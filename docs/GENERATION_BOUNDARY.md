@@ -11,4 +11,4 @@ The Generator must not copy sentence realization rules from the Transformer. Bot
 
 An unmatched state can still be grammatical. The UI therefore shows the generated sentence and distinguishes "The sentence is grammatical, but it does not match the goal yet." from a matched goal. `onComplete` fires only for a matched target, once per mount run, and becomes available again after Reset.
 
-The current Generator uses the same `subject`, `tense`, and `negative` control vocabulary as the Transformer so the sentence model and validation rules remain compatible. It does not add Lesson 03, new Research References, backend state, free text, or an LLM.
+The current Generator uses the same `subject`, `tense`, and `negative` control vocabulary as the Transformer for tense-based Problems. Lesson 03 also reuses the same Components with a separate modal state shape: `subject`, `modal`, and `negative`. Tense and modal are intentionally mutually exclusive in one Problem. It does not add new Research References, backend state, free text, or an LLM.

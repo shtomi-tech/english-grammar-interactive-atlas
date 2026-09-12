@@ -8,13 +8,15 @@ const defaultSentenceModel = {
   punctuation: '.',
 };
 
+const supportedModals = new Set(['can', 'could', 'should', 'must']);
+
 function presentForm(verb, number) {
   if (verb.present) return verb.present;
   return number === 'singular' ? `${verb.base}s` : verb.base;
 }
 
 export function generateSentence(
-  { subject = 'he', tense = 'present', negative = false } = {},
+  { subject = 'he', tense, modal, negative = false } = {},
   sentenceModel = defaultSentenceModel,
 ) {
   const model = sentenceModel ?? defaultSentenceModel;
@@ -24,14 +26,23 @@ export function generateSentence(
   if (!subjectData || !verb?.base || !verb?.past || typeof model.object !== 'string') {
     throw new Error('Unsupported sentence state');
   }
-  if (!['present', 'past'].includes(tense) || typeof negative !== 'boolean') {
-    throw new Error('Unsupported sentence state');
-  }
-
   const punctuation = model.punctuation ?? '.';
   if (typeof punctuation !== 'string') throw new Error('Unsupported sentence state');
 
-  if (tense === 'past') {
+  if (modal !== undefined) {
+    if (tense !== undefined || !supportedModals.has(modal) || typeof negative !== 'boolean') {
+      throw new Error('Unsupported sentence state');
+    }
+    const modalText = negative && modal === 'can' ? 'cannot' : negative ? `${modal} not` : modal;
+    return `${subjectData.label} ${modalText} ${verb.base} ${model.object}${punctuation}`;
+  }
+
+  const resolvedTense = tense ?? 'present';
+  if (!['present', 'past'].includes(resolvedTense) || typeof negative !== 'boolean') {
+    throw new Error('Unsupported sentence state');
+  }
+
+  if (resolvedTense === 'past') {
     return negative
       ? `${subjectData.label} did not ${verb.base} ${model.object}${punctuation}`
       : `${subjectData.label} ${verb.past} ${model.object}${punctuation}`;

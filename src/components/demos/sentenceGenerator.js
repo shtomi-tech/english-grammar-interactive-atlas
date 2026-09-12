@@ -9,6 +9,7 @@ import {
 const controlLabels = {
   subject: 'Subject',
   tense: 'Tense',
+  modal: 'Modal',
   negative: 'Polarity',
 };
 

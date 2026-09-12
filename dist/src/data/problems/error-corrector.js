@@ -90,6 +90,32 @@ export const errorCorrectorProblems = [
     ],
     explanation: '現在完了では、主語に合う助動詞と、その後ろの過去分詞を組み合わせます。',
   },
+  {
+    id: 'EC-004',
+    type: 'error-corrector',
+    prompt: '助動詞の後ろの動詞の形を正しく直してください。',
+    tokens: [
+      { id: 't1', text: 'He' },
+      { id: 't2', text: 'can' },
+      { id: 't3', text: 'plays', correctionId: 'modal-base-form' },
+      { id: 't4', text: 'tennis.' },
+    ],
+    corrections: [
+      {
+        id: 'modal-base-form',
+        tokenId: 't3',
+        options: [
+          { id: 'o7', text: 'play' },
+          { id: 'o8', text: 'plays' },
+          { id: 'o9', text: 'playing' },
+        ],
+        acceptedOptionIds: ['o7'],
+        ruleLabel: 'Base verb after a modal',
+        explanation: '助動詞 can の後ろでは、三単現の -s を付けずに動詞の原形 play を使います。',
+      },
+    ],
+    explanation: '助動詞の後ろには、主語が三人称単数でも動詞の原形を置きます。',
+  },
 ];
 
 export const errorCorrectorProblem = errorCorrectorProblems[0];

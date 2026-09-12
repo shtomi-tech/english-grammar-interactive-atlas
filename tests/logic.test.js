@@ -4,7 +4,7 @@ import { getLessonById, getLessonBySlug, lessons } from '../src/data/lessons.js'
 import { grammarClassifierProblems } from '../src/data/problems/grammar-classifier.js';
 import { markPartsProblems } from '../src/data/problems/mark-parts.js';
 import { problemRegistry, problems } from '../src/data/problems/index.js';
-import { sentenceTransformerProblem } from '../src/data/problems/sentence-transformer.js';
+import { sentenceTransformerProblem, sentenceTransformerProblems } from '../src/data/problems/sentence-transformer.js';
 import { sentencePatternDiagramProblems } from '../src/data/problems/sentence-pattern-diagram.js';
 import { modifierConnectionViewerProblems } from '../src/data/problems/modifier-connection-viewer.js';
 import { sentenceComparisonProblems } from '../src/data/problems/sentence-comparison.js';
@@ -76,13 +76,13 @@ assert.deepEqual(getAtlasStats(interactions, demoRegistry), {
   workingDemos: 10,
 });
 
-assert.equal(problems.length, 29);
+assert.equal(problems.length, 35);
 assert.deepEqual(
   Object.fromEntries(Object.entries({
     'word-order': wordOrderProblems,
     'mark-parts': markPartsProblems,
     'grammar-classifier': grammarClassifierProblems,
-    'sentence-transformer': [sentenceTransformerProblem],
+    'sentence-transformer': sentenceTransformerProblems,
     'sentence-pattern-diagram': sentencePatternDiagramProblems,
     'modifier-connection-viewer': modifierConnectionViewerProblems,
     'sentence-comparison': sentenceComparisonProblems,
@@ -90,7 +90,7 @@ assert.deepEqual(
     'context-grammar': contextGrammarProblems,
     'sentence-generator': sentenceGeneratorProblems,
   }).map(([type, entries]) => [type, entries.length])),
-  { 'word-order': 4, 'mark-parts': 3, 'grammar-classifier': 3, 'sentence-transformer': 1, 'sentence-pattern-diagram': 3, 'modifier-connection-viewer': 3, 'sentence-comparison': 3, 'error-corrector': 3, 'context-grammar': 3, 'sentence-generator': 3 },
+  { 'word-order': 5, 'mark-parts': 3, 'grammar-classifier': 3, 'sentence-transformer': 2, 'sentence-pattern-diagram': 3, 'modifier-connection-viewer': 3, 'sentence-comparison': 4, 'error-corrector': 4, 'context-grammar': 4, 'sentence-generator': 4 },
 );
 assert.equal(problemRegistry['WO-001'], wordOrderProblems[0]);
 assert.equal(problemRegistry['SPD-001'], sentencePatternDiagramProblems[0]);
@@ -99,6 +99,12 @@ assert.equal(problemRegistry['SC-001'], sentenceComparisonProblems[0]);
 assert.equal(problemRegistry['EC-001'], errorCorrectorProblems[0]);
 assert.equal(problemRegistry['CG-001'], contextGrammarProblems[0]);
 assert.equal(problemRegistry['SG-001'], sentenceGeneratorProblems[0]);
+assert.equal(problemRegistry['ST-002'], sentenceTransformerProblems[1]);
+assert.equal(problemRegistry['WO-005'], wordOrderProblems[4]);
+assert.equal(problemRegistry['EC-004'], errorCorrectorProblems[3]);
+assert.equal(problemRegistry['SC-004'], sentenceComparisonProblems[3]);
+assert.equal(problemRegistry['SG-004'], sentenceGeneratorProblems[3]);
+assert.equal(problemRegistry['CG-004'], contextGrammarProblems[3]);
 assert.equal(validateProblems(problems).valid, true);
 assert.equal(validateDemoRegistry(demoRegistry, problemRegistry).valid, true);
 for (const demo of Object.values(demoRegistry)) {
@@ -202,6 +208,14 @@ assert.equal(
   false,
 );
 assert.equal(
+  matchesGenerationTarget(
+    { subject: 'he', tense: 'future', negative: false },
+    generationProblem.targetStates[0],
+    Object.keys(generationProblem.controls),
+  ),
+  false,
+);
+assert.equal(
   findMatchingTargetState(
     { subject: 'they', tense: 'past', negative: true },
     sentenceGeneratorProblems[2].targetStates,
@@ -222,11 +236,13 @@ const lessonValidation = validateLessons(lessons, {
   problemTypes: new Set(Object.keys(demoRegistry)),
 });
 assert.equal(lessonValidation.valid, true, lessonValidation.errors.join('; '));
-assert.equal(lessons.length, 2);
+assert.equal(lessons.length, 3);
 assert.equal(getLessonById('LESSON-002').slug, 'structural-reading');
 assert.equal(getLessonBySlug('structural-reading').id, 'LESSON-002');
 assert.equal(getLessonBySlug('structural-reading').steps.length, 6);
 assert.equal(lessons[0].steps.length, 6);
+assert.equal(getLessonById('LESSON-003').slug, 'modal-verbs');
+assert.equal(getLessonBySlug('modal-verbs').steps.length, 6);
 
 assert.equal(checkWordOrder(['i', 'play', 'tennis'], [['i', 'play', 'tennis']]), true);
 assert.equal(checkWordOrder(['play', 'i', 'tennis'], [['i', 'play', 'tennis']]), false);
@@ -340,6 +356,11 @@ const sentenceCases = [
   [{ subject: 'they', tense: 'present', negative: true }, 'They do not play tennis.'],
   [{ subject: 'he', tense: 'past', negative: true }, 'He did not play tennis.'],
   [{ subject: 'they', tense: 'past', negative: true }, 'They did not play tennis.'],
+  [{ subject: 'he', modal: 'can', negative: false }, 'He can play tennis.'],
+  [{ subject: 'he', modal: 'can', negative: true }, 'He cannot play tennis.'],
+  [{ subject: 'they', modal: 'should', negative: false }, 'They should play tennis.'],
+  [{ subject: 'he', modal: 'must', negative: true }, 'He must not play tennis.'],
+  [{ subject: 'they', modal: 'could', negative: false }, 'They could play tennis.'],
 ];
 
 for (const [state, expected] of sentenceCases) {
@@ -349,6 +370,16 @@ assert.equal(
   generateSentence({ subject: 'they', tense: 'past', negative: false }, sentenceTransformerProblem.sentenceModel),
   'They played tennis.',
 );
+assert.equal(
+  generateSentence({ subject: 'he', modal: 'can', negative: false }, sentenceTransformerProblem.sentenceModel),
+  'He can play tennis.',
+);
+assert.equal(
+  generateSentence({ subject: 'he', modal: 'can', negative: true }, sentenceTransformerProblem.sentenceModel),
+  'He cannot play tennis.',
+);
+assert.throws(() => generateSentence({ subject: 'he', modal: 'might', negative: false }), /Unsupported sentence state/);
+assert.throws(() => generateSentence({ subject: 'he', tense: 'past', modal: 'can', negative: false }), /Unsupported sentence state/);
 
 const invalidWordId = structuredClone(problems);
 invalidWordId[0].words[1].id = invalidWordId[0].words[0].id;
@@ -462,6 +493,23 @@ assert.equal(validateProblems(generatorUnknownTargetControl).valid, false);
 const generatorDuplicateTarget = structuredClone(sentenceGeneratorProblems);
 generatorDuplicateTarget[2].targetStates.push({ ...generatorDuplicateTarget[2].targetStates[0] });
 assert.equal(validateProblems(generatorDuplicateTarget).valid, false);
+assert.equal(validateProblems([sentenceTransformerProblems[1]]).valid, true);
+assert.equal(validateProblems([sentenceGeneratorProblems[3]]).valid, true);
+const modalTransformerUnknown = structuredClone(sentenceTransformerProblems);
+modalTransformerUnknown[1].controls.modal[0].value = 'might';
+assert.equal(validateProblems(modalTransformerUnknown).valid, false);
+const modalGeneratorMissingTargetValue = structuredClone(sentenceGeneratorProblems);
+delete modalGeneratorMissingTargetValue[3].targetStates[0].modal;
+assert.equal(validateProblems(modalGeneratorMissingTargetValue).valid, false);
+const modalGeneratorUnknownTargetValue = structuredClone(sentenceGeneratorProblems);
+modalGeneratorUnknownTargetValue[3].targetStates[0].modal = 'might';
+assert.equal(validateProblems(modalGeneratorUnknownTargetValue).valid, false);
+const modalMixedControls = structuredClone(sentenceTransformerProblems);
+modalMixedControls[1].controls.tense = [
+  { value: 'present', label: 'Present' },
+  { value: 'past', label: 'Past' },
+];
+assert.equal(validateProblems(modalMixedControls).valid, false);
 const errorTokenCorrectionMismatch = structuredClone(errorCorrectorProblems);
 errorTokenCorrectionMismatch[0].tokens[1].correctionId = 'missing-correction';
 assert.equal(validateProblems(errorTokenCorrectionMismatch).valid, false);

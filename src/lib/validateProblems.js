@@ -1,6 +1,7 @@
 const problemTypes = new Set(['word-order', 'mark-parts', 'grammar-classifier', 'sentence-transformer', 'sentence-pattern-diagram', 'modifier-connection-viewer', 'sentence-comparison', 'error-corrector', 'context-grammar', 'sentence-generator']);
-const transformerControlNames = new Set(['subject', 'tense', 'negative']);
+const transformerControlNames = new Set(['subject', 'tense', 'negative', 'modal']);
 const supportedTenses = new Set(['present', 'past']);
+const supportedModals = new Set(['can', 'could', 'should', 'must']);
 
 function hasText(value) {
   return typeof value === 'string' && value.trim().length > 0;
@@ -136,11 +137,17 @@ function validateGrammarControls(problem, label, errors) {
         if (name === 'tense' && !supportedTenses.has(option.value)) {
           errors.push(`${label}.controls.tense has unsupported value: ${option.value}`);
         }
+        if (name === 'modal' && !supportedModals.has(option.value)) {
+          errors.push(`${label}.controls.modal has unsupported value: ${option.value}`);
+        }
         if (name === 'negative' && typeof option.value !== 'boolean') {
           errors.push(`${label}.controls.negative values must be boolean`);
         }
       });
     }
+  }
+  if (isRecord(problem.controls) && Object.prototype.hasOwnProperty.call(problem.controls, 'tense') && Object.prototype.hasOwnProperty.call(problem.controls, 'modal')) {
+    errors.push(`${label}.controls cannot contain both tense and modal`);
   }
 }
 

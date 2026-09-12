@@ -23,6 +23,23 @@ const sharedSentenceModel = {
   punctuation: '.',
 };
 
+const modalControls = {
+  subject: [
+    { value: 'he', label: 'He' },
+    { value: 'they', label: 'They' },
+  ],
+  modal: [
+    { value: 'can', label: 'Can' },
+    { value: 'could', label: 'Could' },
+    { value: 'should', label: 'Should' },
+    { value: 'must', label: 'Must' },
+  ],
+  negative: [
+    { value: false, label: 'Affirmative' },
+    { value: true, label: 'Negative' },
+  ],
+};
+
 export const sentenceGeneratorProblems = [
   {
     id: 'SG-001',
@@ -65,6 +82,19 @@ export const sentenceGeneratorProblems = [
     ],
     sentenceModel: structuredClone(sharedSentenceModel),
     explanation: '主語が変わっても、過去形の否定では did not の後ろに動詞の原形を置きます。',
+  },
+  {
+    id: 'SG-004',
+    type: 'sentence-generator',
+    prompt: '助動詞を含む目標に合う英文を組み立て、Generateで確かめてください。',
+    goal: {
+      title: 'Advice with should',
+      description: 'They を主語にして、「〜すべきだ」という助言の肯定文を作る。',
+    },
+    controls: structuredClone(modalControls),
+    targetStates: [{ subject: 'they', modal: 'should', negative: false }],
+    sentenceModel: structuredClone(sharedSentenceModel),
+    explanation: '助動詞 should の後ろには、主語が They でも動詞の原形 play を置きます。',
   },
 ];
 

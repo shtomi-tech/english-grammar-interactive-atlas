@@ -117,6 +117,43 @@ export const sentenceComparisonProblems = [
     ],
     explanation: '同じ出来事でも、文の主語を誰・何にするかで、文の視点と動詞の形が変わります。',
   },
+  {
+    id: 'SC-004',
+    type: 'sentence-comparison',
+    prompt: '助動詞の違う部分を選び、話し手の意味の違いを確認してください。',
+    sentences: [
+      {
+        id: 'a',
+        text: 'You can leave now.',
+        chunks: [
+          { id: 'a-1', text: 'You', matchKey: 'subject' },
+          { id: 'a-2', text: 'can', differenceId: 'modal-meaning' },
+          { id: 'a-3', text: 'leave now.', matchKey: 'action' },
+        ],
+      },
+      {
+        id: 'b',
+        text: 'You must leave now.',
+        chunks: [
+          { id: 'b-1', text: 'You', matchKey: 'subject' },
+          { id: 'b-2', text: 'must', differenceId: 'modal-meaning' },
+          { id: 'b-3', text: 'leave now.', matchKey: 'action' },
+        ],
+      },
+    ],
+    differences: [
+      {
+        id: 'modal-meaning',
+        leftChunkId: 'a-2',
+        rightChunkId: 'b-2',
+        label: 'can / must',
+        explanation: 'can は許可や可能を、must は強い必要や義務を表します。',
+        meaningLeft: '今、帰ってもよい。',
+        meaningRight: '今、帰らなければならない。',
+      },
+    ],
+    explanation: '助動詞の小さな形の差が、許可・可能と義務という意味の差を作ります。',
+  },
 ];
 
 export const sentenceComparisonProblem = sentenceComparisonProblems[0];

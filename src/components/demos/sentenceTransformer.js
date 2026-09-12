@@ -5,6 +5,7 @@ import { generateSentence } from '../../lib/grammar/generateSentence.js';
 const controlLabels = {
   subject: 'Subject',
   tense: 'Tense',
+  modal: 'Modal',
   negative: 'Negative',
 };
 

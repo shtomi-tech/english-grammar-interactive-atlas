@@ -29,7 +29,7 @@ const cleanup = mountInteraction(root, problem, {
 | Word Order Builder | `word-order` | `prompt`, `words`, `acceptedAnswers`, optional `hints`, `explanation` |
 | Mark the Parts | `mark-parts` | `prompt`, `tokens`, `answer`, `targetRole`, `explanation` |
 | Grammar Classifier | `grammar-classifier` | `sentence`, `categories`, `items`, `explanation` |
-| Sentence Transformer | `sentence-transformer` | `controls`, `defaults`, `sentenceModel` |
+| Sentence Transformer | `sentence-transformer` | `controls`, `defaults`, `sentenceModel`（時制または助動詞） |
 | Sentence Pattern Diagram | `sentence-pattern-diagram` | `prompt`, `sentence`, `chunks`, `pattern`, `explanation` |
 | Modifier Connection Viewer | `modifier-connection-viewer` | `prompt`, `sentence`, `chunks`, `relations`, `explanation` |
 | Sentence Comparison | `sentence-comparison` | `prompt`, `sentences`, `differences`, `explanation` |
@@ -122,8 +122,12 @@ Word Orderの正答は `acceptedAnswers` を正本とし、1問に1つ以上のI
 
 すべてのcontrolを選ぶまでGenerateは無効です。目標状態と一致しなくても文法的に生成可能な英文は表示し、「文法的だが目標とは異なる」と伝えます。`targetStates` のいずれかと一致した時はProblem Dataの説明を表示し、`onComplete({ correct: true, problemId, state, sentence, matchedTargetIndex })` を同一runで一度だけ呼びます。Resetは選択、生成文、recipe、feedback、完了通知を初期化します。境界の詳細は [GENERATION_BOUNDARY.md](./GENERATION_BOUNDARY.md) を参照してください。
 
+## Modal support
+
+Sentence TransformerとSentence Generatorは、既存の生成ロジックを共有したまま、`subject`、`modal`、`negative` の状態も受け取れます。対応する助動詞は `can`、`could`、`should`、`must` です。時制用の `tense` と `modal` は同じProblemのcontrolsへ同時に置きません。Problem、Lesson 03、生成境界の詳細は [MODAL_SUPPORT.md](./MODAL_SUPPORT.md) を参照してください。
+
 ## Lesson Registry and Problem injection
 
 `src/data/lessons.js` のLesson Registryは、Lessonの `id`、`slug`、順序付き `steps` を保持します。各Stepは `interactionType` と `problemId` を持ち、Lesson PlayerはDemo Registryから対応Componentを取得してProblemを注入します。Stepの切り替え時には前のComponentをcleanupし、次のStepを新しいProblemでmountします。
 
-Lesson 02は、Mark the Parts → Sentence Pattern Diagram → Modifier Connection Viewer → Grammar Classifierの順で、文の中心、骨格、修飾関係、句と節の整理へ進みます。Lesson専用Componentや進捗保存は追加せず、既存Componentの学習フローへの組み合わせだけをデータとして定義します。
+Lesson 02は、Mark the Parts → Sentence Pattern Diagram → Modifier Connection Viewer → Grammar Classifierの順で、文の中心、骨格、修飾関係、句と節の整理へ進みます。Lesson 03は、Sentence Transformer → Word Order Builder → Error Corrector → Sentence Comparison → Sentence Generator → Context Grammarの順で、助動詞の形・語順・訂正・意味・生成・場面へ進みます。Lesson専用Componentや進捗保存は追加せず、既存Componentの学習フローへの組み合わせだけをデータとして定義します。

@@ -38,7 +38,7 @@
 
 Demoを作る場合、英文・正答・説明などの教材固有データは `src/data/problems/` の機能別ファイルへ置きます。Demoコンポーネントに問題文を直接書きません。分類Demoなら、`categories` と `items` の `answer` をデータ側に持たせ、分類軸を差し替えられる形にします。互換用の `src/data/demo-problems.js` は代表Problemの再エクスポートだけを行います。
 
-Problemは `type` と安定した `id` を持ち、`src/data/problems/index.js` のRegistryから `getProblemById('WO-001')` のように取得できます。現在のProblem数は Word Order 4、Mark the Parts 3、Grammar Classifier 3、Sentence Transformer 1、Sentence Pattern Diagram 3、Modifier Connection Viewer 3、Sentence Comparison 3、Error Corrector 3、Context Grammar 3、Sentence Generator 3（計29件）です。Word Orderの正答は `acceptedAnswers`（許容順序の配列）を正本とし、任意で段階的な `hints` を指定できます。複数正答の判定は `src/lib/grammar/word-order.js` に置き、UIへ重複実装しません。
+Problemは `type` と安定した `id` を持ち、`src/data/problems/index.js` のRegistryから `getProblemById('WO-001')` のように取得できます。現在のProblem数は Word Order 5、Mark the Parts 3、Grammar Classifier 3、Sentence Transformer 2、Sentence Pattern Diagram 3、Modifier Connection Viewer 3、Sentence Comparison 4、Error Corrector 4、Context Grammar 4、Sentence Generator 4（計35件）です。Phase 5FのST-002、WO-005、EC-004、SC-004、SG-004、CG-004は、既存Componentへ助動詞用のProblem Dataを渡す例です。Word Orderの正答は `acceptedAnswers`（許容順序の配列）を正本とし、任意で段階的な `hints` を指定できます。複数正答の判定は `src/lib/grammar/word-order.js` に置き、UIへ重複実装しません。
 
 Sentence Pattern Diagramでは、英文のまとまりを `chunks`、文型の役割順を `pattern` としてProblem Dataへ置きます。chunkの `id` はrole記号とは別の一意な識別子です。SVOOのように同じroleが複数ある問題でも、英文chunkと図のnodeをchunk IDで対応づけます。`mountSentencePatternDiagram` はSVO専用にせず、Problem DataからSVC・SVO・SVOOなどの配置を生成します。
 
@@ -54,7 +54,7 @@ Error Correctorでは、誤文の語句を `tokens`、語句ごとの訂正候�
 
 Context Grammarでは、`scenario` と順序付き `steps` をProblem Dataへ置きます。各stepは相手の `speaker`、`line`、学習者への `instruction`、2つ以上の `choices`、`acceptedChoiceIds` を持ち、choiceは `text`、`reply`、`grammarLabel`、`explanation` を持ちます。正答を選んだ後にContinueで履歴へ追加し、最後のStepで完了callbackを一度だけ呼びます。初期実装は線形マルチステップに限定し、分岐エンジン、自由入力、LLM/API、音声は追加しません。
 
-Sentence Generatorでは、`goal`、`controls`、`targetStates`、`sentenceModel` をProblem Dataへ置きます。学習者が未選択状態からすべての文法条件を選び、Generateで明示的に英文を生成します。生成規則は既存の `src/lib/grammar/generateSentence.js` を共有し、目標状態との照合だけを `src/lib/grammar/generation-goal.js` のpure helperで行います。目標と異なるが文法的な状態も表示し、文法的正しさと課題条件の一致を分けて扱います。Sentence TransformerのUIや生成規則を複製せず、Lesson 03はGeneratorの検証後に再評価します。
+Sentence Generatorでは、`goal`、`controls`、`targetStates`、`sentenceModel` をProblem Dataへ置きます。学習者が未選択状態からすべての文法条件を選び、Generateで明示的に英文を生成します。生成規則は既存の `src/lib/grammar/generateSentence.js` を共有し、目標状態との照合だけを `src/lib/grammar/generation-goal.js` のpure helperで行います。目標と異なるが文法的な状態も表示し、文法的正しさと課題条件の一致を分けて扱います。Sentence TransformerのUIや生成規則を複製せず、Lesson 03では `subject`、`modal`、`negative` の助動詞状態を同じGeneratorへ渡します。対応範囲と時制との境界は [MODAL_SUPPORT.md](./MODAL_SUPPORT.md) を参照してください。
 
 `src/components/demos/` にコンポーネントを追加します。共通Demo枠の中で、次の順序を保ちます。
 
@@ -89,7 +89,7 @@ export const demoRegistry = {
 
 Lesson UIをハードコードせず、`src/data/lessons.js` に `interactionType` と `problemId` を持つStepを追加します。LessonからはRegistry経由で同じComponentを再利用します。Lessonでは進捗をページ内stateだけに置き、LocalStorageやDBへ保存しません。複数Lessonを一覧表示する場合も、Lesson Registryからリンクを生成します。
 
-Lessonを追加する場合は、各Stepへ一意な `id`、登録済みの `interactionType`、存在して型が一致する `problemId`、学習順序を説明する `title` と `instruction` を設定します。`validateLessons` はLesson/slug/Step IDの重複、Problemの存在、Problem typeとの一致を検証します。Lesson 02では既存のMark the Parts、Sentence Pattern Diagram、Modifier Connection Viewer、Grammar Classifierを再利用し、Lesson専用Componentは作りません。
+Lessonを追加する場合は、各Stepへ一意な `id`、登録済みの `interactionType`、存在して型が一致する `problemId`、学習順序を説明する `title` と `instruction` を設定します。`validateLessons` はLesson/slug/Step IDの重複、Problemの存在、Problem typeとの一致を検証します。Lesson 02では既存のMark the Parts、Sentence Pattern Diagram、Modifier Connection Viewer、Grammar Classifierを再利用し、Lesson 03ではSentence Transformer、Word Order Builder、Error Corrector、Sentence Comparison、Sentence Generator、Context Grammarを再利用します。どちらもLesson専用Componentは作りません。
 
 ## 6. ロジックとテストを追加する
 

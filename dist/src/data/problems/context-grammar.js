@@ -173,6 +173,71 @@ export const contextGrammarProblems = [
     ],
     explanation: '経験を尋ねるときは現在完了、いつ起きたかを示す具体的な過去時点には過去形を使います。',
   },
+  {
+    id: 'CG-004',
+    type: 'context-grammar',
+    prompt: '助言と義務の場面に合う助動詞を選び、会話を進めてください。',
+    scenario: {
+      title: 'Advice and obligation',
+      setting: '勉強の相談と、実験室の安全規則について話す場面です。',
+      learnerRole: 'Student',
+      goal: '助言には should、明確な義務には must を使い分ける。',
+    },
+    steps: [
+      {
+        id: 'cg004-step-1',
+        speaker: 'Friend',
+        line: 'I have an important test tomorrow. What do you recommend?',
+        instruction: '相手への助言として、今夜勉強することを伝えてください。',
+        choices: [
+          {
+            id: 'cg004-choice-1a',
+            text: 'You should study tonight.',
+            reply: 'That sounds helpful. I will start tonight.',
+            grammarLabel: 'should for advice',
+            explanation: 'should は相手にとってよい行動をすすめる、穏やかな助言に使います。',
+          },
+          {
+            id: 'cg004-choice-1b',
+            text: 'You could study tonight.',
+            reply: 'That is another good idea. I will make a study plan.',
+            grammarLabel: 'could for a suggestion',
+            explanation: 'could も選択肢の一つを提案する助言に使えるため、この場面で自然です。',
+          },
+          {
+            id: 'cg004-choice-1c',
+            text: 'You must not study tonight.',
+            grammarLabel: 'must not for prohibition',
+            explanation: 'must not は禁止を表すので、勉強をすすめるこの場面の目的に合いません。',
+          },
+        ],
+        acceptedChoiceIds: ['cg004-choice-1a', 'cg004-choice-1b'],
+      },
+      {
+        id: 'cg004-step-2',
+        speaker: 'Lab supervisor',
+        line: 'Students are required to wear safety glasses in the lab.',
+        instruction: '明確な安全規則による義務として、保護めがねを着用するよう伝えてください。',
+        choices: [
+          {
+            id: 'cg004-choice-2a',
+            text: 'You must wear safety glasses.',
+            reply: 'Exactly. Please put them on before you enter.',
+            grammarLabel: 'must for obligation',
+            explanation: 'must は規則や必要性にもとづく、強い義務を表します。',
+          },
+          {
+            id: 'cg004-choice-2b',
+            text: 'You should wear safety glasses.',
+            grammarLabel: 'should for advice',
+            explanation: 'should は助言としては自然ですが、required と示された規則の強い義務には must が合います。',
+          },
+        ],
+        acceptedChoiceIds: ['cg004-choice-2a'],
+      },
+    ],
+    explanation: 'should や could は助言・提案、must は規則にもとづく強い義務を表します。場面と話し手の意図を合わせて選びます。',
+  },
 ];
 
 export const contextGrammarProblem = contextGrammarProblems[0];

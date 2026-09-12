@@ -103,6 +103,58 @@ export const lessons = [
       },
     ],
   },
+  {
+    id: 'LESSON-003',
+    slug: 'modal-verbs',
+    label: 'Lesson 03',
+    title: '助動詞を形と場面から使う',
+    description: '助動詞の後ろに動詞の原形を置く基本形を確認し、can / should / must などの意味を場面に応じて使い分けます。',
+    learningGoal: '助動詞 + 動詞原形という形を理解し、能力・助言・義務などの意味と場面を対応づけて適切な助動詞を選べるようにする。',
+    steps: [
+      {
+        id: 'LESSON-003-STEP-01',
+        interactionType: 'sentence-transformer',
+        problemId: 'ST-002',
+        title: '助動詞を変えて形を見る',
+        instruction: 'can / could / should / must を切り替え、助動詞の後ろが動詞の原形のまま変わらないことを観察します。',
+      },
+      {
+        id: 'LESSON-003-STEP-02',
+        interactionType: 'word-order',
+        problemId: 'WO-005',
+        title: '助動詞を含む語順を組み立てる',
+        instruction: 'Subject + Modal + Base Verb の順に単語を並べ、助動詞の後ろの形を確かめます。',
+      },
+      {
+        id: 'LESSON-003-STEP-03',
+        interactionType: 'error-corrector',
+        problemId: 'EC-004',
+        title: '助動詞後の動詞を直す',
+        instruction: '助動詞の後ろに三単現の -s を付けない規則を、誤文の訂正で確認します。',
+      },
+      {
+        id: 'LESSON-003-STEP-04',
+        interactionType: 'sentence-comparison',
+        problemId: 'SC-004',
+        title: '助動詞で意味を比べる',
+        instruction: 'can と must の形の差を、許可・可能と義務という意味の差に対応づけます。',
+      },
+      {
+        id: 'LESSON-003-STEP-05',
+        interactionType: 'sentence-generator',
+        problemId: 'SG-004',
+        title: '目標に合う助動詞を生成する',
+        instruction: '助言というGoalに合う文法状態を選び、英文を生成して確かめます。',
+      },
+      {
+        id: 'LESSON-003-STEP-06',
+        interactionType: 'context-grammar',
+        problemId: 'CG-004',
+        title: '場面に合う助動詞を選ぶ',
+        instruction: '相談の助言と安全規則の義務を、会話の場面に合う助動詞で表します。',
+      },
+    ],
+  },
 ];
 
 export const lessonRegistry = Object.fromEntries(lessons.map((lesson) => [lesson.id, lesson]));

@@ -59,6 +59,20 @@ export const wordOrderProblems = [
     explanation: 'They visit the museum on Sundays. と On Sundays they visit the museum. は、どちらも自然な語順です。',
     grammar: ['SVO', 'adverbial-phrase', 'word-order'],
   },
+  {
+    id: 'WO-005',
+    type: 'word-order',
+    prompt: '助動詞を含む英文を、自然な語順に組み立ててください。',
+    words: [
+      { id: 'you', text: 'You' },
+      { id: 'should', text: 'should' },
+      { id: 'study', text: 'study' },
+      { id: 'today', text: 'today' },
+    ],
+    acceptedAnswers: [['you', 'should', 'study', 'today']],
+    explanation: '助動詞の後ろには動詞の原形を置きます。基本語順は Subject + Modal + Base Verb です。',
+    grammar: ['modal', 'base-verb', 'word-order'],
+  },
 ];
 
 export const wordOrderProblem = wordOrderProblems[0];
