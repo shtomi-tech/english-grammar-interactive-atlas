@@ -743,6 +743,147 @@ a.button {
   color: var(--paper);
 }
 
+.classifier-sentence {
+  margin: 0 0 24px;
+  padding: 16px 17px;
+  border-left: 3px solid var(--accent-strong);
+  background: var(--paper-deep);
+  font-family: Georgia, serif;
+  font-size: clamp(1.15rem, 2.5vw, 1.45rem);
+  line-height: 1.35;
+}
+
+.classifier-card-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  min-height: 54px;
+  align-items: center;
+  margin-bottom: 23px;
+  padding: 12px;
+  border: 1px dashed #bdb1a0;
+  border-radius: 10px;
+  background: var(--paper-deep);
+}
+
+.classifier-card {
+  min-height: 44px;
+  padding: 8px 13px;
+  border: 1px solid #beb3a5;
+  border-radius: 9px;
+  background: #fffdf8;
+  color: var(--ink);
+  cursor: pointer;
+  font-weight: 650;
+  text-align: left;
+}
+
+.classifier-card:hover,
+.classifier-card:focus-visible {
+  border-color: var(--accent-strong);
+  background: #fff1d9;
+}
+
+.classifier-card[aria-pressed="true"] {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.classifier-category-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.classifier-category {
+  overflow: hidden;
+  border: 1px solid var(--paper-line);
+  border-radius: 10px;
+  background: #fffdf8;
+}
+
+.classifier-category-target {
+  display: flex;
+  width: 100%;
+  min-height: 50px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 13px;
+  border: 0;
+  border-bottom: 1px solid var(--paper-line);
+  background: var(--paper-deep);
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 780;
+  letter-spacing: 0.08em;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.classifier-category-target:hover,
+.classifier-category-target:focus-visible {
+  background: #fff1d9;
+}
+
+.classifier-count {
+  display: inline-grid;
+  min-width: 24px;
+  min-height: 24px;
+  place-items: center;
+  border: 1px solid #bdb1a0;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  letter-spacing: 0;
+}
+
+.classifier-category-items {
+  display: grid;
+  min-height: 68px;
+  gap: 8px;
+  padding: 10px;
+  align-content: start;
+}
+
+.classifier-category-items:empty::after {
+  color: #837a70;
+  content: "カードを選択してここへ分類";
+  font-size: 0.78rem;
+}
+
+.classifier-category-items .classifier-card {
+  width: 100%;
+}
+
+.classifier-empty {
+  margin: 0;
+  color: #837a70;
+  font-size: 0.86rem;
+}
+
+.classifier-result {
+  display: grid;
+  gap: 12px;
+  margin-top: 22px;
+  padding-top: 19px;
+  border-top: 1px solid var(--paper-line);
+}
+
+.classifier-result-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.classifier-result-row p {
+  margin: 5px 0 0;
+  color: var(--ink-soft);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
 .demo-actions {
   display: flex;
   flex-wrap: wrap;
@@ -1033,7 +1174,8 @@ a.button {
 
   .toolbar,
   .learning-sequence,
-  .transformer-grid {
+  .transformer-grid,
+  .classifier-category-grid {
     grid-template-columns: 1fr;
   }
 

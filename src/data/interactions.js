@@ -116,7 +116,7 @@ export const interactions = [
     description: '語句を品詞や文の役割ごとのグループへ分類する。',
     learningGoal: '形ではなく、文中での働きによって語句を捉える。',
     touchTarget: '語句カードと分類先',
-    userAction: 'タップ / ドロップ',
+    userAction: 'タップ / クリック',
     changingElement: '分類先と分類結果',
     insight: '語句の種類と文中の役割を区別して考えられる。',
     targetGrammar: ['品詞', 'S / V / O / C', '句と節'],
@@ -127,6 +127,7 @@ export const interactions = [
     sourceName: 'Original concept',
     license: 'Original implementation',
     reusePolicy: 'idea-only',
+    demoType: 'grammar-classifier',
     notes: '分類軸をデータで差し替えられるようにする。',
   },
   {

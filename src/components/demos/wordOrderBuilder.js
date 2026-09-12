@@ -1,10 +1,14 @@
 import { wordOrderProblem } from '../../data/demo-problems.js';
-import { checkWordOrder } from '../../lib/grammar/word-order.js';
+import { checkWordOrder, shuffleWordIds } from '../../lib/grammar/word-order.js';
 import { escapeHtml } from '../../lib/dom.js';
 
 export function mountWordOrderBuilder(root) {
   const wordById = new Map(wordOrderProblem.words.map((word) => [word.id, word]));
-  let bankIds = [...wordOrderProblem.initialOrder];
+  const initialBankIds = shuffleWordIds(
+    wordOrderProblem.words.map((word) => word.id),
+    wordOrderProblem.answer,
+  );
+  let bankIds = [...initialBankIds];
   let answerIds = [];
 
   root.innerHTML = `
@@ -64,7 +68,7 @@ export function mountWordOrderBuilder(root) {
   });
 
   root.querySelector('[data-reset]').addEventListener('click', () => {
-    bankIds = [...wordOrderProblem.initialOrder];
+    bankIds = [...initialBankIds];
     answerIds = [];
     clearFeedback();
     render();

@@ -14,3 +14,16 @@ export function searchInteractions(entries, query = '') {
     return searchableText.includes(normalizedQuery);
   });
 }
+
+export function getAtlasStats(entries, demoRegistry = {}) {
+  const categories = new Set(entries.map((entry) => entry.category));
+  const workingDemos = entries.filter(
+    (entry) => entry.demoType && typeof demoRegistry[entry.demoType] === 'function',
+  ).length;
+
+  return {
+    catalogEntries: entries.length,
+    interactionFamilies: categories.size,
+    workingDemos,
+  };
+}

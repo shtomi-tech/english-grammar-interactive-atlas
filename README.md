@@ -32,17 +32,19 @@ npm start
 - `src/data/interactions.js`: 図鑑データと `InteractionEntry` のJSDoc定義
 - `src/data/demo-problems.js`: Demoで使う問題データ
 - `src/components/atlas/`: 一覧カードとカテゴリフィルタ
-- `src/components/demos/`: 共通Demo枠、3つのDemo、Demo Registry
-- `src/lib/grammar/`: 正誤判定と文法状態からの英文生成
-- `tests/logic.test.js`: 検索・フィルタ・正誤判定・英文生成のテスト
+- `src/components/demos/`: 共通Demo枠、4つのDemo、Demo Registry
+- `src/lib/grammar/`: 正誤判定、分類判定、文法状態からの英文生成
+- `src/lib/validateInteractions.js`: 図鑑データの整合性検証
+- `tests/logic.test.js`: 検索・フィルタ・正誤判定・分類・英文生成のテスト
 - `docs/ADDING_INTERACTION.md`: 新しい図鑑項目とDemoの追加手順
 
-## Phase 1の実装範囲
+## 現在の実装範囲
 
-10件のカタログ、カテゴリ絞り込み、部分一致検索、ハッシュURLによる詳細画面、次の3つのDemoを含みます。
+Phase 1の基盤に、Phase 2AのGrammar Classifierを加えています。10件のカタログ、カテゴリ絞り込み、部分一致検索、ハッシュURLによる詳細画面、次の4つのDemoを含みます。
 
 1. Word Order Builder
 2. Mark the Parts
 3. Sentence Transformer
+4. Grammar Classifier
 
 画面は、スマートフォンのタップ操作とキーボード操作で利用できるようにしています。BackendやDBはまだ導入していません。

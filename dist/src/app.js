@@ -3,7 +3,7 @@ import { renderInteractionCard, renderEmptyState, renderDifficulty } from './com
 import { renderFilterBar } from './components/atlas/filterBar.js';
 import { renderDemoPanel } from './components/demos/demoPanel.js';
 import { demoRegistry } from './components/demos/registry.js';
-import { filterInteractions, searchInteractions } from './lib/atlas.js';
+import { filterInteractions, getAtlasStats, searchInteractions } from './lib/atlas.js';
 import { escapeHtml } from './lib/dom.js';
 import { registerAtlasWebMcp } from './webmcp.js';
 
@@ -24,6 +24,7 @@ function categoryLabel(category) {
 }
 
 function renderHeader() {
+  const stats = getAtlasStats(interactions, demoRegistry);
   return `
     <header class="site-header">
       <div class="shell">
@@ -41,9 +42,9 @@ function renderHeader() {
         <h1>英文法を、<span>触って理解する。</span></h1>
         <p class="header-description">文法のインタラクションを、学習者が触るもの・変わるもの・気づくことから記録する図鑑。</p>
         <div class="stats" aria-label="Catalog summary">
-          <div class="stat"><strong>10</strong><span>catalog entries</span></div>
-          <div class="stat"><strong>10</strong><span>interaction families</span></div>
-          <div class="stat"><strong>3</strong><span>working demos</span></div>
+          <div class="stat"><strong>${stats.catalogEntries}</strong><span>catalog entries</span></div>
+          <div class="stat"><strong>${stats.interactionFamilies}</strong><span>interaction families</span></div>
+          <div class="stat"><strong>${stats.workingDemos}</strong><span>working demos</span></div>
         </div>
       </div>
     </header>`;

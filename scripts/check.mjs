@@ -8,9 +8,11 @@ const files = [
   'src/data/interactions.js',
   'src/data/demo-problems.js',
   'src/lib/atlas.js',
+  'src/lib/validateInteractions.js',
   'src/lib/dom.js',
   'src/lib/grammar/word-order.js',
   'src/lib/grammar/parts.js',
+  'src/lib/grammar/classification.js',
   'src/lib/grammar/generateSentence.js',
   'src/webmcp.js',
   'src/components/atlas/interactionCard.js',
@@ -19,6 +21,7 @@ const files = [
   'src/components/demos/wordOrderBuilder.js',
   'src/components/demos/markTheParts.js',
   'src/components/demos/sentenceTransformer.js',
+  'src/components/demos/grammarClassifier.js',
   'src/components/demos/registry.js',
 ];
 
@@ -33,3 +36,10 @@ for (const relativePath of files) {
 }
 
 console.log(`Syntax check passed for ${files.length} source files.`);
+
+const { interactions } = await import('../src/data/interactions.js');
+const { demoRegistry } = await import('../src/components/demos/registry.js');
+const { validateInteractions } = await import('../src/lib/validateInteractions.js');
+const validation = validateInteractions(interactions, { registryKeys: Object.keys(demoRegistry) });
+if (!validation.valid) throw new Error(`Interaction validation failed: ${validation.errors.join('; ')}`);
+console.log(`Interaction validation passed for ${interactions.length} entries.`);
