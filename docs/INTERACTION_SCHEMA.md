@@ -47,6 +47,12 @@
 
 詳細画面では、未設定値を `Not researched`、`Not applicable`、`Not recorded` のいずれかで表示します。
 
+## Research references
+
+`researchRefs` is an optional array of IDs from `src/data/research/references.js`. It records which verified external research informed the Interaction entry. The original `sourceName`, `sourceUrl`, `repositoryUrl`, `licenseStatus`, and `reusePolicy` fields remain the entry's own provenance and reuse boundary.
+
+Research Reference records separately store observed patterns, atlas implications, verification date, and license status. An unknown license must not be guessed. `npm run check` rejects unknown reference IDs and incomplete Research Reference metadata.
+
 ## ランク基準
 
 - `S`: 問題データを差し替えて複数単元へ展開しやすく、学習ループも明確

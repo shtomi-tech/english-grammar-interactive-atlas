@@ -10,6 +10,13 @@ import {
   sourceTypeLabels,
 } from './data/interaction-schema.js';
 import { getLessonBySlug } from './data/lessons.js';
+import {
+  getResearchReferencesByIds,
+  researchLicenseStatusLabels,
+  researchReusePolicyLabels,
+  researchSourceTypeLabels,
+  researchStatusLabels as externalResearchStatusLabels,
+} from './data/research/index.js';
 import { renderInteractionCard, renderEmptyState, renderDifficulty } from './components/atlas/interactionCard.js';
 import { renderFilterBar } from './components/atlas/filterBar.js';
 import { renderDemoPanel } from './components/demos/demoPanel.js';
@@ -48,6 +55,48 @@ function metadataLink(url, label) {
 
 function metadataLabel(value, labels, fallback = 'Not recorded') {
   return escapeHtml(labels[value] ?? value ?? fallback);
+}
+
+function renderResearchList(items) {
+  return `<ul class="research-points">${items.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>`;
+}
+
+function renderResearchSection(entry) {
+  const references = getResearchReferencesByIds(entry.researchRefs);
+  const referenceMarkup = references.length
+    ? `<div class="research-grid">${references.map((reference) => `
+        <article class="research-card">
+          <div class="research-card-top">
+            <div>
+              <p class="card-label">${escapeHtml(reference.id)}</p>
+              <h3>${escapeHtml(reference.name)}</h3>
+            </div>
+            <span class="status-pill">${metadataLabel(reference.researchStatus, externalResearchStatusLabels)}</span>
+          </div>
+          <dl class="research-list">
+            <div><dt>Source type</dt><dd>${metadataLabel(reference.sourceType, researchSourceTypeLabels)}</dd></div>
+            <div><dt>Observed patterns</dt><dd>${renderResearchList(reference.observedPatterns)}</dd></div>
+            <div><dt>Atlas implication</dt><dd>${renderResearchList(reference.atlasImplications)}</dd></div>
+            <div><dt>Learning value</dt><dd>${escapeHtml(reference.learningValue)}</dd></div>
+            <div><dt>License</dt><dd>${reference.licenseStatus === 'not-applicable' ? 'Not applicable' : metadataText(reference.license)} · ${metadataLabel(reference.licenseStatus, researchLicenseStatusLabels)}</dd></div>
+            <div><dt>Reuse policy</dt><dd>${metadataLabel(reference.reusePolicy, researchReusePolicyLabels)}</dd></div>
+            <div><dt>Links</dt><dd>${metadataLink(reference.sourceUrl, 'Open source')}${reference.repositoryUrl ? ` · ${metadataLink(reference.repositoryUrl, 'Open repository')}` : ''}</dd></div>
+            <div><dt>Reuse notes</dt><dd>${escapeHtml(reference.reuseNotes)}</dd></div>
+          </dl>
+        </article>`).join('')}</div>`
+    : '<p class="research-empty">No external research recorded yet.</p>';
+
+  return `
+    <section class="detail-section research-section" id="research">
+      <div class="research-heading">
+        <div>
+          <p class="section-kicker">Evidence trail</p>
+          <h2>Research references</h2>
+        </div>
+        <span class="research-count">${references.length} ${references.length === 1 ? 'reference' : 'references'}</span>
+      </div>
+      ${referenceMarkup}
+    </section>`;
 }
 
 function renderHeader() {
@@ -161,7 +210,7 @@ function renderAtlas() {
       </div>
       <section class="interaction-grid" data-results aria-live="polite"></section>
     </main>
-    <footer class="site-footer"><div class="shell">Phase 3A · Research the interaction, then reuse the learning part.</div></footer>`;
+    <footer class="site-footer"><div class="shell">Phase 3B · Research the interaction, then reuse the learning part.</div></footer>`;
 
   app.querySelector('#interaction-search').addEventListener('input', (event) => {
     state.query = event.target.value;
@@ -260,6 +309,7 @@ function renderDetail(entry) {
           </div>
         </div>
       </section>
+      ${renderResearchSection(entry)}
     </main>
     <footer class="site-footer"><div class="shell">Interactive Grammar Atlas · one interaction, one reusable learning part.</div></footer>`;
 

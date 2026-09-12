@@ -16,6 +16,11 @@ import { checkClassification } from '../src/lib/grammar/classification.js';
 import { checkWordOrder, shuffleWordIds } from '../src/lib/grammar/word-order.js';
 import { checkTokenSelection } from '../src/lib/grammar/parts.js';
 import { generateSentence } from '../src/lib/grammar/generateSentence.js';
+import {
+  researchReferences,
+  researchReferenceRegistry,
+} from '../src/data/research/index.js';
+import { validateResearchReferences, validateResearchRegistry } from '../src/lib/validateResearch.js';
 
 assert.equal(interactions.length, 40);
 assert.deepEqual(
@@ -62,6 +67,12 @@ for (const demo of Object.values(demoRegistry)) {
 assert.equal(getDemoProblem('word-order', 'WO-002').id, 'WO-002');
 assert.throws(() => getDemoProblem('word-order', 'MP-001'), /type mismatch/);
 
+assert.equal(researchReferences.length, 7);
+assert.equal(new Set(researchReferences.map((reference) => reference.id)).size, researchReferences.length);
+assert.equal(validateResearchReferences(researchReferences).valid, true);
+assert.equal(validateResearchRegistry(researchReferenceRegistry, researchReferences).valid, true);
+assert.ok(interactions.filter((entry) => entry.researchRefs?.length).length >= 15);
+
 const lessonValidation = validateLessons(lessons, {
   problemRegistry,
   problemTypes: new Set(Object.keys(demoRegistry)),
@@ -95,7 +106,10 @@ delete incompleteAssignments['after-school'];
 assert.equal(checkClassification(incompleteAssignments, grammarClassifierProblem.items), false);
 assert.equal(checkClassification({ ...correctAssignments, extra: 'subject' }, grammarClassifierProblem.items), false);
 
-const validInteractions = validateInteractions(interactions, { registryKeys: Object.keys(demoRegistry) });
+const validInteractions = validateInteractions(interactions, {
+  registryKeys: Object.keys(demoRegistry),
+  researchRegistry: researchReferenceRegistry,
+});
 assert.equal(validInteractions.valid, true, validInteractions.errors.join('; '));
 const cloneInteractions = () => interactions.map((entry) => ({ ...entry, targetGrammar: [...entry.targetGrammar] }));
 const duplicateId = cloneInteractions();
@@ -138,6 +152,22 @@ assert.equal(validateInteractions(repositoryWithoutUrl).valid, false);
 const missingDemo = cloneInteractions();
 missingDemo[0].demoType = 'missing-demo';
 assert.equal(validateInteractions(missingDemo, { registryKeys: Object.keys(demoRegistry) }).valid, false);
+const unknownResearchReference = cloneInteractions();
+unknownResearchReference[0].researchRefs = ['REF-MISSING'];
+assert.equal(validateInteractions(unknownResearchReference, { researchRegistry: researchReferenceRegistry }).valid, false);
+
+const invalidResearchLicense = structuredClone(researchReferences);
+delete invalidResearchLicense[0].license;
+assert.equal(validateResearchReferences(invalidResearchLicense).valid, false);
+const invalidResearchRepositoryUrl = structuredClone(researchReferences);
+delete invalidResearchRepositoryUrl[0].repositoryUrl;
+assert.equal(validateResearchReferences(invalidResearchRepositoryUrl).valid, false);
+const invalidObservedPatterns = structuredClone(researchReferences);
+invalidObservedPatterns[0].observedPatterns = [];
+assert.equal(validateResearchReferences(invalidObservedPatterns).valid, false);
+const invalidVerifiedAt = structuredClone(researchReferences);
+invalidVerifiedAt[0].verifiedAt = '2026/09/13';
+assert.equal(validateResearchReferences(invalidVerifiedAt).valid, false);
 
 const sentenceCases = [
   [{ subject: 'he', tense: 'present', negative: false }, 'He plays tennis.'],

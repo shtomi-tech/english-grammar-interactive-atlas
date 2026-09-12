@@ -9,6 +9,7 @@ import {
   sourceTypes,
 } from './interaction-schema.js';
 import { additionalInteractions } from './interactions-additional.js';
+import { researchRefsByInteractionId } from './research/mappings.js';
 
 /**
  * @typedef {'build'|'move'|'select'|'classify'|'transform'|'visualize'|'generate'|'compare'|'correct'|'simulate'} InteractionCategory
@@ -38,6 +39,7 @@ import { additionalInteractions } from './interactions-additional.js';
  * @property {'verified'|'unresearched'} researchStatus
  * @property {'verified'|'unknown'|'not-applicable'} licenseStatus
  * @property {ReusePolicy} reusePolicy
+ * @property {string[]} [researchRefs]
  * @property {string} [demoType]
  * @property {string} [notes]
  */
@@ -267,7 +269,10 @@ const initialInteractions = [
   },
 ];
 
-export const interactions = [...initialInteractions, ...additionalInteractions];
+export const interactions = [...initialInteractions, ...additionalInteractions].map((entry) => {
+  const researchRefs = researchRefsByInteractionId[entry.id];
+  return researchRefs ? { ...entry, researchRefs: [...researchRefs] } : entry;
+});
 
 export function getInteractionBySlug(slug) {
   return interactions.find((entry) => entry.slug === slug);

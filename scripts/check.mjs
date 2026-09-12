@@ -15,11 +15,16 @@ const files = [
   'src/data/problems/sentence-transformer.js',
   'src/data/problems/index.js',
   'src/data/lessons.js',
+  'src/data/research/schema.js',
+  'src/data/research/references.js',
+  'src/data/research/mappings.js',
+  'src/data/research/index.js',
   'src/lib/atlas.js',
   'src/lib/lifecycle.js',
   'src/lib/validateInteractions.js',
   'src/lib/validateProblems.js',
   'src/lib/validateLessons.js',
+  'src/lib/validateResearch.js',
   'src/lib/dom.js',
   'src/lib/grammar/word-order.js',
   'src/lib/grammar/parts.js',
@@ -55,9 +60,22 @@ const { problems, problemRegistry } = await import('../src/data/problems/index.j
 const { lessons } = await import('../src/data/lessons.js');
 const { validateDemoRegistry, validateProblems } = await import('../src/lib/validateProblems.js');
 const { validateLessons } = await import('../src/lib/validateLessons.js');
+const { researchReferences, researchReferenceRegistry } = await import('../src/data/research/index.js');
+const { validateResearchReferences, validateResearchRegistry } = await import('../src/lib/validateResearch.js');
 const validation = validateInteractions(interactions, { registryKeys: Object.keys(demoRegistry) });
 if (!validation.valid) throw new Error(`Interaction validation failed: ${validation.errors.join('; ')}`);
 console.log(`Interaction validation passed for ${interactions.length} entries.`);
+const researchValidation = validateResearchReferences(researchReferences);
+if (!researchValidation.valid) throw new Error(`Research validation failed: ${researchValidation.errors.join('; ')}`);
+console.log(`Research validation passed for ${researchReferences.length} references.`);
+const researchRegistryValidation = validateResearchRegistry(researchReferenceRegistry, researchReferences);
+if (!researchRegistryValidation.valid) throw new Error(`Research registry validation failed: ${researchRegistryValidation.errors.join('; ')}`);
+const interactionResearchValidation = validateInteractions(interactions, {
+  registryKeys: Object.keys(demoRegistry),
+  researchRegistry: researchReferenceRegistry,
+});
+if (!interactionResearchValidation.valid) throw new Error(`Interaction research mapping validation failed: ${interactionResearchValidation.errors.join('; ')}`);
+console.log(`Interaction research mappings passed for ${interactions.filter((entry) => entry.researchRefs?.length).length} entries.`);
 const problemValidation = validateProblems(problems);
 if (!problemValidation.valid) throw new Error(`Problem validation failed: ${problemValidation.errors.join('; ')}`);
 console.log(`Problem validation passed for ${problems.length} problems.`);

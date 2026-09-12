@@ -30,12 +30,20 @@ function hasText(value) {
   return typeof value === 'string' && value.trim().length > 0;
 }
 
-export function validateInteractions(entries, { registryKeys } = {}) {
+function getResearchKeys(researchRegistry) {
+  if (researchRegistry instanceof Set) return researchRegistry;
+  if (Array.isArray(researchRegistry)) return new Set(researchRegistry);
+  if (researchRegistry && typeof researchRegistry === 'object') return new Set(Object.keys(researchRegistry));
+  return null;
+}
+
+export function validateInteractions(entries, { registryKeys, researchRegistry } = {}) {
   const errors = [];
   if (!Array.isArray(entries)) return { valid: false, errors: ['entries must be an array'] };
 
   const ids = new Set();
   const slugs = new Set();
+  const researchKeys = getResearchKeys(researchRegistry);
   entries.forEach((entry, index) => {
     const label = `entry[${index}]`;
     if (!entry || typeof entry !== 'object') {
@@ -85,6 +93,15 @@ export function validateInteractions(entries, { registryKeys } = {}) {
     }
     if (entry.licenseStatus === 'not-applicable' && hasText(entry.license)) {
       errors.push(`${label}.license must be omitted when licenseStatus is not-applicable`);
+    }
+    if (entry.researchRefs !== undefined) {
+      if (!Array.isArray(entry.researchRefs) || entry.researchRefs.some((id) => !hasText(id))) {
+        errors.push(`${label}.researchRefs must contain non-empty strings`);
+      } else if (researchKeys) {
+        for (const id of entry.researchRefs) {
+          if (!researchKeys.has(id)) errors.push(`${label}.researchRefs contains unknown reference: ${id}`);
+        }
+      }
     }
 
     if (entry.demoType !== undefined) {
