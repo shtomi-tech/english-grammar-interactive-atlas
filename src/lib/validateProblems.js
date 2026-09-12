@@ -226,6 +226,37 @@ function validateTransformer(problem, label, errors) {
   validateGrammarControls(problem, label, errors);
   validateDefaults(problem, label, errors);
   validateSentenceModel(problem, label, errors);
+  validateTransformerCompletion(problem, label, errors);
+}
+
+function validateTransformerCompletion(problem, label, errors) {
+  if (problem.completion === undefined) return;
+  const completion = problem.completion;
+  if (!isRecord(completion) || completion.type !== 'explore-control') {
+    errors.push(`${label}.completion.type must be explore-control`);
+    return;
+  }
+  if (!hasText(completion.control)) {
+    errors.push(`${label}.completion.control is required`);
+    return;
+  }
+  const options = problem.controls?.[completion.control];
+  if (!Array.isArray(options)) {
+    errors.push(`${label}.completion.control is not present in controls: ${completion.control}`);
+  }
+  if (!Array.isArray(completion.requiredValues) || completion.requiredValues.length === 0) {
+    errors.push(`${label}.completion.requiredValues must contain at least one value`);
+    return;
+  }
+
+  const controlValues = new Set((options ?? []).map((option) => controlValueKey(option?.value)));
+  const seenValues = new Set();
+  completion.requiredValues.forEach((value) => {
+    const key = controlValueKey(value);
+    if (seenValues.has(key)) errors.push(`${label}.completion.requiredValues contains duplicate values`);
+    seenValues.add(key);
+    if (!controlValues.has(key)) errors.push(`${label}.completion.requiredValues contains an unknown value: ${value}`);
+  });
 }
 
 function validateSentenceGenerator(problem, label, errors) {
@@ -586,6 +617,9 @@ export function validateProblems(entries, { expectedTypes = problemTypes } = {})
     if (!expectedTypes.has(problem.type)) {
       errors.push(`${label}.type is invalid: ${problem.type}`);
       return;
+    }
+    if (problem.completion !== undefined && problem.type !== 'sentence-transformer') {
+      errors.push(`${label}.completion is only supported for sentence-transformer problems`);
     }
     if (problem.type === 'word-order') validateWordOrder(problem, label, errors);
     if (problem.type === 'mark-parts') validateMarkParts(problem, label, errors);

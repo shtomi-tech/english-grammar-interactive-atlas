@@ -24,6 +24,11 @@ import { checkTokenSelection } from '../src/lib/grammar/parts.js';
 import { generateSentence } from '../src/lib/grammar/generateSentence.js';
 import { getGrammarStateMode, SUPPORTED_MODALS, SUPPORTED_TENSES, SUPPORTED_VOICES } from '../src/lib/grammar/grammar-state.js';
 import { getControlLabel } from '../src/lib/grammar/grammar-controls.js';
+import {
+  createInitialExploration,
+  hasCompletedTransformerExploration,
+  recordExploredValue,
+} from '../src/lib/grammar/transformer-exploration.js';
 import { buildPatternSlots, getExploredRoles, hasExploredAllChunks } from '../src/lib/grammar/sentence-pattern.js';
 import { getRelatedChunkIds, getRelationsForChunk, hasExploredAllRelations } from '../src/lib/grammar/modifier-relations.js';
 import {
@@ -581,6 +586,31 @@ delete generatorControlsWithoutGrammarMode.targetStates[0].tense;
 assert.equal(validateProblems([generatorControlsWithoutGrammarMode]).valid, false);
 assert.equal(validateProblems([sentenceTransformerProblems[2]]).valid, true);
 assert.equal(validateProblems([sentenceGeneratorProblems[4]]).valid, true);
+const st003Exploration = createInitialExploration(sentenceTransformerProblems[2]);
+assert.equal(hasCompletedTransformerExploration(sentenceTransformerProblems[2], st003Exploration), false);
+assert.equal(
+  hasCompletedTransformerExploration(
+    sentenceTransformerProblems[2],
+    recordExploredValue(st003Exploration, 'tense', 'past'),
+  ),
+  false,
+);
+const st003WithPassive = recordExploredValue(st003Exploration, 'voice', 'passive');
+assert.equal(hasCompletedTransformerExploration(sentenceTransformerProblems[2], st003WithPassive), true);
+const st002Exploration = createInitialExploration(sentenceTransformerProblems[1]);
+assert.equal(hasCompletedTransformerExploration(sentenceTransformerProblems[1], st002Exploration), false);
+const st002WithAllModals = ['could', 'should', 'must'].reduce(
+  (exploredValues, value) => recordExploredValue(exploredValues, 'modal', value),
+  st002Exploration,
+);
+assert.equal(hasCompletedTransformerExploration(sentenceTransformerProblems[1], st002WithAllModals), true);
+assert.equal(
+  hasCompletedTransformerExploration(
+    sentenceTransformerProblems[1],
+    recordExploredValue(st002Exploration, 'modal', 'might'),
+  ),
+  false,
+);
 const passiveWithoutTense = structuredClone(sentenceTransformerProblems[2]);
 delete passiveWithoutTense.controls.tense;
 delete passiveWithoutTense.defaults.tense;
@@ -614,6 +644,24 @@ assert.equal(validateProblems([passiveInvalidRoleNumber]).valid, false);
 const passiveMissingParticiple = structuredClone(sentenceTransformerProblems[2]);
 delete passiveMissingParticiple.sentenceModel.verb.pastParticiple;
 assert.equal(validateProblems([passiveMissingParticiple]).valid, false);
+const completionMissingControl = structuredClone(sentenceTransformerProblems[2]);
+delete completionMissingControl.completion.control;
+assert.equal(validateProblems([completionMissingControl]).valid, false);
+const completionUnknownValue = structuredClone(sentenceTransformerProblems[2]);
+completionUnknownValue.completion.requiredValues = ['active', 'passive', 'future'];
+assert.equal(validateProblems([completionUnknownValue]).valid, false);
+const completionEmptyValues = structuredClone(sentenceTransformerProblems[2]);
+completionEmptyValues.completion.requiredValues = [];
+assert.equal(validateProblems([completionEmptyValues]).valid, false);
+const completionDuplicateValue = structuredClone(sentenceTransformerProblems[2]);
+completionDuplicateValue.completion.requiredValues = ['active', 'active'];
+assert.equal(validateProblems([completionDuplicateValue]).valid, false);
+const completionUnsupportedType = structuredClone(sentenceTransformerProblems[2]);
+completionUnsupportedType.completion.type = 'manual';
+assert.equal(validateProblems([completionUnsupportedType]).valid, false);
+const completionOnOtherProblem = structuredClone(wordOrderProblems[0]);
+completionOnOtherProblem.completion = { type: 'explore-control', control: 'words', requiredValues: ['subject'] };
+assert.equal(validateProblems([completionOnOtherProblem]).valid, false);
 const errorTokenCorrectionMismatch = structuredClone(errorCorrectorProblems);
 errorTokenCorrectionMismatch[0].tokens[1].correctionId = 'missing-correction';
 assert.equal(validateProblems(errorTokenCorrectionMismatch).valid, false);

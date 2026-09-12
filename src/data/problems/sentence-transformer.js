@@ -57,6 +57,11 @@ export const sentenceTransformerProblems = [
       modal: 'can',
       negative: false,
     },
+    completion: {
+      type: 'explore-control',
+      control: 'modal',
+      requiredValues: ['can', 'could', 'should', 'must'],
+    },
     sentenceModel: {
       subjects: {
         he: { label: 'He', number: 'singular' },
@@ -84,6 +89,11 @@ export const sentenceTransformerProblems = [
     defaults: {
       tense: 'present',
       voice: 'active',
+    },
+    completion: {
+      type: 'explore-control',
+      control: 'voice',
+      requiredValues: ['active', 'passive'],
     },
     sentenceModel: {
       roles: {

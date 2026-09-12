@@ -46,3 +46,5 @@ The role-based model requires both roles, their `label` and `number`, and all th
 Problem Data for Sentence Transformer and Sentence Generator must contain exactly one of `tense` or `modal`; neither is invalid even though the low-level realizer may default an omitted tense to present for legacy callers. Voice Problems use `tense` plus `voice` and do not use `subject` or `negative` controls.
 
 This contract does not add perfect/progressive voice, modal + voice, negative passive, persistence, or a new Demo Type.
+
+Sentence Transformerの一部Problemでは、文法状態の変化を観察するために `completion: { type: 'explore-control', control, requiredValues }` を指定できます。`requiredValues` の全値を同一マウント中に確認した時だけLesson Stepを完了とし、初期値は確認済みとして数えます。探索状態は保存せず、採点・バッジ・連続記録にも使いません。

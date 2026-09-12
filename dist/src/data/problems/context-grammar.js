@@ -252,7 +252,7 @@ export const contextGrammarProblems = [
       {
         id: 'cg005-step-1',
         speaker: 'Editor',
-        line: 'Who broke the window last night?',
+        line: 'What happened to the window last night?',
         instruction: '誰がしたか分からない出来事として、窓に焦点を置いて報告してください。',
         choices: [
           {

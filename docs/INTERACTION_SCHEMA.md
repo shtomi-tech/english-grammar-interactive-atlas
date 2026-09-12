@@ -67,4 +67,6 @@ Research Reference records separately store observed patterns, atlas implication
 
 Sentence TransformerとSentence Generatorの文法状態契約は [GRAMMAR_STATE_CONTRACT.md](./GRAMMAR_STATE_CONTRACT.md) に分離して管理します。既存10 Demoの学習行為は共通化せず、共通化するのは対応する文法値・状態モード・表示ラベルの契約だけです。Phase 6Bのvoiceは `active` / `passive` と `tense` の組み合わせに限定し、Problem Dataにはagent/patientを持つrole-based sentence modelを使います。
 
+Sentence Transformerでは、必要な値の探索をLessonの完了条件にするProblemだけ、`completion: { type: 'explore-control', control, requiredValues }` を追加できます。初期値は探索済みとして扱い、同一マウント中にrequiredValuesをすべて表示した時点で完了します。これは進捗の保存や採点ではありません。
+
 検証は `npm test`、`npm run check`、`npm run build` の順で実行します。

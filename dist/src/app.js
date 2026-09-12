@@ -10,6 +10,7 @@ import {
   sourceTypeLabels,
 } from './data/interaction-schema.js';
 import { getLessonBySlug, lessons } from './data/lessons.js';
+import { getProblemById } from './data/problems/index.js';
 import {
   getResearchReferencesByIds,
   researchLicenseStatusLabels,
@@ -393,6 +394,8 @@ function renderLesson(lesson) {
 
   function renderStep(shouldFocus = true) {
     const step = lesson.steps[stepIndex];
+    const requiresCompletion = Boolean(getProblemById(step.problemId)?.completion);
+    let stepComplete = !requiresCompletion;
     cleanup?.();
     cleanup = null;
     stepLabel.textContent = `Step ${stepIndex + 1} / ${lesson.steps.length}`;
@@ -404,11 +407,15 @@ function renderLesson(lesson) {
     stepInstruction.textContent = step.instruction;
     completion.textContent = '';
     previousButton.disabled = stepIndex === 0;
-    nextButton.disabled = stepIndex === lesson.steps.length - 1;
+    nextButton.disabled = stepIndex === lesson.steps.length - 1 || !stepComplete;
     cleanup = mountDemo(step.interactionType, componentRoot, {
       problemId: step.problemId,
       onComplete(result) {
-        if (result.correct) completion.textContent = 'Step complete — 次の気づきへ進めます。';
+        if (result.correct) {
+          completion.textContent = 'Step complete — 次の気づきへ進めます。';
+          stepComplete = true;
+          nextButton.disabled = stepIndex === lesson.steps.length - 1;
+        }
       },
     });
     if (shouldFocus) stepTitle.focus({ preventScroll: true });

@@ -62,7 +62,7 @@ Phase 1の基盤とPhase 2AのGrammar Classifierをもとに、Phase 2Bで40件�
 9. Context Grammar
 10. Sentence Generator
 
-Lesson 01「文の骨格を見抜く」、Lesson 02「英文の構造を読む」、Lesson 03「助動詞を形と場面から使う」、Lesson 04「能動態と受動態で視点を変える」はCatalogのGuided lessonsから開けます。LessonはProblem IDで問題を参照し、同じComponentへ別のProblem Dataを渡せます。ProblemとLessonの検証は `npm run check` に含まれます。助動詞の対応範囲は [docs/MODAL_SUPPORT.md](./docs/MODAL_SUPPORT.md)、受動態の対応範囲は [docs/PASSIVE_SUPPORT.md](./docs/PASSIVE_SUPPORT.md)、文法状態の共通契約は [docs/GRAMMAR_STATE_CONTRACT.md](./docs/GRAMMAR_STATE_CONTRACT.md) に記録しています。
+Lesson 01「文の骨格を見抜く」、Lesson 02「英文の構造を読む」、Lesson 03「助動詞を形と場面から使う」、Lesson 04「能動態と受動態で視点を変える」はCatalogのGuided lessonsから開けます。LessonはProblem IDで問題を参照し、同じComponentへ別のProblem Dataを渡せます。助動詞と受動態のTransformerでは、Problem Dataに定めた値を実際に見比べるまでLessonを先へ進めない探索完了条件も使えます。ProblemとLessonの検証は `npm run check` に含まれます。助動詞の対応範囲は [docs/MODAL_SUPPORT.md](./docs/MODAL_SUPPORT.md)、受動態の対応範囲は [docs/PASSIVE_SUPPORT.md](./docs/PASSIVE_SUPPORT.md)、文法状態の共通契約は [docs/GRAMMAR_STATE_CONTRACT.md](./docs/GRAMMAR_STATE_CONTRACT.md) に記録しています。
 
 画面は、スマートフォンのタップ操作とキーボード操作で利用できるようにしています。BackendやDBはまだ導入していません。外部Repositoryやサイトのコード・教材を推測で取り込まず、未調査の出典は明示的に未調査として扱います。
 

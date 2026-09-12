@@ -2,6 +2,12 @@ import { escapeHtml } from '../../lib/dom.js';
 import { prepareMountRoot } from '../../lib/lifecycle.js';
 import { generateSentence } from '../../lib/grammar/generateSentence.js';
 import { getControlLabel } from '../../lib/grammar/grammar-controls.js';
+import {
+  createInitialExploration,
+  getTransformerExplorationProgress,
+  hasCompletedTransformerExploration,
+  recordExploredValue,
+} from '../../lib/grammar/transformer-exploration.js';
 
 function valueKey(value) {
   return `${typeof value}:${String(value)}`;
@@ -18,8 +24,11 @@ export function mountSentenceTransformer(root, problem, options = {}) {
   }
   const onComplete = typeof options.onComplete === 'function' ? options.onComplete : () => {};
   const state = { ...problem.defaults };
+  let exploredValues = createInitialExploration(problem);
+  let completionNotified = false;
   const problemKey = safeId(problem.id);
   const controls = Object.entries(problem.controls);
+  const hasExplorationCompletion = problem.completion?.type === 'explore-control';
 
   root.innerHTML = `
     <p class="instruction">${escapeHtml(problem.prompt)}</p>
@@ -43,6 +52,7 @@ export function mountSentenceTransformer(root, problem, options = {}) {
           )
           .join('')}
       </div>
+      ${hasExplorationCompletion ? '<p class="instruction" data-exploration-progress aria-live="polite"></p>' : ''}
       <div class="transformer-output" aria-live="polite">
         <span class="output-label">Generated sentence</span>
         <span class="transformer-sentence" data-sentence></span>
@@ -52,6 +62,7 @@ export function mountSentenceTransformer(root, problem, options = {}) {
 
   const sentence = root.querySelector('[data-sentence]');
   const recipe = root.querySelector('[data-recipe]');
+  const explorationProgress = root.querySelector('[data-exploration-progress]');
 
   function getOptionLabel(name, value) {
     return problem.controls[name]?.find((option) => valueKey(option.value) === valueKey(value))?.label ?? String(value);
@@ -63,6 +74,10 @@ export function mountSentenceTransformer(root, problem, options = {}) {
     recipe.innerHTML = controls
       .map(([name]) => `<span class="recipe-chip">${escapeHtml(getControlLabel(name))}: ${escapeHtml(getOptionLabel(name, state[name]))}</span>`)
       .join('');
+    const progress = getTransformerExplorationProgress(problem, exploredValues);
+    if (explorationProgress && progress) {
+      explorationProgress.textContent = `Explore ${getControlLabel(problem.completion.control)} ${progress.exploredCount} / ${progress.requiredCount} explored`;
+    }
     return generatedSentence;
   }
 
@@ -73,8 +88,12 @@ export function mountSentenceTransformer(root, problem, options = {}) {
     const option = problem.controls[name]?.find((candidate) => String(candidate.value) === input.value);
     if (!option) return;
     state[name] = option.value;
+    exploredValues = recordExploredValue(exploredValues, name, option.value);
     const generatedSentence = render();
-    onComplete({ correct: true, problemId: problem.id, state: { ...state }, sentence: generatedSentence });
+    if (!hasExplorationCompletion || (hasCompletedTransformerExploration(problem, exploredValues) && !completionNotified)) {
+      completionNotified = true;
+      onComplete({ correct: true, problemId: problem.id, state: { ...state }, sentence: generatedSentence });
+    }
   });
 
   render();
