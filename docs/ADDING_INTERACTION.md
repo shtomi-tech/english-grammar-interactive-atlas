@@ -4,7 +4,7 @@
 
 ## 1. `InteractionEntry` を登録する
 
-`src/data/interactions.js` の `interactions` 配列へ、次の項目を追加します。
+`src/data/interactions.js` または `src/data/interactions-additional.js` の配列へ、次の項目を追加します。データ契約の詳細は [INTERACTION_SCHEMA.md](./INTERACTION_SCHEMA.md) を参照してください。
 
 ```js
 {
@@ -23,14 +23,16 @@
   feedbackType: ['正誤', '説明'],
   implementationDifficulty: 2,
   reusability: 'A',
-  sourceName: 'Original concept',
-  license: 'Original implementation',
+  sourceType: 'original',
+  researchStatus: 'verified',
+  sourceName: 'Original catalog concept',
+  licenseStatus: 'not-applicable',
   reusePolicy: 'idea-only',
   notes: '拡張時の注意点。',
 }
 ```
 
-`id` は安定IDとして一度決めたら変更しません。検索対象は `title`、`description`、`targetGrammar` です。項目を登録するとAtlas一覧と詳細画面へ自動表示されます。
+`id` は安定IDとして一度決めたら変更しません。必須の学習フィールドと配列フィールドは空にできません。検索対象は `title`、`description`、`targetGrammar` です。項目を登録するとAtlas一覧と詳細画面へ自動表示されます。外部出典を登録する場合は、確認したURLと実在するライセンスだけを記録し、分からない場合は `researchStatus: 'unresearched'` または `licenseStatus: 'unknown'` とします。`Original implementation` のような説明文をライセンス名として登録しません。
 
 ## 2. 問題データを分離する
 
@@ -50,7 +52,7 @@ Explanation
 
 タップだけで主要操作を完了できるようにし、button要素、focus表示、`aria-live`、文字による正誤表示を用意します。
 
-`npm run check` は、構文確認に加えて、ID・slugの重複、カテゴリ、難易度、再利用性、`demoType` とDemo Registryの対応を検証します。新しい項目を追加したら、まずこの検証を通してください。
+`npm run check` は、構文確認に加えて、ID・slugの重複、カテゴリ、難易度、再利用性、必須フィールド、出典メタデータ、`demoType` とDemo Registryの対応を検証します。新しい項目を追加したら、まずこの検証を通してください。
 
 ## 4. Registryへ登録する
 

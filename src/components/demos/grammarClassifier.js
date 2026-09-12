@@ -30,7 +30,24 @@ export function mountGrammarClassifier(root) {
   const result = root.querySelector('[data-classifier-result]');
   const explanation = root.querySelector('[data-classifier-explanation]');
 
-  function render() {
+  function restoreFocus(focusTarget) {
+    if (!focusTarget) return;
+    let target = null;
+    if (focusTarget.type === 'category') {
+      target = [...root.querySelectorAll('[data-classifier-category-id]')].find(
+        (button) => button.dataset.classifierCategoryId === focusTarget.id,
+      );
+    } else if (focusTarget.type === 'item') {
+      target = [...root.querySelectorAll('[data-classifier-item-id]')].find(
+        (button) => button.dataset.classifierItemId === focusTarget.id,
+      );
+    } else if (focusTarget.type === 'check') {
+      target = root.querySelector('[data-classifier-check]');
+    }
+    target?.focus();
+  }
+
+  function render(focusTarget = null) {
     const unclassifiedItems = grammarClassifierProblem.items.filter((item) => !assignments[item.id]);
     cards.innerHTML = unclassifiedItems.length
       ? unclassifiedItems
@@ -65,6 +82,7 @@ export function mountGrammarClassifier(root) {
           </section>`;
       })
       .join('');
+    restoreFocus(focusTarget);
   }
 
   function clearFeedback() {
@@ -85,7 +103,7 @@ export function mountGrammarClassifier(root) {
     if (!button) return;
     selectedItemId = button.dataset.classifierItemId;
     clearFeedback();
-    render();
+    render({ type: 'category', id: grammarClassifierProblem.categories[0].id });
   });
 
   categories.addEventListener('click', (event) => {
@@ -93,7 +111,10 @@ export function mountGrammarClassifier(root) {
     if (itemButton) {
       selectedItemId = itemButton.dataset.classifierItemId;
       clearFeedback();
-      render();
+      render({
+        type: 'category',
+        id: itemButton.closest('[data-classifier-category-items]')?.dataset.classifierCategoryItems,
+      });
       return;
     }
     const button = event.target.closest('[data-classifier-category-id]');
@@ -102,17 +123,21 @@ export function mountGrammarClassifier(root) {
       showSelectionHint();
       return;
     }
+    const assignedIndex = grammarClassifierProblem.items.findIndex((item) => item.id === selectedItemId);
     assignments = { ...assignments, [selectedItemId]: button.dataset.classifierCategoryId };
     selectedItemId = null;
     clearFeedback();
-    render();
+    const nextItem =
+      grammarClassifierProblem.items.find((item, index) => index > assignedIndex && !assignments[item.id]) ??
+      grammarClassifierProblem.items.find((item) => !assignments[item.id]);
+    render(nextItem ? { type: 'item', id: nextItem.id } : { type: 'check' });
   });
 
   root.querySelector('[data-classifier-reset]').addEventListener('click', () => {
     selectedItemId = null;
     assignments = {};
     clearFeedback();
-    render();
+    render({ type: 'item', id: grammarClassifierProblem.items[0].id });
   });
 
   root.querySelector('[data-classifier-check]').addEventListener('click', () => {

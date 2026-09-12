@@ -1,8 +1,30 @@
-import { categoryOptions } from '../data/interactions.js';
+import {
+  interactionCategories,
+  interactionRanks,
+  licenseStatuses,
+  researchStatuses,
+  reusePolicies,
+  sourceTypes,
+} from '../data/interaction-schema.js';
 
-const allowedCategories = new Set(categoryOptions.filter((option) => option.id !== 'all').map((option) => option.id));
-const allowedRanks = new Set(['S', 'A', 'B']);
-const allowedReusePolicies = new Set(['code', 'logic', 'ui-reference', 'idea-only']);
+const allowedCategories = new Set(interactionCategories);
+const allowedRanks = new Set(interactionRanks);
+const allowedReusePolicies = new Set(reusePolicies);
+const allowedSourceTypes = new Set(sourceTypes);
+const allowedResearchStatuses = new Set(researchStatuses);
+const allowedLicenseStatuses = new Set(licenseStatuses);
+const requiredTextFields = [
+  'id',
+  'slug',
+  'title',
+  'description',
+  'learningGoal',
+  'touchTarget',
+  'userAction',
+  'changingElement',
+  'insight',
+];
+const requiredArrayFields = ['targetGrammar', 'interactionType', 'feedbackType'];
 
 function hasText(value) {
   return typeof value === 'string' && value.trim().length > 0;
@@ -21,7 +43,7 @@ export function validateInteractions(entries, { registryKeys } = {}) {
       return;
     }
 
-    for (const field of ['id', 'slug', 'title', 'touchTarget', 'changingElement', 'insight']) {
+    for (const field of requiredTextFields) {
       if (!hasText(entry[field])) errors.push(`${label}.${field} is required`);
     }
     if (hasText(entry.id)) {
@@ -38,7 +60,32 @@ export function validateInteractions(entries, { registryKeys } = {}) {
     }
     if (!allowedRanks.has(entry.reusability)) errors.push(`${label}.reusability is invalid`);
     if (!allowedReusePolicies.has(entry.reusePolicy)) errors.push(`${label}.reusePolicy is invalid`);
-    if (!Array.isArray(entry.targetGrammar)) errors.push(`${label}.targetGrammar must be an array`);
+    for (const field of requiredArrayFields) {
+      if (!Array.isArray(entry[field])) {
+        errors.push(`${label}.${field} must be an array`);
+      } else if (entry[field].length === 0 || entry[field].some((value) => !hasText(value))) {
+        errors.push(`${label}.${field} must contain non-empty strings`);
+      }
+    }
+
+    if (!allowedSourceTypes.has(entry.sourceType)) errors.push(`${label}.sourceType is invalid`);
+    if (!allowedResearchStatuses.has(entry.researchStatus)) errors.push(`${label}.researchStatus is invalid`);
+    if (!allowedLicenseStatuses.has(entry.licenseStatus)) errors.push(`${label}.licenseStatus is invalid`);
+    if (entry.researchStatus === 'verified' && entry.sourceType === 'repository' && !hasText(entry.repositoryUrl)) {
+      errors.push(`${label}.repositoryUrl is required for a verified repository source`);
+    }
+    if (entry.researchStatus === 'verified' && entry.sourceType === 'site' && !hasText(entry.sourceUrl)) {
+      errors.push(`${label}.sourceUrl is required for a verified site source`);
+    }
+    if (entry.licenseStatus === 'verified' && !hasText(entry.license)) {
+      errors.push(`${label}.license is required for a verified license`);
+    }
+    if (entry.licenseStatus === 'unknown' && hasText(entry.license)) {
+      errors.push(`${label}.license must be omitted when licenseStatus is unknown`);
+    }
+    if (entry.licenseStatus === 'not-applicable' && hasText(entry.license)) {
+      errors.push(`${label}.license must be omitted when licenseStatus is not-applicable`);
+    }
 
     if (entry.demoType !== undefined) {
       if (!hasText(entry.demoType)) errors.push(`${label}.demoType is invalid`);

@@ -9,12 +9,27 @@ import { checkWordOrder, shuffleWordIds } from '../src/lib/grammar/word-order.js
 import { checkTokenSelection } from '../src/lib/grammar/parts.js';
 import { generateSentence } from '../src/lib/grammar/generateSentence.js';
 
-assert.equal(interactions.length, 10);
-assert.equal(filterInteractions(interactions, 'transform').length, 1);
+assert.equal(interactions.length, 40);
+assert.deepEqual(
+  interactions.map((entry) => entry.id),
+  Array.from({ length: 40 }, (_, index) => `GRAM-INT-${String(index + 1).padStart(3, '0')}`),
+);
+assert.equal(new Set(interactions.map((entry) => entry.category)).size, 10);
+assert.equal(filterInteractions(interactions, 'transform').length, 4);
+assert.equal(filterInteractions(interactions, 'all', { reusability: 'S' }).length, 29);
+assert.equal(filterInteractions(interactions, 'all', { reusability: 'A' }).length, 11);
+assert.equal(filterInteractions(interactions, 'all', { reusability: 'B' }).length, 0);
+assert.equal(filterInteractions(interactions, 'all', { demo: 'available' }).length, 4);
+assert.equal(filterInteractions(interactions, 'all', { demo: 'planned' }).length, 36);
 assert.equal(searchInteractions(interactions, 'relative').length, 2);
 assert.equal(searchInteractions(interactions, '  RELATIVE  ').length, 2);
+assert.equal(searchInteractions(interactions, 'conditional').length, 1);
+assert.equal(
+  searchInteractions(filterInteractions(interactions, 'generate', { reusability: 'S', demo: 'planned' }), 'generator').length,
+  2,
+);
 assert.deepEqual(getAtlasStats(interactions, demoRegistry), {
-  catalogEntries: 10,
+  catalogEntries: 40,
   interactionFamilies: 10,
   workingDemos: 4,
 });
@@ -55,6 +70,28 @@ assert.equal(validateInteractions(invalidDifficulty).valid, false);
 const invalidRank = cloneInteractions();
 invalidRank[0].reusability = 'X';
 assert.equal(validateInteractions(invalidRank).valid, false);
+const missingDescription = cloneInteractions();
+missingDescription[0].description = '';
+assert.equal(validateInteractions(missingDescription).valid, false);
+const emptyTargetGrammar = cloneInteractions();
+emptyTargetGrammar[0].targetGrammar = [];
+assert.equal(validateInteractions(emptyTargetGrammar).valid, false);
+const blankInteractionType = cloneInteractions();
+blankInteractionType[0].interactionType = [''];
+assert.equal(validateInteractions(blankInteractionType).valid, false);
+const invalidResearchStatus = cloneInteractions();
+invalidResearchStatus[0].researchStatus = 'pending';
+assert.equal(validateInteractions(invalidResearchStatus).valid, false);
+const verifiedLicenseWithoutName = cloneInteractions();
+verifiedLicenseWithoutName[0].licenseStatus = 'verified';
+assert.equal(validateInteractions(verifiedLicenseWithoutName).valid, false);
+const unknownLicenseWithName = cloneInteractions();
+unknownLicenseWithName[0].licenseStatus = 'unknown';
+unknownLicenseWithName[0].license = 'MIT';
+assert.equal(validateInteractions(unknownLicenseWithName).valid, false);
+const repositoryWithoutUrl = cloneInteractions();
+repositoryWithoutUrl[0].sourceType = 'repository';
+assert.equal(validateInteractions(repositoryWithoutUrl).valid, false);
 const missingDemo = cloneInteractions();
 missingDemo[0].demoType = 'missing-demo';
 assert.equal(validateInteractions(missingDemo, { registryKeys: Object.keys(demoRegistry) }).valid, false);

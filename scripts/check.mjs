@@ -6,6 +6,8 @@ const root = decodeURIComponent(new URL('..', import.meta.url).pathname).replace
 const files = [
   'src/app.js',
   'src/data/interactions.js',
+  'src/data/interaction-schema.js',
+  'src/data/interactions-additional.js',
   'src/data/demo-problems.js',
   'src/lib/atlas.js',
   'src/lib/validateInteractions.js',

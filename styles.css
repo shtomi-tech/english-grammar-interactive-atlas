@@ -276,6 +276,35 @@ a.button {
   gap: 8px;
 }
 
+.toolbar-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.select-filter {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.select-filter select {
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--canvas);
+  color: var(--paper);
+  font: inherit;
+}
+
+.toolbar-actions {
+  margin-top: 14px;
+}
+
 .filter-button {
   min-height: 40px;
   padding: 7px 13px;
@@ -1176,6 +1205,10 @@ a.button {
   .learning-sequence,
   .transformer-grid,
   .classifier-category-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .toolbar-options {
     grid-template-columns: 1fr;
   }
 

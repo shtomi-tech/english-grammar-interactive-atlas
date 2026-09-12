@@ -1,4 +1,14 @@
-import { categoryOptions, getInteractionBySlug, interactions } from './data/interactions.js';
+import {
+  categoryOptions,
+  getInteractionBySlug,
+  interactions,
+} from './data/interactions.js';
+import {
+  licenseStatusLabels,
+  researchStatusLabels,
+  reusePolicyLabels,
+  sourceTypeLabels,
+} from './data/interaction-schema.js';
 import { renderInteractionCard, renderEmptyState, renderDifficulty } from './components/atlas/interactionCard.js';
 import { renderFilterBar } from './components/atlas/filterBar.js';
 import { renderDemoPanel } from './components/demos/demoPanel.js';
@@ -8,7 +18,7 @@ import { escapeHtml } from './lib/dom.js';
 import { registerAtlasWebMcp } from './webmcp.js';
 
 const app = document.querySelector('#app');
-const state = { query: '', category: 'all' };
+const state = { query: '', category: 'all', reusability: 'all', demo: 'all' };
 
 function getRoute() {
   const hash = window.location.hash.replace(/^#/, '');
@@ -21,6 +31,19 @@ function getRoute() {
 
 function categoryLabel(category) {
   return categoryOptions.find((option) => option.id === category)?.label ?? category;
+}
+
+function metadataText(value, fallback = 'Not recorded') {
+  return escapeHtml(typeof value === 'string' && value.trim() ? value : fallback);
+}
+
+function metadataLink(url, label) {
+  if (typeof url !== 'string' || !/^https?:\/\//i.test(url)) return 'Not recorded';
+  return `<a href="${escapeHtml(url)}" rel="noreferrer">${escapeHtml(label)}</a>`;
+}
+
+function metadataLabel(value, labels, fallback = 'Not recorded') {
+  return escapeHtml(labels[value] ?? value ?? fallback);
 }
 
 function renderHeader() {
@@ -64,12 +87,40 @@ function renderToolbar() {
         <div class="filter-list" role="group" aria-label="Filter by category">
           ${renderFilterBar(categoryOptions, state.category)}
         </div>
+        <div class="toolbar-options">
+          <label class="select-filter" for="reusability-filter">
+            <span>Reusability</span>
+            <select id="reusability-filter" aria-label="Filter by reusability">
+              <option value="all"${state.reusability === 'all' ? ' selected' : ''}>All ranks</option>
+              <option value="S"${state.reusability === 'S' ? ' selected' : ''}>S — highest reuse</option>
+              <option value="A"${state.reusability === 'A' ? ' selected' : ''}>A — strong reuse</option>
+              <option value="B"${state.reusability === 'B' ? ' selected' : ''}>B — limited reuse</option>
+            </select>
+          </label>
+          <label class="select-filter" for="demo-filter">
+            <span>Demo</span>
+            <select id="demo-filter" aria-label="Filter by demo status">
+              <option value="all"${state.demo === 'all' ? ' selected' : ''}>All demos</option>
+              <option value="available"${state.demo === 'available' ? ' selected' : ''}>Available now</option>
+              <option value="planned"${state.demo === 'planned' ? ' selected' : ''}>Planned</option>
+            </select>
+          </label>
+        </div>
+        <div class="toolbar-actions">
+          <button class="button secondary" type="button" id="reset-filters">Reset filters</button>
+        </div>
       </div>
     </section>`;
 }
 
 function getVisibleInteractions() {
-  return searchInteractions(filterInteractions(interactions, state.category), state.query);
+  return searchInteractions(
+    filterInteractions(interactions, state.category, {
+      reusability: state.reusability,
+      demo: state.demo,
+    }),
+    state.query,
+  );
 }
 
 function updateResults() {
@@ -105,7 +156,7 @@ function renderAtlas() {
       </div>
       <section class="interaction-grid" data-results aria-live="polite"></section>
     </main>
-    <footer class="site-footer"><div class="shell">Phase 1 · Research the interaction, then reuse the learning part.</div></footer>`;
+    <footer class="site-footer"><div class="shell">Phase 2B · Research the interaction, then reuse the learning part.</div></footer>`;
 
   app.querySelector('#interaction-search').addEventListener('input', (event) => {
     state.query = event.target.value;
@@ -117,6 +168,22 @@ function renderAtlas() {
       renderAtlas();
       app.querySelector(`[data-category="${state.category}"]`)?.focus();
     });
+  });
+  app.querySelector('#reusability-filter').addEventListener('change', (event) => {
+    state.reusability = event.target.value;
+    updateResults();
+  });
+  app.querySelector('#demo-filter').addEventListener('change', (event) => {
+    state.demo = event.target.value;
+    updateResults();
+  });
+  app.querySelector('#reset-filters').addEventListener('click', () => {
+    state.query = '';
+    state.category = 'all';
+    state.reusability = 'all';
+    state.demo = 'all';
+    renderAtlas();
+    app.querySelector('#reset-filters')?.focus();
   });
   updateResults();
 }
@@ -176,11 +243,14 @@ function renderDetail(entry) {
           <div class="info-card">
             <h3>Reference notes</h3>
             <dl class="info-list">
-              <div><dt>Source</dt><dd>${escapeHtml(entry.sourceName ?? 'Not recorded')}</dd></div>
-              <div><dt>Repository</dt><dd>${entry.repositoryUrl ? `<a href="${escapeHtml(entry.repositoryUrl)}" rel="noreferrer">Open repository</a>` : 'Not recorded'}</dd></div>
-              <div><dt>License</dt><dd>${escapeHtml(entry.license ?? 'Not recorded')}</dd></div>
-              <div><dt>Reuse policy</dt><dd>${escapeHtml(entry.reusePolicy)}</dd></div>
-              <div><dt>Notes</dt><dd>${escapeHtml(entry.notes ?? '—')}</dd></div>
+              <div><dt>Source type</dt><dd>${metadataLabel(entry.sourceType, sourceTypeLabels)}</dd></div>
+              <div><dt>Research status</dt><dd>${metadataLabel(entry.researchStatus, researchStatusLabels)}</dd></div>
+              <div><dt>Source</dt><dd>${metadataText(entry.sourceName)}${entry.sourceUrl ? ` · ${metadataLink(entry.sourceUrl, 'Open source')}` : ''}</dd></div>
+              <div><dt>Repository</dt><dd>${metadataLink(entry.repositoryUrl, 'Open repository')}</dd></div>
+              <div><dt>License</dt><dd>${entry.licenseStatus === 'not-applicable' ? 'Not applicable' : metadataText(entry.license)}</dd></div>
+              <div><dt>License status</dt><dd>${metadataLabel(entry.licenseStatus, licenseStatusLabels)}</dd></div>
+              <div><dt>Reuse policy</dt><dd>${metadataLabel(entry.reusePolicy, reusePolicyLabels)}</dd></div>
+              <div><dt>Notes</dt><dd>${metadataText(entry.notes, 'Not recorded')}</dd></div>
             </dl>
           </div>
         </div>

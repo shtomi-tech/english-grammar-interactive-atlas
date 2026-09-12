@@ -1,6 +1,11 @@
-export function filterInteractions(entries, category = 'all') {
-  if (category === 'all') return entries;
-  return entries.filter((entry) => entry.category === category);
+export function filterInteractions(entries, category = 'all', { reusability = 'all', demo = 'all' } = {}) {
+  return entries.filter((entry) => {
+    const matchesCategory = category === 'all' || entry.category === category;
+    const matchesReusability = reusability === 'all' || entry.reusability === reusability;
+    const hasDemo = Boolean(entry.demoType);
+    const matchesDemo = demo === 'all' || (demo === 'available' && hasDemo) || (demo === 'planned' && !hasDemo);
+    return matchesCategory && matchesReusability && matchesDemo;
+  });
 }
 
 export function searchInteractions(entries, query = '') {

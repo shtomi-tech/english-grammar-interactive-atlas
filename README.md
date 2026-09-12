@@ -30,21 +30,24 @@ npm start
 ## 現在の構成
 
 - `src/data/interactions.js`: 図鑑データと `InteractionEntry` のJSDoc定義
+- `src/data/interaction-schema.js`: カテゴリ、ランク、再利用性、出典メタデータの定義
+- `src/data/interactions-additional.js`: GRAM-INT-011〜040のカタログ項目
 - `src/data/demo-problems.js`: Demoで使う問題データ
 - `src/components/atlas/`: 一覧カードとカテゴリフィルタ
 - `src/components/demos/`: 共通Demo枠、4つのDemo、Demo Registry
 - `src/lib/grammar/`: 正誤判定、分類判定、文法状態からの英文生成
-- `src/lib/validateInteractions.js`: 図鑑データの整合性検証
-- `tests/logic.test.js`: 検索・フィルタ・正誤判定・分類・英文生成のテスト
+- `src/lib/validateInteractions.js`: 図鑑データと出典メタデータの整合性検証
+- `tests/logic.test.js`: カタログ、検索・フィルタ、正誤判定・分類・英文生成のテスト
 - `docs/ADDING_INTERACTION.md`: 新しい図鑑項目とDemoの追加手順
+- `docs/INTERACTION_SCHEMA.md`: データ契約、出典メタデータ、ランク基準
 
 ## 現在の実装範囲
 
-Phase 1の基盤に、Phase 2AのGrammar Classifierを加えています。10件のカタログ、カテゴリ絞り込み、部分一致検索、ハッシュURLによる詳細画面、次の4つのDemoを含みます。
+Phase 1の基盤とPhase 2AのGrammar Classifierをもとに、Phase 2Bで40件のカタログへ拡張しています。カテゴリ・検索・再利用性ランク・Demo状態をAND条件で絞り込め、ハッシュURLによる詳細画面では出典メタデータも確認できます。実際に操作できるDemoは4つです。
 
 1. Word Order Builder
 2. Mark the Parts
 3. Sentence Transformer
 4. Grammar Classifier
 
-画面は、スマートフォンのタップ操作とキーボード操作で利用できるようにしています。BackendやDBはまだ導入していません。
+画面は、スマートフォンのタップ操作とキーボード操作で利用できるようにしています。BackendやDBはまだ導入していません。外部Repositoryやサイトのコード・教材を推測で取り込まず、未調査の出典は明示的に未調査として扱います。

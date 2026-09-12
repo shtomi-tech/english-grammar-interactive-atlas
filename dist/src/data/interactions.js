@@ -1,3 +1,15 @@
+import {
+  interactionCategories,
+  interactionCategoryLabels,
+  interactionRanks,
+  licenseStatuses,
+  originalSourceMetadata,
+  researchStatuses,
+  reusePolicies,
+  sourceTypes,
+} from './interaction-schema.js';
+import { additionalInteractions } from './interactions-additional.js';
+
 /**
  * @typedef {'build'|'move'|'select'|'classify'|'transform'|'visualize'|'generate'|'compare'|'correct'|'simulate'} InteractionCategory
  * @typedef {'S'|'A'|'B'} InteractionRank
@@ -22,6 +34,9 @@
  * @property {string} [sourceUrl]
  * @property {string} [repositoryUrl]
  * @property {string} [license]
+ * @property {'original'|'repository'|'site'} sourceType
+ * @property {'verified'|'unresearched'} researchStatus
+ * @property {'verified'|'unknown'|'not-applicable'} licenseStatus
  * @property {ReusePolicy} reusePolicy
  * @property {string} [demoType]
  * @property {string} [notes]
@@ -29,20 +44,13 @@
 
 export const categoryOptions = [
   { id: 'all', label: 'All' },
-  { id: 'build', label: 'Build' },
-  { id: 'move', label: 'Move' },
-  { id: 'select', label: 'Select' },
-  { id: 'classify', label: 'Classify' },
-  { id: 'transform', label: 'Transform' },
-  { id: 'visualize', label: 'Visualize' },
-  { id: 'generate', label: 'Generate' },
-  { id: 'compare', label: 'Compare' },
-  { id: 'correct', label: 'Correct' },
-  { id: 'simulate', label: 'Simulate' },
+  ...interactionCategories.map((id) => ({ id, label: interactionCategoryLabels[id] })),
 ];
 
+export { interactionRanks, licenseStatuses, researchStatuses, reusePolicies, sourceTypes };
+
 /** @type {InteractionEntry[]} */
-export const interactions = [
+const initialInteractions = [
   {
     id: 'GRAM-INT-001',
     slug: 'word-order-builder',
@@ -60,7 +68,7 @@ export const interactions = [
     implementationDifficulty: 2,
     reusability: 'S',
     sourceName: 'Original prototype',
-    license: 'Original implementation',
+    ...originalSourceMetadata,
     reusePolicy: 'idea-only',
     demoType: 'word-order',
     notes: '語句単位へ拡張すれば、疑問文や節の組み合わせにも使える。',
@@ -82,7 +90,7 @@ export const interactions = [
     implementationDifficulty: 3,
     reusability: 'S',
     sourceName: 'Original concept',
-    license: 'Original implementation',
+    ...originalSourceMetadata,
     reusePolicy: 'idea-only',
     notes: 'ドラッグは補助操作とし、タップでも完結させる。',
   },
@@ -103,7 +111,7 @@ export const interactions = [
     implementationDifficulty: 2,
     reusability: 'S',
     sourceName: 'Original prototype',
-    license: 'Original implementation',
+    ...originalSourceMetadata,
     reusePolicy: 'idea-only',
     demoType: 'mark-parts',
     notes: '将来は補語・修飾語・関係詞節も同じTokenモデルで扱う。',
@@ -125,7 +133,7 @@ export const interactions = [
     implementationDifficulty: 3,
     reusability: 'S',
     sourceName: 'Original concept',
-    license: 'Original implementation',
+    ...originalSourceMetadata,
     reusePolicy: 'idea-only',
     demoType: 'grammar-classifier',
     notes: '分類軸をデータで差し替えられるようにする。',
@@ -147,7 +155,7 @@ export const interactions = [
     implementationDifficulty: 3,
     reusability: 'S',
     sourceName: 'Original prototype',
-    license: 'Original implementation',
+    ...originalSourceMetadata,
     reusePolicy: 'idea-only',
     demoType: 'sentence-transformer',
     notes: '文法状態から生成するため、将来の文生成エンジン差し替えに対応しやすい。',
@@ -169,7 +177,7 @@ export const interactions = [
     implementationDifficulty: 4,
     reusability: 'A',
     sourceName: 'Original concept',
-    license: 'Original implementation',
+    ...originalSourceMetadata,
     reusePolicy: 'idea-only',
     notes: 'SVGまたはDOMのノード構造をデータから生成する。',
   },
@@ -190,7 +198,7 @@ export const interactions = [
     implementationDifficulty: 4,
     reusability: 'A',
     sourceName: 'Original concept',
-    license: 'Original implementation',
+    ...originalSourceMetadata,
     reusePolicy: 'idea-only',
     notes: '生成器と表示器を分離し、データを追加しやすくする。',
   },
@@ -211,7 +219,7 @@ export const interactions = [
     implementationDifficulty: 2,
     reusability: 'S',
     sourceName: 'Original concept',
-    license: 'Original implementation',
+    ...originalSourceMetadata,
     reusePolicy: 'idea-only',
     notes: '比較するペアをJSONデータとして登録する。',
   },
@@ -232,7 +240,7 @@ export const interactions = [
     implementationDifficulty: 3,
     reusability: 'S',
     sourceName: 'Original concept',
-    license: 'Original implementation',
+    ...originalSourceMetadata,
     reusePolicy: 'idea-only',
     notes: '許容される別解と、学習上の代表解を分けて管理する。',
   },
@@ -253,11 +261,13 @@ export const interactions = [
     implementationDifficulty: 4,
     reusability: 'A',
     sourceName: 'Original concept',
-    license: 'Original implementation',
+    ...originalSourceMetadata,
     reusePolicy: 'idea-only',
     notes: '場面・選択肢・結果を独立したデータとして管理する。',
   },
 ];
+
+export const interactions = [...initialInteractions, ...additionalInteractions];
 
 export function getInteractionBySlug(slug) {
   return interactions.find((entry) => entry.slug === slug);
