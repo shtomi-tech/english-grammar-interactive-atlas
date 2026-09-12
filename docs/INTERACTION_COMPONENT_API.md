@@ -14,7 +14,7 @@ Demo / Lesson
 
 ## Mount signature
 
-6つのComponentは次の形を実装します。
+7つのComponentは次の形を実装します。
 
 ```js
 const cleanup = mountInteraction(root, problem, {
@@ -32,10 +32,11 @@ const cleanup = mountInteraction(root, problem, {
 | Sentence Transformer | `sentence-transformer` | `controls`, `defaults`, `sentenceModel` |
 | Sentence Pattern Diagram | `sentence-pattern-diagram` | `prompt`, `sentence`, `chunks`, `pattern`, `explanation` |
 | Modifier Connection Viewer | `modifier-connection-viewer` | `prompt`, `sentence`, `chunks`, `relations`, `explanation` |
+| Sentence Comparison | `sentence-comparison` | `prompt`, `sentences`, `differences`, `explanation` |
 
 ## Options and onComplete
 
-判定を持つ3つのComponentはCheck時に、Sentence Transformerは選択変更時にcallbackを呼びます。
+判定を持つ3つのComponentはCheck時に、Sentence Transformerは選択変更時にcallbackを呼びます。探索型のSentence Pattern Diagram、Modifier Connection Viewer、Sentence Comparisonは必要な要素をすべて確認した時にcallbackを呼びます。
 
 ```js
 onComplete({
@@ -93,6 +94,12 @@ Word Orderの正答は `acceptedAnswers` を正本とし、1問に1つ以上のI
 `mountModifierConnectionViewer(root, problem, options)` は、`chunks` と `relations` から修飾語と被修飾語の接続を生成します。relationは一意な `id`、修飾語側の `modifierId`、対象側の `targetId`、`relationType`、`label`、`explanation` を持ちます。chunkの `id` で参照するため、同じ文に複数の修飾関係を置けます。
 
 英文chunkまたは関係カードのModifier/Targetを選ぶと、関係する要素と説明が文字でも示されます。関係を一度以上確認すると `onComplete({ correct: true, problemId, exploredRelationIds })` を一度だけ呼びます。正誤問題ではなく探索型のDemoとして扱い、Resetで選択・探索済み関係・完了状態を初期化します。
+
+## Sentence Comparison
+
+`mountSentenceComparison(root, problem, options)` は、2つの `sentences` と、教材側で定義した `differences` から比較UIを生成します。各sentenceは一意な `id`、表示用の `text`、一意なchunkの配列を持ちます。differenceは一意な `id`、左右のchunk ID、差分label、説明、`meaningLeft`、`meaningRight` を持ちます。文字列の一般的なdiff計算は行いません。
+
+左右どちらの差分chunkを押しても、対応する2つのchunkを強調し、Difference・Meaning A/B・Why it mattersを文字で表示します。全differenceを一度以上確認すると `onComplete({ correct: true, problemId, exploredDifferenceIds })` を一度だけ呼びます。Resetは選択・確認済み差分・完了状態を初期化します。
 
 ## Lesson Registry and Problem injection
 

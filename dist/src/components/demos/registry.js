@@ -4,6 +4,7 @@ import { mountSentenceTransformer } from './sentenceTransformer.js';
 import { mountGrammarClassifier } from './grammarClassifier.js';
 import { mountSentencePatternDiagram } from './sentencePatternDiagram.js';
 import { mountModifierConnectionViewer } from './modifierConnectionViewer.js';
+import { mountSentenceComparison } from './sentenceComparison.js';
 import { getProblemById } from '../../data/problems/index.js';
 
 export const demoRegistry = {
@@ -30,6 +31,10 @@ export const demoRegistry = {
   'modifier-connection-viewer': {
     mount: mountModifierConnectionViewer,
     demoProblemId: 'MCV-001',
+  },
+  'sentence-comparison': {
+    mount: mountSentenceComparison,
+    demoProblemId: 'SC-001',
   },
 };
 

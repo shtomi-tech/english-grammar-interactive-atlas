@@ -38,15 +38,17 @@
 
 Demoを作る場合、英文・正答・説明などの教材固有データは `src/data/problems/` の機能別ファイルへ置きます。Demoコンポーネントに問題文を直接書きません。分類Demoなら、`categories` と `items` の `answer` をデータ側に持たせ、分類軸を差し替えられる形にします。互換用の `src/data/demo-problems.js` は代表Problemの再エクスポートだけを行います。
 
-Problemは `type` と安定した `id` を持ち、`src/data/problems/index.js` のRegistryから `getProblemById('WO-001')` のように取得できます。現在のProblem数は Word Order 4、Mark the Parts 3、Grammar Classifier 3、Sentence Transformer 1、Sentence Pattern Diagram 3、Modifier Connection Viewer 3 です。Word Orderの正答は `acceptedAnswers`（許容順序の配列）を正本とし、任意で段階的な `hints` を指定できます。複数正答の判定は `src/lib/grammar/word-order.js` に置き、UIへ重複実装しません。
+Problemは `type` と安定した `id` を持ち、`src/data/problems/index.js` のRegistryから `getProblemById('WO-001')` のように取得できます。現在のProblem数は Word Order 4、Mark the Parts 3、Grammar Classifier 3、Sentence Transformer 1、Sentence Pattern Diagram 3、Modifier Connection Viewer 3、Sentence Comparison 3 です。Word Orderの正答は `acceptedAnswers`（許容順序の配列）を正本とし、任意で段階的な `hints` を指定できます。複数正答の判定は `src/lib/grammar/word-order.js` に置き、UIへ重複実装しません。
 
 Sentence Pattern Diagramでは、英文のまとまりを `chunks`、文型の役割順を `pattern` としてProblem Dataへ置きます。chunkの `id` はrole記号とは別の一意な識別子です。SVOOのように同じroleが複数ある問題でも、英文chunkと図のnodeをchunk IDで対応づけます。`mountSentencePatternDiagram` はSVO専用にせず、Problem DataからSVC・SVO・SVOOなどの配置を生成します。
 
 ## 3. 再利用可能なDemoコンポーネントを作る
 
-コンポーネントは教材Problemをimportせず、`mount(root, problem, options)` として受け取ります。6種類のAPIとcallbackの詳細は [INTERACTION_COMPONENT_API.md](./INTERACTION_COMPONENT_API.md) を参照してください。
+コンポーネントは教材Problemをimportせず、`mount(root, problem, options)` として受け取ります。7種類のAPIとcallbackの詳細は [INTERACTION_COMPONENT_API.md](./INTERACTION_COMPONENT_API.md) を参照してください。
 
 Modifier Connection Viewerでは、英文のまとまりを `chunks`、修飾関係を `relations` としてProblem Dataへ置きます。各relationは `modifierId` と `targetId` でchunkを参照し、`relationType: 'modifies'`、短い表示label、説明を持ちます。Componentは特定の英文や語句を条件分岐せず、関係データから英文側と関係カードを生成します。
+
+Sentence Comparisonでは、比較する2文を `sentences`、教材として説明したい差分を `differences` としてProblem Dataへ置きます。各differenceは左右のchunk ID、差分label、説明、`meaningLeft`、`meaningRight` を持ちます。差分は汎用文字列diffで推定せず、文法上の対応をデータとして明示します。差分chunkのどちらを選んでも左右を強調し、全差分を確認すると完了callbackを一度だけ呼びます。
 
 `src/components/demos/` にコンポーネントを追加します。共通Demo枠の中で、次の順序を保ちます。
 

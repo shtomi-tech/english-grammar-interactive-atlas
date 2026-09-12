@@ -7,6 +7,7 @@ import { problemRegistry, problems } from '../src/data/problems/index.js';
 import { sentenceTransformerProblem } from '../src/data/problems/sentence-transformer.js';
 import { sentencePatternDiagramProblems } from '../src/data/problems/sentence-pattern-diagram.js';
 import { modifierConnectionViewerProblems } from '../src/data/problems/modifier-connection-viewer.js';
+import { sentenceComparisonProblems } from '../src/data/problems/sentence-comparison.js';
 import { wordOrderProblems } from '../src/data/problems/word-order.js';
 import { filterInteractions, getAtlasStats, searchInteractions } from '../src/lib/atlas.js';
 import { grammarClassifierProblem } from '../src/data/demo-problems.js';
@@ -20,6 +21,11 @@ import { checkTokenSelection } from '../src/lib/grammar/parts.js';
 import { generateSentence } from '../src/lib/grammar/generateSentence.js';
 import { buildPatternSlots, getExploredRoles, hasExploredAllChunks } from '../src/lib/grammar/sentence-pattern.js';
 import { getRelatedChunkIds, getRelationsForChunk, hasExploredAllRelations } from '../src/lib/grammar/modifier-relations.js';
+import {
+  getChunkIdsForDifference,
+  getDifferenceByChunkId,
+  hasExploredAllDifferences,
+} from '../src/lib/grammar/sentence-comparison.js';
 import {
   researchReferences,
   researchReferenceRegistry,
@@ -36,8 +42,8 @@ assert.equal(filterInteractions(interactions, 'transform').length, 4);
 assert.equal(filterInteractions(interactions, 'all', { reusability: 'S' }).length, 29);
 assert.equal(filterInteractions(interactions, 'all', { reusability: 'A' }).length, 11);
 assert.equal(filterInteractions(interactions, 'all', { reusability: 'B' }).length, 0);
-assert.equal(filterInteractions(interactions, 'all', { demo: 'available' }).length, 6);
-assert.equal(filterInteractions(interactions, 'all', { demo: 'planned' }).length, 34);
+assert.equal(filterInteractions(interactions, 'all', { demo: 'available' }).length, 7);
+assert.equal(filterInteractions(interactions, 'all', { demo: 'planned' }).length, 33);
 assert.equal(searchInteractions(interactions, 'relative').length, 2);
 assert.equal(searchInteractions(interactions, '  RELATIVE  ').length, 2);
 assert.equal(searchInteractions(interactions, 'conditional').length, 1);
@@ -48,10 +54,10 @@ assert.equal(
 assert.deepEqual(getAtlasStats(interactions, demoRegistry), {
   catalogEntries: 40,
   interactionFamilies: 10,
-  workingDemos: 6,
+  workingDemos: 7,
 });
 
-assert.equal(problems.length, 17);
+assert.equal(problems.length, 20);
 assert.deepEqual(
   Object.fromEntries(Object.entries({
     'word-order': wordOrderProblems,
@@ -60,12 +66,14 @@ assert.deepEqual(
     'sentence-transformer': [sentenceTransformerProblem],
     'sentence-pattern-diagram': sentencePatternDiagramProblems,
     'modifier-connection-viewer': modifierConnectionViewerProblems,
+    'sentence-comparison': sentenceComparisonProblems,
   }).map(([type, entries]) => [type, entries.length])),
-  { 'word-order': 4, 'mark-parts': 3, 'grammar-classifier': 3, 'sentence-transformer': 1, 'sentence-pattern-diagram': 3, 'modifier-connection-viewer': 3 },
+  { 'word-order': 4, 'mark-parts': 3, 'grammar-classifier': 3, 'sentence-transformer': 1, 'sentence-pattern-diagram': 3, 'modifier-connection-viewer': 3, 'sentence-comparison': 3 },
 );
 assert.equal(problemRegistry['WO-001'], wordOrderProblems[0]);
 assert.equal(problemRegistry['SPD-001'], sentencePatternDiagramProblems[0]);
 assert.equal(problemRegistry['MCV-001'], modifierConnectionViewerProblems[0]);
+assert.equal(problemRegistry['SC-001'], sentenceComparisonProblems[0]);
 assert.equal(validateProblems(problems).valid, true);
 assert.equal(validateDemoRegistry(demoRegistry, problemRegistry).valid, true);
 for (const demo of Object.values(demoRegistry)) {
@@ -75,6 +83,7 @@ for (const demo of Object.values(demoRegistry)) {
 assert.equal(getDemoProblem('word-order', 'WO-002').id, 'WO-002');
 assert.equal(getDemoProblem('sentence-pattern-diagram', 'SPD-003').id, 'SPD-003');
 assert.equal(getDemoProblem('modifier-connection-viewer', 'MCV-003').id, 'MCV-003');
+assert.equal(getDemoProblem('sentence-comparison', 'SC-003').id, 'SC-003');
 assert.throws(() => getDemoProblem('word-order', 'MP-001'), /type mismatch/);
 
 const sentencePatternProblem = sentencePatternDiagramProblems[0];
@@ -98,6 +107,17 @@ assert.deepEqual(getRelatedChunkIds(modifierProblem.relations, 'with-a-red-cap')
 assert.deepEqual(getRelatedChunkIds(modifierProblem.relations, 'the-boy'), ['with-a-red-cap']);
 assert.equal(hasExploredAllRelations(modifierProblem.relations, new Set()), false);
 assert.equal(hasExploredAllRelations(modifierProblem.relations, new Set(['relation-1'])), true);
+
+const comparisonProblem = sentenceComparisonProblems[0];
+assert.equal(getDifferenceByChunkId(comparisonProblem.differences, 'a-2').id, 'purpose-action');
+assert.equal(getDifferenceByChunkId(comparisonProblem.differences, 'b-2').id, 'purpose-action');
+assert.equal(getDifferenceByChunkId(comparisonProblem.differences, 'a-1'), null);
+assert.deepEqual(getChunkIdsForDifference(comparisonProblem.differences, 'purpose-action'), ['a-2', 'b-2']);
+assert.deepEqual(getChunkIdsForDifference(comparisonProblem.differences, 'missing-difference'), []);
+assert.equal(hasExploredAllDifferences(comparisonProblem.differences, new Set()), false);
+assert.equal(hasExploredAllDifferences(comparisonProblem.differences, new Set(['purpose-action'])), true);
+assert.equal(hasExploredAllDifferences(sentenceComparisonProblems[2].differences, new Set(['voice-form'])), false);
+assert.equal(hasExploredAllDifferences(sentenceComparisonProblems[2].differences, new Set(['voice-form', 'subject-agent'])), true);
 
 assert.equal(researchReferences.length, 7);
 assert.equal(new Set(researchReferences.map((reference) => reference.id)).size, researchReferences.length);
@@ -281,6 +301,27 @@ assert.equal(validateProblems(unknownModifierReference).valid, false);
 const selfModifierReference = structuredClone(modifierConnectionViewerProblems);
 selfModifierReference[0].relations[0].targetId = selfModifierReference[0].relations[0].modifierId;
 assert.equal(validateProblems(selfModifierReference).valid, false);
+const comparisonSentenceCount = structuredClone(sentenceComparisonProblems);
+comparisonSentenceCount[0].sentences.pop();
+assert.equal(validateProblems(comparisonSentenceCount).valid, false);
+const comparisonDuplicateSentenceId = structuredClone(sentenceComparisonProblems);
+comparisonDuplicateSentenceId[0].sentences[1].id = comparisonDuplicateSentenceId[0].sentences[0].id;
+assert.equal(validateProblems(comparisonDuplicateSentenceId).valid, false);
+const comparisonDuplicateChunkId = structuredClone(sentenceComparisonProblems);
+comparisonDuplicateChunkId[0].sentences[1].chunks[0].id = comparisonDuplicateChunkId[0].sentences[0].chunks[0].id;
+assert.equal(validateProblems(comparisonDuplicateChunkId).valid, false);
+const comparisonDuplicateDifferenceId = structuredClone(sentenceComparisonProblems);
+comparisonDuplicateDifferenceId[0].differences.push({ ...comparisonDuplicateDifferenceId[0].differences[0] });
+assert.equal(validateProblems(comparisonDuplicateDifferenceId).valid, false);
+const comparisonUnknownLeft = structuredClone(sentenceComparisonProblems);
+comparisonUnknownLeft[0].differences[0].leftChunkId = 'missing-left';
+assert.equal(validateProblems(comparisonUnknownLeft).valid, false);
+const comparisonUnknownRight = structuredClone(sentenceComparisonProblems);
+comparisonUnknownRight[0].differences[0].rightChunkId = 'missing-right';
+assert.equal(validateProblems(comparisonUnknownRight).valid, false);
+const comparisonSameSentence = structuredClone(sentenceComparisonProblems);
+comparisonSameSentence[0].differences[0].rightChunkId = comparisonSameSentence[0].sentences[0].chunks[0].id;
+assert.equal(validateProblems(comparisonSameSentence).valid, false);
 const unknownTokenAnswer = structuredClone(problems);
 unknownTokenAnswer.find((problem) => problem.id === 'MP-001').answer = ['missing-token'];
 assert.equal(validateProblems(unknownTokenAnswer).valid, false);

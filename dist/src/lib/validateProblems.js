@@ -1,4 +1,4 @@
-const problemTypes = new Set(['word-order', 'mark-parts', 'grammar-classifier', 'sentence-transformer', 'sentence-pattern-diagram', 'modifier-connection-viewer']);
+const problemTypes = new Set(['word-order', 'mark-parts', 'grammar-classifier', 'sentence-transformer', 'sentence-pattern-diagram', 'modifier-connection-viewer', 'sentence-comparison']);
 const transformerControlNames = new Set(['subject', 'tense', 'negative']);
 const supportedTenses = new Set(['present', 'past']);
 
@@ -253,6 +253,75 @@ function validateModifierConnectionViewer(problem, label, errors) {
   });
 }
 
+function validateSentenceComparison(problem, label, errors) {
+  if (!hasText(problem.prompt) || !hasText(problem.explanation)) {
+    errors.push(`${label}.prompt and explanation are required`);
+  }
+
+  const sentenceById = new Map();
+  const sentenceByChunkId = new Map();
+  const chunkById = new Map();
+  if (!Array.isArray(problem.sentences) || problem.sentences.length !== 2) {
+    errors.push(`${label}.sentences must contain exactly two sentences`);
+  } else {
+    problem.sentences.forEach((sentence, sentenceIndex) => {
+      if (!isRecord(sentence) || !hasText(sentence.id) || !hasText(sentence.text)) {
+        errors.push(`${label}.sentences[${sentenceIndex}] must have id and text`);
+        return;
+      }
+      if (sentenceById.has(sentence.id)) errors.push(`${label}.sentences has duplicate IDs: ${sentence.id}`);
+      sentenceById.set(sentence.id, sentence);
+      if (!Array.isArray(sentence.chunks) || sentence.chunks.length === 0) {
+        errors.push(`${label}.sentences[${sentenceIndex}].chunks must contain at least one chunk`);
+        return;
+      }
+      sentence.chunks.forEach((chunk, chunkIndex) => {
+        if (!isRecord(chunk) || !hasText(chunk.id) || !hasText(chunk.text)) {
+          errors.push(`${label}.sentences[${sentenceIndex}].chunks[${chunkIndex}] must have id and text`);
+          return;
+        }
+        if (chunkById.has(chunk.id)) errors.push(`${label}.chunks has duplicate IDs: ${chunk.id}`);
+        chunkById.set(chunk.id, chunk);
+        sentenceByChunkId.set(chunk.id, sentence.id);
+      });
+    });
+  }
+
+  const differenceById = new Map();
+  if (!Array.isArray(problem.differences) || problem.differences.length === 0) {
+    errors.push(`${label}.differences must contain at least one difference`);
+  } else {
+    problem.differences.forEach((difference, differenceIndex) => {
+      if (!isRecord(difference) || !hasText(difference.id) || !hasText(difference.leftChunkId) || !hasText(difference.rightChunkId) || !hasText(difference.label) || !hasText(difference.explanation) || !hasText(difference.meaningLeft) || !hasText(difference.meaningRight)) {
+        errors.push(`${label}.differences[${differenceIndex}] must have id, both chunk IDs, label, explanation, and both meanings`);
+        return;
+      }
+      if (differenceById.has(difference.id)) errors.push(`${label}.differences has duplicate IDs: ${difference.id}`);
+      differenceById.set(difference.id, difference);
+      const leftSentenceId = sentenceByChunkId.get(difference.leftChunkId);
+      const rightSentenceId = sentenceByChunkId.get(difference.rightChunkId);
+      if (!chunkById.has(difference.leftChunkId)) errors.push(`${label}.differences[${differenceIndex}] references an unknown leftChunkId: ${difference.leftChunkId}`);
+      if (!chunkById.has(difference.rightChunkId)) errors.push(`${label}.differences[${differenceIndex}] references an unknown rightChunkId: ${difference.rightChunkId}`);
+      if (leftSentenceId && rightSentenceId && leftSentenceId === rightSentenceId) {
+        errors.push(`${label}.differences[${differenceIndex}] left and right chunks must come from different sentences`);
+      }
+    });
+  }
+
+  for (const chunk of chunkById.values()) {
+    if (chunk.differenceId !== undefined) {
+      if (!hasText(chunk.differenceId) || !differenceById.has(chunk.differenceId)) {
+        errors.push(`${label}.chunks differenceId references an unknown difference: ${chunk.differenceId}`);
+      } else {
+        const difference = differenceById.get(chunk.differenceId);
+        if (difference.leftChunkId !== chunk.id && difference.rightChunkId !== chunk.id) {
+          errors.push(`${label}.chunks differenceId does not include chunk: ${chunk.id}`);
+        }
+      }
+    }
+  }
+}
+
 export function validateProblems(entries, { expectedTypes = problemTypes } = {}) {
   const errors = [];
   if (!Array.isArray(entries)) return { valid: false, errors: ['Problems must be an array'] };
@@ -274,6 +343,7 @@ export function validateProblems(entries, { expectedTypes = problemTypes } = {})
     if (problem.type === 'sentence-transformer') validateTransformer(problem, label, errors);
     if (problem.type === 'sentence-pattern-diagram') validateSentencePatternDiagram(problem, label, errors);
     if (problem.type === 'modifier-connection-viewer') validateModifierConnectionViewer(problem, label, errors);
+    if (problem.type === 'sentence-comparison') validateSentenceComparison(problem, label, errors);
   });
 
   return { valid: errors.length === 0, errors };

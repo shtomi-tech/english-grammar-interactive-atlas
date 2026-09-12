@@ -3,6 +3,7 @@ import { markPartsProblems } from './mark-parts.js';
 import { sentenceTransformerProblems } from './sentence-transformer.js';
 import { sentencePatternDiagramProblems } from './sentence-pattern-diagram.js';
 import { modifierConnectionViewerProblems } from './modifier-connection-viewer.js';
+import { sentenceComparisonProblems } from './sentence-comparison.js';
 import { wordOrderProblems } from './word-order.js';
 
 export const problemSets = {
@@ -12,6 +13,7 @@ export const problemSets = {
   'sentence-transformer': sentenceTransformerProblems,
   'sentence-pattern-diagram': sentencePatternDiagramProblems,
   'modifier-connection-viewer': modifierConnectionViewerProblems,
+  'sentence-comparison': sentenceComparisonProblems,
 };
 
 export const problems = Object.values(problemSets).flat();
@@ -31,5 +33,6 @@ export {
   sentenceTransformerProblems,
   sentencePatternDiagramProblems,
   modifierConnectionViewerProblems,
+  sentenceComparisonProblems,
   wordOrderProblems,
 };

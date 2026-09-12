@@ -220,6 +220,7 @@ const initialInteractions = [
     feedbackType: ['差分強調', '意味比較'],
     implementationDifficulty: 2,
     reusability: 'S',
+    demoType: 'sentence-comparison',
     sourceName: 'Original concept',
     ...originalSourceMetadata,
     reusePolicy: 'idea-only',

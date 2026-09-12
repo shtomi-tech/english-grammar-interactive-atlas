@@ -17,3 +17,7 @@ export {
   modifierConnectionViewerProblem,
   modifierConnectionViewerProblems,
 } from './problems/modifier-connection-viewer.js';
+export {
+  sentenceComparisonProblem,
+  sentenceComparisonProblems,
+} from './problems/sentence-comparison.js';
