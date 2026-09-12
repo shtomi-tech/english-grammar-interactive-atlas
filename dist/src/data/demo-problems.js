@@ -29,3 +29,7 @@ export {
   contextGrammarProblem,
   contextGrammarProblems,
 } from './problems/context-grammar.js';
+export {
+  sentenceGeneratorProblem,
+  sentenceGeneratorProblems,
+} from './problems/sentence-generator.js';

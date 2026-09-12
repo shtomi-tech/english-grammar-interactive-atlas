@@ -7,6 +7,7 @@ import { mountModifierConnectionViewer } from './modifierConnectionViewer.js';
 import { mountSentenceComparison } from './sentenceComparison.js';
 import { mountErrorCorrector } from './errorCorrector.js';
 import { mountContextGrammar } from './contextGrammar.js';
+import { mountSentenceGenerator } from './sentenceGenerator.js';
 import { getProblemById } from '../../data/problems/index.js';
 
 export const demoRegistry = {
@@ -45,6 +46,10 @@ export const demoRegistry = {
   'context-grammar': {
     mount: mountContextGrammar,
     demoProblemId: 'CG-001',
+  },
+  'sentence-generator': {
+    mount: mountSentenceGenerator,
+    demoProblemId: 'SG-001',
   },
 };
 

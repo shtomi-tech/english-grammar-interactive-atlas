@@ -1791,6 +1791,11 @@ a.button {
   color: var(--danger);
 }
 
+.feedback.neutral {
+  background: #f8ecd5;
+  color: var(--ink-soft);
+}
+
 .explanation {
   margin: 17px 0 0;
   padding-top: 17px;
@@ -1839,6 +1844,43 @@ a.button {
 }
 
 .transformer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.generator-goal {
+  margin-bottom: 22px;
+  padding: 16px;
+  border: 1px solid var(--paper-line);
+  border-radius: 10px;
+  background: #fffdf8;
+}
+
+.generator-goal h4,
+.generator-goal p:last-child {
+  margin-bottom: 0;
+}
+
+.generator-goal h4 {
+  margin-top: 0;
+}
+
+.generator-goal p:last-child {
+  color: var(--ink-soft);
+  overflow-wrap: anywhere;
+}
+
+.generator-kicker {
+  margin: 0 0 7px;
+  color: #837a70;
+  font-size: 0.72rem;
+  font-weight: 780;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.generator-controls {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
@@ -1901,6 +1943,41 @@ a.button {
   border-radius: 12px;
   background: var(--ink);
   color: var(--paper);
+}
+
+.generator-output {
+  margin-top: 28px;
+  padding: 25px 22px;
+  border-radius: 12px;
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.generator-output .output-label {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--accent);
+  font-size: 0.7rem;
+  font-weight: 760;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.generator-sentence {
+  display: block;
+  min-height: 1.2em;
+  font-family: Georgia, serif;
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.generator-explanation {
+  margin: 17px 0 0;
+  padding-top: 17px;
+  border-top: 1px solid var(--paper-line);
+  color: var(--ink-soft);
+  font-size: 0.9rem;
 }
 
 .transformer-output .output-label {
@@ -2168,9 +2245,10 @@ a.button {
 
   .toolbar,
   .lesson-index,
-  .learning-sequence,
-  .transformer-grid,
-  .classifier-category-grid,
+    .learning-sequence,
+    .transformer-grid,
+    .generator-controls,
+    .classifier-category-grid,
   .comparison-grid {
     grid-template-columns: 1fr;
   }

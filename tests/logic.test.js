@@ -10,6 +10,7 @@ import { modifierConnectionViewerProblems } from '../src/data/problems/modifier-
 import { sentenceComparisonProblems } from '../src/data/problems/sentence-comparison.js';
 import { errorCorrectorProblems } from '../src/data/problems/error-corrector.js';
 import { contextGrammarProblems } from '../src/data/problems/context-grammar.js';
+import { sentenceGeneratorProblems } from '../src/data/problems/sentence-generator.js';
 import { wordOrderProblems } from '../src/data/problems/word-order.js';
 import { filterInteractions, getAtlasStats, searchInteractions } from '../src/lib/atlas.js';
 import { grammarClassifierProblem } from '../src/data/demo-problems.js';
@@ -40,6 +41,11 @@ import {
   isAcceptedScenarioChoice,
 } from '../src/lib/grammar/context-grammar.js';
 import {
+  findMatchingTargetState,
+  hasCompleteGenerationState,
+  matchesGenerationTarget,
+} from '../src/lib/grammar/generation-goal.js';
+import {
   researchReferences,
   researchReferenceRegistry,
 } from '../src/data/research/index.js';
@@ -55,8 +61,8 @@ assert.equal(filterInteractions(interactions, 'transform').length, 4);
 assert.equal(filterInteractions(interactions, 'all', { reusability: 'S' }).length, 29);
 assert.equal(filterInteractions(interactions, 'all', { reusability: 'A' }).length, 11);
 assert.equal(filterInteractions(interactions, 'all', { reusability: 'B' }).length, 0);
-assert.equal(filterInteractions(interactions, 'all', { demo: 'available' }).length, 9);
-assert.equal(filterInteractions(interactions, 'all', { demo: 'planned' }).length, 31);
+assert.equal(filterInteractions(interactions, 'all', { demo: 'available' }).length, 10);
+assert.equal(filterInteractions(interactions, 'all', { demo: 'planned' }).length, 30);
 assert.equal(searchInteractions(interactions, 'relative').length, 2);
 assert.equal(searchInteractions(interactions, '  RELATIVE  ').length, 2);
 assert.equal(searchInteractions(interactions, 'conditional').length, 1);
@@ -67,10 +73,10 @@ assert.equal(
 assert.deepEqual(getAtlasStats(interactions, demoRegistry), {
   catalogEntries: 40,
   interactionFamilies: 10,
-  workingDemos: 9,
+  workingDemos: 10,
 });
 
-assert.equal(problems.length, 26);
+assert.equal(problems.length, 29);
 assert.deepEqual(
   Object.fromEntries(Object.entries({
     'word-order': wordOrderProblems,
@@ -82,8 +88,9 @@ assert.deepEqual(
     'sentence-comparison': sentenceComparisonProblems,
     'error-corrector': errorCorrectorProblems,
     'context-grammar': contextGrammarProblems,
+    'sentence-generator': sentenceGeneratorProblems,
   }).map(([type, entries]) => [type, entries.length])),
-  { 'word-order': 4, 'mark-parts': 3, 'grammar-classifier': 3, 'sentence-transformer': 1, 'sentence-pattern-diagram': 3, 'modifier-connection-viewer': 3, 'sentence-comparison': 3, 'error-corrector': 3, 'context-grammar': 3 },
+  { 'word-order': 4, 'mark-parts': 3, 'grammar-classifier': 3, 'sentence-transformer': 1, 'sentence-pattern-diagram': 3, 'modifier-connection-viewer': 3, 'sentence-comparison': 3, 'error-corrector': 3, 'context-grammar': 3, 'sentence-generator': 3 },
 );
 assert.equal(problemRegistry['WO-001'], wordOrderProblems[0]);
 assert.equal(problemRegistry['SPD-001'], sentencePatternDiagramProblems[0]);
@@ -91,6 +98,7 @@ assert.equal(problemRegistry['MCV-001'], modifierConnectionViewerProblems[0]);
 assert.equal(problemRegistry['SC-001'], sentenceComparisonProblems[0]);
 assert.equal(problemRegistry['EC-001'], errorCorrectorProblems[0]);
 assert.equal(problemRegistry['CG-001'], contextGrammarProblems[0]);
+assert.equal(problemRegistry['SG-001'], sentenceGeneratorProblems[0]);
 assert.equal(validateProblems(problems).valid, true);
 assert.equal(validateDemoRegistry(demoRegistry, problemRegistry).valid, true);
 for (const demo of Object.values(demoRegistry)) {
@@ -103,6 +111,7 @@ assert.equal(getDemoProblem('modifier-connection-viewer', 'MCV-003').id, 'MCV-00
 assert.equal(getDemoProblem('sentence-comparison', 'SC-003').id, 'SC-003');
 assert.equal(getDemoProblem('error-corrector', 'EC-003').id, 'EC-003');
 assert.equal(getDemoProblem('context-grammar', 'CG-003').id, 'CG-003');
+assert.equal(getDemoProblem('sentence-generator', 'SG-003').id, 'SG-003');
 assert.throws(() => getDemoProblem('word-order', 'MP-001'), /type mismatch/);
 
 const sentencePatternProblem = sentencePatternDiagramProblems[0];
@@ -169,6 +178,38 @@ assert.equal(hasCompletedScenario(contextProblem.steps, new Set()), false);
 assert.equal(hasCompletedScenario(contextProblem.steps, new Set(['cg001-step-1'])), false);
 assert.equal(hasCompletedScenario(contextProblem.steps, new Set(['cg001-step-1', 'cg001-step-2'])), true);
 assert.equal(hasCompletedScenario(contextProblem.steps, new Set(['unknown-step'])), false);
+
+const generationProblem = sentenceGeneratorProblems[0];
+assert.equal(hasCompleteGenerationState({}, generationProblem.controls), false);
+assert.equal(
+  hasCompleteGenerationState({ subject: 'he', tense: 'present', negative: false }, generationProblem.controls),
+  true,
+);
+assert.equal(
+  matchesGenerationTarget(
+    { subject: 'he', tense: 'present', negative: false },
+    generationProblem.targetStates[0],
+    Object.keys(generationProblem.controls),
+  ),
+  true,
+);
+assert.equal(
+  matchesGenerationTarget(
+    { subject: 'they', tense: 'past', negative: false },
+    generationProblem.targetStates[0],
+    Object.keys(generationProblem.controls),
+  ),
+  false,
+);
+assert.equal(
+  findMatchingTargetState(
+    { subject: 'they', tense: 'past', negative: true },
+    sentenceGeneratorProblems[2].targetStates,
+    Object.keys(sentenceGeneratorProblems[2].controls),
+  ),
+  1,
+);
+assert.equal(findMatchingTargetState({}, generationProblem.targetStates, Object.keys(generationProblem.controls)), -1);
 
 assert.equal(researchReferences.length, 7);
 assert.equal(new Set(researchReferences.map((reference) => reference.id)).size, researchReferences.length);
@@ -406,6 +447,21 @@ assert.equal(validateProblems(contextMissingReply).valid, false);
 const contextMissingScenarioField = structuredClone(contextGrammarProblems);
 contextMissingScenarioField[0].scenario.goal = '';
 assert.equal(validateProblems(contextMissingScenarioField).valid, false);
+const generatorMissingGoal = structuredClone(sentenceGeneratorProblems);
+generatorMissingGoal[0].goal.description = '';
+assert.equal(validateProblems(generatorMissingGoal).valid, false);
+const generatorMissingTargetControl = structuredClone(sentenceGeneratorProblems);
+delete generatorMissingTargetControl[0].targetStates[0].negative;
+assert.equal(validateProblems(generatorMissingTargetControl).valid, false);
+const generatorUnknownTargetValue = structuredClone(sentenceGeneratorProblems);
+generatorUnknownTargetValue[0].targetStates[0].tense = 'future';
+assert.equal(validateProblems(generatorUnknownTargetValue).valid, false);
+const generatorUnknownTargetControl = structuredClone(sentenceGeneratorProblems);
+generatorUnknownTargetControl[0].targetStates[0].mood = 'indicative';
+assert.equal(validateProblems(generatorUnknownTargetControl).valid, false);
+const generatorDuplicateTarget = structuredClone(sentenceGeneratorProblems);
+generatorDuplicateTarget[2].targetStates.push({ ...generatorDuplicateTarget[2].targetStates[0] });
+assert.equal(validateProblems(generatorDuplicateTarget).valid, false);
 const errorTokenCorrectionMismatch = structuredClone(errorCorrectorProblems);
 errorTokenCorrectionMismatch[0].tokens[1].correctionId = 'missing-correction';
 assert.equal(validateProblems(errorTokenCorrectionMismatch).valid, false);

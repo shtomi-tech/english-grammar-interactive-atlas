@@ -1,4 +1,4 @@
-const problemTypes = new Set(['word-order', 'mark-parts', 'grammar-classifier', 'sentence-transformer', 'sentence-pattern-diagram', 'modifier-connection-viewer', 'sentence-comparison', 'error-corrector', 'context-grammar']);
+const problemTypes = new Set(['word-order', 'mark-parts', 'grammar-classifier', 'sentence-transformer', 'sentence-pattern-diagram', 'modifier-connection-viewer', 'sentence-comparison', 'error-corrector', 'context-grammar', 'sentence-generator']);
 const transformerControlNames = new Set(['subject', 'tense', 'negative']);
 const supportedTenses = new Set(['present', 'past']);
 
@@ -111,7 +111,7 @@ function controlValueKey(value) {
   return `${typeof value}:${String(value)}`;
 }
 
-function validateTransformer(problem, label, errors) {
+function validateGrammarControls(problem, label, errors) {
   if (!isRecord(problem.controls) || Object.keys(problem.controls).length === 0) {
     errors.push(`${label}.controls must contain controls`);
   } else {
@@ -142,7 +142,9 @@ function validateTransformer(problem, label, errors) {
       });
     }
   }
+}
 
+function validateDefaults(problem, label, errors) {
   if (!isRecord(problem.defaults)) {
     errors.push(`${label}.defaults is required`);
   } else {
@@ -158,7 +160,9 @@ function validateTransformer(problem, label, errors) {
       }
     }
   }
+}
 
+function validateSentenceModel(problem, label, errors) {
   const model = problem.sentenceModel;
   if (!isRecord(model) || !isRecord(model.subjects) || !isRecord(model.verb) || !hasText(model.object)) {
     errors.push(`${label}.sentenceModel must have subjects, verb, and object`);
@@ -175,6 +179,68 @@ function validateTransformer(problem, label, errors) {
       if (!model.subjects[option.value]) errors.push(`${label}.sentenceModel has no subject for ${option.value}`);
     });
   }
+}
+
+function validateTransformer(problem, label, errors) {
+  validateGrammarControls(problem, label, errors);
+  validateDefaults(problem, label, errors);
+  validateSentenceModel(problem, label, errors);
+}
+
+function validateSentenceGenerator(problem, label, errors) {
+  if (!hasText(problem.prompt) || !hasText(problem.explanation)) {
+    errors.push(`${label}.prompt and explanation are required`);
+  }
+  if (!isRecord(problem.goal)) {
+    errors.push(`${label}.goal is required`);
+  } else {
+    if (!hasText(problem.goal.title)) errors.push(`${label}.goal.title is required`);
+    if (!hasText(problem.goal.description)) errors.push(`${label}.goal.description is required`);
+  }
+
+  validateGrammarControls(problem, label, errors);
+  validateSentenceModel(problem, label, errors);
+
+  if (!Array.isArray(problem.targetStates) || problem.targetStates.length === 0) {
+    errors.push(`${label}.targetStates must contain at least one target state`);
+    return;
+  }
+
+  const controlNames = Object.keys(problem.controls ?? {});
+  const controlValues = new Map(
+    controlNames.map((name) => [
+      name,
+      new Set((problem.controls?.[name] ?? []).map((option) => controlValueKey(option?.value))),
+    ]),
+  );
+  const signatures = new Set();
+  problem.targetStates.forEach((state, stateIndex) => {
+    if (!isRecord(state)) {
+      errors.push(`${label}.targetStates[${stateIndex}] must be an object`);
+      return;
+    }
+    let valid = true;
+    for (const name of controlNames) {
+      if (!Object.prototype.hasOwnProperty.call(state, name)) {
+        errors.push(`${label}.targetStates[${stateIndex}].${name} is required`);
+        valid = false;
+      } else if (!controlValues.get(name)?.has(controlValueKey(state[name]))) {
+        errors.push(`${label}.targetStates[${stateIndex}].${name} is not present in controls.${name}`);
+        valid = false;
+      }
+    }
+    for (const name of Object.keys(state)) {
+      if (!controlNames.includes(name)) {
+        errors.push(`${label}.targetStates[${stateIndex}] has an unsupported control: ${name}`);
+        valid = false;
+      }
+    }
+    if (valid) {
+      const signature = controlNames.map((name) => controlValueKey(state[name])).join('\u0000');
+      if (signatures.has(signature)) errors.push(`${label}.targetStates contains a duplicate state`);
+      signatures.add(signature);
+    }
+  });
 }
 
 function validateSentencePatternDiagram(problem, label, errors) {
@@ -489,6 +555,7 @@ export function validateProblems(entries, { expectedTypes = problemTypes } = {})
     if (problem.type === 'sentence-comparison') validateSentenceComparison(problem, label, errors);
     if (problem.type === 'error-corrector') validateErrorCorrector(problem, label, errors);
     if (problem.type === 'context-grammar') validateContextGrammar(problem, label, errors);
+    if (problem.type === 'sentence-generator') validateSentenceGenerator(problem, label, errors);
   });
 
   return { valid: errors.length === 0, errors };

@@ -14,7 +14,7 @@ Demo / Lesson
 
 ## Mount signature
 
-9つのComponentは次の形を実装します。
+10個のComponentは次の形を実装します。
 
 ```js
 const cleanup = mountInteraction(root, problem, {
@@ -35,10 +35,11 @@ const cleanup = mountInteraction(root, problem, {
 | Sentence Comparison | `sentence-comparison` | `prompt`, `sentences`, `differences`, `explanation` |
 | Error Corrector | `error-corrector` | `prompt`, `tokens`, `corrections`, `explanation` |
 | Context Grammar | `context-grammar` | `prompt`, `scenario`, `steps`, `explanation` |
+| Sentence Generator | `sentence-generator` | `prompt`, `goal`, `controls`, `targetStates`, `sentenceModel`, `explanation` |
 
 ## Options and onComplete
 
-判定を持つ3つのComponentはCheck時に、Sentence Transformerは選択変更時にcallbackを呼びます。探索型のSentence Pattern Diagram、Modifier Connection Viewer、Sentence Comparisonは必要な要素をすべて確認した時にcallbackを呼びます。Context Grammarは各Stepの正答をContinueで確定し、最後のStepを完了した時にcallbackを一度だけ呼びます。
+判定を持つComponentはCheck時に、Sentence Transformerは選択変更時にcallbackを呼びます。探索型のSentence Pattern Diagram、Modifier Connection Viewer、Sentence Comparisonは必要な要素をすべて確認した時にcallbackを呼びます。Context Grammarは各Stepの正答をContinueで確定し、最後のStepを完了した時にcallbackを一度だけ呼びます。Sentence GeneratorはGenerateで目標状態に一致した時だけcallbackを一度だけ呼びます。
 
 ```js
 onComplete({
@@ -114,6 +115,12 @@ Word Orderの正答は `acceptedAnswers` を正本とし、1問に1つ以上のI
 `mountContextGrammar(root, problem, options)` は、`scenario` と順序付きの `steps` から線形の会話シミュレーターを生成します。`scenario` は `title`、`setting`、`learnerRole`、`goal` を持ちます。各stepは一意な `id`、相手の `speaker` と `line`、学習者への `instruction`、2つ以上の `choices`、`acceptedChoiceIds` を持ち、choiceは `text`、`reply`、`grammarLabel`、`explanation` を持ちます。Problem Dataが場面・英文・正答・説明を管理し、Componentは問題固有の文を持ちません。
 
 選択肢を押すと、正答ならGrammar・Why it works・Responseを表示し、Continueで会話を次へ進めます。誤答は `Not yet` と文法上の理由を表示するだけでStepを進めません。完了済みStepは相手の発話、学習者の返答、相手のreplyとして履歴に残ります。最後のStepを完了すると `onComplete({ correct: true, problemId, completedStepIds, selectedChoiceIds })` を一度だけ呼び、Resetで選択・履歴・完了状態を初期化してResetへfocusを戻します。分岐エンジン、自由入力、LLM/API、音声はこのComponentの責務に含めません。
+
+## Sentence Generator
+
+`mountSentenceGenerator(root, problem, options)` は、Problem Dataの `goal`、`controls`、`targetStates`、`sentenceModel` を使って、目標に合う英文を組み立てるUIを生成します。Sentence Transformerが初期状態から即時変化を観察するのに対し、Sentence Generatorは未選択状態から学習者が条件を選び、Generateを明示的に押してから英文を生成します。英文の実現規則は `src/lib/grammar/generateSentence.js` を共有し、Generator内へ再実装しません。
+
+すべてのcontrolを選ぶまでGenerateは無効です。目標状態と一致しなくても文法的に生成可能な英文は表示し、「文法的だが目標とは異なる」と伝えます。`targetStates` のいずれかと一致した時はProblem Dataの説明を表示し、`onComplete({ correct: true, problemId, state, sentence, matchedTargetIndex })` を同一runで一度だけ呼びます。Resetは選択、生成文、recipe、feedback、完了通知を初期化します。境界の詳細は [GENERATION_BOUNDARY.md](./GENERATION_BOUNDARY.md) を参照してください。
 
 ## Lesson Registry and Problem injection
 

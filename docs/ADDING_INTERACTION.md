@@ -38,13 +38,13 @@
 
 Demoを作る場合、英文・正答・説明などの教材固有データは `src/data/problems/` の機能別ファイルへ置きます。Demoコンポーネントに問題文を直接書きません。分類Demoなら、`categories` と `items` の `answer` をデータ側に持たせ、分類軸を差し替えられる形にします。互換用の `src/data/demo-problems.js` は代表Problemの再エクスポートだけを行います。
 
-Problemは `type` と安定した `id` を持ち、`src/data/problems/index.js` のRegistryから `getProblemById('WO-001')` のように取得できます。現在のProblem数は Word Order 4、Mark the Parts 3、Grammar Classifier 3、Sentence Transformer 1、Sentence Pattern Diagram 3、Modifier Connection Viewer 3、Sentence Comparison 3、Error Corrector 3、Context Grammar 3（計26件）です。Word Orderの正答は `acceptedAnswers`（許容順序の配列）を正本とし、任意で段階的な `hints` を指定できます。複数正答の判定は `src/lib/grammar/word-order.js` に置き、UIへ重複実装しません。
+Problemは `type` と安定した `id` を持ち、`src/data/problems/index.js` のRegistryから `getProblemById('WO-001')` のように取得できます。現在のProblem数は Word Order 4、Mark the Parts 3、Grammar Classifier 3、Sentence Transformer 1、Sentence Pattern Diagram 3、Modifier Connection Viewer 3、Sentence Comparison 3、Error Corrector 3、Context Grammar 3、Sentence Generator 3（計29件）です。Word Orderの正答は `acceptedAnswers`（許容順序の配列）を正本とし、任意で段階的な `hints` を指定できます。複数正答の判定は `src/lib/grammar/word-order.js` に置き、UIへ重複実装しません。
 
 Sentence Pattern Diagramでは、英文のまとまりを `chunks`、文型の役割順を `pattern` としてProblem Dataへ置きます。chunkの `id` はrole記号とは別の一意な識別子です。SVOOのように同じroleが複数ある問題でも、英文chunkと図のnodeをchunk IDで対応づけます。`mountSentencePatternDiagram` はSVO専用にせず、Problem DataからSVC・SVO・SVOOなどの配置を生成します。
 
 ## 3. 再利用可能なDemoコンポーネントを作る
 
-コンポーネントは教材Problemをimportせず、`mount(root, problem, options)` として受け取ります。9種類のAPIとcallbackの詳細は [INTERACTION_COMPONENT_API.md](./INTERACTION_COMPONENT_API.md) を参照してください。
+コンポーネントは教材Problemをimportせず、`mount(root, problem, options)` として受け取ります。10種類のAPIとcallbackの詳細は [INTERACTION_COMPONENT_API.md](./INTERACTION_COMPONENT_API.md) を参照してください。
 
 Modifier Connection Viewerでは、英文のまとまりを `chunks`、修飾関係を `relations` としてProblem Dataへ置きます。各relationは `modifierId` と `targetId` でchunkを参照し、`relationType: 'modifies'`、短い表示label、説明を持ちます。Componentは特定の英文や語句を条件分岐せず、関係データから英文側と関係カードを生成します。
 
@@ -53,6 +53,8 @@ Sentence Comparisonでは、比較する2文を `sentences`、教材として説
 Error Correctorでは、誤文の語句を `tokens`、語句ごとの訂正候補を `corrections` としてProblem Dataへ置きます。各correctionは `tokenId`、`options`、`acceptedOptionIds`、`ruleLabel`、`explanation` を持ちます。複数箇所を訂正するProblemにも対応し、全correctionが正解になった時だけ完了callbackを呼びます。語順訂正や自由入力の自動判定はこのComponentへ追加しません。
 
 Context Grammarでは、`scenario` と順序付き `steps` をProblem Dataへ置きます。各stepは相手の `speaker`、`line`、学習者への `instruction`、2つ以上の `choices`、`acceptedChoiceIds` を持ち、choiceは `text`、`reply`、`grammarLabel`、`explanation` を持ちます。正答を選んだ後にContinueで履歴へ追加し、最後のStepで完了callbackを一度だけ呼びます。初期実装は線形マルチステップに限定し、分岐エンジン、自由入力、LLM/API、音声は追加しません。
+
+Sentence Generatorでは、`goal`、`controls`、`targetStates`、`sentenceModel` をProblem Dataへ置きます。学習者が未選択状態からすべての文法条件を選び、Generateで明示的に英文を生成します。生成規則は既存の `src/lib/grammar/generateSentence.js` を共有し、目標状態との照合だけを `src/lib/grammar/generation-goal.js` のpure helperで行います。目標と異なるが文法的な状態も表示し、文法的正しさと課題条件の一致を分けて扱います。Sentence TransformerのUIや生成規則を複製せず、Lesson 03はGeneratorの検証後に再評価します。
 
 `src/components/demos/` にコンポーネントを追加します。共通Demo枠の中で、次の順序を保ちます。
 

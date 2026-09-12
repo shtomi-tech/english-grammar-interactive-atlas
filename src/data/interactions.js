@@ -199,6 +199,7 @@ const initialInteractions = [
     feedbackType: ['生成結果', '規則説明'],
     implementationDifficulty: 4,
     reusability: 'A',
+    demoType: 'sentence-generator',
     sourceName: 'Original concept',
     ...originalSourceMetadata,
     reusePolicy: 'idea-only',
