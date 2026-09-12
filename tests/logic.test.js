@@ -47,7 +47,7 @@ assert.deepEqual(getAtlasStats(interactions, demoRegistry), {
   workingDemos: 4,
 });
 
-assert.equal(problems.length, 10);
+assert.equal(problems.length, 11);
 assert.deepEqual(
   Object.fromEntries(Object.entries({
     'word-order': wordOrderProblems,
@@ -55,7 +55,7 @@ assert.deepEqual(
     'grammar-classifier': grammarClassifierProblems,
     'sentence-transformer': [sentenceTransformerProblem],
   }).map(([type, entries]) => [type, entries.length])),
-  { 'word-order': 3, 'mark-parts': 3, 'grammar-classifier': 3, 'sentence-transformer': 1 },
+  { 'word-order': 4, 'mark-parts': 3, 'grammar-classifier': 3, 'sentence-transformer': 1 },
 );
 assert.equal(problemRegistry['WO-001'], wordOrderProblems[0]);
 assert.equal(validateProblems(problems).valid, true);
@@ -80,20 +80,34 @@ const lessonValidation = validateLessons(lessons, {
 assert.equal(lessonValidation.valid, true, lessonValidation.errors.join('; '));
 assert.equal(lessons[0].steps.length, 6);
 
-assert.equal(checkWordOrder(['i', 'play', 'tennis'], ['i', 'play', 'tennis']), true);
-assert.equal(checkWordOrder(['play', 'i', 'tennis'], ['i', 'play', 'tennis']), false);
+assert.equal(checkWordOrder(['i', 'play', 'tennis'], [['i', 'play', 'tennis']]), true);
+assert.equal(checkWordOrder(['play', 'i', 'tennis'], [['i', 'play', 'tennis']]), false);
 assert.equal(checkTokenSelection(['boy', 'the'], ['the', 'boy']), true);
 assert.equal(checkTokenSelection(['the', 'plays'], ['the', 'boy']), false);
 
-const shuffled = shuffleWordIds(['i', 'play', 'tennis'], ['i', 'play', 'tennis'], () => 0.5);
+const shuffled = shuffleWordIds(['i', 'play', 'tennis'], [['i', 'play', 'tennis']], () => 0.5);
 assert.deepEqual([...shuffled].sort(), ['i', 'play', 'tennis']);
 assert.notDeepEqual(shuffled, ['i', 'play', 'tennis']);
 assert.deepEqual(shuffleWordIds(['only'], ['only'], () => 0), ['only']);
 
 for (const problem of wordOrderProblems) {
-  assert.equal(checkWordOrder(problem.answer, problem.answer), true);
-  assert.equal(shuffleWordIds(problem.words.map((word) => word.id), problem.answer).length, problem.words.length);
+  assert.equal(checkWordOrder(problem.acceptedAnswers[0], problem.acceptedAnswers), true);
+  assert.equal(shuffleWordIds(problem.words.map((word) => word.id), problem.acceptedAnswers).length, problem.words.length);
 }
+
+const multipleAnswerProblem = wordOrderProblems.find((problem) => problem.id === 'WO-004');
+assert.equal(checkWordOrder(multipleAnswerProblem.acceptedAnswers[0], multipleAnswerProblem.acceptedAnswers), true);
+assert.equal(checkWordOrder(multipleAnswerProblem.acceptedAnswers[1], multipleAnswerProblem.acceptedAnswers), true);
+assert.equal(checkWordOrder(['they', 'the-museum', 'visit', 'on-sundays'], multipleAnswerProblem.acceptedAnswers), false);
+assert.equal(checkWordOrder(['they', 'visit', 'the-museum'], multipleAnswerProblem.acceptedAnswers), false);
+assert.equal(checkWordOrder(['they', 'visit', 'the-museum', 'on-sundays', 'extra'], multipleAnswerProblem.acceptedAnswers), false);
+const shuffledMultiple = shuffleWordIds(
+  multipleAnswerProblem.words.map((word) => word.id),
+  multipleAnswerProblem.acceptedAnswers,
+  () => 0.5,
+);
+assert.deepEqual([...shuffledMultiple].sort(), multipleAnswerProblem.words.map((word) => word.id).sort());
+assert.equal(multipleAnswerProblem.acceptedAnswers.some((answer) => answer.join('|') === shuffledMultiple.join('|')), false);
 for (const problem of markPartsProblems) {
   assert.equal(checkTokenSelection(problem.answer, problem.answer), true);
 }
@@ -192,16 +206,31 @@ const invalidWordId = structuredClone(problems);
 invalidWordId[0].words[1].id = invalidWordId[0].words[0].id;
 assert.equal(validateProblems(invalidWordId).valid, false);
 const unknownWordAnswer = structuredClone(problems);
-unknownWordAnswer[0].answer = ['missing-word'];
+unknownWordAnswer[0].acceptedAnswers = [['missing-word']];
 assert.equal(validateProblems(unknownWordAnswer).valid, false);
+const duplicateAcceptedAnswer = structuredClone(wordOrderProblems);
+duplicateAcceptedAnswer[0].acceptedAnswers.push([...duplicateAcceptedAnswer[0].acceptedAnswers[0]]);
+assert.equal(validateProblems(duplicateAcceptedAnswer).valid, false);
+const invalidAcceptedAnswers = structuredClone(wordOrderProblems);
+invalidAcceptedAnswers[0].acceptedAnswers = [];
+assert.equal(validateProblems(invalidAcceptedAnswers).valid, false);
+const incompleteAcceptedAnswer = structuredClone(wordOrderProblems);
+incompleteAcceptedAnswer[0].acceptedAnswers = [['i', 'play', 'play']];
+assert.equal(validateProblems(incompleteAcceptedAnswer).valid, false);
+const invalidHintsEmpty = structuredClone(wordOrderProblems);
+invalidHintsEmpty[3].hints = [];
+assert.equal(validateProblems(invalidHintsEmpty).valid, false);
+const invalidHintsBlank = structuredClone(wordOrderProblems);
+invalidHintsBlank[3].hints = [''];
+assert.equal(validateProblems(invalidHintsBlank).valid, false);
 const unknownTokenAnswer = structuredClone(problems);
-unknownTokenAnswer[3].answer = ['missing-token'];
+unknownTokenAnswer.find((problem) => problem.id === 'MP-001').answer = ['missing-token'];
 assert.equal(validateProblems(unknownTokenAnswer).valid, false);
 const unknownClassifierCategory = structuredClone(problems);
-unknownClassifierCategory[6].items[0].answer = 'missing-category';
+unknownClassifierCategory.find((problem) => problem.id === 'GC-001').items[0].answer = 'missing-category';
 assert.equal(validateProblems(unknownClassifierCategory).valid, false);
 const invalidTransformerDefault = structuredClone(problems);
-invalidTransformerDefault[9].defaults.tense = 'future';
+invalidTransformerDefault.find((problem) => problem.id === 'ST-001').defaults.tense = 'future';
 assert.equal(validateProblems(invalidTransformerDefault).valid, false);
 
 const unknownLessonProblem = structuredClone(lessons);

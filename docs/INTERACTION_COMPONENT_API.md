@@ -26,7 +26,7 @@ const cleanup = mountInteraction(root, problem, {
 
 | Component | type | Problemの主なフィールド |
 | --- | --- | --- |
-| Word Order Builder | `word-order` | `prompt`, `words`, `answer`, `explanation` |
+| Word Order Builder | `word-order` | `prompt`, `words`, `acceptedAnswers`, optional `hints`, `explanation` |
 | Mark the Parts | `mark-parts` | `prompt`, `tokens`, `answer`, `targetRole`, `explanation` |
 | Grammar Classifier | `grammar-classifier` | `sentence`, `categories`, `items`, `explanation` |
 | Sentence Transformer | `sentence-transformer` | `controls`, `defaults`, `sentenceModel` |
@@ -60,3 +60,22 @@ ResetはProblemの初期状態へ戻します。LessonがStepを切り替える�
 ## Problem Registry
 
 `src/data/problems/index.js` が全ProblemをIDで引けるRegistryです。Demo Registryには各Demo Typeの代表Problem IDを登録し、LessonはProblem IDだけを持ちます。`npm run check` はProblemの構造、Demo Registryの型一致、Lessonの存在・型一致を検証します。
+
+## Word Order multiple answers and hints
+
+Word Orderの正答は `acceptedAnswers` を正本とし、1問に1つ以上のID配列を持たせます。`checkWordOrder` と `shuffleWordIds` は複数の許容順序を扱い、判定ロジックは `src/lib/grammar/word-order.js` に置きます。
+
+```js
+{
+  acceptedAnswers: [
+    ['they', 'visit', 'the-museum', 'on-sundays'],
+    ['on-sundays', 'they', 'visit', 'the-museum'],
+  ],
+  hints: [
+    'まず主語を探してみましょう。',
+    '時間を表す語句は文の最初にも置けます。',
+  ],
+}
+```
+
+`hints` は任意の段階的ヒントです。HintがないProblemではHintボタンを表示しません。Hintは正答そのものを表示せず、Resetで回答・フィードバック・Hint位置を初期化します。

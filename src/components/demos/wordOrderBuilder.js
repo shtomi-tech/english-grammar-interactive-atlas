@@ -9,10 +9,12 @@ export function mountWordOrderBuilder(root, problem, options = {}) {
   const wordById = new Map(problem.words.map((word) => [word.id, word]));
   const initialBankIds = shuffleWordIds(
     problem.words.map((word) => word.id),
-    problem.answer,
+    problem.acceptedAnswers,
   );
   let bankIds = [...initialBankIds];
   let answerIds = [];
+  let hintIndex = 0;
+  const hints = Array.isArray(problem.hints) ? problem.hints : [];
 
   root.innerHTML = `
     <p class="instruction">${escapeHtml(problem.prompt)}</p>
@@ -23,8 +25,10 @@ export function mountWordOrderBuilder(root, problem, options = {}) {
       <div class="token-bank" data-word-bank></div>
       <div class="demo-actions">
         <button class="button secondary" type="button" data-reset>Reset</button>
+        ${hints.length ? '<button class="button secondary" type="button" data-hint>Hint</button>' : ''}
         <button class="button" type="button" data-check>Check answer</button>
       </div>
+      ${hints.length ? '<div class="hint" data-hint-output role="status" aria-live="polite"></div>' : ''}
       <div class="feedback" data-feedback role="status" aria-live="polite"></div>
       <p class="explanation" data-explanation hidden>${escapeHtml(problem.explanation)}</p>
     </div>`;
@@ -34,9 +38,16 @@ export function mountWordOrderBuilder(root, problem, options = {}) {
   const feedback = root.querySelector('[data-feedback]');
   const explanation = root.querySelector('[data-explanation]');
   const resetButton = root.querySelector('[data-reset]');
+  const hintButton = root.querySelector('[data-hint]');
+  const hintOutput = root.querySelector('[data-hint-output]');
   const checkButton = root.querySelector('[data-check]');
 
-  function render() {
+  function restoreFocus(id) {
+    if (!id) return;
+    [...root.querySelectorAll('.word-token')].find((button) => button.dataset.wordId === id)?.focus();
+  }
+
+  function render(focusId = null) {
     answerArea.classList.toggle('is-empty', answerIds.length === 0);
     answerArea.innerHTML = answerIds
       .map((id) => {
@@ -47,6 +58,7 @@ export function mountWordOrderBuilder(root, problem, options = {}) {
     wordBank.innerHTML = bankIds
       .map((id) => `<button class="word-token" type="button" data-word-id="${escapeHtml(id)}">${escapeHtml(wordById.get(id).text)}</button>`)
       .join('');
+    restoreFocus(focusId);
   }
 
   function clearFeedback() {
@@ -56,7 +68,7 @@ export function mountWordOrderBuilder(root, problem, options = {}) {
   }
 
   function check() {
-    const correct = checkWordOrder(answerIds, problem.answer);
+    const correct = checkWordOrder(answerIds, problem.acceptedAnswers);
     feedback.className = `feedback is-visible ${correct ? 'success' : 'error'}`;
     feedback.textContent = correct
       ? 'Correct — 文の骨格を正しく組み立てられました。'
@@ -72,7 +84,7 @@ export function mountWordOrderBuilder(root, problem, options = {}) {
     bankIds = bankIds.filter((wordId) => wordId !== id);
     answerIds = [...answerIds, id];
     clearFeedback();
-    render();
+    render(id);
   });
 
   on(answerArea, 'click', (event) => {
@@ -82,15 +94,26 @@ export function mountWordOrderBuilder(root, problem, options = {}) {
     answerIds = answerIds.filter((wordId) => wordId !== id);
     bankIds = [...bankIds, id];
     clearFeedback();
-    render();
+    render(id);
   });
 
   on(resetButton, 'click', () => {
     bankIds = [...initialBankIds];
     answerIds = [];
+    hintIndex = 0;
     clearFeedback();
+    if (hintOutput) hintOutput.textContent = '';
+    if (hintButton) hintButton.disabled = false;
     render();
   });
+  if (hintButton) {
+    on(hintButton, 'click', () => {
+      if (!hintOutput || hintIndex >= hints.length) return;
+      hintOutput.textContent = `Hint ${hintIndex + 1}: ${hints[hintIndex]}`;
+      hintIndex += 1;
+      if (hintIndex >= hints.length) hintButton.disabled = true;
+    });
+  }
   on(checkButton, 'click', check);
 
   render();

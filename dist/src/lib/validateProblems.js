@@ -28,13 +28,29 @@ function validateWordOrder(problem, label, errors) {
       }
     });
   }
-  if (!Array.isArray(problem.answer) || problem.answer.length === 0) {
-    errors.push(`${label}.answer must contain word IDs`);
+  if (!Array.isArray(problem.acceptedAnswers) || problem.acceptedAnswers.length === 0) {
+    errors.push(`${label}.acceptedAnswers must contain at least one answer`);
   } else {
     const wordIds = new Set((problem.words ?? []).map((word) => word?.id));
-    problem.answer.forEach((id) => {
-      if (!wordIds.has(id)) errors.push(`${label}.answer references an unknown word ID: ${id}`);
+    const answerSignatures = new Set();
+    problem.acceptedAnswers.forEach((answer, answerIndex) => {
+      if (!Array.isArray(answer) || answer.length === 0 || answer.some((id) => !hasText(id))) {
+        errors.push(`${label}.acceptedAnswers[${answerIndex}] must contain word IDs`);
+        return;
+      }
+      const signature = answer.join('\u0000');
+      if (answerSignatures.has(signature)) errors.push(`${label}.acceptedAnswers contains a duplicate answer`);
+      answerSignatures.add(signature);
+      if (answer.length !== wordIds.size || new Set(answer).size !== answer.length) {
+        errors.push(`${label}.acceptedAnswers[${answerIndex}] must use every word ID exactly once`);
+      }
+      answer.forEach((id) => {
+        if (!wordIds.has(id)) errors.push(`${label}.acceptedAnswers[${answerIndex}] references an unknown word ID: ${id}`);
+      });
     });
+  }
+  if (problem.hints !== undefined && (!Array.isArray(problem.hints) || problem.hints.length === 0 || problem.hints.some((hint) => !hasText(hint)))) {
+    errors.push(`${label}.hints must contain non-empty strings when provided`);
   }
   if (!hasText(problem.explanation)) errors.push(`${label}.explanation is required`);
 }

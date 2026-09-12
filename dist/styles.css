@@ -1050,6 +1050,16 @@ a.button {
   margin-top: 20px;
 }
 
+.hint {
+  min-height: 1.6em;
+  margin-top: 13px;
+  padding: 11px 13px;
+  border-left: 3px solid var(--accent);
+  background: #f8ecd5;
+  color: var(--ink-soft);
+  font-size: 0.86rem;
+}
+
 .feedback {
   display: none;
   margin-top: 17px;

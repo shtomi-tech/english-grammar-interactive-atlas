@@ -49,7 +49,7 @@ npm start
 
 ## 現在の実装範囲
 
-Phase 1の基盤とPhase 2AのGrammar Classifierをもとに、Phase 2Bで40件のカタログへ拡張し、Phase 3Aで教材Problem DataとReusable Componentsを分離しました。Phase 3Bでは、7件の一次ソースをResearch Referenceとして記録し、31件のInteractionへ参照IDを紐付けています。カテゴリ・検索・再利用性ランク・Demo状態をAND条件で絞り込め、ハッシュURLによる詳細画面では元の出典メタデータと外部調査の含意を分けて確認できます。実際に操作できるDemoは4つです。
+Phase 1の基盤とPhase 2AのGrammar Classifierをもとに、Phase 2Bで40件のカタログへ拡張し、Phase 3Aで教材Problem DataとReusable Componentsを分離しました。Phase 3Bでは、7件の一次ソースをResearch Referenceとして記録し、31件のInteractionへ参照IDを紐付けています。Phase 4AではResearch結果を既存Word Order Builderへ還元し、4件のProblem（複数正答1件を含む）と任意Hintをデータ駆動で扱います。カテゴリ・検索・再利用性ランク・Demo状態をAND条件で絞り込め、ハッシュURLによる詳細画面では元の出典メタデータと外部調査の含意を分けて確認できます。実際に操作できるDemoは4つです。
 
 1. Word Order Builder
 2. Mark the Parts

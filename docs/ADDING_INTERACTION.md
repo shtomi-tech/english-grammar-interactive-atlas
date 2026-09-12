@@ -38,7 +38,7 @@
 
 Demoを作る場合、英文・正答・説明などの教材固有データは `src/data/problems/` の機能別ファイルへ置きます。Demoコンポーネントに問題文を直接書きません。分類Demoなら、`categories` と `items` の `answer` をデータ側に持たせ、分類軸を差し替えられる形にします。互換用の `src/data/demo-problems.js` は代表Problemの再エクスポートだけを行います。
 
-Problemは `type` と安定した `id` を持ち、`src/data/problems/index.js` のRegistryから `getProblemById('WO-001')` のように取得できます。現在のProblem数は Word Order 3、Mark the Parts 3、Grammar Classifier 3、Sentence Transformer 1 です。
+Problemは `type` と安定した `id` を持ち、`src/data/problems/index.js` のRegistryから `getProblemById('WO-001')` のように取得できます。現在のProblem数は Word Order 4、Mark the Parts 3、Grammar Classifier 3、Sentence Transformer 1 です。Word Orderの正答は `acceptedAnswers`（許容順序の配列）を正本とし、任意で段階的な `hints` を指定できます。複数正答の判定は `src/lib/grammar/word-order.js` に置き、UIへ重複実装しません。
 
 ## 3. 再利用可能なDemoコンポーネントを作る
 
@@ -90,5 +90,7 @@ npm test
 npm run check
 npm run build
 ```
+
+Phase 4Aでは、Research Reference `REF-SENTENCE-BUILDER` の示唆を既存Word Order Builderへ反映しています。新しいDemo TypeやLessonを増やさず、複数正答と任意HintというProblem Contractだけを拡張します。
 
 外部Repositoryのコードを導入する場合は、先にライセンス・依存関係・流用範囲を確認し、UI参考とコード流用を記録上も明確に分けます。

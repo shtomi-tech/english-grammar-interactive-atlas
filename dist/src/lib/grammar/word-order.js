@@ -1,5 +1,15 @@
-export function checkWordOrder(selectedIds, answerIds) {
-  return selectedIds.length === answerIds.length && selectedIds.every((id, index) => id === answerIds[index]);
+export function normalizeAcceptedAnswers(acceptedAnswers = []) {
+  if (!Array.isArray(acceptedAnswers) || acceptedAnswers.length === 0) return [];
+  return Array.isArray(acceptedAnswers[0]) ? acceptedAnswers : [acceptedAnswers];
+}
+
+export function checkWordOrder(selectedIds, acceptedAnswers) {
+  if (!Array.isArray(selectedIds)) return false;
+  return normalizeAcceptedAnswers(acceptedAnswers).some((answerIds) => (
+    Array.isArray(answerIds)
+      && selectedIds.length === answerIds.length
+      && selectedIds.every((id, index) => id === answerIds[index])
+  ));
 }
 
 function shuffleOnce(ids, random) {
@@ -17,18 +27,19 @@ function sameOrder(left, right) {
   return left.length === right.length && left.every((id, index) => id === right[index]);
 }
 
-export function shuffleWordIds(wordIds, answerIds = [], random = Math.random) {
+export function shuffleWordIds(wordIds, acceptedAnswers = [], random = Math.random) {
   const source = [...wordIds];
   if (source.length < 2) return source;
+  const answers = normalizeAcceptedAnswers(acceptedAnswers);
 
   for (let attempt = 0; attempt < 20; attempt += 1) {
     const shuffled = shuffleOnce(source, random);
-    if (!sameOrder(shuffled, answerIds)) return shuffled;
+    if (!answers.some((answer) => sameOrder(shuffled, answer))) return shuffled;
   }
 
   for (let offset = 1; offset < source.length; offset += 1) {
     const rotated = source.slice(offset).concat(source.slice(0, offset));
-    if (!sameOrder(rotated, answerIds)) return rotated;
+    if (!answers.some((answer) => sameOrder(rotated, answer))) return rotated;
   }
 
   return source;
