@@ -114,6 +114,39 @@ export const grammarClassifierProblems = [
     ],
     explanation: '同じ to + 動詞原形でも、文中で名詞・形容詞・副詞に近い働きを持つことがあります。',
   },
+  {
+    id: 'GC-005',
+    type: 'grammar-classifier',
+    classificationAxis: 'Gerund phrase role',
+    prompt: '動名詞句を、文中での役割ごとに分類してください。',
+    sentence: 'Reading books is fun. I enjoy cooking. My favorite hobby is swimming.',
+    categories: [
+      { id: 'subject', label: 'Subject', explanation: '文の主語として働く語句です。' },
+      { id: 'object', label: 'Object', explanation: '動詞の目的語として働く語句です。' },
+      { id: 'complement', label: 'Complement', explanation: '主語の内容を説明する補語です。' },
+    ],
+    items: [
+      {
+        id: 'reading-books',
+        text: 'Reading books',
+        answer: 'subject',
+        explanation: 'Reading books が文の主語として働いています。',
+      },
+      {
+        id: 'cooking',
+        text: 'cooking',
+        answer: 'object',
+        explanation: 'cooking は enjoy の目的語として、「料理すること」を表しています。',
+      },
+      {
+        id: 'swimming',
+        text: 'swimming',
+        answer: 'complement',
+        explanation: 'swimming は My favorite hobby の内容を説明する補語です。',
+      },
+    ],
+    explanation: '動名詞は動詞由来の -ing 形ですが、文の中では名詞のように主語・目的語・補語として働けます。',
+  },
 ];
 
 export const grammarClassifierProblem = grammarClassifierProblems[0];

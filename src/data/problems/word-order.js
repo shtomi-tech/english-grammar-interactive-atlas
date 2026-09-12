@@ -102,6 +102,20 @@ export const wordOrderProblems = [
     explanation: 'want の後ろで「〜すること」を表す不定詞は、to + 動詞の原形で作ります。',
     grammar: ['infinitive', 'noun-use', 'base-verb', 'word-order'],
   },
+  {
+    id: 'WO-008',
+    type: 'word-order',
+    prompt: 'enjoy + gerund の語順を意識して、英文を組み立ててください。',
+    words: [
+      { id: 'i', text: 'I' },
+      { id: 'enjoy', text: 'enjoy' },
+      { id: 'reading', text: 'reading' },
+      { id: 'books', text: 'books' },
+    ],
+    acceptedAnswers: [['i', 'enjoy', 'reading', 'books']],
+    explanation: 'enjoy の後ろでは、動詞 read を reading の形にして「本を読むこと」を表します。ここでは enjoy + gerund という組み合わせを確認します。',
+    grammar: ['gerund', 'verb-pattern', 'noun-like', 'word-order'],
+  },
 ];
 
 export const wordOrderProblem = wordOrderProblems[0];

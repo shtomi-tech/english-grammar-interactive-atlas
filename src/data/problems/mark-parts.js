@@ -40,6 +40,21 @@ export const markPartsProblems = [
     answer: ['happy'],
     explanation: 'happy は be動詞 is の後ろで、Tom の状態を説明する補語です。',
   },
+  {
+    id: 'MP-004',
+    type: 'mark-parts',
+    prompt: '文の主語として働いている動名詞句を選んでください。',
+    targetRole: 'Subject',
+    sentence: 'Reading books is fun.',
+    tokens: [
+      { id: 'reading', text: 'Reading', role: 'Subject' },
+      { id: 'books', text: 'books', role: 'Subject' },
+      { id: 'is', text: 'is', role: 'Verb' },
+      { id: 'fun', text: 'fun', role: 'Complement' },
+    ],
+    answer: ['reading', 'books'],
+    explanation: 'Reading books 全体が「本を読むこと」という一つの内容を表し、文の主語として働いています。',
+  },
 ];
 
 export const markPartsProblem = markPartsProblems[0];

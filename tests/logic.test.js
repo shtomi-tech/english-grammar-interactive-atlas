@@ -91,7 +91,7 @@ assert.deepEqual(getAtlasStats(interactions, demoRegistry), {
   workingDemos: 11,
 });
 
-assert.equal(problems.length, 48);
+assert.equal(problems.length, 53);
 assert.deepEqual(
   Object.fromEntries(Object.entries({
     'word-order': wordOrderProblems,
@@ -106,7 +106,7 @@ assert.deepEqual(
     'context-grammar': contextGrammarProblems,
     'sentence-generator': sentenceGeneratorProblems,
   }).map(([type, entries]) => [type, entries.length])),
-  { 'word-order': 7, 'mark-parts': 3, 'grammar-classifier': 4, 'sentence-transformer': 3, 'sentence-pattern-diagram': 3, 'modifier-connection-viewer': 3, 'modifier-positioner': 4, 'sentence-comparison': 4, 'error-corrector': 6, 'context-grammar': 6, 'sentence-generator': 5 },
+  { 'word-order': 8, 'mark-parts': 4, 'grammar-classifier': 5, 'sentence-transformer': 3, 'sentence-pattern-diagram': 3, 'modifier-connection-viewer': 3, 'modifier-positioner': 4, 'sentence-comparison': 4, 'error-corrector': 7, 'context-grammar': 7, 'sentence-generator': 5 },
 );
 assert.equal(problemRegistry['WO-001'], wordOrderProblems[0]);
 assert.equal(problemRegistry['SPD-001'], sentencePatternDiagramProblems[0]);
@@ -132,6 +132,11 @@ assert.equal(problemRegistry['GC-004'], grammarClassifierProblems[3]);
 assert.equal(problemRegistry['MPO-004'], modifierPositionerProblems[3]);
 assert.equal(problemRegistry['EC-006'], errorCorrectorProblems[5]);
 assert.equal(problemRegistry['CG-006'], contextGrammarProblems[5]);
+assert.equal(problemRegistry['WO-008'], wordOrderProblems[7]);
+assert.equal(problemRegistry['MP-004'], markPartsProblems[3]);
+assert.equal(problemRegistry['GC-005'], grammarClassifierProblems[4]);
+assert.equal(problemRegistry['EC-007'], errorCorrectorProblems[6]);
+assert.equal(problemRegistry['CG-007'], contextGrammarProblems[6]);
 assert.equal(validateProblems(problems).valid, true);
 assert.equal(validateDemoRegistry(demoRegistry, problemRegistry).valid, true);
 for (const demo of Object.values(demoRegistry)) {
@@ -212,6 +217,9 @@ assert.equal(hasCompletedAllCorrections(errorCorrectorProblems[2].corrections, n
 assert.equal(isAcceptedCorrection(errorCorrectorProblems[5].corrections[0], 'o16'), true);
 assert.equal(isAcceptedCorrection(errorCorrectorProblems[5].corrections[0], 'o17'), false);
 assert.equal(hasCompletedAllCorrections(errorCorrectorProblems[5].corrections, new Map([['infinitive-base-form', 'o16']])), true);
+assert.equal(isAcceptedCorrection(errorCorrectorProblems[6].corrections[0], 'o19'), true);
+assert.equal(isAcceptedCorrection(errorCorrectorProblems[6].corrections[0], 'o20'), false);
+assert.equal(hasCompletedAllCorrections(errorCorrectorProblems[6].corrections, new Map([['gerund-after-enjoy', 'o19']])), true);
 const errorStateTransition = new Map([['agreement', 'o2']]);
 assert.equal(hasCompletedAllCorrections(errorProblem.corrections, errorStateTransition), true);
 errorStateTransition.set('agreement', 'o1');
@@ -238,6 +246,15 @@ assert.equal(isAcceptedScenarioChoice(infinitiveContextProblem.steps[0], 'cg006-
 assert.equal(isAcceptedScenarioChoice(infinitiveContextProblem.steps[1], 'cg006-choice-2b'), false);
 assert.equal(hasCompletedScenario(infinitiveContextProblem.steps, new Set(['cg006-step-1', 'cg006-step-2'])), false);
 assert.equal(hasCompletedScenario(infinitiveContextProblem.steps, new Set(['cg006-step-1', 'cg006-step-2', 'cg006-step-3'])), true);
+const gerundContextProblem = contextGrammarProblems[6];
+assert.equal(gerundContextProblem.steps.length, 3);
+assert.equal(isAcceptedScenarioChoice(gerundContextProblem.steps[0], 'cg007-choice-1a'), true);
+assert.equal(isAcceptedScenarioChoice(gerundContextProblem.steps[1], 'cg007-choice-2a'), true);
+assert.equal(isAcceptedScenarioChoice(gerundContextProblem.steps[2], 'cg007-choice-3a'), true);
+assert.equal(isAcceptedScenarioChoice(gerundContextProblem.steps[2], 'cg007-choice-3b'), false);
+assert.match(gerundContextProblem.steps[2].choices[1].explanation, /文法的/);
+assert.equal(hasCompletedScenario(gerundContextProblem.steps, new Set(['cg007-step-1', 'cg007-step-2'])), false);
+assert.equal(hasCompletedScenario(gerundContextProblem.steps, new Set(['cg007-step-1', 'cg007-step-2', 'cg007-step-3'])), true);
 
 const generationProblem = sentenceGeneratorProblems[0];
 assert.equal(hasCompleteGenerationState({}, generationProblem.controls), false);
@@ -290,7 +307,7 @@ const lessonValidation = validateLessons(lessons, {
   problemTypes: new Set(Object.keys(demoRegistry)),
 });
 assert.equal(lessonValidation.valid, true, lessonValidation.errors.join('; '));
-assert.equal(lessons.length, 5);
+assert.equal(lessons.length, 6);
 assert.equal(getLessonById('LESSON-002').slug, 'structural-reading');
 assert.equal(getLessonBySlug('structural-reading').id, 'LESSON-002');
 assert.equal(getLessonBySlug('structural-reading').steps.length, 6);
@@ -304,6 +321,14 @@ assert.deepEqual(
   getLessonBySlug('infinitives').steps.map((step) => step.problemId),
   ['WO-007', 'GC-004', 'MPO-004', 'SC-001', 'EC-006', 'CG-006'],
 );
+assert.equal(getLessonById('LESSON-006').slug, 'gerunds');
+assert.deepEqual(
+  getLessonBySlug('gerunds').steps.map((step) => step.problemId),
+  ['WO-008', 'MP-004', 'GC-005', 'SC-001', 'EC-007', 'CG-007'],
+);
+assert.equal(getLessonBySlug('gerunds').steps.length, 6);
+assert.equal(getLessonBySlug('infinitives').steps[3].problemId, 'SC-001');
+assert.equal(getLessonBySlug('gerunds').steps[3].problemId, 'SC-001');
 
 const lessonProgress = lessons[0];
 const emptyLessonProgress = new Set();
@@ -365,6 +390,8 @@ assert.equal(multipleAnswerProblem.acceptedAnswers.some((answer) => answer.join(
 for (const problem of markPartsProblems) {
   assert.equal(checkTokenSelection(problem.answer, problem.answer), true);
 }
+assert.equal(checkTokenSelection(markPartsProblems[3].answer, ['reading', 'books']), true);
+assert.equal(checkTokenSelection(['reading'], markPartsProblems[3].answer), false);
 
 const correctAssignments = Object.fromEntries(grammarClassifierProblem.items.map((item) => [item.id, item.answer]));
 assert.equal(checkClassification(correctAssignments, grammarClassifierProblem.items), true);
@@ -373,6 +400,10 @@ const incompleteAssignments = { ...correctAssignments };
 delete incompleteAssignments['after-school'];
 assert.equal(checkClassification(incompleteAssignments, grammarClassifierProblem.items), false);
 assert.equal(checkClassification({ ...correctAssignments, extra: 'subject' }, grammarClassifierProblem.items), false);
+const gerundClassifierProblem = grammarClassifierProblems[4];
+const gerundAssignments = Object.fromEntries(gerundClassifierProblem.items.map((item) => [item.id, item.answer]));
+assert.equal(checkClassification(gerundAssignments, gerundClassifierProblem.items), true);
+assert.equal(checkClassification({ ...gerundAssignments, cooking: 'subject' }, gerundClassifierProblem.items), false);
 
 const validInteractions = validateInteractions(interactions, {
   registryKeys: Object.keys(demoRegistry),

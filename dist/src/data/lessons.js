@@ -259,6 +259,58 @@ export const lessons = [
       },
     ],
   },
+  {
+    id: 'LESSON-006',
+    slug: 'gerunds',
+    label: 'Lesson 06',
+    title: '動名詞を名詞の働きと動詞との組み合わせから使う',
+    description: '動詞 + ing が名詞のように働くことを確認し、主語・目的語・補語としての使い方や、不定詞との意味・verb patternの違いを整理します。',
+    learningGoal: '動名詞の基本形と名詞的な働きを理解し、文中での役割を見分け、動名詞を取る動詞や不定詞との意味差に応じて適切な形を選べるようにする。',
+    steps: [
+      {
+        id: 'LESSON-006-STEP-01',
+        interactionType: 'word-order',
+        problemId: 'WO-008',
+        title: 'enjoy + gerund の形を組み立てる',
+        instruction: 'enjoy の後ろに動名詞を置く語順を意識して、文を完成させます。',
+      },
+      {
+        id: 'LESSON-006-STEP-02',
+        interactionType: 'mark-parts',
+        problemId: 'MP-004',
+        title: '動名詞句の主語を見つける',
+        instruction: 'Reading books 全体が文の主語として働くことを確認します。',
+      },
+      {
+        id: 'LESSON-006-STEP-03',
+        interactionType: 'grammar-classifier',
+        problemId: 'GC-005',
+        title: '動名詞の文中の役割を分類する',
+        instruction: '動名詞句が主語・目的語・補語のどの役割を担うか分類します。',
+      },
+      {
+        id: 'LESSON-006-STEP-04',
+        interactionType: 'sentence-comparison',
+        problemId: 'SC-001',
+        title: '動名詞と不定詞の意味差を比べる',
+        instruction: 'stop + 動名詞と stop + 不定詞を比べ、同じ動詞でも後ろの形によって意味が変わることを確認します。',
+      },
+      {
+        id: 'LESSON-006-STEP-05',
+        interactionType: 'error-corrector',
+        problemId: 'EC-007',
+        title: 'enjoy の後ろの形を直す',
+        instruction: 'enjoy の後ろでは動名詞を使う規則を、誤文の訂正で確認します。',
+      },
+      {
+        id: 'LESSON-006-STEP-06',
+        interactionType: 'context-grammar',
+        problemId: 'CG-007',
+        title: '場面で動名詞の形を使い分ける',
+        instruction: '好きなこと、終えた行為、やめた行為の場面に合う動名詞の使い方を選びます。',
+      },
+    ],
+  },
 ];
 
 export const lessonRegistry = Object.fromEntries(lessons.map((lesson) => [lesson.id, lesson]));

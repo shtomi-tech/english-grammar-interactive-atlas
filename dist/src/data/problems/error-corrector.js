@@ -170,6 +170,32 @@ export const errorCorrectorProblems = [
     ],
     explanation: 'to不定詞の基本形は to + 動詞原形です。主語が三人称単数でも、toの後ろに -s は付けません。',
   },
+  {
+    id: 'EC-007',
+    type: 'error-corrector',
+    prompt: 'enjoy の後ろの動詞の形を正しく直してください。',
+    tokens: [
+      { id: 't1', text: 'She' },
+      { id: 't2', text: 'enjoys' },
+      { id: 't3', text: 'to read', correctionId: 'gerund-after-enjoy' },
+      { id: 't4', text: 'novels.' },
+    ],
+    corrections: [
+      {
+        id: 'gerund-after-enjoy',
+        tokenId: 't3',
+        options: [
+          { id: 'o19', text: 'reading' },
+          { id: 'o20', text: 'to read' },
+          { id: 'o21', text: 'read' },
+        ],
+        acceptedOptionIds: ['o19'],
+        ruleLabel: 'Gerund after enjoy',
+        explanation: 'enjoy の後ろでは、通常 to不定詞ではなく動名詞を使うため、to read ではなく reading にします。',
+      },
+    ],
+    explanation: '動詞によって、後ろに動名詞を取るか不定詞を取るかが異なります。enjoy は動名詞を取る代表例です。-ing が常に正しいわけではありません。',
+  },
 ];
 
 export const errorCorrectorProblem = errorCorrectorProblems[0];

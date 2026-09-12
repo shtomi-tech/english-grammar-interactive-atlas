@@ -355,7 +355,7 @@ export const contextGrammarProblems = [
         id: 'cg006-step-3',
         speaker: 'Friend',
         line: 'Why do you watch English videos?',
-        instruction: '映画を見る目的を、目的を表す不定詞で説明してください。',
+        instruction: '英語の動画を見る目的を、目的を表す不定詞で説明してください。',
         choices: [
           {
             id: 'cg006-choice-3a',
@@ -375,6 +375,86 @@ export const contextGrammarProblems = [
       },
     ],
     explanation: '不定詞は、wantの内容、名詞の説明、動作の目的など、文中でさまざまな働きをします。',
+  },
+  {
+    id: 'CG-007',
+    type: 'context-grammar',
+    prompt: '場面に合う動名詞の使い方を選び、会話を進めてください。',
+    scenario: {
+      title: 'Hobbies, finishing, and stopping',
+      setting: '好きなこと、終えた行為、やめた行為について話す場面です。',
+      learnerRole: 'Student',
+      goal: '動名詞を取る表現と、動名詞・不定詞で意味が変わる表現を場面に合わせて選ぶ。',
+    },
+    steps: [
+      {
+        id: 'cg007-step-1',
+        speaker: 'Friend',
+        line: 'What do you enjoy doing after work?',
+        instruction: 'enjoy の後ろに動名詞を置いて、好きなことを答えてください。',
+        choices: [
+          {
+            id: 'cg007-choice-1a',
+            text: 'I enjoy cooking.',
+            reply: 'That sounds relaxing. Cooking can be a great hobby.',
+            grammarLabel: 'Gerund after enjoy',
+            explanation: 'enjoy の後ろでは cooking のような動名詞を使います。',
+          },
+          {
+            id: 'cg007-choice-1b',
+            text: 'I enjoy to cook.',
+            grammarLabel: 'Infinitive after enjoy',
+            explanation: 'enjoy の後ろでは通常to不定詞ではなく、動名詞 cooking を使います。',
+          },
+        ],
+        acceptedChoiceIds: ['cg007-choice-1a'],
+      },
+      {
+        id: 'cg007-step-2',
+        speaker: 'Teacher',
+        line: 'Did you finish your report?',
+        instruction: 'finish の後ろに動名詞を置いて、終えた行為を答えてください。',
+        choices: [
+          {
+            id: 'cg007-choice-2a',
+            text: 'Yes, I finished writing it.',
+            reply: 'Good. Now you can submit the report.',
+            grammarLabel: 'Gerund after finish',
+            explanation: 'finish の後ろでは writing のような動名詞を使って、終えた行為の内容を表します。',
+          },
+          {
+            id: 'cg007-choice-2b',
+            text: 'Yes, I finished to write it.',
+            grammarLabel: 'Infinitive after finish',
+            explanation: 'finish の後ろで行為を表す場合は、通常to不定詞ではなく動名詞を使います。',
+          },
+        ],
+        acceptedChoiceIds: ['cg007-choice-2a'],
+      },
+      {
+        id: 'cg007-step-3',
+        speaker: 'Friend',
+        line: 'Did you stop talking when class started?',
+        instruction: '話すのをやめたことを、stop + 動名詞で答えてください。',
+        choices: [
+          {
+            id: 'cg007-choice-3a',
+            text: 'Yes, I stopped talking.',
+            reply: 'That was considerate. The class could begin quietly.',
+            grammarLabel: 'stop + gerund',
+            explanation: 'stop talking は、「話すという行為をやめる」という意味です。',
+          },
+          {
+            id: 'cg007-choice-3b',
+            text: 'Yes, I stopped to talk to my teacher.',
+            grammarLabel: 'stop + infinitive',
+            explanation: 'この文も文法的ですが、stop to talk は「話すために立ち止まる／別の行動を止める」という意味で、今回のgoalとは異なります。',
+          },
+        ],
+        acceptedChoiceIds: ['cg007-choice-3a'],
+      },
+    ],
+    explanation: 'enjoy や finish の後ろでは動名詞を使い、stop は後ろの形によって意味が変わります。',
   },
 ];
 
