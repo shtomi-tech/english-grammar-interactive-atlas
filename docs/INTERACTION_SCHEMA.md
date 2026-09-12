@@ -63,6 +63,6 @@ Research Reference records separately store observed patterns, atlas implication
 
 ## 40件カタログの方針
 
-`GRAM-INT-001`〜`GRAM-INT-040` を1件ずつ保持し、10カテゴリを各4件で構成します。現在の8つのDemoは実働のまま維持し、カタログ拡張で新しいDemoを自動的に増やしません。新しい項目はまず学習目的・触る対象・変化・気づきを記録し、同じ操作概念の重複や、実装されていないDemoのふりを避けます。
+`GRAM-INT-001`〜`GRAM-INT-040` を1件ずつ保持し、10カテゴリを各4件で構成します。現在の9つのDemoは実働のまま維持し、カタログ拡張で新しいDemoを自動的に増やしません。新しい項目はまず学習目的・触る対象・変化・気づきを記録し、同じ操作概念の重複や、実装されていないDemoのふりを避けます。
 
 検証は `npm test`、`npm run check`、`npm run build` の順で実行します。

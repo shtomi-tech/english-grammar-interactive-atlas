@@ -6,6 +6,7 @@ import { mountSentencePatternDiagram } from './sentencePatternDiagram.js';
 import { mountModifierConnectionViewer } from './modifierConnectionViewer.js';
 import { mountSentenceComparison } from './sentenceComparison.js';
 import { mountErrorCorrector } from './errorCorrector.js';
+import { mountContextGrammar } from './contextGrammar.js';
 import { getProblemById } from '../../data/problems/index.js';
 
 export const demoRegistry = {
@@ -40,6 +41,10 @@ export const demoRegistry = {
   'error-corrector': {
     mount: mountErrorCorrector,
     demoProblemId: 'EC-001',
+  },
+  'context-grammar': {
+    mount: mountContextGrammar,
+    demoProblemId: 'CG-001',
   },
 };
 

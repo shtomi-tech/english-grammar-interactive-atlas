@@ -1,4 +1,4 @@
-const problemTypes = new Set(['word-order', 'mark-parts', 'grammar-classifier', 'sentence-transformer', 'sentence-pattern-diagram', 'modifier-connection-viewer', 'sentence-comparison', 'error-corrector']);
+const problemTypes = new Set(['word-order', 'mark-parts', 'grammar-classifier', 'sentence-transformer', 'sentence-pattern-diagram', 'modifier-connection-viewer', 'sentence-comparison', 'error-corrector', 'context-grammar']);
 const transformerControlNames = new Set(['subject', 'tense', 'negative']);
 const supportedTenses = new Set(['present', 'past']);
 
@@ -401,6 +401,70 @@ function validateErrorCorrector(problem, label, errors) {
   }
 }
 
+function validateContextGrammar(problem, label, errors) {
+  if (!hasText(problem.prompt) || !hasText(problem.explanation)) {
+    errors.push(`${label}.prompt and explanation are required`);
+  }
+
+  const scenario = problem.scenario;
+  if (!isRecord(scenario)) {
+    errors.push(`${label}.scenario is required`);
+  } else {
+    for (const field of ['title', 'setting', 'learnerRole', 'goal']) {
+      if (!hasText(scenario[field])) errors.push(`${label}.scenario.${field} is required`);
+    }
+  }
+
+  if (!Array.isArray(problem.steps) || problem.steps.length === 0) {
+    errors.push(`${label}.steps must contain at least one step`);
+    return;
+  }
+
+  duplicateIds(problem.steps, `${label}.steps`, errors);
+  const choiceIds = new Set();
+  problem.steps.forEach((step, stepIndex) => {
+    if (!isRecord(step) || !hasText(step.id) || !hasText(step.speaker) || !hasText(step.line) || !hasText(step.instruction)) {
+      errors.push(`${label}.steps[${stepIndex}] must have id, speaker, line, and instruction`);
+    }
+
+    if (!Array.isArray(step?.choices) || step.choices.length < 2) {
+      errors.push(`${label}.steps[${stepIndex}].choices must contain at least two choices`);
+    } else {
+      duplicateIds(step.choices, `${label}.steps[${stepIndex}].choices`, errors);
+      step.choices.forEach((choice, choiceIndex) => {
+        if (!isRecord(choice) || !hasText(choice.id) || !hasText(choice.text) || !hasText(choice.grammarLabel) || !hasText(choice.explanation)) {
+          errors.push(`${label}.steps[${stepIndex}].choices[${choiceIndex}] must have id, text, grammarLabel, and explanation`);
+          return;
+        }
+        if (choiceIds.has(choice.id)) errors.push(`${label}.choices has duplicate IDs: ${choice.id}`);
+        choiceIds.add(choice.id);
+      });
+    }
+
+    if (!Array.isArray(step?.acceptedChoiceIds) || step.acceptedChoiceIds.length === 0) {
+      errors.push(`${label}.steps[${stepIndex}].acceptedChoiceIds must contain at least one choice ID`);
+      return;
+    }
+
+    const stepChoiceIds = new Set((step.choices ?? []).map((choice) => choice?.id));
+    const acceptedChoiceIds = new Set();
+    step.acceptedChoiceIds.forEach((choiceId) => {
+      if (!hasText(choiceId)) {
+        errors.push(`${label}.steps[${stepIndex}].acceptedChoiceIds must contain choice IDs`);
+        return;
+      }
+      if (acceptedChoiceIds.has(choiceId)) errors.push(`${label}.steps[${stepIndex}].acceptedChoiceIds has duplicate IDs: ${choiceId}`);
+      acceptedChoiceIds.add(choiceId);
+      if (!stepChoiceIds.has(choiceId)) {
+        errors.push(`${label}.steps[${stepIndex}] references an unknown accepted choice: ${choiceId}`);
+        return;
+      }
+      const choice = step.choices.find((candidate) => candidate?.id === choiceId);
+      if (!hasText(choice?.reply)) errors.push(`${label}.steps[${stepIndex}].choices reply is required for accepted choice: ${choiceId}`);
+    });
+  });
+}
+
 export function validateProblems(entries, { expectedTypes = problemTypes } = {}) {
   const errors = [];
   if (!Array.isArray(entries)) return { valid: false, errors: ['Problems must be an array'] };
@@ -424,6 +488,7 @@ export function validateProblems(entries, { expectedTypes = problemTypes } = {})
     if (problem.type === 'modifier-connection-viewer') validateModifierConnectionViewer(problem, label, errors);
     if (problem.type === 'sentence-comparison') validateSentenceComparison(problem, label, errors);
     if (problem.type === 'error-corrector') validateErrorCorrector(problem, label, errors);
+    if (problem.type === 'context-grammar') validateContextGrammar(problem, label, errors);
   });
 
   return { valid: errors.length === 0, errors };

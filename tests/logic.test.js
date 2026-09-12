@@ -9,6 +9,7 @@ import { sentencePatternDiagramProblems } from '../src/data/problems/sentence-pa
 import { modifierConnectionViewerProblems } from '../src/data/problems/modifier-connection-viewer.js';
 import { sentenceComparisonProblems } from '../src/data/problems/sentence-comparison.js';
 import { errorCorrectorProblems } from '../src/data/problems/error-corrector.js';
+import { contextGrammarProblems } from '../src/data/problems/context-grammar.js';
 import { wordOrderProblems } from '../src/data/problems/word-order.js';
 import { filterInteractions, getAtlasStats, searchInteractions } from '../src/lib/atlas.js';
 import { grammarClassifierProblem } from '../src/data/demo-problems.js';
@@ -33,6 +34,12 @@ import {
   isAcceptedCorrection,
 } from '../src/lib/grammar/error-correction.js';
 import {
+  getScenarioChoice,
+  getScenarioStep,
+  hasCompletedScenario,
+  isAcceptedScenarioChoice,
+} from '../src/lib/grammar/context-grammar.js';
+import {
   researchReferences,
   researchReferenceRegistry,
 } from '../src/data/research/index.js';
@@ -48,8 +55,8 @@ assert.equal(filterInteractions(interactions, 'transform').length, 4);
 assert.equal(filterInteractions(interactions, 'all', { reusability: 'S' }).length, 29);
 assert.equal(filterInteractions(interactions, 'all', { reusability: 'A' }).length, 11);
 assert.equal(filterInteractions(interactions, 'all', { reusability: 'B' }).length, 0);
-assert.equal(filterInteractions(interactions, 'all', { demo: 'available' }).length, 8);
-assert.equal(filterInteractions(interactions, 'all', { demo: 'planned' }).length, 32);
+assert.equal(filterInteractions(interactions, 'all', { demo: 'available' }).length, 9);
+assert.equal(filterInteractions(interactions, 'all', { demo: 'planned' }).length, 31);
 assert.equal(searchInteractions(interactions, 'relative').length, 2);
 assert.equal(searchInteractions(interactions, '  RELATIVE  ').length, 2);
 assert.equal(searchInteractions(interactions, 'conditional').length, 1);
@@ -60,10 +67,10 @@ assert.equal(
 assert.deepEqual(getAtlasStats(interactions, demoRegistry), {
   catalogEntries: 40,
   interactionFamilies: 10,
-  workingDemos: 8,
+  workingDemos: 9,
 });
 
-assert.equal(problems.length, 23);
+assert.equal(problems.length, 26);
 assert.deepEqual(
   Object.fromEntries(Object.entries({
     'word-order': wordOrderProblems,
@@ -74,14 +81,16 @@ assert.deepEqual(
     'modifier-connection-viewer': modifierConnectionViewerProblems,
     'sentence-comparison': sentenceComparisonProblems,
     'error-corrector': errorCorrectorProblems,
+    'context-grammar': contextGrammarProblems,
   }).map(([type, entries]) => [type, entries.length])),
-  { 'word-order': 4, 'mark-parts': 3, 'grammar-classifier': 3, 'sentence-transformer': 1, 'sentence-pattern-diagram': 3, 'modifier-connection-viewer': 3, 'sentence-comparison': 3, 'error-corrector': 3 },
+  { 'word-order': 4, 'mark-parts': 3, 'grammar-classifier': 3, 'sentence-transformer': 1, 'sentence-pattern-diagram': 3, 'modifier-connection-viewer': 3, 'sentence-comparison': 3, 'error-corrector': 3, 'context-grammar': 3 },
 );
 assert.equal(problemRegistry['WO-001'], wordOrderProblems[0]);
 assert.equal(problemRegistry['SPD-001'], sentencePatternDiagramProblems[0]);
 assert.equal(problemRegistry['MCV-001'], modifierConnectionViewerProblems[0]);
 assert.equal(problemRegistry['SC-001'], sentenceComparisonProblems[0]);
 assert.equal(problemRegistry['EC-001'], errorCorrectorProblems[0]);
+assert.equal(problemRegistry['CG-001'], contextGrammarProblems[0]);
 assert.equal(validateProblems(problems).valid, true);
 assert.equal(validateDemoRegistry(demoRegistry, problemRegistry).valid, true);
 for (const demo of Object.values(demoRegistry)) {
@@ -93,6 +102,7 @@ assert.equal(getDemoProblem('sentence-pattern-diagram', 'SPD-003').id, 'SPD-003'
 assert.equal(getDemoProblem('modifier-connection-viewer', 'MCV-003').id, 'MCV-003');
 assert.equal(getDemoProblem('sentence-comparison', 'SC-003').id, 'SC-003');
 assert.equal(getDemoProblem('error-corrector', 'EC-003').id, 'EC-003');
+assert.equal(getDemoProblem('context-grammar', 'CG-003').id, 'CG-003');
 assert.throws(() => getDemoProblem('word-order', 'MP-001'), /type mismatch/);
 
 const sentencePatternProblem = sentencePatternDiagramProblems[0];
@@ -139,6 +149,26 @@ assert.equal(hasCompletedAllCorrections(errorProblem.corrections, new Map()), fa
 assert.equal(hasCompletedAllCorrections(errorProblem.corrections, new Map([['agreement', 'o2']])), true);
 assert.equal(hasCompletedAllCorrections(errorCorrectorProblems[2].corrections, new Map([['auxiliary-agreement', 'o2']])), false);
 assert.equal(hasCompletedAllCorrections(errorCorrectorProblems[2].corrections, new Map([['auxiliary-agreement', 'o2'], ['past-participle', 'o5']])), true);
+const errorStateTransition = new Map([['agreement', 'o2']]);
+assert.equal(hasCompletedAllCorrections(errorProblem.corrections, errorStateTransition), true);
+errorStateTransition.set('agreement', 'o1');
+assert.equal(hasCompletedAllCorrections(errorProblem.corrections, errorStateTransition), false);
+errorStateTransition.set('agreement', 'o2');
+assert.equal(hasCompletedAllCorrections(errorProblem.corrections, errorStateTransition), true);
+
+const contextProblem = contextGrammarProblems[0];
+const contextStep = getScenarioStep(contextProblem.steps, 'cg001-step-1');
+assert.equal(contextStep, contextProblem.steps[0]);
+assert.equal(getScenarioStep(contextProblem.steps, 0), contextStep);
+assert.equal(getScenarioStep(contextProblem.steps, 'missing-step'), null);
+assert.equal(getScenarioChoice(contextStep, 'cg001-choice-1a'), contextStep.choices[0]);
+assert.equal(getScenarioChoice(contextStep, 'missing-choice'), null);
+assert.equal(isAcceptedScenarioChoice(contextStep, 'cg001-choice-1a'), true);
+assert.equal(isAcceptedScenarioChoice(contextStep, 'cg001-choice-1b'), false);
+assert.equal(hasCompletedScenario(contextProblem.steps, new Set()), false);
+assert.equal(hasCompletedScenario(contextProblem.steps, new Set(['cg001-step-1'])), false);
+assert.equal(hasCompletedScenario(contextProblem.steps, new Set(['cg001-step-1', 'cg001-step-2'])), true);
+assert.equal(hasCompletedScenario(contextProblem.steps, new Set(['unknown-step'])), false);
 
 assert.equal(researchReferences.length, 7);
 assert.equal(new Set(researchReferences.map((reference) => reference.id)).size, researchReferences.length);
@@ -358,6 +388,24 @@ assert.equal(validateProblems(errorUnknownAcceptedOption).valid, false);
 const errorEmptyOptions = structuredClone(errorCorrectorProblems);
 errorEmptyOptions[0].corrections[0].options = [];
 assert.equal(validateProblems(errorEmptyOptions).valid, false);
+const contextDuplicateStepId = structuredClone(contextGrammarProblems);
+contextDuplicateStepId[0].steps[1].id = contextDuplicateStepId[0].steps[0].id;
+assert.equal(validateProblems(contextDuplicateStepId).valid, false);
+const contextDuplicateChoiceId = structuredClone(contextGrammarProblems);
+contextDuplicateChoiceId[0].steps[1].choices[0].id = contextDuplicateChoiceId[0].steps[0].choices[0].id;
+assert.equal(validateProblems(contextDuplicateChoiceId).valid, false);
+const contextUnknownAcceptedChoice = structuredClone(contextGrammarProblems);
+contextUnknownAcceptedChoice[0].steps[0].acceptedChoiceIds = ['missing-choice'];
+assert.equal(validateProblems(contextUnknownAcceptedChoice).valid, false);
+const contextEmptyAcceptedChoices = structuredClone(contextGrammarProblems);
+contextEmptyAcceptedChoices[0].steps[0].acceptedChoiceIds = [];
+assert.equal(validateProblems(contextEmptyAcceptedChoices).valid, false);
+const contextMissingReply = structuredClone(contextGrammarProblems);
+contextMissingReply[0].steps[0].choices[0].reply = '';
+assert.equal(validateProblems(contextMissingReply).valid, false);
+const contextMissingScenarioField = structuredClone(contextGrammarProblems);
+contextMissingScenarioField[0].scenario.goal = '';
+assert.equal(validateProblems(contextMissingScenarioField).valid, false);
 const errorTokenCorrectionMismatch = structuredClone(errorCorrectorProblems);
 errorTokenCorrectionMismatch[0].tokens[1].correctionId = 'missing-correction';
 assert.equal(validateProblems(errorTokenCorrectionMismatch).valid, false);

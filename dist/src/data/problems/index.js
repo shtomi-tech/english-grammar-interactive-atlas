@@ -5,6 +5,7 @@ import { sentencePatternDiagramProblems } from './sentence-pattern-diagram.js';
 import { modifierConnectionViewerProblems } from './modifier-connection-viewer.js';
 import { sentenceComparisonProblems } from './sentence-comparison.js';
 import { errorCorrectorProblems } from './error-corrector.js';
+import { contextGrammarProblems } from './context-grammar.js';
 import { wordOrderProblems } from './word-order.js';
 
 export const problemSets = {
@@ -16,6 +17,7 @@ export const problemSets = {
   'modifier-connection-viewer': modifierConnectionViewerProblems,
   'sentence-comparison': sentenceComparisonProblems,
   'error-corrector': errorCorrectorProblems,
+  'context-grammar': contextGrammarProblems,
 };
 
 export const problems = Object.values(problemSets).flat();
@@ -37,5 +39,6 @@ export {
   modifierConnectionViewerProblems,
   sentenceComparisonProblems,
   errorCorrectorProblems,
+  contextGrammarProblems,
   wordOrderProblems,
 };

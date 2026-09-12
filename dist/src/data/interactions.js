@@ -264,6 +264,7 @@ const initialInteractions = [
     feedbackType: ['会話結果', '場面別ヒント'],
     implementationDifficulty: 4,
     reusability: 'A',
+    demoType: 'context-grammar',
     sourceName: 'Original concept',
     ...originalSourceMetadata,
     reusePolicy: 'idea-only',

@@ -25,3 +25,7 @@ export {
   errorCorrectorProblem,
   errorCorrectorProblems,
 } from './problems/error-corrector.js';
+export {
+  contextGrammarProblem,
+  contextGrammarProblems,
+} from './problems/context-grammar.js';

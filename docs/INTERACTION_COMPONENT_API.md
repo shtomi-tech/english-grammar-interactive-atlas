@@ -14,7 +14,7 @@ Demo / Lesson
 
 ## Mount signature
 
-8つのComponentは次の形を実装します。
+9つのComponentは次の形を実装します。
 
 ```js
 const cleanup = mountInteraction(root, problem, {
@@ -34,10 +34,11 @@ const cleanup = mountInteraction(root, problem, {
 | Modifier Connection Viewer | `modifier-connection-viewer` | `prompt`, `sentence`, `chunks`, `relations`, `explanation` |
 | Sentence Comparison | `sentence-comparison` | `prompt`, `sentences`, `differences`, `explanation` |
 | Error Corrector | `error-corrector` | `prompt`, `tokens`, `corrections`, `explanation` |
+| Context Grammar | `context-grammar` | `prompt`, `scenario`, `steps`, `explanation` |
 
 ## Options and onComplete
 
-判定を持つ3つのComponentはCheck時に、Sentence Transformerは選択変更時にcallbackを呼びます。探索型のSentence Pattern Diagram、Modifier Connection Viewer、Sentence Comparisonは必要な要素をすべて確認した時にcallbackを呼びます。
+判定を持つ3つのComponentはCheck時に、Sentence Transformerは選択変更時にcallbackを呼びます。探索型のSentence Pattern Diagram、Modifier Connection Viewer、Sentence Comparisonは必要な要素をすべて確認した時にcallbackを呼びます。Context Grammarは各Stepの正答をContinueで確定し、最後のStepを完了した時にcallbackを一度だけ呼びます。
 
 ```js
 onComplete({
@@ -107,6 +108,12 @@ Word Orderの正答は `acceptedAnswers` を正本とし、1問に1つ以上のI
 `mountErrorCorrector(root, problem, options)` は、誤文の `tokens` と語句置換型の `corrections` から訂正UIを生成します。各correctionは対象token、2つ以上の修正候補、`acceptedOptionIds`、`ruleLabel`、`explanation` を持ちます。Componentは教材英文や文法説明を内部に持たず、選択した候補で訂正文を再構成します。
 
 誤り候補のtokenを選んでから修正候補を選択し、正誤とDifference・Rule・Why it mattersを文字で表示します。全correctionが正解になった時点で `onComplete({ correct: true, problemId, completedCorrectionIds })` を一度だけ呼びます。Resetは選択・回答・訂正文・feedback・完了状態を初期化します。
+
+## Context Grammar
+
+`mountContextGrammar(root, problem, options)` は、`scenario` と順序付きの `steps` から線形の会話シミュレーターを生成します。`scenario` は `title`、`setting`、`learnerRole`、`goal` を持ちます。各stepは一意な `id`、相手の `speaker` と `line`、学習者への `instruction`、2つ以上の `choices`、`acceptedChoiceIds` を持ち、choiceは `text`、`reply`、`grammarLabel`、`explanation` を持ちます。Problem Dataが場面・英文・正答・説明を管理し、Componentは問題固有の文を持ちません。
+
+選択肢を押すと、正答ならGrammar・Why it works・Responseを表示し、Continueで会話を次へ進めます。誤答は `Not yet` と文法上の理由を表示するだけでStepを進めません。完了済みStepは相手の発話、学習者の返答、相手のreplyとして履歴に残ります。最後のStepを完了すると `onComplete({ correct: true, problemId, completedStepIds, selectedChoiceIds })` を一度だけ呼び、Resetで選択・履歴・完了状態を初期化してResetへfocusを戻します。分岐エンジン、自由入力、LLM/API、音声はこのComponentの責務に含めません。
 
 ## Lesson Registry and Problem injection
 

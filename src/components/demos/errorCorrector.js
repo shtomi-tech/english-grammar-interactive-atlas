@@ -21,7 +21,7 @@ export function mountErrorCorrector(root, problem, options = {}) {
   let selectedOptionId = null;
   let feedbackText = '';
   let feedbackKind = '';
-  let completed = false;
+  let completionNotified = false;
 
   root.innerHTML = `
     <p class="instruction">${escapeHtml(problem.prompt)}</p>
@@ -67,6 +67,7 @@ export function mountErrorCorrector(root, problem, options = {}) {
   }
 
   function render(focusTarget = null) {
+    const allCorrect = hasCompletedAllCorrections(problem.corrections, answers);
     tokenArea.innerHTML = problem.tokens
       .map((token) => {
         const correction = getCorrectionByTokenId(problem.corrections, token.id);
@@ -109,7 +110,7 @@ export function mountErrorCorrector(root, problem, options = {}) {
 
     feedback.className = feedbackText ? `feedback is-visible ${feedbackKind}` : 'feedback';
     feedback.textContent = feedbackText;
-    progress.textContent = completed
+    progress.textContent = allCorrect
       ? 'You corrected all errors.'
       : `${getCompletedCorrectionIds().length} / ${problem.corrections.length} corrections completed.`;
     restoreFocus(focusTarget);
@@ -138,14 +139,14 @@ export function mountErrorCorrector(root, problem, options = {}) {
       ? `Correct. ${originalToken.text} → ${option.text}。${correction.ruleLabel}: ${correction.explanation}`
       : `Not yet. ${correction.ruleLabel}。${correction.explanation}`;
     render({ type: 'option', optionId: option.id });
-    if (!completed && hasCompletedAllCorrections(problem.corrections, answers)) {
-      completed = true;
+    const allCorrect = hasCompletedAllCorrections(problem.corrections, answers);
+    if (allCorrect && !completionNotified) {
+      completionNotified = true;
       onComplete({
         correct: true,
         problemId: problem.id,
         completedCorrectionIds: getCompletedCorrectionIds(),
       });
-      progress.textContent = 'You corrected all errors.';
     }
   }
 
@@ -165,7 +166,7 @@ export function mountErrorCorrector(root, problem, options = {}) {
     selectedOptionId = null;
     feedbackText = '';
     feedbackKind = '';
-    completed = false;
+    completionNotified = false;
     render({ type: 'reset' });
   });
 
