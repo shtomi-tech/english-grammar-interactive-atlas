@@ -116,6 +116,33 @@ export const errorCorrectorProblems = [
     ],
     explanation: '助動詞の後ろには、主語が三人称単数でも動詞の原形を置きます。',
   },
+  {
+    id: 'EC-005',
+    type: 'error-corrector',
+    prompt: '受動態のbe動詞の後ろに置く動詞の形を正しく直してください。',
+    tokens: [
+      { id: 't1', text: 'The' },
+      { id: 't2', text: 'report' },
+      { id: 't3', text: 'was' },
+      { id: 't4', text: 'wrote', correctionId: 'passive-participle' },
+      { id: 't5', text: 'by the teacher.' },
+    ],
+    corrections: [
+      {
+        id: 'passive-participle',
+        tokenId: 't4',
+        options: [
+          { id: 'o7', text: 'write' },
+          { id: 'o8', text: 'wrote' },
+          { id: 'o9', text: 'written' },
+        ],
+        acceptedOptionIds: ['o9'],
+        ruleLabel: 'Past participle in the passive',
+        explanation: '受動態ではbe動詞の後ろに過去形 wrote ではなく、過去分詞 written を置きます。',
+      },
+    ],
+    explanation: '受動態は be + 過去分詞で作ります。過去形と過去分詞が異なる動詞にも注意します。',
+  },
 ];
 
 export const errorCorrectorProblem = errorCorrectorProblems[0];

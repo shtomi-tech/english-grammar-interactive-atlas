@@ -73,6 +73,20 @@ export const wordOrderProblems = [
     explanation: '助動詞の後ろには動詞の原形を置きます。基本語順は Subject + Modal + Base Verb です。',
     grammar: ['modal', 'base-verb', 'word-order'],
   },
+  {
+    id: 'WO-006',
+    type: 'word-order',
+    prompt: '受動態の英文を、自然な語順に組み立ててください。',
+    words: [
+      { id: 'the-report', text: 'The report' },
+      { id: 'was', text: 'was' },
+      { id: 'written', text: 'written' },
+      { id: 'by-the-teacher', text: 'by the teacher' },
+    ],
+    acceptedAnswers: [['the-report', 'was', 'written', 'by-the-teacher']],
+    explanation: '受動態は Subject + be + Past Participle が中心で、必要なら by 句で動作主を示します。',
+    grammar: ['passive-voice', 'past-participle', 'word-order'],
+  },
 ];
 
 export const wordOrderProblem = wordOrderProblems[0];

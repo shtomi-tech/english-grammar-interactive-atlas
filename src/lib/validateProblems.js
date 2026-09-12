@@ -1,7 +1,7 @@
-import { getGrammarStateMode, SUPPORTED_MODALS, SUPPORTED_TENSES } from './grammar/grammar-state.js';
+import { getGrammarStateMode, SUPPORTED_MODALS, SUPPORTED_TENSES, SUPPORTED_VOICES } from './grammar/grammar-state.js';
 
 const problemTypes = new Set(['word-order', 'mark-parts', 'grammar-classifier', 'sentence-transformer', 'sentence-pattern-diagram', 'modifier-connection-viewer', 'sentence-comparison', 'error-corrector', 'context-grammar', 'sentence-generator']);
-const transformerControlNames = new Set(['subject', 'tense', 'negative', 'modal']);
+const transformerControlNames = new Set(['subject', 'tense', 'negative', 'modal', 'voice']);
 
 function hasText(value) {
   return typeof value === 'string' && value.trim().length > 0;
@@ -140,14 +140,27 @@ function validateGrammarControls(problem, label, errors) {
         if (name === 'modal' && !SUPPORTED_MODALS.has(option.value)) {
           errors.push(`${label}.controls.modal has unsupported value: ${option.value}`);
         }
+        if (name === 'voice' && !SUPPORTED_VOICES.includes(option.value)) {
+          errors.push(`${label}.controls.voice has unsupported value: ${option.value}`);
+        }
         if (name === 'negative' && typeof option.value !== 'boolean') {
           errors.push(`${label}.controls.negative values must be boolean`);
         }
       });
     }
   }
-  if (getGrammarStateMode(problem.controls) === 'invalid') {
+  const controls = problem.controls;
+  const hasTense = isRecord(controls) && Object.prototype.hasOwnProperty.call(controls, 'tense');
+  const hasModal = isRecord(controls) && Object.prototype.hasOwnProperty.call(controls, 'modal');
+  const hasVoice = isRecord(controls) && Object.prototype.hasOwnProperty.call(controls, 'voice');
+  if (!hasTense && !hasModal) errors.push(`${label}.controls must contain tense or modal`);
+  if (getGrammarStateMode(controls) === 'invalid') {
     errors.push(`${label}.controls cannot contain both tense and modal`);
+  }
+  if (hasVoice && hasModal) errors.push(`${label}.controls cannot contain modal and voice`);
+  if (hasVoice && !hasTense) errors.push(`${label}.controls with voice must contain tense`);
+  if (hasVoice && isRecord(controls) && Object.prototype.hasOwnProperty.call(controls, 'negative')) {
+    errors.push(`${label}.controls cannot contain negative and voice`);
   }
 }
 
@@ -171,6 +184,24 @@ function validateDefaults(problem, label, errors) {
 
 function validateSentenceModel(problem, label, errors) {
   const model = problem.sentenceModel;
+  const hasVoice = isRecord(problem.controls) && Object.prototype.hasOwnProperty.call(problem.controls, 'voice');
+  if (hasVoice) {
+    if (!isRecord(model) || !isRecord(model.roles) || !isRecord(model.verb)) {
+      errors.push(`${label}.sentenceModel must have roles and verb for voice controls`);
+      return;
+    }
+    for (const roleName of ['agent', 'patient']) {
+      const role = model.roles[roleName];
+      if (!isRecord(role) || !hasText(role.label) || !['singular', 'plural'].includes(role.number)) {
+        errors.push(`${label}.sentenceModel.roles.${roleName} is invalid`);
+      }
+    }
+    if (!hasText(model.verb.base)) errors.push(`${label}.sentenceModel.verb.base is required`);
+    if (!hasText(model.verb.past)) errors.push(`${label}.sentenceModel.verb.past is required for voice controls`);
+    if (!hasText(model.verb.pastParticiple)) errors.push(`${label}.sentenceModel.verb.pastParticiple is required for voice controls`);
+    if (model.punctuation !== undefined && !hasText(model.punctuation)) errors.push(`${label}.sentenceModel.punctuation is invalid`);
+    return;
+  }
   if (!isRecord(model) || !isRecord(model.subjects) || !isRecord(model.verb) || !hasText(model.object)) {
     errors.push(`${label}.sentenceModel must have subjects, verb, and object`);
   } else {

@@ -67,6 +67,33 @@ export const sentenceTransformerProblems = [
       punctuation: '.',
     },
   },
+  {
+    id: 'ST-003',
+    type: 'sentence-transformer',
+    prompt: 'Voiceを切り替えると、同じ出来事の視点と動詞の形がどう変わるか観察してください。',
+    controls: {
+      tense: [
+        { value: 'present', label: 'Present' },
+        { value: 'past', label: 'Past' },
+      ],
+      voice: [
+        { value: 'active', label: 'Active' },
+        { value: 'passive', label: 'Passive' },
+      ],
+    },
+    defaults: {
+      tense: 'present',
+      voice: 'active',
+    },
+    sentenceModel: {
+      roles: {
+        agent: { label: 'the teacher', number: 'singular' },
+        patient: { label: 'the report', number: 'singular' },
+      },
+      verb: { base: 'write', past: 'wrote', pastParticiple: 'written' },
+      punctuation: '.',
+    },
+  },
 ];
 
 export const sentenceTransformerProblem = sentenceTransformerProblems[0];

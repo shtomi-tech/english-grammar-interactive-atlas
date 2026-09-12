@@ -1,4 +1,4 @@
-import { getGrammarStateMode, SUPPORTED_MODALS, SUPPORTED_TENSES } from './grammar-state.js';
+import { getGrammarStateMode, SUPPORTED_MODALS, SUPPORTED_TENSES, SUPPORTED_VOICES } from './grammar-state.js';
 
 const defaultSentenceModel = {
   subjects: {
@@ -15,11 +15,56 @@ function presentForm(verb, number) {
   return number === 'singular' ? `${verb.base}s` : verb.base;
 }
 
+function sentenceCase(label) {
+  return label.charAt(0).toUpperCase() + label.slice(1);
+}
+
+function getBeForm(tense, number) {
+  if (tense === 'present') return number === 'singular' ? 'is' : 'are';
+  return number === 'singular' ? 'was' : 'were';
+}
+
+function generateRoleBasedSentence({ tense, modal, voice, negative }, model) {
+  if (modal !== undefined || !SUPPORTED_VOICES.includes(voice) || !SUPPORTED_TENSES.has(tense) || negative !== false) {
+    throw new Error('Unsupported sentence state');
+  }
+  const agent = model.roles?.agent;
+  const patient = model.roles?.patient;
+  const verb = model.verb;
+  const punctuation = model.punctuation ?? '.';
+  if (
+    !agent || !patient || !verb ||
+    typeof agent.label !== 'string' || !agent.label.trim() ||
+    typeof patient.label !== 'string' || !patient.label.trim() ||
+    !['singular', 'plural'].includes(agent.number) ||
+    !['singular', 'plural'].includes(patient.number) ||
+    typeof verb.base !== 'string' || !verb.base.trim() ||
+    typeof verb.past !== 'string' || !verb.past.trim() ||
+    typeof verb.pastParticiple !== 'string' || !verb.pastParticiple.trim() ||
+    typeof punctuation !== 'string'
+  ) {
+    throw new Error('Unsupported sentence state');
+  }
+
+  const activeVerb = tense === 'present'
+    ? presentForm(verb, agent.number)
+    : verb.past;
+  if (voice === 'active') {
+    return `${sentenceCase(agent.label)} ${activeVerb} ${patient.label}${punctuation}`;
+  }
+  return `${sentenceCase(patient.label)} ${getBeForm(tense, patient.number)} ${verb.pastParticiple} by ${agent.label}${punctuation}`;
+}
+
 export function generateSentence(
-  { subject = 'he', tense, modal, negative = false } = {},
+  { subject = 'he', tense, modal, voice, negative = false } = {},
   sentenceModel = defaultSentenceModel,
 ) {
   const model = sentenceModel ?? defaultSentenceModel;
+  if (model.roles) {
+    const resolvedTense = tense ?? (voice === undefined ? 'present' : undefined);
+    return generateRoleBasedSentence({ tense: resolvedTense, modal, voice, negative }, model);
+  }
+  if (voice !== undefined) throw new Error('Unsupported sentence state');
   const subjectData = model.subjects?.[subject];
   const verb = model.verb;
 

@@ -1,5 +1,6 @@
 export const SUPPORTED_TENSES = new Set(['present', 'past']);
 export const SUPPORTED_MODALS = new Set(['can', 'could', 'should', 'must']);
+export const SUPPORTED_VOICES = Object.freeze(['active', 'passive']);
 
 export function getGrammarStateMode(source = {}) {
   const hasTense = source?.tense !== undefined;

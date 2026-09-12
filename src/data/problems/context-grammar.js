@@ -238,6 +238,64 @@ export const contextGrammarProblems = [
     ],
     explanation: 'should や could は助言・提案、must は規則にもとづく強い義務を表します。場面と話し手の意図を合わせて選びます。',
   },
+  {
+    id: 'CG-005',
+    type: 'context-grammar',
+    prompt: '何に焦点を置くかに合う能動態・受動態を選び、会話を進めてください。',
+    scenario: {
+      title: 'Choosing the focus',
+      setting: '出来事の対象に焦点を置くか、動作主を前面に出すかを考える場面です。',
+      learnerRole: 'Reporter',
+      goal: '動作主が不明なときや対象に焦点を置きたいときに、受動態を選ぶ。',
+    },
+    steps: [
+      {
+        id: 'cg005-step-1',
+        speaker: 'Editor',
+        line: 'Who broke the window last night?',
+        instruction: '誰がしたか分からない出来事として、窓に焦点を置いて報告してください。',
+        choices: [
+          {
+            id: 'cg005-choice-1a',
+            text: 'The window was broken last night.',
+            reply: 'Good. The report focuses on the window, and the agent is unknown.',
+            grammarLabel: 'Passive when the agent is unknown',
+            explanation: '今回のreporting goalでは、誰がしたかを示さず、対象のwindowに焦点を置くため受動態が合います。',
+          },
+          {
+            id: 'cg005-choice-1b',
+            text: 'Someone broke the window last night.',
+            grammarLabel: 'Active with an unspecified agent',
+            explanation: 'この文も文法的ですが、今回は動作主を前面に出さず、対象に焦点を置くことが目的です。',
+          },
+        ],
+        acceptedChoiceIds: ['cg005-choice-1a'],
+      },
+      {
+        id: 'cg005-step-2',
+        speaker: 'Editor',
+        line: 'The school festival was a success. Who organized it?',
+        instruction: '対象を主語にしつつ、必要な動作主をby句で示してください。',
+        choices: [
+          {
+            id: 'cg005-choice-2a',
+            text: 'The school festival was organized by the students.',
+            reply: 'Exactly. The festival stays in focus, while the students are added as the agent.',
+            grammarLabel: 'Passive with a by-phrase',
+            explanation: '受動態では対象のschool festivalを主語に置き、by the studentsで動作主を補足できます。',
+          },
+          {
+            id: 'cg005-choice-2b',
+            text: 'The students organized the school festival.',
+            grammarLabel: 'Active with the agent as subject',
+            explanation: 'この文も文法的ですが、今回は対象のschool festivalを主語として焦点に置く指定です。',
+          },
+        ],
+        acceptedChoiceIds: ['cg005-choice-2a'],
+      },
+    ],
+    explanation: '受動態は単なる変形ではなく、何を主語として焦点に置くか、動作主を示す必要があるかに応じて選びます。',
+  },
 ];
 
 export const contextGrammarProblem = contextGrammarProblems[0];

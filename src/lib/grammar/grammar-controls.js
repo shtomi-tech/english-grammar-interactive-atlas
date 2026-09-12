@@ -2,6 +2,7 @@ export const CONTROL_LABELS = Object.freeze({
   subject: 'Subject',
   tense: 'Tense',
   modal: 'Modal',
+  voice: 'Voice',
   negative: 'Polarity',
 });
 

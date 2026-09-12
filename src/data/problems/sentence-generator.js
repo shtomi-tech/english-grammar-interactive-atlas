@@ -43,6 +43,26 @@ const modalControls = {
   ],
 };
 
+const voiceControls = {
+  tense: [
+    { value: 'present', label: 'Present' },
+    { value: 'past', label: 'Past' },
+  ],
+  voice: [
+    { value: 'active', label: 'Active' },
+    { value: 'passive', label: 'Passive' },
+  ],
+};
+
+const voiceSentenceModel = {
+  roles: {
+    agent: { label: 'the teacher', number: 'singular' },
+    patient: { label: 'the report', number: 'singular' },
+  },
+  verb: { base: 'write', past: 'wrote', pastParticiple: 'written' },
+  punctuation: '.',
+};
+
 export const sentenceGeneratorProblems = [
   {
     id: 'SG-001',
@@ -98,6 +118,19 @@ export const sentenceGeneratorProblems = [
     targetStates: [{ subject: 'they', modal: 'should', negative: false }],
     sentenceModel: structuredClone(modalSentenceModel),
     explanation: '助動詞 should の後ろには、主語が They でも動詞の原形 play を置きます。',
+  },
+  {
+    id: 'SG-005',
+    type: 'sentence-generator',
+    prompt: '目標に合う能動態または受動態の英文を組み立て、Generateで確かめてください。',
+    goal: {
+      title: 'Past passive',
+      description: '過去の出来事を、the report を主語にした受動態で表す。',
+    },
+    controls: structuredClone(voiceControls),
+    targetStates: [{ tense: 'past', voice: 'passive' }],
+    sentenceModel: structuredClone(voiceSentenceModel),
+    explanation: '受動態では動作を受ける対象を主語にし、be動詞の過去形 was の後ろに過去分詞 written を置きます。',
   },
 ];
 

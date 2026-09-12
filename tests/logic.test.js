@@ -22,7 +22,7 @@ import { checkClassification } from '../src/lib/grammar/classification.js';
 import { checkWordOrder, shuffleWordIds } from '../src/lib/grammar/word-order.js';
 import { checkTokenSelection } from '../src/lib/grammar/parts.js';
 import { generateSentence } from '../src/lib/grammar/generateSentence.js';
-import { getGrammarStateMode, SUPPORTED_MODALS, SUPPORTED_TENSES } from '../src/lib/grammar/grammar-state.js';
+import { getGrammarStateMode, SUPPORTED_MODALS, SUPPORTED_TENSES, SUPPORTED_VOICES } from '../src/lib/grammar/grammar-state.js';
 import { getControlLabel } from '../src/lib/grammar/grammar-controls.js';
 import { buildPatternSlots, getExploredRoles, hasExploredAllChunks } from '../src/lib/grammar/sentence-pattern.js';
 import { getRelatedChunkIds, getRelationsForChunk, hasExploredAllRelations } from '../src/lib/grammar/modifier-relations.js';
@@ -78,7 +78,7 @@ assert.deepEqual(getAtlasStats(interactions, demoRegistry), {
   workingDemos: 10,
 });
 
-assert.equal(problems.length, 35);
+assert.equal(problems.length, 40);
 assert.deepEqual(
   Object.fromEntries(Object.entries({
     'word-order': wordOrderProblems,
@@ -92,7 +92,7 @@ assert.deepEqual(
     'context-grammar': contextGrammarProblems,
     'sentence-generator': sentenceGeneratorProblems,
   }).map(([type, entries]) => [type, entries.length])),
-  { 'word-order': 5, 'mark-parts': 3, 'grammar-classifier': 3, 'sentence-transformer': 2, 'sentence-pattern-diagram': 3, 'modifier-connection-viewer': 3, 'sentence-comparison': 4, 'error-corrector': 4, 'context-grammar': 4, 'sentence-generator': 4 },
+  { 'word-order': 6, 'mark-parts': 3, 'grammar-classifier': 3, 'sentence-transformer': 3, 'sentence-pattern-diagram': 3, 'modifier-connection-viewer': 3, 'sentence-comparison': 4, 'error-corrector': 5, 'context-grammar': 5, 'sentence-generator': 5 },
 );
 assert.equal(problemRegistry['WO-001'], wordOrderProblems[0]);
 assert.equal(problemRegistry['SPD-001'], sentencePatternDiagramProblems[0]);
@@ -107,6 +107,11 @@ assert.equal(problemRegistry['EC-004'], errorCorrectorProblems[3]);
 assert.equal(problemRegistry['SC-004'], sentenceComparisonProblems[3]);
 assert.equal(problemRegistry['SG-004'], sentenceGeneratorProblems[3]);
 assert.equal(problemRegistry['CG-004'], contextGrammarProblems[3]);
+assert.equal(problemRegistry['ST-003'], sentenceTransformerProblems[2]);
+assert.equal(problemRegistry['WO-006'], wordOrderProblems[5]);
+assert.equal(problemRegistry['EC-005'], errorCorrectorProblems[4]);
+assert.equal(problemRegistry['SG-005'], sentenceGeneratorProblems[4]);
+assert.equal(problemRegistry['CG-005'], contextGrammarProblems[4]);
 assert.equal(validateProblems(problems).valid, true);
 assert.equal(validateDemoRegistry(demoRegistry, problemRegistry).valid, true);
 for (const demo of Object.values(demoRegistry)) {
@@ -238,13 +243,15 @@ const lessonValidation = validateLessons(lessons, {
   problemTypes: new Set(Object.keys(demoRegistry)),
 });
 assert.equal(lessonValidation.valid, true, lessonValidation.errors.join('; '));
-assert.equal(lessons.length, 3);
+assert.equal(lessons.length, 4);
 assert.equal(getLessonById('LESSON-002').slug, 'structural-reading');
 assert.equal(getLessonBySlug('structural-reading').id, 'LESSON-002');
 assert.equal(getLessonBySlug('structural-reading').steps.length, 6);
 assert.equal(lessons[0].steps.length, 6);
 assert.equal(getLessonById('LESSON-003').slug, 'modal-verbs');
 assert.equal(getLessonBySlug('modal-verbs').steps.length, 6);
+assert.equal(getLessonById('LESSON-004').slug, 'passive-voice');
+assert.equal(getLessonBySlug('passive-voice').steps.length, 6);
 
 assert.equal(checkWordOrder(['i', 'play', 'tennis'], [['i', 'play', 'tennis']]), true);
 assert.equal(checkWordOrder(['play', 'i', 'tennis'], [['i', 'play', 'tennis']]), false);
@@ -391,9 +398,44 @@ assert.equal(getGrammarStateMode({ subject: 'he', modal: 'can' }), 'modal');
 assert.equal(getGrammarStateMode({ tense: 'present', modal: 'can' }), 'invalid');
 assert.equal(SUPPORTED_TENSES.has('past'), true);
 assert.equal(SUPPORTED_MODALS.has('could'), true);
+assert.equal(SUPPORTED_VOICES.includes('passive'), true);
 assert.equal(getControlLabel('modal'), 'Modal');
+assert.equal(getControlLabel('voice'), 'Voice');
 assert.throws(() => generateSentence({ subject: 'he', modal: 'might', negative: false }), /Unsupported sentence state/);
 assert.throws(() => generateSentence({ subject: 'he', tense: 'past', modal: 'can', negative: false }), /Unsupported sentence state/);
+
+const passiveSentenceModel = sentenceTransformerProblems[2].sentenceModel;
+assert.equal(
+  generateSentence({ tense: 'present', voice: 'active' }, passiveSentenceModel),
+  'The teacher writes the report.',
+);
+assert.equal(
+  generateSentence({ tense: 'past', voice: 'active' }, passiveSentenceModel),
+  'The teacher wrote the report.',
+);
+assert.equal(
+  generateSentence({ tense: 'present', voice: 'passive' }, passiveSentenceModel),
+  'The report is written by the teacher.',
+);
+assert.equal(
+  generateSentence({ tense: 'past', voice: 'passive' }, passiveSentenceModel),
+  'The report was written by the teacher.',
+);
+const pluralPatientModel = structuredClone(passiveSentenceModel);
+pluralPatientModel.roles.patient.label = 'the reports';
+pluralPatientModel.roles.patient.number = 'plural';
+assert.equal(
+  generateSentence({ tense: 'present', voice: 'passive' }, pluralPatientModel),
+  'The reports are written by the teacher.',
+);
+assert.equal(
+  generateSentence({ tense: 'past', voice: 'passive' }, pluralPatientModel),
+  'The reports were written by the teacher.',
+);
+assert.throws(() => generateSentence({ tense: 'present', voice: 'future' }, passiveSentenceModel), /Unsupported sentence state/);
+assert.throws(() => generateSentence({ tense: 'present', voice: 'passive', modal: 'can' }, passiveSentenceModel), /Unsupported sentence state/);
+assert.throws(() => generateSentence({ tense: 'present', voice: 'passive', negative: true }, passiveSentenceModel), /Unsupported sentence state/);
+assert.throws(() => generateSentence({ tense: 'present', voice: 'passive' }, sentenceTransformerProblem.sentenceModel), /Unsupported sentence state/);
 
 const invalidWordId = structuredClone(problems);
 invalidWordId[0].words[1].id = invalidWordId[0].words[0].id;
@@ -529,6 +571,49 @@ modalMixedControls[1].controls.tense = [
   { value: 'past', label: 'Past' },
 ];
 assert.equal(validateProblems(modalMixedControls).valid, false);
+const controlsWithoutGrammarMode = structuredClone(sentenceTransformerProblems[0]);
+delete controlsWithoutGrammarMode.controls.tense;
+delete controlsWithoutGrammarMode.defaults.tense;
+assert.equal(validateProblems([controlsWithoutGrammarMode]).valid, false);
+const generatorControlsWithoutGrammarMode = structuredClone(sentenceGeneratorProblems[0]);
+delete generatorControlsWithoutGrammarMode.controls.tense;
+delete generatorControlsWithoutGrammarMode.targetStates[0].tense;
+assert.equal(validateProblems([generatorControlsWithoutGrammarMode]).valid, false);
+assert.equal(validateProblems([sentenceTransformerProblems[2]]).valid, true);
+assert.equal(validateProblems([sentenceGeneratorProblems[4]]).valid, true);
+const passiveWithoutTense = structuredClone(sentenceTransformerProblems[2]);
+delete passiveWithoutTense.controls.tense;
+delete passiveWithoutTense.defaults.tense;
+assert.equal(validateProblems([passiveWithoutTense]).valid, false);
+const passiveWithNegative = structuredClone(sentenceTransformerProblems[2]);
+passiveWithNegative.controls.negative = [
+  { value: false, label: 'Affirmative' },
+  { value: true, label: 'Negative' },
+];
+passiveWithNegative.defaults.negative = false;
+assert.equal(validateProblems([passiveWithNegative]).valid, false);
+const passiveWithModal = structuredClone(sentenceTransformerProblems[2]);
+passiveWithModal.controls.modal = [
+  { value: 'can', label: 'Can' },
+  { value: 'must', label: 'Must' },
+];
+passiveWithModal.defaults.modal = 'can';
+assert.equal(validateProblems([passiveWithModal]).valid, false);
+const passiveUnknownVoice = structuredClone(sentenceTransformerProblems[2]);
+passiveUnknownVoice.controls.voice[0].value = 'future';
+assert.equal(validateProblems([passiveUnknownVoice]).valid, false);
+const passiveMissingAgent = structuredClone(sentenceTransformerProblems[2]);
+delete passiveMissingAgent.sentenceModel.roles.agent;
+assert.equal(validateProblems([passiveMissingAgent]).valid, false);
+const passiveMissingPatient = structuredClone(sentenceTransformerProblems[2]);
+delete passiveMissingPatient.sentenceModel.roles.patient;
+assert.equal(validateProblems([passiveMissingPatient]).valid, false);
+const passiveInvalidRoleNumber = structuredClone(sentenceTransformerProblems[2]);
+passiveInvalidRoleNumber.sentenceModel.roles.patient.number = 'dual';
+assert.equal(validateProblems([passiveInvalidRoleNumber]).valid, false);
+const passiveMissingParticiple = structuredClone(sentenceTransformerProblems[2]);
+delete passiveMissingParticiple.sentenceModel.verb.pastParticiple;
+assert.equal(validateProblems([passiveMissingParticiple]).valid, false);
 const errorTokenCorrectionMismatch = structuredClone(errorCorrectorProblems);
 errorTokenCorrectionMismatch[0].tokens[1].correctionId = 'missing-correction';
 assert.equal(validateProblems(errorTokenCorrectionMismatch).valid, false);

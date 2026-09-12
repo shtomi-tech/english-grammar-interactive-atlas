@@ -155,6 +155,58 @@ export const lessons = [
       },
     ],
   },
+  {
+    id: 'LESSON-004',
+    slug: 'passive-voice',
+    label: 'Lesson 04',
+    title: '能動態と受動態で視点を変える',
+    description: '同じ出来事でも、何を主語として見るかによって英文の形が変わることを確認します。',
+    learningGoal: '能動態と受動態の形の違いを理解し、動作主と動作を受ける対象のどちらを主語として焦点化するかに応じて使い分ける。',
+    steps: [
+      {
+        id: 'LESSON-004-STEP-01',
+        interactionType: 'sentence-comparison',
+        problemId: 'SC-003',
+        title: '能動態と受動態を比べる',
+        instruction: '同じ出来事を表す2つの文を比べ、主語と動詞の形がどう変わるかを確認します。',
+      },
+      {
+        id: 'LESSON-004-STEP-02',
+        interactionType: 'sentence-transformer',
+        problemId: 'ST-003',
+        title: 'Voiceを切り替えて形を見る',
+        instruction: 'Active と Passive を切り替え、agent と patient の文中での役割と動詞の形を観察します。',
+      },
+      {
+        id: 'LESSON-004-STEP-03',
+        interactionType: 'word-order',
+        problemId: 'WO-006',
+        title: '受動態の語順を組み立てる',
+        instruction: 'Subject + be + Past Participle の中心語順に、必要なby句を続けて文を完成させます。',
+      },
+      {
+        id: 'LESSON-004-STEP-04',
+        interactionType: 'error-corrector',
+        problemId: 'EC-005',
+        title: '過去分詞の誤りを直す',
+        instruction: 'be動詞の後ろに過去形ではなく過去分詞を置く規則を、誤文の訂正で確認します。',
+      },
+      {
+        id: 'LESSON-004-STEP-05',
+        interactionType: 'sentence-generator',
+        problemId: 'SG-005',
+        title: '目標に合う受動態を生成する',
+        instruction: '対象を主語にした過去の受動態を目標として選び、英文を生成して確かめます。',
+      },
+      {
+        id: 'LESSON-004-STEP-06',
+        interactionType: 'context-grammar',
+        problemId: 'CG-005',
+        title: '場面に合う視点を選ぶ',
+        instruction: '動作主が不明な場面や対象に焦点を置く場面で、受動態が合う理由を会話の中で確認します。',
+      },
+    ],
+  },
 ];
 
 export const lessonRegistry = Object.fromEntries(lessons.map((lesson) => [lesson.id, lesson]));
