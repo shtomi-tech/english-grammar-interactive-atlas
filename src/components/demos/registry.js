@@ -3,6 +3,7 @@ import { mountMarkTheParts } from './markTheParts.js';
 import { mountSentenceTransformer } from './sentenceTransformer.js';
 import { mountGrammarClassifier } from './grammarClassifier.js';
 import { mountSentencePatternDiagram } from './sentencePatternDiagram.js';
+import { mountModifierConnectionViewer } from './modifierConnectionViewer.js';
 import { getProblemById } from '../../data/problems/index.js';
 
 export const demoRegistry = {
@@ -25,6 +26,10 @@ export const demoRegistry = {
   'sentence-pattern-diagram': {
     mount: mountSentencePatternDiagram,
     demoProblemId: 'SPD-001',
+  },
+  'modifier-connection-viewer': {
+    mount: mountModifierConnectionViewer,
+    demoProblemId: 'MCV-001',
   },
 };
 

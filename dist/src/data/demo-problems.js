@@ -13,3 +13,7 @@ export {
   sentencePatternDiagramProblem,
   sentencePatternDiagramProblems,
 } from './problems/sentence-pattern-diagram.js';
+export {
+  modifierConnectionViewerProblem,
+  modifierConnectionViewerProblems,
+} from './problems/modifier-connection-viewer.js';

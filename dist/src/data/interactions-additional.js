@@ -357,7 +357,8 @@ export const additionalInteractions = [
     reusability: 'S',
     sourceName: 'Original catalog concept',
     reusePolicy: 'idea-only',
-    notes: '関係データは文章表示と独立した配列で持つ。',
+    demoType: 'modifier-connection-viewer',
+    notes: '関係データは文章表示と独立した配列で持ち、modifierIdとtargetIdで対応づける。',
   },
   {
     ...originalSourceMetadata,

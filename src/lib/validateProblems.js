@@ -1,4 +1,4 @@
-const problemTypes = new Set(['word-order', 'mark-parts', 'grammar-classifier', 'sentence-transformer', 'sentence-pattern-diagram']);
+const problemTypes = new Set(['word-order', 'mark-parts', 'grammar-classifier', 'sentence-transformer', 'sentence-pattern-diagram', 'modifier-connection-viewer']);
 const transformerControlNames = new Set(['subject', 'tense', 'negative']);
 const supportedTenses = new Set(['present', 'past']);
 
@@ -220,6 +220,39 @@ function validateSentencePatternDiagram(problem, label, errors) {
   }
 }
 
+function validateModifierConnectionViewer(problem, label, errors) {
+  if (!hasText(problem.prompt) || !hasText(problem.sentence) || !hasText(problem.explanation)) {
+    errors.push(`${label}.prompt, sentence, and explanation are required`);
+  }
+  if (!Array.isArray(problem.chunks) || problem.chunks.length === 0) {
+    errors.push(`${label}.chunks must contain at least one chunk`);
+  } else {
+    duplicateIds(problem.chunks, `${label}.chunks`, errors);
+    problem.chunks.forEach((chunk, index) => {
+      if (!isRecord(chunk) || !hasText(chunk.id) || !hasText(chunk.text) || !hasText(chunk.kind)) {
+        errors.push(`${label}.chunks[${index}] must have id, text, and kind`);
+      }
+    });
+  }
+
+  if (!Array.isArray(problem.relations) || problem.relations.length === 0) {
+    errors.push(`${label}.relations must contain at least one relation`);
+    return;
+  }
+  duplicateIds(problem.relations, `${label}.relations`, errors);
+  const chunkById = new Map((problem.chunks ?? []).map((chunk) => [chunk?.id, chunk]));
+  problem.relations.forEach((relation, index) => {
+    if (!isRecord(relation) || !hasText(relation.id) || !hasText(relation.modifierId) || !hasText(relation.targetId) || !hasText(relation.relationType) || !hasText(relation.label) || !hasText(relation.explanation)) {
+      errors.push(`${label}.relations[${index}] must have id, modifierId, targetId, relationType, label, and explanation`);
+      return;
+    }
+    if (!chunkById.has(relation.modifierId)) errors.push(`${label}.relations[${index}] references an unknown modifierId: ${relation.modifierId}`);
+    if (!chunkById.has(relation.targetId)) errors.push(`${label}.relations[${index}] references an unknown targetId: ${relation.targetId}`);
+    if (relation.modifierId === relation.targetId) errors.push(`${label}.relations[${index}] modifierId and targetId must differ`);
+    if (relation.relationType !== 'modifies') errors.push(`${label}.relations[${index}].relationType is unsupported: ${relation.relationType}`);
+  });
+}
+
 export function validateProblems(entries, { expectedTypes = problemTypes } = {}) {
   const errors = [];
   if (!Array.isArray(entries)) return { valid: false, errors: ['Problems must be an array'] };
@@ -240,6 +273,7 @@ export function validateProblems(entries, { expectedTypes = problemTypes } = {})
     if (problem.type === 'grammar-classifier') validateClassifier(problem, label, errors);
     if (problem.type === 'sentence-transformer') validateTransformer(problem, label, errors);
     if (problem.type === 'sentence-pattern-diagram') validateSentencePatternDiagram(problem, label, errors);
+    if (problem.type === 'modifier-connection-viewer') validateModifierConnectionViewer(problem, label, errors);
   });
 
   return { valid: errors.length === 0, errors };

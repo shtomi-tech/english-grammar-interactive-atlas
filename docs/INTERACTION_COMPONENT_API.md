@@ -14,7 +14,7 @@ Demo / Lesson
 
 ## Mount signature
 
-5つのComponentは次の形を実装します。
+6つのComponentは次の形を実装します。
 
 ```js
 const cleanup = mountInteraction(root, problem, {
@@ -31,6 +31,7 @@ const cleanup = mountInteraction(root, problem, {
 | Grammar Classifier | `grammar-classifier` | `sentence`, `categories`, `items`, `explanation` |
 | Sentence Transformer | `sentence-transformer` | `controls`, `defaults`, `sentenceModel` |
 | Sentence Pattern Diagram | `sentence-pattern-diagram` | `prompt`, `sentence`, `chunks`, `pattern`, `explanation` |
+| Modifier Connection Viewer | `modifier-connection-viewer` | `prompt`, `sentence`, `chunks`, `relations`, `explanation` |
 
 ## Options and onComplete
 
@@ -86,3 +87,9 @@ Word Orderの正答は `acceptedAnswers` を正本とし、1問に1つ以上のI
 `mountSentencePatternDiagram(root, problem, options)` は、Problem Dataの `chunks` と `pattern` から文型図を生成します。各chunkには一意な `id`、表示用の `text`、文中の役割記号 `role`、`label`、`explanation` を持たせます。`pattern` はchunksと同じ順序・件数で役割記号を並べます。SVOOのように同じroleが複数ある場合も、対応づけにはroleではなくchunk IDを使います。
 
 英文側のchunkと文型図のnodeは、どちらを押しても同じchunkが選択されます。選択内容は `aria-pressed` と文字の説明で示し、全chunkを確認した時点で必要なら `onComplete({ correct: true, problemId, exploredRoles })` を一度だけ呼びます。Resetは選択・確認済み状態・説明を初期化します。
+
+## Modifier Connection Viewer
+
+`mountModifierConnectionViewer(root, problem, options)` は、`chunks` と `relations` から修飾語と被修飾語の接続を生成します。relationは一意な `id`、修飾語側の `modifierId`、対象側の `targetId`、`relationType`、`label`、`explanation` を持ちます。chunkの `id` で参照するため、同じ文に複数の修飾関係を置けます。
+
+英文chunkまたは関係カードのModifier/Targetを選ぶと、関係する要素と説明が文字でも示されます。関係を一度以上確認すると `onComplete({ correct: true, problemId, exploredRelationIds })` を一度だけ呼びます。正誤問題ではなく探索型のDemoとして扱い、Resetで選択・探索済み関係・完了状態を初期化します。
