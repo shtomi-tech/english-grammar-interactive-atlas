@@ -335,7 +335,8 @@ export const additionalInteractions = [
     reusability: 'S',
     sourceName: 'Original catalog concept',
     reusePolicy: 'idea-only',
-    notes: 'Grammar Classifierのroleデータから図を生成する候補。',
+    demoType: 'sentence-pattern-diagram',
+    notes: 'Grammar Classifierと同じ役割語彙を、Problem Dataから配置図へ生成する。',
   },
   {
     ...originalSourceMetadata,

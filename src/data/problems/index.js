@@ -1,6 +1,7 @@
 import { grammarClassifierProblems } from './grammar-classifier.js';
 import { markPartsProblems } from './mark-parts.js';
 import { sentenceTransformerProblems } from './sentence-transformer.js';
+import { sentencePatternDiagramProblems } from './sentence-pattern-diagram.js';
 import { wordOrderProblems } from './word-order.js';
 
 export const problemSets = {
@@ -8,6 +9,7 @@ export const problemSets = {
   'mark-parts': markPartsProblems,
   'grammar-classifier': grammarClassifierProblems,
   'sentence-transformer': sentenceTransformerProblems,
+  'sentence-pattern-diagram': sentencePatternDiagramProblems,
 };
 
 export const problems = Object.values(problemSets).flat();
@@ -25,5 +27,6 @@ export {
   grammarClassifierProblems,
   markPartsProblems,
   sentenceTransformerProblems,
+  sentencePatternDiagramProblems,
   wordOrderProblems,
 };

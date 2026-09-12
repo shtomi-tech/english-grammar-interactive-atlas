@@ -13,6 +13,7 @@ const files = [
   'src/data/problems/mark-parts.js',
   'src/data/problems/grammar-classifier.js',
   'src/data/problems/sentence-transformer.js',
+  'src/data/problems/sentence-pattern-diagram.js',
   'src/data/problems/index.js',
   'src/data/lessons.js',
   'src/data/research/schema.js',
@@ -30,6 +31,7 @@ const files = [
   'src/lib/grammar/parts.js',
   'src/lib/grammar/classification.js',
   'src/lib/grammar/generateSentence.js',
+  'src/lib/grammar/sentence-pattern.js',
   'src/webmcp.js',
   'src/components/atlas/interactionCard.js',
   'src/components/atlas/filterBar.js',
@@ -38,6 +40,7 @@ const files = [
   'src/components/demos/markTheParts.js',
   'src/components/demos/sentenceTransformer.js',
   'src/components/demos/grammarClassifier.js',
+  'src/components/demos/sentencePatternDiagram.js',
   'src/components/demos/registry.js',
 ];
 

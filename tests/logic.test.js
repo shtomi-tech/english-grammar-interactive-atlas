@@ -5,6 +5,7 @@ import { grammarClassifierProblems } from '../src/data/problems/grammar-classifi
 import { markPartsProblems } from '../src/data/problems/mark-parts.js';
 import { problemRegistry, problems } from '../src/data/problems/index.js';
 import { sentenceTransformerProblem } from '../src/data/problems/sentence-transformer.js';
+import { sentencePatternDiagramProblems } from '../src/data/problems/sentence-pattern-diagram.js';
 import { wordOrderProblems } from '../src/data/problems/word-order.js';
 import { filterInteractions, getAtlasStats, searchInteractions } from '../src/lib/atlas.js';
 import { grammarClassifierProblem } from '../src/data/demo-problems.js';
@@ -16,6 +17,7 @@ import { checkClassification } from '../src/lib/grammar/classification.js';
 import { checkWordOrder, shuffleWordIds } from '../src/lib/grammar/word-order.js';
 import { checkTokenSelection } from '../src/lib/grammar/parts.js';
 import { generateSentence } from '../src/lib/grammar/generateSentence.js';
+import { buildPatternSlots, getExploredRoles, hasExploredAllChunks } from '../src/lib/grammar/sentence-pattern.js';
 import {
   researchReferences,
   researchReferenceRegistry,
@@ -32,8 +34,8 @@ assert.equal(filterInteractions(interactions, 'transform').length, 4);
 assert.equal(filterInteractions(interactions, 'all', { reusability: 'S' }).length, 29);
 assert.equal(filterInteractions(interactions, 'all', { reusability: 'A' }).length, 11);
 assert.equal(filterInteractions(interactions, 'all', { reusability: 'B' }).length, 0);
-assert.equal(filterInteractions(interactions, 'all', { demo: 'available' }).length, 4);
-assert.equal(filterInteractions(interactions, 'all', { demo: 'planned' }).length, 36);
+assert.equal(filterInteractions(interactions, 'all', { demo: 'available' }).length, 5);
+assert.equal(filterInteractions(interactions, 'all', { demo: 'planned' }).length, 35);
 assert.equal(searchInteractions(interactions, 'relative').length, 2);
 assert.equal(searchInteractions(interactions, '  RELATIVE  ').length, 2);
 assert.equal(searchInteractions(interactions, 'conditional').length, 1);
@@ -44,20 +46,22 @@ assert.equal(
 assert.deepEqual(getAtlasStats(interactions, demoRegistry), {
   catalogEntries: 40,
   interactionFamilies: 10,
-  workingDemos: 4,
+  workingDemos: 5,
 });
 
-assert.equal(problems.length, 11);
+assert.equal(problems.length, 14);
 assert.deepEqual(
   Object.fromEntries(Object.entries({
     'word-order': wordOrderProblems,
     'mark-parts': markPartsProblems,
     'grammar-classifier': grammarClassifierProblems,
     'sentence-transformer': [sentenceTransformerProblem],
+    'sentence-pattern-diagram': sentencePatternDiagramProblems,
   }).map(([type, entries]) => [type, entries.length])),
-  { 'word-order': 4, 'mark-parts': 3, 'grammar-classifier': 3, 'sentence-transformer': 1 },
+  { 'word-order': 4, 'mark-parts': 3, 'grammar-classifier': 3, 'sentence-transformer': 1, 'sentence-pattern-diagram': 3 },
 );
 assert.equal(problemRegistry['WO-001'], wordOrderProblems[0]);
+assert.equal(problemRegistry['SPD-001'], sentencePatternDiagramProblems[0]);
 assert.equal(validateProblems(problems).valid, true);
 assert.equal(validateDemoRegistry(demoRegistry, problemRegistry).valid, true);
 for (const demo of Object.values(demoRegistry)) {
@@ -65,7 +69,21 @@ for (const demo of Object.values(demoRegistry)) {
   assert.equal(problemRegistry[demo.demoProblemId].type, Object.keys(demoRegistry).find((type) => demoRegistry[type] === demo));
 }
 assert.equal(getDemoProblem('word-order', 'WO-002').id, 'WO-002');
+assert.equal(getDemoProblem('sentence-pattern-diagram', 'SPD-003').id, 'SPD-003');
 assert.throws(() => getDemoProblem('word-order', 'MP-001'), /type mismatch/);
+
+const sentencePatternProblem = sentencePatternDiagramProblems[0];
+assert.deepEqual(buildPatternSlots(sentencePatternProblem.chunks, sentencePatternProblem.pattern), [
+  { chunkId: 'subject', role: 'S' },
+  { chunkId: 'verb', role: 'V' },
+  { chunkId: 'object', role: 'O' },
+]);
+assert.equal(hasExploredAllChunks(sentencePatternProblem.chunks, new Set(['subject', 'verb'])), false);
+assert.equal(hasExploredAllChunks(sentencePatternProblem.chunks, new Set(['subject', 'verb', 'object'])), true);
+assert.deepEqual(
+  getExploredRoles(sentencePatternDiagramProblems[2].chunks, new Set(['subject', 'indirect-object', 'direct-object'])),
+  ['S', 'O'],
+);
 
 assert.equal(researchReferences.length, 7);
 assert.equal(new Set(researchReferences.map((reference) => reference.id)).size, researchReferences.length);
@@ -223,6 +241,15 @@ assert.equal(validateProblems(invalidHintsEmpty).valid, false);
 const invalidHintsBlank = structuredClone(wordOrderProblems);
 invalidHintsBlank[3].hints = [''];
 assert.equal(validateProblems(invalidHintsBlank).valid, false);
+const invalidDuplicateChunkId = structuredClone(sentencePatternDiagramProblems);
+invalidDuplicateChunkId[0].chunks[1].id = invalidDuplicateChunkId[0].chunks[0].id;
+assert.equal(validateProblems(invalidDuplicateChunkId).valid, false);
+const invalidPatternRole = structuredClone(sentencePatternDiagramProblems);
+invalidPatternRole[0].pattern[1] = 'X';
+assert.equal(validateProblems(invalidPatternRole).valid, false);
+const emptyPatternChunks = structuredClone(sentencePatternDiagramProblems);
+emptyPatternChunks[0].chunks = [];
+assert.equal(validateProblems(emptyPatternChunks).valid, false);
 const unknownTokenAnswer = structuredClone(problems);
 unknownTokenAnswer.find((problem) => problem.id === 'MP-001').answer = ['missing-token'];
 assert.equal(validateProblems(unknownTokenAnswer).valid, false);

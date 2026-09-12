@@ -38,11 +38,13 @@
 
 Demoを作る場合、英文・正答・説明などの教材固有データは `src/data/problems/` の機能別ファイルへ置きます。Demoコンポーネントに問題文を直接書きません。分類Demoなら、`categories` と `items` の `answer` をデータ側に持たせ、分類軸を差し替えられる形にします。互換用の `src/data/demo-problems.js` は代表Problemの再エクスポートだけを行います。
 
-Problemは `type` と安定した `id` を持ち、`src/data/problems/index.js` のRegistryから `getProblemById('WO-001')` のように取得できます。現在のProblem数は Word Order 4、Mark the Parts 3、Grammar Classifier 3、Sentence Transformer 1 です。Word Orderの正答は `acceptedAnswers`（許容順序の配列）を正本とし、任意で段階的な `hints` を指定できます。複数正答の判定は `src/lib/grammar/word-order.js` に置き、UIへ重複実装しません。
+Problemは `type` と安定した `id` を持ち、`src/data/problems/index.js` のRegistryから `getProblemById('WO-001')` のように取得できます。現在のProblem数は Word Order 4、Mark the Parts 3、Grammar Classifier 3、Sentence Transformer 1、Sentence Pattern Diagram 3 です。Word Orderの正答は `acceptedAnswers`（許容順序の配列）を正本とし、任意で段階的な `hints` を指定できます。複数正答の判定は `src/lib/grammar/word-order.js` に置き、UIへ重複実装しません。
+
+Sentence Pattern Diagramでは、英文のまとまりを `chunks`、文型の役割順を `pattern` としてProblem Dataへ置きます。chunkの `id` はrole記号とは別の一意な識別子です。SVOOのように同じroleが複数ある問題でも、英文chunkと図のnodeをchunk IDで対応づけます。`mountSentencePatternDiagram` はSVO専用にせず、Problem DataからSVC・SVO・SVOOなどの配置を生成します。
 
 ## 3. 再利用可能なDemoコンポーネントを作る
 
-コンポーネントは教材Problemをimportせず、`mount(root, problem, options)` として受け取ります。4種類のAPIとcallbackの詳細は [INTERACTION_COMPONENT_API.md](./INTERACTION_COMPONENT_API.md) を参照してください。
+コンポーネントは教材Problemをimportせず、`mount(root, problem, options)` として受け取ります。5種類のAPIとcallbackの詳細は [INTERACTION_COMPONENT_API.md](./INTERACTION_COMPONENT_API.md) を参照してください。
 
 `src/components/demos/` にコンポーネントを追加します。共通Demo枠の中で、次の順序を保ちます。
 

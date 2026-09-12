@@ -9,3 +9,7 @@ export {
   transformerDefaults,
 } from './problems/sentence-transformer.js';
 export { wordOrderProblem, wordOrderProblems } from './problems/word-order.js';
+export {
+  sentencePatternDiagramProblem,
+  sentencePatternDiagramProblems,
+} from './problems/sentence-pattern-diagram.js';

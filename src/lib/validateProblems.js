@@ -1,4 +1,4 @@
-const problemTypes = new Set(['word-order', 'mark-parts', 'grammar-classifier', 'sentence-transformer']);
+const problemTypes = new Set(['word-order', 'mark-parts', 'grammar-classifier', 'sentence-transformer', 'sentence-pattern-diagram']);
 const transformerControlNames = new Set(['subject', 'tense', 'negative']);
 const supportedTenses = new Set(['present', 'past']);
 
@@ -177,6 +177,49 @@ function validateTransformer(problem, label, errors) {
   }
 }
 
+function validateSentencePatternDiagram(problem, label, errors) {
+  if (!hasText(problem.prompt) || !hasText(problem.sentence) || !hasText(problem.explanation)) {
+    errors.push(`${label}.prompt, sentence, and explanation are required`);
+  }
+  if (!Array.isArray(problem.chunks) || problem.chunks.length === 0) {
+    errors.push(`${label}.chunks must contain at least one chunk`);
+  } else {
+    duplicateIds(problem.chunks, `${label}.chunks`, errors);
+    problem.chunks.forEach((chunk, index) => {
+      if (!isRecord(chunk) || !hasText(chunk.id) || !hasText(chunk.text) || !hasText(chunk.role) || !hasText(chunk.label) || !hasText(chunk.explanation)) {
+        errors.push(`${label}.chunks[${index}] must have id, text, role, label, and explanation`);
+      }
+    });
+  }
+
+  if (!Array.isArray(problem.pattern) || problem.pattern.length === 0) {
+    errors.push(`${label}.pattern must contain roles`);
+    return;
+  }
+
+  const chunks = problem.chunks ?? [];
+  const chunkRoleCounts = new Map();
+  chunks.forEach((chunk) => {
+    if (hasText(chunk?.role)) chunkRoleCounts.set(chunk.role, (chunkRoleCounts.get(chunk.role) ?? 0) + 1);
+  });
+  const patternRoleCounts = new Map();
+  problem.pattern.forEach((role, index) => {
+    if (!hasText(role)) {
+      errors.push(`${label}.pattern[${index}] must be a role`);
+      return;
+    }
+    if (!chunkRoleCounts.has(role)) errors.push(`${label}.pattern[${index}] references an unknown role: ${role}`);
+    if (chunks[index]?.role !== role) errors.push(`${label}.pattern[${index}] must match chunks[${index}].role`);
+    patternRoleCounts.set(role, (patternRoleCounts.get(role) ?? 0) + 1);
+  });
+  if (problem.pattern.length !== chunks.length) {
+    errors.push(`${label}.pattern must have one role for each chunk`);
+  }
+  for (const [role, count] of chunkRoleCounts) {
+    if (patternRoleCounts.get(role) !== count) errors.push(`${label}.pattern must match chunk role counts for ${role}`);
+  }
+}
+
 export function validateProblems(entries, { expectedTypes = problemTypes } = {}) {
   const errors = [];
   if (!Array.isArray(entries)) return { valid: false, errors: ['Problems must be an array'] };
@@ -196,6 +239,7 @@ export function validateProblems(entries, { expectedTypes = problemTypes } = {})
     if (problem.type === 'mark-parts') validateMarkParts(problem, label, errors);
     if (problem.type === 'grammar-classifier') validateClassifier(problem, label, errors);
     if (problem.type === 'sentence-transformer') validateTransformer(problem, label, errors);
+    if (problem.type === 'sentence-pattern-diagram') validateSentencePatternDiagram(problem, label, errors);
   });
 
   return { valid: errors.length === 0, errors };

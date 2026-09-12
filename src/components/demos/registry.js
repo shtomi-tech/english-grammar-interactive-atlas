@@ -2,6 +2,7 @@ import { mountWordOrderBuilder } from './wordOrderBuilder.js';
 import { mountMarkTheParts } from './markTheParts.js';
 import { mountSentenceTransformer } from './sentenceTransformer.js';
 import { mountGrammarClassifier } from './grammarClassifier.js';
+import { mountSentencePatternDiagram } from './sentencePatternDiagram.js';
 import { getProblemById } from '../../data/problems/index.js';
 
 export const demoRegistry = {
@@ -20,6 +21,10 @@ export const demoRegistry = {
   'grammar-classifier': {
     mount: mountGrammarClassifier,
     demoProblemId: 'GC-001',
+  },
+  'sentence-pattern-diagram': {
+    mount: mountSentencePatternDiagram,
+    demoProblemId: 'SPD-001',
   },
 };
 
