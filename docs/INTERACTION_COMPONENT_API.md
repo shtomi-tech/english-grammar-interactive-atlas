@@ -32,6 +32,7 @@ const cleanup = mountInteraction(root, problem, {
 | Sentence Transformer | `sentence-transformer` | `controls`, `defaults`, optional `completion`, `sentenceModel`（時制・助動詞、または `tense + voice` の役割モデル） |
 | Sentence Pattern Diagram | `sentence-pattern-diagram` | `prompt`, `sentence`, `chunks`, `pattern`, `explanation` |
 | Modifier Connection Viewer | `modifier-connection-viewer` | `prompt`, `sentence`, `chunks`, `relations`, `explanation` |
+| Modifier Positioner | `modifier-positioner` | `prompt`, `goal`, `chunks`, `modifier`, `placements`, optional `punctuation`, `explanation` |
 | Sentence Comparison | `sentence-comparison` | `prompt`, `sentences`, `differences`, `explanation` |
 | Error Corrector | `error-corrector` | `prompt`, `tokens`, `corrections`, `explanation` |
 | Context Grammar | `context-grammar` | `prompt`, `scenario`, `steps`, `explanation` |
@@ -39,7 +40,7 @@ const cleanup = mountInteraction(root, problem, {
 
 ## Options and onComplete
 
-判定を持つComponentはCheck時に、Sentence Transformerは通常は選択変更時にcallbackを呼びます。`completion: { type: 'explore-control', control, requiredValues }` を持つTransformerは、指定controlのrequiredValuesを同一マウント中にすべて確認した時だけ、一度callbackを呼びます。初期値は確認済みとして数えます。探索型のSentence Pattern Diagram、Modifier Connection Viewer、Sentence Comparisonは必要な要素をすべて確認した時にcallbackを呼びます。Context Grammarは各Stepの正答をContinueで確定し、最後のStepを完了した時にcallbackを一度だけ呼びます。Sentence GeneratorはGenerateで目標状態に一致した時だけcallbackを一度だけ呼びます。
+判定を持つComponentはCheck時に、Sentence Transformerは通常は選択変更時にcallbackを呼びます。`completion: { type: 'explore-control', control, requiredValues }` を持つTransformerは、指定controlのrequiredValuesを同一マウント中にすべて確認した時だけ、一度callbackを呼びます。初期値は確認済みとして数えます。探索型のSentence Pattern Diagram、Modifier Connection Viewer、Sentence Comparisonは必要な要素をすべて確認した時にcallbackを呼びます。Modifier Positionerは `grammatical: true` かつ `matchesGoal: true` のplacementを選んだ時に、一つのmount runにつき一度callbackを呼びます。Context Grammarは各Stepの正答をContinueで確定し、最後のStepを完了した時にcallbackを一度だけ呼びます。Sentence GeneratorはGenerateで目標状態に一致した時だけcallbackを一度だけ呼びます。
 
 ```js
 onComplete({
@@ -52,6 +53,8 @@ onComplete({
 今回のLessonはcallbackを表示上の「Step complete」にだけ使います。学習履歴、点数、LocalStorage、DBには保存しません。
 
 探索完了を要求するLesson Stepでは、requiredValuesの確認が終わるまでNextを無効にします。探索状態はmount中だけ保持し、ResetまたはStep切り替えで初期化します。
+
+Modifier PositionerはResetで選択中のmodifier、placement、feedback、completion状態を初期化します。placementの位置はbuttonで選び、完成文・relation・meaning・feedbackを `aria-live` で更新します。
 
 ## Reset and lifecycle
 

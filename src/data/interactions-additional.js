@@ -83,6 +83,7 @@ export const additionalInteractions = [
     reusability: 'S',
     sourceName: 'Original catalog concept',
     reusePolicy: 'idea-only',
+    demoType: 'modifier-positioner',
     notes: 'タップ操作を基本にし、ドラッグは補助経路とする。',
   },
   {

@@ -8,6 +8,7 @@ import { errorCorrectorProblems } from './error-corrector.js';
 import { contextGrammarProblems } from './context-grammar.js';
 import { sentenceGeneratorProblems } from './sentence-generator.js';
 import { wordOrderProblems } from './word-order.js';
+import { modifierPositionerProblems } from './modifier-positioner.js';
 
 export const problemSets = {
   'word-order': wordOrderProblems,
@@ -20,6 +21,7 @@ export const problemSets = {
   'error-corrector': errorCorrectorProblems,
   'context-grammar': contextGrammarProblems,
   'sentence-generator': sentenceGeneratorProblems,
+  'modifier-positioner': modifierPositionerProblems,
 };
 
 export const problems = Object.values(problemSets).flat();
@@ -44,4 +46,5 @@ export {
   contextGrammarProblems,
   sentenceGeneratorProblems,
   wordOrderProblems,
+  modifierPositionerProblems,
 };

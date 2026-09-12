@@ -1238,6 +1238,118 @@ a.button {
   font-size: 0.82rem;
 }
 
+.modifier-positioner-goal {
+  margin-bottom: 20px;
+  padding: 13px 15px;
+  border-left: 3px solid var(--accent-strong);
+  background: var(--paper-deep);
+}
+
+.modifier-positioner-goal p,
+.modifier-positioner-detail p {
+  margin: 5px 0 0;
+  color: var(--ink-soft);
+}
+
+.modifier-positioner-controls {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.8fr) minmax(0, 1.6fr);
+  gap: 18px;
+}
+
+.modifier-positioner-controls h4 {
+  margin-bottom: 9px;
+}
+
+.modifier-card,
+.modifier-positioner-slot {
+  width: 100%;
+  min-height: 58px;
+  padding: 10px 12px;
+  border: 1px solid #beb3a5;
+  border-radius: 9px;
+  background: #fffdf8;
+  color: var(--ink);
+  cursor: pointer;
+  text-align: left;
+}
+
+.modifier-card {
+  display: grid;
+  gap: 4px;
+}
+
+.modifier-card:hover,
+.modifier-card:focus-visible,
+.modifier-card[aria-pressed="true"],
+.modifier-positioner-slot:hover,
+.modifier-positioner-slot:focus-visible,
+.modifier-positioner-slot[aria-pressed="true"] {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.modifier-card-label {
+  color: var(--ink-soft);
+  font-size: 0.68rem;
+  font-weight: 760;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.modifier-card:hover .modifier-card-label,
+.modifier-card:focus-visible .modifier-card-label,
+.modifier-card[aria-pressed="true"] .modifier-card-label {
+  color: var(--accent);
+}
+
+.modifier-card-text {
+  font-family: Georgia, serif;
+  font-size: 1.04rem;
+  overflow-wrap: anywhere;
+}
+
+.modifier-positioner-slots {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.modifier-positioner-slot:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
+.modifier-positioner-output {
+  margin-top: 25px;
+  padding: 22px 18px;
+  border-radius: 12px;
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.modifier-positioner-sentence {
+  min-height: 1.3em;
+  margin: 0;
+  font-family: Georgia, serif;
+  font-size: clamp(1.3rem, 3vw, 1.9rem);
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.modifier-positioner-detail {
+  margin-top: 17px;
+  padding-top: 15px;
+  border-top: 1px solid var(--paper-line);
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+.modifier-positioner-detail strong {
+  color: var(--accent);
+}
+
 .comparison-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2249,6 +2361,7 @@ a.button {
     .transformer-grid,
     .generator-controls,
     .classifier-category-grid,
+    .modifier-positioner-controls,
   .comparison-grid {
     grid-template-columns: 1fr;
   }
@@ -2264,6 +2377,10 @@ a.button {
 
   .relation-label {
     grid-column: auto;
+  }
+
+  .modifier-positioner-slots {
+    grid-template-columns: 1fr;
   }
 
   .toolbar-options {

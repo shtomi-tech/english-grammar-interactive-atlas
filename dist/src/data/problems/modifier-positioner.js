@@ -1,0 +1,159 @@
+export const modifierPositionerProblems = [
+  {
+    id: 'MPO-001',
+    type: 'modifier-positioner',
+    prompt: 'in the library が The students を説明する位置へ置いてください。',
+    goal: {
+      description: '場所そのものではなく、どのstudentsかを説明する。',
+    },
+    chunks: [
+      { id: 'the-students', text: 'The students' },
+      { id: 'are-studying', text: 'are studying' },
+    ],
+    modifier: {
+      id: 'in-the-library',
+      text: 'in the library',
+    },
+    placements: [
+      {
+        id: 'after-subject',
+        position: 1,
+        label: 'After “The students”',
+        modifierText: 'in the library',
+        grammatical: true,
+        matchesGoal: true,
+        relation: {
+          modifierId: 'in-the-library',
+          targetId: 'the-students',
+          relationType: 'modifies',
+          label: 'The studentsを説明',
+          explanation: 'in the library が、どのstudentsかを限定しています。',
+        },
+        meaning: '図書館にいる生徒たちが勉強している。',
+      },
+      {
+        id: 'sentence-end',
+        position: 2,
+        label: 'Sentence end',
+        modifierText: 'in the library',
+        grammatical: true,
+        matchesGoal: false,
+        relation: {
+          modifierId: 'in-the-library',
+          targetId: 'are-studying',
+          relationType: 'modifies',
+          label: 'are studyingを説明',
+          explanation: '文末では、勉強している場所を表す読みになります。',
+        },
+        meaning: '生徒たちは図書館で勉強している。',
+      },
+    ],
+    punctuation: '.',
+    explanation: '同じ語句でも、置く位置によってどこへ情報を加えるかが変わります。',
+  },
+  {
+    id: 'MPO-002',
+    type: 'modifier-positioner',
+    prompt: 'wearing a blue hat が The girl を説明する位置へ置いてください。',
+    goal: {
+      description: 'wearing a blue hat がどのgirlを説明するかを確かめる。',
+    },
+    chunks: [
+      { id: 'the-girl', text: 'The girl' },
+      { id: 'waved-to-us', text: 'waved to us' },
+    ],
+    modifier: {
+      id: 'wearing-a-blue-hat',
+      text: 'wearing a blue hat',
+    },
+    placements: [
+      {
+        id: 'after-subject',
+        position: 1,
+        label: 'After “The girl”',
+        grammatical: true,
+        matchesGoal: true,
+        relation: {
+          modifierId: 'wearing-a-blue-hat',
+          targetId: 'the-girl',
+          relationType: 'modifies',
+          label: 'The girlを説明',
+          explanation: 'wearing a blue hat が、どのgirlかを説明しています。',
+        },
+        meaning: '青い帽子をかぶっている女の子が私たちに手を振った。',
+      },
+      {
+        id: 'sentence-end',
+        position: 2,
+        label: 'Sentence end',
+        grammatical: true,
+        matchesGoal: false,
+        relation: {
+          modifierId: 'wearing-a-blue-hat',
+          targetId: 'waved-to-us',
+          relationType: 'modifies',
+          label: 'waved to usを説明',
+          explanation: '文末では、手を振った動作に付随する情報のように読め、girlへの直接の説明が弱くなります。',
+        },
+        meaning: '女の子は青い帽子をかぶりながら私たちに手を振った。',
+      },
+    ],
+    punctuation: '.',
+    explanation: '分詞句は置く位置によって、名詞への説明か動作への付随情報かが変わります。',
+  },
+  {
+    id: 'MPO-003',
+    type: 'modifier-positioner',
+    prompt: 'on Sundays を自然な位置へ置き、どちらも使えることを確認してください。',
+    goal: {
+      description: 'on Sundays のような時間の副詞句を、文頭と文末の両方で使う。',
+    },
+    chunks: [
+      { id: 'they', text: 'They' },
+      { id: 'visit-the-museum', text: 'visit the museum' },
+    ],
+    modifier: {
+      id: 'on-sundays',
+      text: 'on Sundays',
+    },
+    placements: [
+      {
+        id: 'sentence-start',
+        position: 0,
+        label: 'Sentence start',
+        modifierText: 'On Sundays,',
+        chunkTextOverrides: { they: 'they' },
+        grammatical: true,
+        matchesGoal: true,
+        relation: {
+          modifierId: 'on-sundays',
+          targetId: 'visit-the-museum',
+          relationType: 'modifies',
+          label: 'visit the museumの頻度を説明',
+          explanation: 'On Sundays は visit the museum がいつ行われるかを説明しています。',
+        },
+        meaning: '日曜日には、彼らは博物館を訪れる。',
+      },
+      {
+        id: 'sentence-end',
+        position: 2,
+        label: 'Sentence end',
+        modifierText: 'on Sundays',
+        grammatical: true,
+        matchesGoal: true,
+        relation: {
+          modifierId: 'on-sundays',
+          targetId: 'visit-the-museum',
+          relationType: 'modifies',
+          label: 'visit the museumの頻度を説明',
+          explanation: '文末のon Sundaysも、visit the museumがいつ行われるかを説明しています。',
+        },
+        meaning: '彼らは日曜日に博物館を訪れる。',
+      },
+    ],
+    punctuation: '.',
+    explanation: '時間を表す副詞句は、文頭と文末のどちらにも置ける場合があります。',
+  },
+];
+
+export const modifierPositionerProblem = modifierPositionerProblems[0];

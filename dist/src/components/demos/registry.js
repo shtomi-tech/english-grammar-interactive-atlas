@@ -8,6 +8,7 @@ import { mountSentenceComparison } from './sentenceComparison.js';
 import { mountErrorCorrector } from './errorCorrector.js';
 import { mountContextGrammar } from './contextGrammar.js';
 import { mountSentenceGenerator } from './sentenceGenerator.js';
+import { mountModifierPositioner } from './modifierPositioner.js';
 import { getProblemById } from '../../data/problems/index.js';
 
 export const demoRegistry = {
@@ -50,6 +51,10 @@ export const demoRegistry = {
   'sentence-generator': {
     mount: mountSentenceGenerator,
     demoProblemId: 'SG-001',
+  },
+  'modifier-positioner': {
+    mount: mountModifierPositioner,
+    demoProblemId: 'MPO-001',
   },
 };
 

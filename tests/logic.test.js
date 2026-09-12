@@ -7,6 +7,7 @@ import { problemRegistry, problems } from '../src/data/problems/index.js';
 import { sentenceTransformerProblem, sentenceTransformerProblems } from '../src/data/problems/sentence-transformer.js';
 import { sentencePatternDiagramProblems } from '../src/data/problems/sentence-pattern-diagram.js';
 import { modifierConnectionViewerProblems } from '../src/data/problems/modifier-connection-viewer.js';
+import { modifierPositionerProblems } from '../src/data/problems/modifier-positioner.js';
 import { sentenceComparisonProblems } from '../src/data/problems/sentence-comparison.js';
 import { errorCorrectorProblems } from '../src/data/problems/error-corrector.js';
 import { contextGrammarProblems } from '../src/data/problems/context-grammar.js';
@@ -31,6 +32,12 @@ import {
 } from '../src/lib/grammar/transformer-exploration.js';
 import { buildPatternSlots, getExploredRoles, hasExploredAllChunks } from '../src/lib/grammar/sentence-pattern.js';
 import { getRelatedChunkIds, getRelationsForChunk, hasExploredAllRelations } from '../src/lib/grammar/modifier-relations.js';
+import {
+  buildModifierPlacementSentence,
+  getModifierPlacement,
+  getPlacementRelation,
+  isGoalMatchingPlacement,
+} from '../src/lib/grammar/modifier-placement.js';
 import {
   getChunkIdsForDifference,
   getDifferenceByChunkId,
@@ -68,8 +75,8 @@ assert.equal(filterInteractions(interactions, 'transform').length, 4);
 assert.equal(filterInteractions(interactions, 'all', { reusability: 'S' }).length, 29);
 assert.equal(filterInteractions(interactions, 'all', { reusability: 'A' }).length, 11);
 assert.equal(filterInteractions(interactions, 'all', { reusability: 'B' }).length, 0);
-assert.equal(filterInteractions(interactions, 'all', { demo: 'available' }).length, 10);
-assert.equal(filterInteractions(interactions, 'all', { demo: 'planned' }).length, 30);
+assert.equal(filterInteractions(interactions, 'all', { demo: 'available' }).length, 11);
+assert.equal(filterInteractions(interactions, 'all', { demo: 'planned' }).length, 29);
 assert.equal(searchInteractions(interactions, 'relative').length, 2);
 assert.equal(searchInteractions(interactions, '  RELATIVE  ').length, 2);
 assert.equal(searchInteractions(interactions, 'conditional').length, 1);
@@ -80,10 +87,10 @@ assert.equal(
 assert.deepEqual(getAtlasStats(interactions, demoRegistry), {
   catalogEntries: 40,
   interactionFamilies: 10,
-  workingDemos: 10,
+  workingDemos: 11,
 });
 
-assert.equal(problems.length, 40);
+assert.equal(problems.length, 43);
 assert.deepEqual(
   Object.fromEntries(Object.entries({
     'word-order': wordOrderProblems,
@@ -92,16 +99,18 @@ assert.deepEqual(
     'sentence-transformer': sentenceTransformerProblems,
     'sentence-pattern-diagram': sentencePatternDiagramProblems,
     'modifier-connection-viewer': modifierConnectionViewerProblems,
+    'modifier-positioner': modifierPositionerProblems,
     'sentence-comparison': sentenceComparisonProblems,
     'error-corrector': errorCorrectorProblems,
     'context-grammar': contextGrammarProblems,
     'sentence-generator': sentenceGeneratorProblems,
   }).map(([type, entries]) => [type, entries.length])),
-  { 'word-order': 6, 'mark-parts': 3, 'grammar-classifier': 3, 'sentence-transformer': 3, 'sentence-pattern-diagram': 3, 'modifier-connection-viewer': 3, 'sentence-comparison': 4, 'error-corrector': 5, 'context-grammar': 5, 'sentence-generator': 5 },
+  { 'word-order': 6, 'mark-parts': 3, 'grammar-classifier': 3, 'sentence-transformer': 3, 'sentence-pattern-diagram': 3, 'modifier-connection-viewer': 3, 'modifier-positioner': 3, 'sentence-comparison': 4, 'error-corrector': 5, 'context-grammar': 5, 'sentence-generator': 5 },
 );
 assert.equal(problemRegistry['WO-001'], wordOrderProblems[0]);
 assert.equal(problemRegistry['SPD-001'], sentencePatternDiagramProblems[0]);
 assert.equal(problemRegistry['MCV-001'], modifierConnectionViewerProblems[0]);
+assert.equal(problemRegistry['MPO-001'], modifierPositionerProblems[0]);
 assert.equal(problemRegistry['SC-001'], sentenceComparisonProblems[0]);
 assert.equal(problemRegistry['EC-001'], errorCorrectorProblems[0]);
 assert.equal(problemRegistry['CG-001'], contextGrammarProblems[0]);
@@ -126,6 +135,7 @@ for (const demo of Object.values(demoRegistry)) {
 assert.equal(getDemoProblem('word-order', 'WO-002').id, 'WO-002');
 assert.equal(getDemoProblem('sentence-pattern-diagram', 'SPD-003').id, 'SPD-003');
 assert.equal(getDemoProblem('modifier-connection-viewer', 'MCV-003').id, 'MCV-003');
+assert.equal(getDemoProblem('modifier-positioner', 'MPO-003').id, 'MPO-003');
 assert.equal(getDemoProblem('sentence-comparison', 'SC-003').id, 'SC-003');
 assert.equal(getDemoProblem('error-corrector', 'EC-003').id, 'EC-003');
 assert.equal(getDemoProblem('context-grammar', 'CG-003').id, 'CG-003');
@@ -153,6 +163,19 @@ assert.deepEqual(getRelatedChunkIds(modifierProblem.relations, 'with-a-red-cap')
 assert.deepEqual(getRelatedChunkIds(modifierProblem.relations, 'the-boy'), ['with-a-red-cap']);
 assert.equal(hasExploredAllRelations(modifierProblem.relations, new Set()), false);
 assert.equal(hasExploredAllRelations(modifierProblem.relations, new Set(['relation-1'])), true);
+
+const modifierPositionerProblem = modifierPositionerProblems[0];
+assert.equal(buildModifierPlacementSentence(modifierPositionerProblem, 'after-subject'), 'The students in the library are studying.');
+assert.equal(buildModifierPlacementSentence(modifierPositionerProblem, 'sentence-end'), 'The students are studying in the library.');
+assert.equal(isGoalMatchingPlacement(modifierPositionerProblem, 'after-subject'), true);
+assert.equal(isGoalMatchingPlacement(modifierPositionerProblem, 'sentence-end'), false);
+assert.equal(getModifierPlacement(modifierPositionerProblem, 'missing-placement'), null);
+assert.equal(buildModifierPlacementSentence(modifierPositionerProblem, 'missing-placement'), null);
+assert.equal(getPlacementRelation(modifierPositionerProblem, 'after-subject').targetId, 'the-students');
+assert.equal(isGoalMatchingPlacement(modifierPositionerProblems[2], 'sentence-start'), true);
+assert.equal(isGoalMatchingPlacement(modifierPositionerProblems[2], 'sentence-end'), true);
+assert.equal(buildModifierPlacementSentence(modifierPositionerProblems[2], 'sentence-start'), 'On Sundays, they visit the museum.');
+assert.equal(buildModifierPlacementSentence(modifierPositionerProblems[2], 'sentence-end'), 'They visit the museum on Sundays.');
 
 const comparisonProblem = sentenceComparisonProblems[0];
 assert.equal(getDifferenceByChunkId(comparisonProblem.differences, 'a-2').id, 'purpose-action');
@@ -485,6 +508,41 @@ assert.equal(validateProblems(unknownModifierReference).valid, false);
 const selfModifierReference = structuredClone(modifierConnectionViewerProblems);
 selfModifierReference[0].relations[0].targetId = selfModifierReference[0].relations[0].modifierId;
 assert.equal(validateProblems(selfModifierReference).valid, false);
+assert.equal(validateProblems(modifierPositionerProblems).valid, true);
+const invalidPositionerChunkId = structuredClone(modifierPositionerProblems);
+invalidPositionerChunkId[0].chunks[1].id = invalidPositionerChunkId[0].chunks[0].id;
+assert.equal(validateProblems(invalidPositionerChunkId).valid, false);
+const invalidPositionerPlacementId = structuredClone(modifierPositionerProblems);
+invalidPositionerPlacementId[0].placements[1].id = invalidPositionerPlacementId[0].placements[0].id;
+assert.equal(validateProblems(invalidPositionerPlacementId).valid, false);
+const invalidPositionerLowPosition = structuredClone(modifierPositionerProblems);
+invalidPositionerLowPosition[0].placements[0].position = -1;
+assert.equal(validateProblems(invalidPositionerLowPosition).valid, false);
+const invalidPositionerHighPosition = structuredClone(modifierPositionerProblems);
+invalidPositionerHighPosition[0].placements[0].position = invalidPositionerHighPosition[0].chunks.length + 1;
+assert.equal(validateProblems(invalidPositionerHighPosition).valid, false);
+const invalidPositionerTarget = structuredClone(modifierPositionerProblems);
+invalidPositionerTarget[0].placements[0].relation.targetId = 'missing-target';
+assert.equal(validateProblems(invalidPositionerTarget).valid, false);
+const invalidPositionerModifier = structuredClone(modifierPositionerProblems);
+invalidPositionerModifier[0].placements[0].relation.modifierId = 'missing-modifier';
+assert.equal(validateProblems(invalidPositionerModifier).valid, false);
+const invalidPositionerRelation = structuredClone(modifierPositionerProblems);
+delete invalidPositionerRelation[0].placements[0].relation;
+assert.equal(validateProblems(invalidPositionerRelation).valid, false);
+const invalidPositionerMeaning = structuredClone(modifierPositionerProblems);
+delete invalidPositionerMeaning[0].placements[0].meaning;
+assert.equal(validateProblems(invalidPositionerMeaning).valid, false);
+const invalidPositionerGoal = structuredClone(modifierPositionerProblems);
+invalidPositionerGoal[0].placements.forEach((placement) => { placement.matchesGoal = false; });
+assert.equal(validateProblems(invalidPositionerGoal).valid, false);
+const invalidPositionerGrammatical = structuredClone(modifierPositionerProblems);
+invalidPositionerGrammatical[0].placements[0].grammatical = 'true';
+assert.equal(validateProblems(invalidPositionerGrammatical).valid, false);
+const invalidPositionerMatchesGoal = structuredClone(modifierPositionerProblems);
+invalidPositionerMatchesGoal[0].placements[0].matchesGoal = 'true';
+assert.equal(validateProblems(invalidPositionerMatchesGoal).valid, false);
+assert.equal(modifierPositionerProblems[2].placements.filter((placement) => placement.grammatical && placement.matchesGoal).length, 2);
 const comparisonSentenceCount = structuredClone(sentenceComparisonProblems);
 comparisonSentenceCount[0].sentences.pop();
 assert.equal(validateProblems(comparisonSentenceCount).valid, false);

@@ -38,13 +38,13 @@
 
 Demoを作る場合、英文・正答・説明などの教材固有データは `src/data/problems/` の機能別ファイルへ置きます。Demoコンポーネントに問題文を直接書きません。分類Demoなら、`categories` と `items` の `answer` をデータ側に持たせ、分類軸を差し替えられる形にします。互換用の `src/data/demo-problems.js` は代表Problemの再エクスポートだけを行います。
 
-Problemは `type` と安定した `id` を持ち、`src/data/problems/index.js` のRegistryから `getProblemById('WO-001')` のように取得できます。現在のProblem数は Word Order 5、Mark the Parts 3、Grammar Classifier 3、Sentence Transformer 2、Sentence Pattern Diagram 3、Modifier Connection Viewer 3、Sentence Comparison 4、Error Corrector 4、Context Grammar 4、Sentence Generator 4（計35件）です。Phase 5FのST-002、WO-005、EC-004、SC-004、SG-004、CG-004は、既存Componentへ助動詞用のProblem Dataを渡す例です。Word Orderの正答は `acceptedAnswers`（許容順序の配列）を正本とし、任意で段階的な `hints` を指定できます。複数正答の判定は `src/lib/grammar/word-order.js` に置き、UIへ重複実装しません。
+Problemは `type` と安定した `id` を持ち、`src/data/problems/index.js` のRegistryから `getProblemById('WO-001')` のように取得できます。現在のProblem数は Word Order 6、Mark the Parts 3、Grammar Classifier 3、Sentence Transformer 3、Sentence Pattern Diagram 3、Modifier Connection Viewer 3、Modifier Positioner 3、Sentence Comparison 4、Error Corrector 5、Context Grammar 5、Sentence Generator 5（計43件）です。Phase 6DのMPO-001〜003は、既存のModifier Connection Viewerとは別の、位置変更と関係変化を扱うProblem Dataの例です。Word Orderの正答は `acceptedAnswers`（許容順序の配列）を正本とし、任意で段階的な `hints` を指定できます。複数正答の判定は `src/lib/grammar/word-order.js` に置き、UIへ重複実装しません。
 
 Sentence Pattern Diagramでは、英文のまとまりを `chunks`、文型の役割順を `pattern` としてProblem Dataへ置きます。chunkの `id` はrole記号とは別の一意な識別子です。SVOOのように同じroleが複数ある問題でも、英文chunkと図のnodeをchunk IDで対応づけます。`mountSentencePatternDiagram` はSVO専用にせず、Problem DataからSVC・SVO・SVOOなどの配置を生成します。
 
 ## 3. 再利用可能なDemoコンポーネントを作る
 
-コンポーネントは教材Problemをimportせず、`mount(root, problem, options)` として受け取ります。10種類のAPIとcallbackの詳細は [INTERACTION_COMPONENT_API.md](./INTERACTION_COMPONENT_API.md) を参照してください。
+コンポーネントは教材Problemをimportせず、`mount(root, problem, options)` として受け取ります。11種類のAPIとcallbackの詳細は [INTERACTION_COMPONENT_API.md](./INTERACTION_COMPONENT_API.md) を参照してください。
 
 Modifier Connection Viewerでは、英文のまとまりを `chunks`、修飾関係を `relations` としてProblem Dataへ置きます。各relationは `modifierId` と `targetId` でchunkを参照し、`relationType: 'modifies'`、短い表示label、説明を持ちます。Componentは特定の英文や語句を条件分岐せず、関係データから英文側と関係カードを生成します。
 
@@ -55,6 +55,8 @@ Error Correctorでは、誤文の語句を `tokens`、語句ごとの訂正候�
 Context Grammarでは、`scenario` と順序付き `steps` をProblem Dataへ置きます。各stepは相手の `speaker`、`line`、学習者への `instruction`、2つ以上の `choices`、`acceptedChoiceIds` を持ち、choiceは `text`、`reply`、`grammarLabel`、`explanation` を持ちます。正答を選んだ後にContinueで履歴へ追加し、最後のStepで完了callbackを一度だけ呼びます。初期実装は線形マルチステップに限定し、分岐エンジン、自由入力、LLM/API、音声は追加しません。
 
 Sentence Generatorでは、`goal`、`controls`、`targetStates`、`sentenceModel` をProblem Dataへ置きます。学習者が未選択状態からすべての文法条件を選び、Generateで明示的に英文を生成します。生成規則は既存の `src/lib/grammar/generateSentence.js` を共有し、目標状態との照合だけを `src/lib/grammar/generation-goal.js` のpure helperで行います。目標と異なるが文法的な状態も表示し、文法的正しさと課題条件の一致を分けて扱います。Sentence TransformerのUIや生成規則を複製せず、Lesson 03では `subject`、`modal`、`negative` の助動詞状態を同じGeneratorへ渡します。対応範囲と時制との境界は [MODAL_SUPPORT.md](./MODAL_SUPPORT.md) を参照してください。
+
+Modifier Positionerでは、完成に近い文の `chunks`、一つの `modifier`、複数の `placements` をProblem Dataへ置きます。各placementはchunk境界の `position`、表示用の任意 `modifierText`、`grammatical`、`matchesGoal`、`relation`、`meaning` を持ちます。`src/lib/grammar/modifier-placement.js` が配置から文と関係を組み立て、Componentはtap/clickでmodifierと位置を選びます。文法的だが課題の焦点と異なる配置も「誤文」とは扱わず、関係・意味の違いを表示します。MPO-003のように複数のgoal-matching placementを許容できます。drag-and-drop、自由入力、LLM/APIは追加しません。
 
 `src/components/demos/` にコンポーネントを追加します。共通Demo枠の中で、次の順序を保ちます。
 

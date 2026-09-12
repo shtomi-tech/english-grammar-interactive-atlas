@@ -63,7 +63,7 @@ Research Reference records separately store observed patterns, atlas implication
 
 ## 40件カタログの方針
 
-`GRAM-INT-001`〜`GRAM-INT-040` を1件ずつ保持し、10カテゴリを各4件で構成します。現在の10個のDemoは実働のまま維持し、カタログ拡張で新しいDemoを自動的に増やしません。新しい項目はまず学習目的・触る対象・変化・気づきを記録し、同じ操作概念の重複や、実装されていないDemoのふりを避けます。
+`GRAM-INT-001`〜`GRAM-INT-040` を1件ずつ保持し、10カテゴリを各4件で構成します。現在の11個のDemoは実働のまま維持し、カタログ拡張で新しいDemoを自動的に増やしません。新しい項目はまず学習目的・触る対象・変化・気づきを記録し、同じ操作概念の重複や、実装されていないDemoのふりを避けます。
 
 Sentence TransformerとSentence Generatorの文法状態契約は [GRAMMAR_STATE_CONTRACT.md](./GRAMMAR_STATE_CONTRACT.md) に分離して管理します。既存10 Demoの学習行為は共通化せず、共通化するのは対応する文法値・状態モード・表示ラベルの契約だけです。Phase 6Bのvoiceは `active` / `passive` と `tense` の組み合わせに限定し、Problem Dataにはagent/patientを持つrole-based sentence modelを使います。
 

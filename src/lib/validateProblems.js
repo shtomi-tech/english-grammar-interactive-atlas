@@ -1,6 +1,6 @@
 import { getGrammarStateMode, SUPPORTED_MODALS, SUPPORTED_TENSES, SUPPORTED_VOICES } from './grammar/grammar-state.js';
 
-const problemTypes = new Set(['word-order', 'mark-parts', 'grammar-classifier', 'sentence-transformer', 'sentence-pattern-diagram', 'modifier-connection-viewer', 'sentence-comparison', 'error-corrector', 'context-grammar', 'sentence-generator']);
+const problemTypes = new Set(['word-order', 'mark-parts', 'grammar-classifier', 'sentence-transformer', 'sentence-pattern-diagram', 'modifier-connection-viewer', 'modifier-positioner', 'sentence-comparison', 'error-corrector', 'context-grammar', 'sentence-generator']);
 const transformerControlNames = new Set(['subject', 'tense', 'negative', 'modal', 'voice']);
 
 function hasText(value) {
@@ -391,6 +391,79 @@ function validateModifierConnectionViewer(problem, label, errors) {
   });
 }
 
+function validateModifierPositioner(problem, label, errors) {
+  if (!hasText(problem.prompt) || !hasText(problem.explanation)) {
+    errors.push(`${label}.prompt and explanation are required`);
+  }
+
+  if (!isRecord(problem.goal) || !hasText(problem.goal.description)) {
+    errors.push(`${label}.goal.description is required`);
+  }
+
+  const chunkById = new Map();
+  if (!Array.isArray(problem.chunks) || problem.chunks.length < 2) {
+    errors.push(`${label}.chunks must contain at least two chunks`);
+  } else {
+    duplicateIds(problem.chunks, `${label}.chunks`, errors);
+    problem.chunks.forEach((chunk, index) => {
+      if (!isRecord(chunk) || !hasText(chunk.id) || !hasText(chunk.text)) {
+        errors.push(`${label}.chunks[${index}] must have id and text`);
+        return;
+      }
+      chunkById.set(chunk.id, chunk);
+    });
+  }
+
+  if (!isRecord(problem.modifier) || !hasText(problem.modifier.id) || !hasText(problem.modifier.text)) {
+    errors.push(`${label}.modifier must have id and text`);
+  }
+
+  if (!Array.isArray(problem.placements) || problem.placements.length < 2) {
+    errors.push(`${label}.placements must contain at least two placements`);
+  } else {
+    duplicateIds(problem.placements, `${label}.placements`, errors);
+    let goalMatchingPlacementCount = 0;
+    problem.placements.forEach((placement, index) => {
+      if (!isRecord(placement) || !hasText(placement.id) || !hasText(placement.label)) {
+        errors.push(`${label}.placements[${index}] must have id and label`);
+        return;
+      }
+      if (!Number.isInteger(placement.position) || placement.position < 0 || placement.position > (problem.chunks?.length ?? 0)) {
+        errors.push(`${label}.placements[${index}].position must be an integer within the chunk boundaries`);
+      }
+      if (placement.modifierText !== undefined && !hasText(placement.modifierText)) {
+        errors.push(`${label}.placements[${index}].modifierText must be non-empty when provided`);
+      }
+      if (placement.chunkTextOverrides !== undefined) {
+        if (!isRecord(placement.chunkTextOverrides)) {
+          errors.push(`${label}.placements[${index}].chunkTextOverrides must be an object when provided`);
+        } else {
+          Object.entries(placement.chunkTextOverrides).forEach(([chunkId, text]) => {
+            if (!chunkById.has(chunkId)) errors.push(`${label}.placements[${index}].chunkTextOverrides references an unknown chunk: ${chunkId}`);
+            if (!hasText(text)) errors.push(`${label}.placements[${index}].chunkTextOverrides.${chunkId} must be non-empty`);
+          });
+        }
+      }
+      if (typeof placement.grammatical !== 'boolean') errors.push(`${label}.placements[${index}].grammatical must be boolean`);
+      if (typeof placement.matchesGoal !== 'boolean') errors.push(`${label}.placements[${index}].matchesGoal must be boolean`);
+      if (placement.grammatical === true && placement.matchesGoal === true) goalMatchingPlacementCount += 1;
+      if (!isRecord(placement.relation)) {
+        errors.push(`${label}.placements[${index}].relation is required`);
+      } else {
+        if (placement.relation.modifierId !== problem.modifier?.id) errors.push(`${label}.placements[${index}].relation.modifierId must match modifier.id`);
+        if (!chunkById.has(placement.relation.targetId)) errors.push(`${label}.placements[${index}].relation.targetId references an unknown chunk: ${placement.relation.targetId}`);
+        if (!hasText(placement.relation.relationType)) errors.push(`${label}.placements[${index}].relation.relationType is required`);
+        if (!hasText(placement.relation.label)) errors.push(`${label}.placements[${index}].relation.label is required`);
+        if (!hasText(placement.relation.explanation)) errors.push(`${label}.placements[${index}].relation.explanation is required`);
+      }
+      if (!hasText(placement.meaning)) errors.push(`${label}.placements[${index}].meaning is required`);
+    });
+    if (goalMatchingPlacementCount === 0) errors.push(`${label}.placements must contain a grammatical goal-matching placement`);
+  }
+
+  if (problem.punctuation !== undefined && !hasText(problem.punctuation)) errors.push(`${label}.punctuation is invalid`);
+}
+
 function validateSentenceComparison(problem, label, errors) {
   if (!hasText(problem.prompt) || !hasText(problem.explanation)) {
     errors.push(`${label}.prompt and explanation are required`);
@@ -627,6 +700,7 @@ export function validateProblems(entries, { expectedTypes = problemTypes } = {})
     if (problem.type === 'sentence-transformer') validateTransformer(problem, label, errors);
     if (problem.type === 'sentence-pattern-diagram') validateSentencePatternDiagram(problem, label, errors);
     if (problem.type === 'modifier-connection-viewer') validateModifierConnectionViewer(problem, label, errors);
+    if (problem.type === 'modifier-positioner') validateModifierPositioner(problem, label, errors);
     if (problem.type === 'sentence-comparison') validateSentenceComparison(problem, label, errors);
     if (problem.type === 'error-corrector') validateErrorCorrector(problem, label, errors);
     if (problem.type === 'context-grammar') validateContextGrammar(problem, label, errors);
