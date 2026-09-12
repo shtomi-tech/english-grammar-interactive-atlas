@@ -1,16 +1,21 @@
-import { grammarClassifierProblem } from '../../data/demo-problems.js';
 import { escapeHtml } from '../../lib/dom.js';
+import { prepareMountRoot } from '../../lib/lifecycle.js';
 import { checkClassification } from '../../lib/grammar/classification.js';
 
-export function mountGrammarClassifier(root) {
+export function mountGrammarClassifier(root, problem, options = {}) {
+  const { on, cleanup } = prepareMountRoot(root);
+  if (!problem || problem.type !== 'grammar-classifier') {
+    throw new TypeError('Grammar Classifier needs a grammar-classifier problem');
+  }
+  const onComplete = typeof options.onComplete === 'function' ? options.onComplete : () => {};
   let selectedItemId = null;
   let assignments = {};
 
   root.innerHTML = `
-    <p class="instruction">${escapeHtml(grammarClassifierProblem.prompt)}</p>
+    <p class="instruction">${escapeHtml(problem.prompt)}</p>
     <div class="demo-stage classifier-stage">
       <h4>Original sentence</h4>
-      <p class="classifier-sentence" aria-label="Original sentence">${escapeHtml(grammarClassifierProblem.sentence)}</p>
+      <p class="classifier-sentence" aria-label="Original sentence">${escapeHtml(problem.sentence)}</p>
       <h4>Unclassified phrase cards</h4>
       <div class="classifier-card-list" data-classifier-cards aria-live="polite"></div>
       <h4>Classification areas</h4>
@@ -21,7 +26,7 @@ export function mountGrammarClassifier(root) {
       </div>
       <div class="feedback" data-classifier-feedback role="status" aria-live="polite"></div>
       <div class="classifier-result" data-classifier-result hidden></div>
-      <p class="explanation" data-classifier-explanation hidden>${escapeHtml(grammarClassifierProblem.explanation)}</p>
+      <p class="explanation" data-classifier-explanation hidden>${escapeHtml(problem.explanation)}</p>
     </div>`;
 
   const cards = root.querySelector('[data-classifier-cards]');
@@ -29,6 +34,8 @@ export function mountGrammarClassifier(root) {
   const feedback = root.querySelector('[data-classifier-feedback]');
   const result = root.querySelector('[data-classifier-result]');
   const explanation = root.querySelector('[data-classifier-explanation]');
+  const resetButton = root.querySelector('[data-classifier-reset]');
+  const checkButton = root.querySelector('[data-classifier-check]');
 
   function restoreFocus(focusTarget) {
     if (!focusTarget) return;
@@ -42,13 +49,13 @@ export function mountGrammarClassifier(root) {
         (button) => button.dataset.classifierItemId === focusTarget.id,
       );
     } else if (focusTarget.type === 'check') {
-      target = root.querySelector('[data-classifier-check]');
+      target = checkButton;
     }
     target?.focus();
   }
 
   function render(focusTarget = null) {
-    const unclassifiedItems = grammarClassifierProblem.items.filter((item) => !assignments[item.id]);
+    const unclassifiedItems = problem.items.filter((item) => !assignments[item.id]);
     cards.innerHTML = unclassifiedItems.length
       ? unclassifiedItems
           .map(
@@ -60,9 +67,9 @@ export function mountGrammarClassifier(root) {
           .join('')
       : '<p class="classifier-empty">すべての語句を分類しました。</p>';
 
-    categories.innerHTML = grammarClassifierProblem.categories
+    categories.innerHTML = problem.categories
       .map((category) => {
-        const categoryItems = grammarClassifierProblem.items.filter((item) => assignments[item.id] === category.id);
+        const categoryItems = problem.items.filter((item) => assignments[item.id] === category.id);
         return `
           <section class="classifier-category" aria-labelledby="classifier-category-${escapeHtml(category.id)}">
             <button class="classifier-category-target" type="button" data-classifier-category-id="${escapeHtml(category.id)}" aria-label="${escapeHtml(category.label)}へ分類">
@@ -98,59 +105,18 @@ export function mountGrammarClassifier(root) {
     feedback.textContent = 'まず語句カードを選択してください。';
   }
 
-  cards.addEventListener('click', (event) => {
-    const button = event.target.closest('[data-classifier-item-id]');
-    if (!button) return;
-    selectedItemId = button.dataset.classifierItemId;
-    clearFeedback();
-    render({ type: 'category', id: grammarClassifierProblem.categories[0].id });
-  });
-
-  categories.addEventListener('click', (event) => {
-    const itemButton = event.target.closest('[data-classifier-item-id]');
-    if (itemButton) {
-      selectedItemId = itemButton.dataset.classifierItemId;
-      clearFeedback();
-      render({
-        type: 'category',
-        id: itemButton.closest('[data-classifier-category-items]')?.dataset.classifierCategoryItems,
-      });
-      return;
-    }
-    const button = event.target.closest('[data-classifier-category-id]');
-    if (!button) return;
-    if (!selectedItemId) {
-      showSelectionHint();
-      return;
-    }
-    const assignedIndex = grammarClassifierProblem.items.findIndex((item) => item.id === selectedItemId);
-    assignments = { ...assignments, [selectedItemId]: button.dataset.classifierCategoryId };
-    selectedItemId = null;
-    clearFeedback();
-    const nextItem =
-      grammarClassifierProblem.items.find((item, index) => index > assignedIndex && !assignments[item.id]) ??
-      grammarClassifierProblem.items.find((item) => !assignments[item.id]);
-    render(nextItem ? { type: 'item', id: nextItem.id } : { type: 'check' });
-  });
-
-  root.querySelector('[data-classifier-reset]').addEventListener('click', () => {
-    selectedItemId = null;
-    assignments = {};
-    clearFeedback();
-    render({ type: 'item', id: grammarClassifierProblem.items[0].id });
-  });
-
-  root.querySelector('[data-classifier-check]').addEventListener('click', () => {
-    const correct = checkClassification(assignments, grammarClassifierProblem.items);
+  function check() {
+    const correct = checkClassification(assignments, problem.items);
     feedback.className = `feedback is-visible ${correct ? 'success' : 'error'}`;
     feedback.textContent = correct
-      ? 'Correct — 語句のまとまりを文中の役割ごとに分類できました。'
-      : 'Not yet — 語句が文の中で何をしているかを考えてみましょう。';
+      ? `Correct — ${problem.classificationAxis ?? '文法上の役割'}に沿って分類できました。`
+      : `Not yet — ${problem.classificationAxis ?? '文法上の役割'}を考えてみましょう。`;
+    onComplete({ correct, problemId: problem.id, assignments: { ...assignments } });
     if (!correct) return;
 
-    result.innerHTML = grammarClassifierProblem.categories
+    result.innerHTML = problem.categories
       .map((category) => {
-        const categoryItems = grammarClassifierProblem.items.filter((item) => item.answer === category.id);
+        const categoryItems = problem.items.filter((item) => item.answer === category.id);
         return `
           <div class="classifier-result-row">
             <span class="structure-role">${escapeHtml(category.label)}</span>
@@ -168,7 +134,51 @@ export function mountGrammarClassifier(root) {
       .join('');
     result.hidden = false;
     explanation.hidden = false;
+  }
+
+  on(cards, 'click', (event) => {
+    const button = event.target.closest('[data-classifier-item-id]');
+    if (!button) return;
+    selectedItemId = button.dataset.classifierItemId;
+    clearFeedback();
+    render({ type: 'category', id: problem.categories[0].id });
   });
 
+  on(categories, 'click', (event) => {
+    const itemButton = event.target.closest('[data-classifier-item-id]');
+    if (itemButton) {
+      selectedItemId = itemButton.dataset.classifierItemId;
+      clearFeedback();
+      render({
+        type: 'category',
+        id: itemButton.closest('[data-classifier-category-items]')?.dataset.classifierCategoryItems,
+      });
+      return;
+    }
+    const button = event.target.closest('[data-classifier-category-id]');
+    if (!button) return;
+    if (!selectedItemId) {
+      showSelectionHint();
+      return;
+    }
+    const assignedIndex = problem.items.findIndex((item) => item.id === selectedItemId);
+    assignments = { ...assignments, [selectedItemId]: button.dataset.classifierCategoryId };
+    selectedItemId = null;
+    clearFeedback();
+    const nextItem =
+      problem.items.find((item, index) => index > assignedIndex && !assignments[item.id]) ??
+      problem.items.find((item) => !assignments[item.id]);
+    render(nextItem ? { type: 'item', id: nextItem.id } : { type: 'check' });
+  });
+
+  on(resetButton, 'click', () => {
+    selectedItemId = null;
+    assignments = {};
+    clearFeedback();
+    render({ type: 'item', id: problem.items[0].id });
+  });
+  on(checkButton, 'click', check);
+
   render();
+  return cleanup;
 }

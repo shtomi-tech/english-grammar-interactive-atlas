@@ -23,7 +23,10 @@ export function searchInteractions(entries, query = '') {
 export function getAtlasStats(entries, demoRegistry = {}) {
   const categories = new Set(entries.map((entry) => entry.category));
   const workingDemos = entries.filter(
-    (entry) => entry.demoType && typeof demoRegistry[entry.demoType] === 'function',
+    (entry) => {
+      const registryEntry = entry.demoType ? demoRegistry[entry.demoType] : null;
+      return typeof registryEntry === 'function' || typeof registryEntry?.mount === 'function';
+    },
   ).length;
 
   return {

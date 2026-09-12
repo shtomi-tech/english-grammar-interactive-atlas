@@ -36,9 +36,13 @@
 
 ## 2. 問題データを分離する
 
-Demoを作る場合、英文・正答・説明などの教材固有データは `src/data/demo-problems.js` または機能別のデータファイルへ置きます。Demoコンポーネントに大量の問題文を直接書きません。分類Demoなら、`categories` と `items` の `answer` をデータ側に持たせ、分類軸を差し替えられる形にします。
+Demoを作る場合、英文・正答・説明などの教材固有データは `src/data/problems/` の機能別ファイルへ置きます。Demoコンポーネントに問題文を直接書きません。分類Demoなら、`categories` と `items` の `answer` をデータ側に持たせ、分類軸を差し替えられる形にします。互換用の `src/data/demo-problems.js` は代表Problemの再エクスポートだけを行います。
 
-## 3. Demoコンポーネントを作る
+Problemは `type` と安定した `id` を持ち、`src/data/problems/index.js` のRegistryから `getProblemById('WO-001')` のように取得できます。現在のProblem数は Word Order 3、Mark the Parts 3、Grammar Classifier 3、Sentence Transformer 1 です。
+
+## 3. 再利用可能なDemoコンポーネントを作る
+
+コンポーネントは教材Problemをimportせず、`mount(root, problem, options)` として受け取ります。4種類のAPIとcallbackの詳細は [INTERACTION_COMPONENT_API.md](./INTERACTION_COMPONENT_API.md) を参照してください。
 
 `src/components/demos/` にコンポーネントを追加します。共通Demo枠の中で、次の順序を保ちます。
 
@@ -54,21 +58,30 @@ Explanation
 
 `npm run check` は、構文確認に加えて、ID・slugの重複、カテゴリ、難易度、再利用性、必須フィールド、出典メタデータ、`demoType` とDemo Registryの対応を検証します。新しい項目を追加したら、まずこの検証を通してください。
 
-## 4. Registryへ登録する
+## 4. Demo Registryへ登録する
 
-`src/components/demos/registry.js` に `demoType` とマウント関数の対応を追加します。
+`src/components/demos/registry.js` に `demoType`、マウント関数、代表Problem IDを登録します。
 
 ```js
 export const demoRegistry = {
-  'new-interaction': mountNewInteraction,
+  'new-interaction': {
+    mount: mountNewInteraction,
+    demoProblemId: 'NEW-001',
+  },
 };
 ```
 
 `InteractionEntry.demoType` に同じキーを設定すれば、詳細画面から自動でDemoが表示されます。
 
-## 5. ロジックとテストを追加する
+## 5. Lessonへ組み込む
+
+Lesson UIをハードコードせず、`src/data/lessons.js` に `interactionType` と `problemId` を持つStepを追加します。LessonからはRegistry経由で同じComponentを再利用します。Lessonでは進捗をページ内stateだけに置き、LocalStorageやDBへ保存しません。
+
+## 6. ロジックとテストを追加する
 
 判定や文生成は `src/lib/grammar/` などの純粋な関数としてUIから分離します。`tests/logic.test.js` に、正解・不正解・境界条件を追加してください。
+
+Problemの追加時は `validateProblems`、Lessonの追加時は `validateLessons` の異常系もテストします。特に、未知のProblem ID、Problem Typeとの不一致、重複ID、defaultsとcontrolsの不一致を確認します。
 
 最後に次を実行します。
 

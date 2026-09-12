@@ -1,34 +1,46 @@
-const subjects = {
-  he: { label: 'He', number: 'singular' },
-  they: { label: 'They', number: 'plural' },
-};
-
-const verbs = {
-  play: { base: 'play', past: 'played', object: 'tennis' },
+const defaultSentenceModel = {
+  subjects: {
+    he: { label: 'He', number: 'singular' },
+    they: { label: 'They', number: 'plural' },
+  },
+  verb: { base: 'play', past: 'played' },
+  object: 'tennis',
+  punctuation: '.',
 };
 
 function presentForm(verb, number) {
-  return number === 'singular' ? `${verb}s` : verb;
+  if (verb.present) return verb.present;
+  return number === 'singular' ? `${verb.base}s` : verb.base;
 }
 
-export function generateSentence({ subject = 'he', verb = 'play', tense = 'present', negative = false }) {
-  const subjectData = subjects[subject];
-  const verbData = verbs[verb];
+export function generateSentence(
+  { subject = 'he', tense = 'present', negative = false } = {},
+  sentenceModel = defaultSentenceModel,
+) {
+  const model = sentenceModel ?? defaultSentenceModel;
+  const subjectData = model.subjects?.[subject];
+  const verb = model.verb;
 
-  if (!subjectData || !verbData) {
+  if (!subjectData || !verb?.base || !verb?.past || typeof model.object !== 'string') {
+    throw new Error('Unsupported sentence state');
+  }
+  if (!['present', 'past'].includes(tense) || typeof negative !== 'boolean') {
     throw new Error('Unsupported sentence state');
   }
 
+  const punctuation = model.punctuation ?? '.';
+  if (typeof punctuation !== 'string') throw new Error('Unsupported sentence state');
+
   if (tense === 'past') {
     return negative
-      ? `${subjectData.label} did not ${verbData.base} ${verbData.object}.`
-      : `${subjectData.label} ${verbData.past} ${verbData.object}.`;
+      ? `${subjectData.label} did not ${verb.base} ${model.object}${punctuation}`
+      : `${subjectData.label} ${verb.past} ${model.object}${punctuation}`;
   }
 
   if (negative) {
     const auxiliary = subjectData.number === 'singular' ? 'does' : 'do';
-    return `${subjectData.label} ${auxiliary} not ${verbData.base} ${verbData.object}.`;
+    return `${subjectData.label} ${auxiliary} not ${verb.base} ${model.object}${punctuation}`;
   }
 
-  return `${subjectData.label} ${presentForm(verbData.base, subjectData.number)} ${verbData.object}.`;
+  return `${subjectData.label} ${presentForm(verb, subjectData.number)} ${model.object}${punctuation}`;
 }

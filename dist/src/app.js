@@ -9,10 +9,11 @@ import {
   reusePolicyLabels,
   sourceTypeLabels,
 } from './data/interaction-schema.js';
+import { getLessonBySlug } from './data/lessons.js';
 import { renderInteractionCard, renderEmptyState, renderDifficulty } from './components/atlas/interactionCard.js';
 import { renderFilterBar } from './components/atlas/filterBar.js';
 import { renderDemoPanel } from './components/demos/demoPanel.js';
-import { demoRegistry } from './components/demos/registry.js';
+import { demoRegistry, mountDemo } from './components/demos/registry.js';
 import { filterInteractions, getAtlasStats, searchInteractions } from './lib/atlas.js';
 import { escapeHtml } from './lib/dom.js';
 import { registerAtlasWebMcp } from './webmcp.js';
@@ -25,6 +26,9 @@ function getRoute() {
   const hashParts = hash.split('/');
   if (hashParts[0] === 'interactions' && hashParts[1]) {
     return { page: 'detail', slug: decodeURIComponent(hashParts.slice(1).join('/')) };
+  }
+  if (hashParts[0] === 'lessons' && hashParts[1]) {
+    return { page: 'lesson', slug: decodeURIComponent(hashParts.slice(1).join('/')) };
   }
   return { page: 'atlas' };
 }
@@ -58,6 +62,7 @@ function renderHeader() {
           </a>
           <nav aria-label="Main navigation">
             <a href="#catalog">Catalog</a>
+            <a href="#lessons/basic-sentence-structure">Lesson 01</a>
             <a href="#about">How it works</a>
           </nav>
         </div>
@@ -156,7 +161,7 @@ function renderAtlas() {
       </div>
       <section class="interaction-grid" data-results aria-live="polite"></section>
     </main>
-    <footer class="site-footer"><div class="shell">Phase 2B · Research the interaction, then reuse the learning part.</div></footer>`;
+    <footer class="site-footer"><div class="shell">Phase 3A · Research the interaction, then reuse the learning part.</div></footer>`;
 
   app.querySelector('#interaction-search').addEventListener('input', (event) => {
     state.query = event.target.value;
@@ -191,7 +196,7 @@ function renderAtlas() {
 function renderDetail(entry) {
   document.title = `${entry.title} · Interactive Grammar Atlas`;
   const demoMountId = 'demo-mount';
-  const hasDemo = Boolean(entry.demoType && demoRegistry[entry.demoType]);
+  const hasDemo = Boolean(entry.demoType && typeof demoRegistry[entry.demoType]?.mount === 'function');
   const demoMarkup = hasDemo
     ? renderDemoPanel(entry, demoMountId)
     : `<div class="planned-demo"><h3>Demo planned</h3><p>この項目は図鑑に登録済みです。学習効果と再利用性を検討しながら、次のDemo候補として実装します。</p></div>`;
@@ -258,14 +263,105 @@ function renderDetail(entry) {
     </main>
     <footer class="site-footer"><div class="shell">Interactive Grammar Atlas · one interaction, one reusable learning part.</div></footer>`;
 
-  if (hasDemo) demoRegistry[entry.demoType](app.querySelector(`#${demoMountId}`));
+  if (hasDemo) mountDemo(entry.demoType, app.querySelector(`#${demoMountId}`));
+}
+
+function renderLesson(lesson) {
+  document.title = `${lesson.label}: ${lesson.title} · Interactive Grammar Atlas`;
+  let stepIndex = 0;
+  let cleanup = null;
+
+  app.innerHTML = `
+    <main class="lesson-page shell">
+      <div class="detail-topline">
+        <a class="back-link" href="#">← Back to catalog</a>
+        <span class="entry-id">${escapeHtml(lesson.id)}</span>
+      </div>
+      <header class="lesson-header">
+        <p class="header-kicker">${escapeHtml(lesson.label)}</p>
+        <h1>${escapeHtml(lesson.title)}</h1>
+        <p>${escapeHtml(lesson.description)}</p>
+        <div class="lesson-goal">
+          <span class="meta-label">Learning goal</span>
+          <p>${escapeHtml(lesson.learningGoal)}</p>
+        </div>
+      </header>
+      <section class="lesson-player" aria-labelledby="lesson-step-heading">
+        <div class="lesson-progress">
+          <strong data-step-label></strong>
+          <span class="progress-text" data-progress-text></span>
+          <span class="progress-dots" data-progress-dots aria-hidden="true"></span>
+        </div>
+        <div class="lesson-step-copy">
+          <p class="section-kicker">Current step</p>
+          <h2 id="lesson-step-heading" tabindex="-1" data-step-title></h2>
+          <p data-step-instruction></p>
+        </div>
+        <div class="lesson-component" data-lesson-component></div>
+        <div class="lesson-completion" data-lesson-completion role="status" aria-live="polite"></div>
+        <nav class="lesson-navigation" aria-label="Lesson navigation">
+          <button class="button secondary" type="button" data-lesson-previous>← Previous</button>
+          <button class="button" type="button" data-lesson-next>Next →</button>
+        </nav>
+      </section>
+    </main>
+    <footer class="site-footer"><div class="shell">Lesson prototype · one component, many questions.</div></footer>`;
+
+  const stepLabel = app.querySelector('[data-step-label]');
+  const progressText = app.querySelector('[data-progress-text]');
+  const progressDots = app.querySelector('[data-progress-dots]');
+  const stepTitle = app.querySelector('[data-step-title]');
+  const stepInstruction = app.querySelector('[data-step-instruction]');
+  const componentRoot = app.querySelector('[data-lesson-component]');
+  const completion = app.querySelector('[data-lesson-completion]');
+  const previousButton = app.querySelector('[data-lesson-previous]');
+  const nextButton = app.querySelector('[data-lesson-next]');
+
+  function renderStep(shouldFocus = true) {
+    const step = lesson.steps[stepIndex];
+    cleanup?.();
+    cleanup = null;
+    stepLabel.textContent = `Step ${stepIndex + 1} / ${lesson.steps.length}`;
+    progressText.textContent = `${Math.round(((stepIndex + 1) / lesson.steps.length) * 100)}% complete`;
+    progressDots.innerHTML = lesson.steps
+      .map((_, index) => `<span class="progress-dot${index <= stepIndex ? ' is-complete' : ''}" aria-hidden="true"></span>`)
+      .join('');
+    stepTitle.textContent = step.title;
+    stepInstruction.textContent = step.instruction;
+    completion.textContent = '';
+    previousButton.disabled = stepIndex === 0;
+    nextButton.disabled = stepIndex === lesson.steps.length - 1;
+    cleanup = mountDemo(step.interactionType, componentRoot, {
+      problemId: step.problemId,
+      onComplete(result) {
+        if (result.correct) completion.textContent = 'Step complete — 次の気づきへ進めます。';
+      },
+    });
+    if (shouldFocus) stepTitle.focus({ preventScroll: true });
+  }
+
+  previousButton.addEventListener('click', () => {
+    if (stepIndex === 0) return;
+    stepIndex -= 1;
+    renderStep();
+  });
+  nextButton.addEventListener('click', () => {
+    if (stepIndex >= lesson.steps.length - 1) return;
+    stepIndex += 1;
+    renderStep();
+  });
+
+  renderStep(false);
 }
 
 function render() {
   const route = getRoute();
   const entry = route.page === 'detail' ? getInteractionBySlug(route.slug) : null;
+  const lesson = route.page === 'lesson' ? getLessonBySlug(route.slug) : null;
   if (route.page === 'detail' && entry) {
     renderDetail(entry);
+  } else if (route.page === 'lesson' && lesson) {
+    renderLesson(lesson);
   } else {
     renderAtlas();
   }

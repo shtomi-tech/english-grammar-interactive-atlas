@@ -1,34 +1,52 @@
-import { transformerDefaults } from '../../data/demo-problems.js';
+import { escapeHtml } from '../../lib/dom.js';
+import { prepareMountRoot } from '../../lib/lifecycle.js';
 import { generateSentence } from '../../lib/grammar/generateSentence.js';
 
-export function mountSentenceTransformer(root) {
-  const state = { ...transformerDefaults };
+const controlLabels = {
+  subject: 'Subject',
+  tense: 'Tense',
+  negative: 'Negative',
+};
+
+function valueKey(value) {
+  return `${typeof value}:${String(value)}`;
+}
+
+function safeId(value) {
+  return String(value).replace(/[^a-z0-9_-]/gi, '-');
+}
+
+export function mountSentenceTransformer(root, problem, options = {}) {
+  const { on, cleanup } = prepareMountRoot(root);
+  if (!problem || problem.type !== 'sentence-transformer') {
+    throw new TypeError('Sentence Transformer needs a sentence-transformer problem');
+  }
+  const onComplete = typeof options.onComplete === 'function' ? options.onComplete : () => {};
+  const state = { ...problem.defaults };
+  const problemKey = safeId(problem.id);
+  const controls = Object.entries(problem.controls);
 
   root.innerHTML = `
-    <p class="instruction">条件を変えると、英文の形がどう変わるか観察してください。</p>
+    <p class="instruction">${escapeHtml(problem.prompt)}</p>
     <div class="demo-stage">
       <div class="transformer-grid">
-        <fieldset class="control-group">
-          <legend>Subject</legend>
-          <div class="control-options">
-            <div class="control-option"><input id="subject-he" type="radio" name="subject" value="he" checked><label for="subject-he">He</label></div>
-            <div class="control-option"><input id="subject-they" type="radio" name="subject" value="they"><label for="subject-they">They</label></div>
-          </div>
-        </fieldset>
-        <fieldset class="control-group">
-          <legend>Tense</legend>
-          <div class="control-options">
-            <div class="control-option"><input id="tense-present" type="radio" name="tense" value="present" checked><label for="tense-present">Present</label></div>
-            <div class="control-option"><input id="tense-past" type="radio" name="tense" value="past"><label for="tense-past">Past</label></div>
-          </div>
-        </fieldset>
-        <fieldset class="control-group">
-          <legend>Negative</legend>
-          <div class="control-options">
-            <div class="control-option"><input id="negative-off" type="radio" name="negative" value="false" checked><label for="negative-off">OFF</label></div>
-            <div class="control-option"><input id="negative-on" type="radio" name="negative" value="true"><label for="negative-on">ON</label></div>
-          </div>
-        </fieldset>
+        ${controls
+          .map(
+            ([name, values]) => `
+              <fieldset class="control-group">
+                <legend>${escapeHtml(controlLabels[name] ?? name)}</legend>
+                <div class="control-options">
+                  ${values
+                    .map((option, index) => {
+                      const inputId = `transformer-${problemKey}-${safeId(name)}-${index}`;
+                      const checked = valueKey(option.value) === valueKey(state[name]);
+                      return `<div class="control-option"><input id="${inputId}" type="radio" name="transformer-${problemKey}-${safeId(name)}" value="${escapeHtml(String(option.value))}" data-control-name="${escapeHtml(name)}" ${checked ? 'checked' : ''}><label for="${inputId}">${escapeHtml(option.label)}</label></div>`;
+                    })
+                    .join('')}
+                </div>
+              </fieldset>`,
+          )
+          .join('')}
       </div>
       <div class="transformer-output" aria-live="polite">
         <span class="output-label">Generated sentence</span>
@@ -40,26 +58,30 @@ export function mountSentenceTransformer(root) {
   const sentence = root.querySelector('[data-sentence]');
   const recipe = root.querySelector('[data-recipe]');
 
-  function render() {
-    sentence.textContent = generateSentence(state);
-    recipe.innerHTML = [
-      `subject: ${state.subject}`,
-      'verb: play',
-      `tense: ${state.tense}`,
-      `polarity: ${state.negative ? 'negative' : 'affirmative'}`,
-    ]
-      .map((item) => `<span class="recipe-chip">${item}</span>`)
-      .join('');
+  function getOptionLabel(name, value) {
+    return problem.controls[name]?.find((option) => valueKey(option.value) === valueKey(value))?.label ?? String(value);
   }
 
-  root.addEventListener('change', (event) => {
+  function render() {
+    const generatedSentence = generateSentence(state, problem.sentenceModel);
+    sentence.textContent = generatedSentence;
+    recipe.innerHTML = controls
+      .map(([name]) => `<span class="recipe-chip">${escapeHtml(controlLabels[name] ?? name)}: ${escapeHtml(getOptionLabel(name, state[name]))}</span>`)
+      .join('');
+    return generatedSentence;
+  }
+
+  on(root, 'change', (event) => {
     const input = event.target;
-    if (!(input instanceof HTMLInputElement)) return;
-    if (input.name === 'subject') state.subject = input.value;
-    if (input.name === 'tense') state.tense = input.value;
-    if (input.name === 'negative') state.negative = input.value === 'true';
-    render();
+    if (!(input instanceof HTMLInputElement) || !input.dataset.controlName) return;
+    const name = input.dataset.controlName;
+    const option = problem.controls[name]?.find((candidate) => String(candidate.value) === input.value);
+    if (!option) return;
+    state[name] = option.value;
+    const generatedSentence = render();
+    onComplete({ correct: true, problemId: problem.id, state: { ...state }, sentence: generatedSentence });
   });
 
   render();
+  return cleanup;
 }
