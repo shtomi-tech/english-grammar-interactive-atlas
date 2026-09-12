@@ -8,6 +8,7 @@ import { sentenceTransformerProblem } from '../src/data/problems/sentence-transf
 import { sentencePatternDiagramProblems } from '../src/data/problems/sentence-pattern-diagram.js';
 import { modifierConnectionViewerProblems } from '../src/data/problems/modifier-connection-viewer.js';
 import { sentenceComparisonProblems } from '../src/data/problems/sentence-comparison.js';
+import { errorCorrectorProblems } from '../src/data/problems/error-corrector.js';
 import { wordOrderProblems } from '../src/data/problems/word-order.js';
 import { filterInteractions, getAtlasStats, searchInteractions } from '../src/lib/atlas.js';
 import { grammarClassifierProblem } from '../src/data/demo-problems.js';
@@ -27,6 +28,11 @@ import {
   hasExploredAllDifferences,
 } from '../src/lib/grammar/sentence-comparison.js';
 import {
+  getCorrectionByTokenId,
+  hasCompletedAllCorrections,
+  isAcceptedCorrection,
+} from '../src/lib/grammar/error-correction.js';
+import {
   researchReferences,
   researchReferenceRegistry,
 } from '../src/data/research/index.js';
@@ -42,8 +48,8 @@ assert.equal(filterInteractions(interactions, 'transform').length, 4);
 assert.equal(filterInteractions(interactions, 'all', { reusability: 'S' }).length, 29);
 assert.equal(filterInteractions(interactions, 'all', { reusability: 'A' }).length, 11);
 assert.equal(filterInteractions(interactions, 'all', { reusability: 'B' }).length, 0);
-assert.equal(filterInteractions(interactions, 'all', { demo: 'available' }).length, 7);
-assert.equal(filterInteractions(interactions, 'all', { demo: 'planned' }).length, 33);
+assert.equal(filterInteractions(interactions, 'all', { demo: 'available' }).length, 8);
+assert.equal(filterInteractions(interactions, 'all', { demo: 'planned' }).length, 32);
 assert.equal(searchInteractions(interactions, 'relative').length, 2);
 assert.equal(searchInteractions(interactions, '  RELATIVE  ').length, 2);
 assert.equal(searchInteractions(interactions, 'conditional').length, 1);
@@ -54,10 +60,10 @@ assert.equal(
 assert.deepEqual(getAtlasStats(interactions, demoRegistry), {
   catalogEntries: 40,
   interactionFamilies: 10,
-  workingDemos: 7,
+  workingDemos: 8,
 });
 
-assert.equal(problems.length, 20);
+assert.equal(problems.length, 23);
 assert.deepEqual(
   Object.fromEntries(Object.entries({
     'word-order': wordOrderProblems,
@@ -67,13 +73,15 @@ assert.deepEqual(
     'sentence-pattern-diagram': sentencePatternDiagramProblems,
     'modifier-connection-viewer': modifierConnectionViewerProblems,
     'sentence-comparison': sentenceComparisonProblems,
+    'error-corrector': errorCorrectorProblems,
   }).map(([type, entries]) => [type, entries.length])),
-  { 'word-order': 4, 'mark-parts': 3, 'grammar-classifier': 3, 'sentence-transformer': 1, 'sentence-pattern-diagram': 3, 'modifier-connection-viewer': 3, 'sentence-comparison': 3 },
+  { 'word-order': 4, 'mark-parts': 3, 'grammar-classifier': 3, 'sentence-transformer': 1, 'sentence-pattern-diagram': 3, 'modifier-connection-viewer': 3, 'sentence-comparison': 3, 'error-corrector': 3 },
 );
 assert.equal(problemRegistry['WO-001'], wordOrderProblems[0]);
 assert.equal(problemRegistry['SPD-001'], sentencePatternDiagramProblems[0]);
 assert.equal(problemRegistry['MCV-001'], modifierConnectionViewerProblems[0]);
 assert.equal(problemRegistry['SC-001'], sentenceComparisonProblems[0]);
+assert.equal(problemRegistry['EC-001'], errorCorrectorProblems[0]);
 assert.equal(validateProblems(problems).valid, true);
 assert.equal(validateDemoRegistry(demoRegistry, problemRegistry).valid, true);
 for (const demo of Object.values(demoRegistry)) {
@@ -84,6 +92,7 @@ assert.equal(getDemoProblem('word-order', 'WO-002').id, 'WO-002');
 assert.equal(getDemoProblem('sentence-pattern-diagram', 'SPD-003').id, 'SPD-003');
 assert.equal(getDemoProblem('modifier-connection-viewer', 'MCV-003').id, 'MCV-003');
 assert.equal(getDemoProblem('sentence-comparison', 'SC-003').id, 'SC-003');
+assert.equal(getDemoProblem('error-corrector', 'EC-003').id, 'EC-003');
 assert.throws(() => getDemoProblem('word-order', 'MP-001'), /type mismatch/);
 
 const sentencePatternProblem = sentencePatternDiagramProblems[0];
@@ -118,6 +127,18 @@ assert.equal(hasExploredAllDifferences(comparisonProblem.differences, new Set())
 assert.equal(hasExploredAllDifferences(comparisonProblem.differences, new Set(['purpose-action'])), true);
 assert.equal(hasExploredAllDifferences(sentenceComparisonProblems[2].differences, new Set(['voice-form'])), false);
 assert.equal(hasExploredAllDifferences(sentenceComparisonProblems[2].differences, new Set(['voice-form', 'subject-agent'])), true);
+
+const errorProblem = errorCorrectorProblems[0];
+const agreementCorrection = errorProblem.corrections[0];
+assert.equal(getCorrectionByTokenId(errorProblem.corrections, 't2'), agreementCorrection);
+assert.equal(getCorrectionByTokenId(errorProblem.corrections, 'missing-token'), null);
+assert.equal(isAcceptedCorrection(agreementCorrection, 'o2'), true);
+assert.equal(isAcceptedCorrection(agreementCorrection, 'o1'), false);
+assert.equal(isAcceptedCorrection(null, 'o2'), false);
+assert.equal(hasCompletedAllCorrections(errorProblem.corrections, new Map()), false);
+assert.equal(hasCompletedAllCorrections(errorProblem.corrections, new Map([['agreement', 'o2']])), true);
+assert.equal(hasCompletedAllCorrections(errorCorrectorProblems[2].corrections, new Map([['auxiliary-agreement', 'o2']])), false);
+assert.equal(hasCompletedAllCorrections(errorCorrectorProblems[2].corrections, new Map([['auxiliary-agreement', 'o2'], ['past-participle', 'o5']])), true);
 
 assert.equal(researchReferences.length, 7);
 assert.equal(new Set(researchReferences.map((reference) => reference.id)).size, researchReferences.length);
@@ -322,6 +343,24 @@ assert.equal(validateProblems(comparisonUnknownRight).valid, false);
 const comparisonSameSentence = structuredClone(sentenceComparisonProblems);
 comparisonSameSentence[0].differences[0].rightChunkId = comparisonSameSentence[0].sentences[0].chunks[0].id;
 assert.equal(validateProblems(comparisonSameSentence).valid, false);
+const errorUnknownToken = structuredClone(errorCorrectorProblems);
+errorUnknownToken[0].corrections[0].tokenId = 'missing-token';
+assert.equal(validateProblems(errorUnknownToken).valid, false);
+const errorDuplicateToken = structuredClone(errorCorrectorProblems);
+errorDuplicateToken[0].tokens[1].id = errorDuplicateToken[0].tokens[0].id;
+assert.equal(validateProblems(errorDuplicateToken).valid, false);
+const errorDuplicateCorrection = structuredClone(errorCorrectorProblems);
+errorDuplicateCorrection[0].corrections.push({ ...errorDuplicateCorrection[0].corrections[0] });
+assert.equal(validateProblems(errorDuplicateCorrection).valid, false);
+const errorUnknownAcceptedOption = structuredClone(errorCorrectorProblems);
+errorUnknownAcceptedOption[0].corrections[0].acceptedOptionIds = ['missing-option'];
+assert.equal(validateProblems(errorUnknownAcceptedOption).valid, false);
+const errorEmptyOptions = structuredClone(errorCorrectorProblems);
+errorEmptyOptions[0].corrections[0].options = [];
+assert.equal(validateProblems(errorEmptyOptions).valid, false);
+const errorTokenCorrectionMismatch = structuredClone(errorCorrectorProblems);
+errorTokenCorrectionMismatch[0].tokens[1].correctionId = 'missing-correction';
+assert.equal(validateProblems(errorTokenCorrectionMismatch).valid, false);
 const unknownTokenAnswer = structuredClone(problems);
 unknownTokenAnswer.find((problem) => problem.id === 'MP-001').answer = ['missing-token'];
 assert.equal(validateProblems(unknownTokenAnswer).valid, false);

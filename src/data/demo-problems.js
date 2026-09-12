@@ -21,3 +21,7 @@ export {
   sentenceComparisonProblem,
   sentenceComparisonProblems,
 } from './problems/sentence-comparison.js';
+export {
+  errorCorrectorProblem,
+  errorCorrectorProblems,
+} from './problems/error-corrector.js';

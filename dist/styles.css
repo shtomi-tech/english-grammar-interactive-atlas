@@ -1339,6 +1339,118 @@ a.button {
   font-size: 0.82rem;
 }
 
+.error-token-row,
+.error-option-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.error-token-row {
+  align-items: center;
+  min-height: 60px;
+  margin-bottom: 21px;
+  padding: 12px;
+  border: 1px dashed #bdb1a0;
+  border-radius: 10px;
+  background: var(--paper-deep);
+}
+
+.error-plain-token {
+  padding: 8px 2px;
+  color: var(--ink);
+  font-family: Georgia, serif;
+  font-size: 1.12rem;
+  line-height: 1.3;
+}
+
+.error-token,
+.error-option {
+  display: inline-flex;
+  min-height: 56px;
+  flex: 1 1 105px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2px;
+  padding: 8px 12px;
+  border: 1px solid #beb3a5;
+  border-radius: 9px;
+  background: #fffdf8;
+  color: var(--ink);
+  cursor: pointer;
+  text-align: left;
+}
+
+.error-token:hover,
+.error-token:focus-visible,
+.error-option:hover,
+.error-option:focus-visible {
+  border-color: var(--accent-strong);
+  background: #fff1d9;
+}
+
+.error-token.is-selected,
+.error-option.is-selected {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.error-token-text,
+.error-option > span:first-child {
+  font-family: Georgia, serif;
+  font-size: 1rem;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.error-token-state,
+.error-option-state {
+  color: var(--ink-soft);
+  font-size: 0.67rem;
+  font-weight: 760;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.error-token.is-selected .error-token-state,
+.error-option.is-selected .error-option-state,
+.error-token:hover .error-token-state,
+.error-token:focus-visible .error-token-state,
+.error-option:hover .error-option-state,
+.error-option:focus-visible .error-option-state {
+  color: var(--paper);
+}
+
+.error-selection {
+  min-height: 3.1em;
+  padding: 12px 13px;
+  border-left: 3px solid var(--accent-strong);
+  background: var(--paper-deep);
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+.error-options {
+  margin-top: 21px;
+}
+
+.error-options h4 {
+  margin-bottom: 10px;
+}
+
+.error-option {
+  min-width: 90px;
+  flex-basis: 90px;
+}
+
+.error-progress {
+  margin: 12px 0 0;
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+}
+
 .classifier-card-list {
   display: flex;
   flex-wrap: wrap;

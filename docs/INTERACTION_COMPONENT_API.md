@@ -14,7 +14,7 @@ Demo / Lesson
 
 ## Mount signature
 
-7つのComponentは次の形を実装します。
+8つのComponentは次の形を実装します。
 
 ```js
 const cleanup = mountInteraction(root, problem, {
@@ -33,6 +33,7 @@ const cleanup = mountInteraction(root, problem, {
 | Sentence Pattern Diagram | `sentence-pattern-diagram` | `prompt`, `sentence`, `chunks`, `pattern`, `explanation` |
 | Modifier Connection Viewer | `modifier-connection-viewer` | `prompt`, `sentence`, `chunks`, `relations`, `explanation` |
 | Sentence Comparison | `sentence-comparison` | `prompt`, `sentences`, `differences`, `explanation` |
+| Error Corrector | `error-corrector` | `prompt`, `tokens`, `corrections`, `explanation` |
 
 ## Options and onComplete
 
@@ -100,6 +101,12 @@ Word Orderの正答は `acceptedAnswers` を正本とし、1問に1つ以上のI
 `mountSentenceComparison(root, problem, options)` は、2つの `sentences` と、教材側で定義した `differences` から比較UIを生成します。各sentenceは一意な `id`、表示用の `text`、一意なchunkの配列を持ちます。differenceは一意な `id`、左右のchunk ID、差分label、説明、`meaningLeft`、`meaningRight` を持ちます。文字列の一般的なdiff計算は行いません。
 
 左右どちらの差分chunkを押しても、対応する2つのchunkを強調し、Difference・Meaning A/B・Why it mattersを文字で表示します。全differenceを一度以上確認すると `onComplete({ correct: true, problemId, exploredDifferenceIds })` を一度だけ呼びます。Resetは選択・確認済み差分・完了状態を初期化します。
+
+## Error Corrector
+
+`mountErrorCorrector(root, problem, options)` は、誤文の `tokens` と語句置換型の `corrections` から訂正UIを生成します。各correctionは対象token、2つ以上の修正候補、`acceptedOptionIds`、`ruleLabel`、`explanation` を持ちます。Componentは教材英文や文法説明を内部に持たず、選択した候補で訂正文を再構成します。
+
+誤り候補のtokenを選んでから修正候補を選択し、正誤とDifference・Rule・Why it mattersを文字で表示します。全correctionが正解になった時点で `onComplete({ correct: true, problemId, completedCorrectionIds })` を一度だけ呼びます。Resetは選択・回答・訂正文・feedback・完了状態を初期化します。
 
 ## Lesson Registry and Problem injection
 

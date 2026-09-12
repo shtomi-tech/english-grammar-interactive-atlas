@@ -242,6 +242,7 @@ const initialInteractions = [
     feedbackType: ['正誤', '修正理由'],
     implementationDifficulty: 3,
     reusability: 'S',
+    demoType: 'error-corrector',
     sourceName: 'Original concept',
     ...originalSourceMetadata,
     reusePolicy: 'idea-only',

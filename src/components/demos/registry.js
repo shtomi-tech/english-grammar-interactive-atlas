@@ -5,6 +5,7 @@ import { mountGrammarClassifier } from './grammarClassifier.js';
 import { mountSentencePatternDiagram } from './sentencePatternDiagram.js';
 import { mountModifierConnectionViewer } from './modifierConnectionViewer.js';
 import { mountSentenceComparison } from './sentenceComparison.js';
+import { mountErrorCorrector } from './errorCorrector.js';
 import { getProblemById } from '../../data/problems/index.js';
 
 export const demoRegistry = {
@@ -35,6 +36,10 @@ export const demoRegistry = {
   'sentence-comparison': {
     mount: mountSentenceComparison,
     demoProblemId: 'SC-001',
+  },
+  'error-corrector': {
+    mount: mountErrorCorrector,
+    demoProblemId: 'EC-001',
   },
 };
 

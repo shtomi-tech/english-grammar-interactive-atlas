@@ -16,6 +16,7 @@ const files = [
   'src/data/problems/sentence-pattern-diagram.js',
   'src/data/problems/modifier-connection-viewer.js',
   'src/data/problems/sentence-comparison.js',
+  'src/data/problems/error-corrector.js',
   'src/data/problems/index.js',
   'src/data/lessons.js',
   'src/data/research/schema.js',
@@ -36,6 +37,7 @@ const files = [
   'src/lib/grammar/sentence-pattern.js',
   'src/lib/grammar/modifier-relations.js',
   'src/lib/grammar/sentence-comparison.js',
+  'src/lib/grammar/error-correction.js',
   'src/webmcp.js',
   'src/components/atlas/interactionCard.js',
   'src/components/atlas/filterBar.js',
@@ -47,6 +49,7 @@ const files = [
   'src/components/demos/sentencePatternDiagram.js',
   'src/components/demos/modifierConnectionViewer.js',
   'src/components/demos/sentenceComparison.js',
+  'src/components/demos/errorCorrector.js',
   'src/components/demos/registry.js',
 ];
 

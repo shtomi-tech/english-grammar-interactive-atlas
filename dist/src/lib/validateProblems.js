@@ -1,4 +1,4 @@
-const problemTypes = new Set(['word-order', 'mark-parts', 'grammar-classifier', 'sentence-transformer', 'sentence-pattern-diagram', 'modifier-connection-viewer', 'sentence-comparison']);
+const problemTypes = new Set(['word-order', 'mark-parts', 'grammar-classifier', 'sentence-transformer', 'sentence-pattern-diagram', 'modifier-connection-viewer', 'sentence-comparison', 'error-corrector']);
 const transformerControlNames = new Set(['subject', 'tense', 'negative']);
 const supportedTenses = new Set(['present', 'past']);
 
@@ -322,6 +322,85 @@ function validateSentenceComparison(problem, label, errors) {
   }
 }
 
+function validateErrorCorrector(problem, label, errors) {
+  if (!hasText(problem.prompt) || !hasText(problem.explanation)) {
+    errors.push(`${label}.prompt and explanation are required`);
+  }
+
+  const tokenById = new Map();
+  if (!Array.isArray(problem.tokens) || problem.tokens.length === 0) {
+    errors.push(`${label}.tokens must contain at least one token`);
+  } else {
+    duplicateIds(problem.tokens, `${label}.tokens`, errors);
+    problem.tokens.forEach((token, index) => {
+      if (!isRecord(token) || !hasText(token.id) || !hasText(token.text)) {
+        errors.push(`${label}.tokens[${index}] must have id and text`);
+        return;
+      }
+      tokenById.set(token.id, token);
+    });
+  }
+
+  const correctionById = new Map();
+  const correctionTokenIds = new Set();
+  const optionIds = new Set();
+  if (!Array.isArray(problem.corrections) || problem.corrections.length === 0) {
+    errors.push(`${label}.corrections must contain at least one correction`);
+  } else {
+    duplicateIds(problem.corrections, `${label}.corrections`, errors);
+    problem.corrections.forEach((correction, correctionIndex) => {
+      if (!isRecord(correction) || !hasText(correction.id) || !hasText(correction.tokenId) || !hasText(correction.ruleLabel) || !hasText(correction.explanation)) {
+        errors.push(`${label}.corrections[${correctionIndex}] must have id, tokenId, ruleLabel, and explanation`);
+        return;
+      }
+      correctionById.set(correction.id, correction);
+      if (!tokenById.has(correction.tokenId)) errors.push(`${label}.corrections[${correctionIndex}] references an unknown tokenId: ${correction.tokenId}`);
+      if (correctionTokenIds.has(correction.tokenId)) errors.push(`${label}.corrections cannot share a tokenId: ${correction.tokenId}`);
+      correctionTokenIds.add(correction.tokenId);
+
+      if (!Array.isArray(correction.options) || correction.options.length < 2) {
+        errors.push(`${label}.corrections[${correctionIndex}].options must contain at least two options`);
+      } else {
+        duplicateIds(correction.options, `${label}.corrections[${correctionIndex}].options`, errors);
+        correction.options.forEach((option, optionIndex) => {
+          if (!isRecord(option) || !hasText(option.id) || !hasText(option.text)) {
+            errors.push(`${label}.corrections[${correctionIndex}].options[${optionIndex}] must have id and text`);
+            return;
+          }
+          if (optionIds.has(option.id)) errors.push(`${label}.options has duplicate IDs: ${option.id}`);
+          optionIds.add(option.id);
+        });
+      }
+
+      if (!Array.isArray(correction.acceptedOptionIds) || correction.acceptedOptionIds.length === 0) {
+        errors.push(`${label}.corrections[${correctionIndex}].acceptedOptionIds must contain at least one option ID`);
+      } else {
+        const correctionOptionIds = new Set((correction.options ?? []).map((option) => option?.id));
+        correction.acceptedOptionIds.forEach((optionId) => {
+          if (!correctionOptionIds.has(optionId)) errors.push(`${label}.corrections[${correctionIndex}] references an unknown accepted option: ${optionId}`);
+        });
+      }
+    });
+  }
+
+  for (const token of tokenById.values()) {
+    if (token.correctionId !== undefined) {
+      const correction = correctionById.get(token.correctionId);
+      if (!hasText(token.correctionId) || !correction) {
+        errors.push(`${label}.tokens correctionId references an unknown correction: ${token.correctionId}`);
+      } else if (correction.tokenId !== token.id) {
+        errors.push(`${label}.tokens correctionId does not match correction tokenId: ${token.id}`);
+      }
+    }
+  }
+  for (const correction of correctionById.values()) {
+    const token = tokenById.get(correction.tokenId);
+    if (token?.correctionId !== undefined && token.correctionId !== correction.id) {
+      errors.push(`${label}.corrections tokenId does not match token correctionId: ${correction.id}`);
+    }
+  }
+}
+
 export function validateProblems(entries, { expectedTypes = problemTypes } = {}) {
   const errors = [];
   if (!Array.isArray(entries)) return { valid: false, errors: ['Problems must be an array'] };
@@ -344,6 +423,7 @@ export function validateProblems(entries, { expectedTypes = problemTypes } = {})
     if (problem.type === 'sentence-pattern-diagram') validateSentencePatternDiagram(problem, label, errors);
     if (problem.type === 'modifier-connection-viewer') validateModifierConnectionViewer(problem, label, errors);
     if (problem.type === 'sentence-comparison') validateSentenceComparison(problem, label, errors);
+    if (problem.type === 'error-corrector') validateErrorCorrector(problem, label, errors);
   });
 
   return { valid: errors.length === 0, errors };
