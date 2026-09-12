@@ -51,6 +51,58 @@ export const lessons = [
       },
     ],
   },
+  {
+    id: 'LESSON-002',
+    slug: 'structural-reading',
+    label: 'Lesson 02',
+    title: '英文の構造を読む',
+    description: '文の骨格と、そこへ加わる修飾情報を順に見分けます。',
+    learningGoal: '英文の骨格と修飾部分を分け、文の中心と追加情報を構造として理解する。',
+    steps: [
+      {
+        id: 'LESSON-002-STEP-01',
+        interactionType: 'mark-parts',
+        problemId: 'MP-001',
+        title: 'まず文の中心を見つける',
+        instruction: '最初に、文の「だれが・なにが」にあたる中心部分を選びます。',
+      },
+      {
+        id: 'LESSON-002-STEP-02',
+        interactionType: 'sentence-pattern-diagram',
+        problemId: 'SPD-001',
+        title: '骨格をS・V・Oで見る',
+        instruction: '中心部分を確認したら、The boy plays soccer. の骨格をS・V・Oの配置として見てみましょう。',
+      },
+      {
+        id: 'LESSON-002-STEP-03',
+        interactionType: 'sentence-pattern-diagram',
+        problemId: 'SPD-002',
+        title: '別の文型と比べる',
+        instruction: '次にS・V・Cの文を見て、動詞の後ろが主語を説明する場合も確認します。',
+      },
+      {
+        id: 'LESSON-002-STEP-04',
+        interactionType: 'modifier-connection-viewer',
+        problemId: 'MCV-001',
+        title: '追加情報のかかり先を見る',
+        instruction: '骨格に with a red cap が加わりました。修飾語がThe boyへ追加情報を与える関係を確認します。',
+      },
+      {
+        id: 'LESSON-002-STEP-05',
+        interactionType: 'modifier-connection-viewer',
+        problemId: 'MCV-002',
+        title: '動作への修飾を見る',
+        instruction: '今度は after dinner が studies の時間を説明します。修飾先が変わることに注目します。',
+      },
+      {
+        id: 'LESSON-002-STEP-06',
+        interactionType: 'grammar-classifier',
+        problemId: 'GC-002',
+        title: '句と節として整理する',
+        instruction: '最後に句と節を分類し、語句のまとまりが文の構造を作ることを整理します。',
+      },
+    ],
+  },
 ];
 
 export const lessonRegistry = Object.fromEntries(lessons.map((lesson) => [lesson.id, lesson]));

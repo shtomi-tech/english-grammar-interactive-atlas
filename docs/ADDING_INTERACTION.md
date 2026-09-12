@@ -79,7 +79,9 @@ export const demoRegistry = {
 
 ## 5. Lessonへ組み込む
 
-Lesson UIをハードコードせず、`src/data/lessons.js` に `interactionType` と `problemId` を持つStepを追加します。LessonからはRegistry経由で同じComponentを再利用します。Lessonでは進捗をページ内stateだけに置き、LocalStorageやDBへ保存しません。
+Lesson UIをハードコードせず、`src/data/lessons.js` に `interactionType` と `problemId` を持つStepを追加します。LessonからはRegistry経由で同じComponentを再利用します。Lessonでは進捗をページ内stateだけに置き、LocalStorageやDBへ保存しません。複数Lessonを一覧表示する場合も、Lesson Registryからリンクを生成します。
+
+Lessonを追加する場合は、各Stepへ一意な `id`、登録済みの `interactionType`、存在して型が一致する `problemId`、学習順序を説明する `title` と `instruction` を設定します。`validateLessons` はLesson/slug/Step IDの重複、Problemの存在、Problem typeとの一致を検証します。Lesson 02では既存のMark the Parts、Sentence Pattern Diagram、Modifier Connection Viewer、Grammar Classifierを再利用し、Lesson専用Componentは作りません。
 
 ## 6. ロジックとテストを追加する
 

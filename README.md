@@ -34,7 +34,7 @@ npm start
 - `src/data/interactions-additional.js`: GRAM-INT-011〜040のカタログ項目
 - `src/data/problems/`: Interaction Typeごとの教材Problem Data
 - `src/data/problems/index.js`: Problem RegistryとID検索
-- `src/data/lessons.js`: Lesson Data ModelとLesson Registry
+- `src/data/lessons.js`: Lesson Data Model、Lesson Registry、Lesson一覧
 - `src/data/research/`: 外部調査のReference、紐付け、検証用スキーマ
 - `src/components/atlas/`: 一覧カードとカテゴリフィルタ
 - `src/components/demos/`: 共通Demo枠、6つのDemo、Demo Registry
@@ -49,7 +49,7 @@ npm start
 
 ## 現在の実装範囲
 
-Phase 1の基盤とPhase 2AのGrammar Classifierをもとに、Phase 2Bで40件のカタログへ拡張し、Phase 3Aで教材Problem DataとReusable Componentsを分離しました。Phase 3Bでは、7件の一次ソースをResearch Referenceとして記録し、31件のInteractionへ参照IDを紐付けています。Phase 4AではResearch結果を既存Word Order Builderへ還元し、4件のProblem（複数正答1件を含む）と任意Hintをデータ駆動で扱います。Phase 4BではResearchで候補化したSentence Pattern Diagramを追加し、3件のProblemからSVO・SVC・SVOOの文型図を生成します。Phase 4CではModifier Connection Viewerを追加し、3件のProblemから名詞修飾・動詞修飾・関係詞節による修飾関係を表示します。カテゴリ・検索・再利用性ランク・Demo状態をAND条件で絞り込め、ハッシュURLによる詳細画面では元の出典メタデータと外部調査の含意を分けて確認できます。実際に操作できるDemoは6つです。
+Phase 1の基盤とPhase 2AのGrammar Classifierをもとに、Phase 2Bで40件のカタログへ拡張し、Phase 3Aで教材Problem DataとReusable Componentsを分離しました。Phase 3Bでは、7件の一次ソースをResearch Referenceとして記録し、31件のInteractionへ参照IDを紐付けています。Phase 4AではResearch結果を既存Word Order Builderへ還元し、4件のProblem（複数正答1件を含む）と任意Hintをデータ駆動で扱います。Phase 4BではResearchで候補化したSentence Pattern Diagramを追加し、3件のProblemからSVO・SVC・SVOOの文型図を生成します。Phase 4CではModifier Connection Viewerを追加し、3件のProblemから名詞修飾・動詞修飾・関係詞節による修飾関係を表示します。Phase 5Aではこれらの既存ComponentをLesson 02「英文の構造を読む」へ組み合わせ、骨格から修飾関係へ進む学習フローを構成します。カテゴリ・検索・再利用性ランク・Demo状態をAND条件で絞り込め、ハッシュURLによる詳細画面では元の出典メタデータと外部調査の含意を分けて確認できます。実際に操作できるDemoは6つです。
 
 1. Word Order Builder
 2. Mark the Parts
@@ -58,7 +58,7 @@ Phase 1の基盤とPhase 2AのGrammar Classifierをもとに、Phase 2Bで40件�
 5. Sentence Pattern Diagram
 6. Modifier Connection Viewer
 
-Lesson 01「文の骨格を見抜く」は [#lessons/basic-sentence-structure](#lessons/basic-sentence-structure) から開けます。LessonはProblem IDで問題を参照し、同じComponentへ別のProblem Dataを渡せます。ProblemとLessonの検証は `npm run check` に含まれます。
+Lesson 01「文の骨格を見抜く」とLesson 02「英文の構造を読む」はCatalogのGuided lessonsから開けます。LessonはProblem IDで問題を参照し、同じComponentへ別のProblem Dataを渡せます。ProblemとLessonの検証は `npm run check` に含まれます。
 
 画面は、スマートフォンのタップ操作とキーボード操作で利用できるようにしています。BackendやDBはまだ導入していません。外部Repositoryやサイトのコード・教材を推測で取り込まず、未調査の出典は明示的に未調査として扱います。
 

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { interactions } from '../src/data/interactions.js';
-import { lessons } from '../src/data/lessons.js';
+import { getLessonById, getLessonBySlug, lessons } from '../src/data/lessons.js';
 import { grammarClassifierProblems } from '../src/data/problems/grammar-classifier.js';
 import { markPartsProblems } from '../src/data/problems/mark-parts.js';
 import { problemRegistry, problems } from '../src/data/problems/index.js';
@@ -110,6 +110,10 @@ const lessonValidation = validateLessons(lessons, {
   problemTypes: new Set(Object.keys(demoRegistry)),
 });
 assert.equal(lessonValidation.valid, true, lessonValidation.errors.join('; '));
+assert.equal(lessons.length, 2);
+assert.equal(getLessonById('LESSON-002').slug, 'structural-reading');
+assert.equal(getLessonBySlug('structural-reading').id, 'LESSON-002');
+assert.equal(getLessonBySlug('structural-reading').steps.length, 6);
 assert.equal(lessons[0].steps.length, 6);
 
 assert.equal(checkWordOrder(['i', 'play', 'tennis'], [['i', 'play', 'tennis']]), true);
@@ -296,5 +300,8 @@ assert.equal(validateLessons(mismatchedLessonStep, { problemRegistry }).valid, f
 const emptyLessonSteps = structuredClone(lessons);
 emptyLessonSteps[0].steps = [];
 assert.equal(validateLessons(emptyLessonSteps, { problemRegistry }).valid, false);
+const duplicateStepId = structuredClone(lessons);
+duplicateStepId[1].steps[1].id = duplicateStepId[1].steps[0].id;
+assert.equal(validateLessons(duplicateStepId, { problemRegistry, problemTypes: new Set(Object.keys(demoRegistry)) }).valid, false);
 
 console.log('Logic tests passed.');

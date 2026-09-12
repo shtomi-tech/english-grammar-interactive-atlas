@@ -9,7 +9,7 @@ import {
   reusePolicyLabels,
   sourceTypeLabels,
 } from './data/interaction-schema.js';
-import { getLessonBySlug } from './data/lessons.js';
+import { getLessonBySlug, lessons } from './data/lessons.js';
 import {
   getResearchReferencesByIds,
   researchLicenseStatusLabels,
@@ -111,7 +111,7 @@ function renderHeader() {
           </a>
           <nav aria-label="Main navigation">
             <a href="#catalog">Catalog</a>
-            <a href="#lessons/basic-sentence-structure">Lesson 01</a>
+            ${lessons.map((lesson) => `<a href="#lessons/${escapeHtml(lesson.slug)}">${escapeHtml(lesson.label)}</a>`).join('')}
             <a href="#about">How it works</a>
           </nav>
         </div>
@@ -167,6 +167,29 @@ function renderToolbar() {
     </section>`;
 }
 
+function renderLessonIndex() {
+  return `
+    <section class="lesson-index" id="lessons" aria-labelledby="lesson-index-heading">
+      <div class="lesson-index-copy">
+        <p class="section-kicker">Guided lessons</p>
+        <h2 id="lesson-index-heading">図鑑の操作を、学習の流れへ。</h2>
+        <p>LessonはRegistryのProblem IDから構成され、同じComponentを別の文脈で再利用します。</p>
+      </div>
+      <div class="lesson-index-list">
+        ${lessons
+          .map(
+            (lesson) => `
+              <a class="lesson-index-card" href="#lessons/${escapeHtml(lesson.slug)}">
+                <span class="step-label">${escapeHtml(lesson.label)}</span>
+                <strong>${escapeHtml(lesson.title)}</strong>
+                <span>${escapeHtml(lesson.learningGoal)}</span>
+              </a>`,
+          )
+          .join('')}
+      </div>
+    </section>`;
+}
+
 function getVisibleInteractions() {
   return searchInteractions(
     filterInteractions(interactions, state.category, {
@@ -204,6 +227,7 @@ function renderAtlas() {
     ${renderHeader()}
     <main class="catalog-section shell" id="catalog">
       ${renderToolbar()}
+      ${renderLessonIndex()}
       <div class="results-heading">
         <h2>Explore interactions</h2>
         <span class="results-count" data-results-count></span>

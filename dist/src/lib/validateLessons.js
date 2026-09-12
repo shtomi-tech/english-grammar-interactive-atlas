@@ -29,12 +29,15 @@ export function validateLessons(lessons, { problemRegistry = {}, problemTypes = 
       errors.push(`${label}.steps must contain at least one step`);
       return;
     }
+    const stepIds = new Set();
     lesson.steps.forEach((step, stepIndex) => {
       const stepLabel = `${label}.steps[${stepIndex}]`;
-      if (!isRecord(step) || !hasText(step.interactionType) || !hasText(step.problemId)) {
-        errors.push(`${stepLabel} needs interactionType and problemId`);
+      if (!isRecord(step) || !hasText(step.id) || !hasText(step.interactionType) || !hasText(step.problemId)) {
+        errors.push(`${stepLabel} needs id, interactionType, and problemId`);
         return;
       }
+      if (stepIds.has(step.id)) errors.push(`${stepLabel}.id is duplicated: ${step.id}`);
+      stepIds.add(step.id);
       if (problemTypes.size > 0 && !problemTypes.has(step.interactionType)) {
         errors.push(`${stepLabel}.interactionType is not registered: ${step.interactionType}`);
       }
