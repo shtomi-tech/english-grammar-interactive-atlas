@@ -5,13 +5,7 @@ import {
   findMatchingTargetState,
   hasCompleteGenerationState,
 } from '../../lib/grammar/generation-goal.js';
-
-const controlLabels = {
-  subject: 'Subject',
-  tense: 'Tense',
-  modal: 'Modal',
-  negative: 'Polarity',
-};
+import { getControlLabel } from '../../lib/grammar/grammar-controls.js';
 
 function valueKey(value) {
   return `${typeof value}:${String(value)}`;
@@ -49,7 +43,7 @@ export function mountSentenceGenerator(root, problem, options = {}) {
           .map(
             ([name, values]) => `
               <fieldset class="control-group">
-                <legend>${escapeHtml(controlLabels[name] ?? name)}</legend>
+                <legend>${escapeHtml(getControlLabel(name))}</legend>
                 <div class="control-options">
                   ${values
                     .map((option, index) => {
@@ -108,7 +102,7 @@ export function mountSentenceGenerator(root, problem, options = {}) {
     sentence.textContent = generatedSentence || '—';
     recipe.innerHTML = generatedSentence
       ? controlNames
-          .map((name) => `<span class="recipe-chip">${escapeHtml(controlLabels[name] ?? name)}: ${escapeHtml(getOptionLabel(name, state[name]))}</span>`)
+          .map((name) => `<span class="recipe-chip">${escapeHtml(getControlLabel(name))}: ${escapeHtml(getOptionLabel(name, state[name]))}</span>`)
           .join('')
       : '';
     feedback.className = feedbackText ? `feedback is-visible ${feedbackKind}` : 'feedback';

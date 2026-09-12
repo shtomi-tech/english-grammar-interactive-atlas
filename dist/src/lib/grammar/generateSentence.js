@@ -1,3 +1,5 @@
+import { getGrammarStateMode, SUPPORTED_MODALS, SUPPORTED_TENSES } from './grammar-state.js';
+
 const defaultSentenceModel = {
   subjects: {
     he: { label: 'He', number: 'singular' },
@@ -7,8 +9,6 @@ const defaultSentenceModel = {
   object: 'tennis',
   punctuation: '.',
 };
-
-const supportedModals = new Set(['can', 'could', 'should', 'must']);
 
 function presentForm(verb, number) {
   if (verb.present) return verb.present;
@@ -23,14 +23,16 @@ export function generateSentence(
   const subjectData = model.subjects?.[subject];
   const verb = model.verb;
 
-  if (!subjectData || !verb?.base || !verb?.past || typeof model.object !== 'string') {
+  if (!subjectData || !verb?.base || typeof model.object !== 'string') {
     throw new Error('Unsupported sentence state');
   }
+  const mode = getGrammarStateMode({ tense, modal });
+  if (mode === 'invalid') throw new Error('Unsupported sentence state');
   const punctuation = model.punctuation ?? '.';
   if (typeof punctuation !== 'string') throw new Error('Unsupported sentence state');
 
-  if (modal !== undefined) {
-    if (tense !== undefined || !supportedModals.has(modal) || typeof negative !== 'boolean') {
+  if (mode === 'modal') {
+    if (!SUPPORTED_MODALS.has(modal) || typeof negative !== 'boolean') {
       throw new Error('Unsupported sentence state');
     }
     const modalText = negative && modal === 'can' ? 'cannot' : negative ? `${modal} not` : modal;
@@ -38,7 +40,7 @@ export function generateSentence(
   }
 
   const resolvedTense = tense ?? 'present';
-  if (!['present', 'past'].includes(resolvedTense) || typeof negative !== 'boolean') {
+  if (!SUPPORTED_TENSES.has(resolvedTense) || !verb?.past || typeof negative !== 'boolean') {
     throw new Error('Unsupported sentence state');
   }
 

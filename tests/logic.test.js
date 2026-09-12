@@ -22,6 +22,8 @@ import { checkClassification } from '../src/lib/grammar/classification.js';
 import { checkWordOrder, shuffleWordIds } from '../src/lib/grammar/word-order.js';
 import { checkTokenSelection } from '../src/lib/grammar/parts.js';
 import { generateSentence } from '../src/lib/grammar/generateSentence.js';
+import { getGrammarStateMode, SUPPORTED_MODALS, SUPPORTED_TENSES } from '../src/lib/grammar/grammar-state.js';
+import { getControlLabel } from '../src/lib/grammar/grammar-controls.js';
 import { buildPatternSlots, getExploredRoles, hasExploredAllChunks } from '../src/lib/grammar/sentence-pattern.js';
 import { getRelatedChunkIds, getRelationsForChunk, hasExploredAllRelations } from '../src/lib/grammar/modifier-relations.js';
 import {
@@ -378,6 +380,18 @@ assert.equal(
   generateSentence({ subject: 'he', modal: 'can', negative: true }, sentenceTransformerProblem.sentenceModel),
   'He cannot play tennis.',
 );
+const modalOnlySentenceModel = structuredClone(sentenceTransformerProblems[1].sentenceModel);
+assert.equal(Object.hasOwn(modalOnlySentenceModel.verb, 'past'), false);
+assert.equal(
+  generateSentence({ subject: 'he', modal: 'can', negative: false }, modalOnlySentenceModel),
+  'He can play tennis.',
+);
+assert.equal(getGrammarStateMode({ subject: 'he', tense: 'present' }), 'tense');
+assert.equal(getGrammarStateMode({ subject: 'he', modal: 'can' }), 'modal');
+assert.equal(getGrammarStateMode({ tense: 'present', modal: 'can' }), 'invalid');
+assert.equal(SUPPORTED_TENSES.has('past'), true);
+assert.equal(SUPPORTED_MODALS.has('could'), true);
+assert.equal(getControlLabel('modal'), 'Modal');
 assert.throws(() => generateSentence({ subject: 'he', modal: 'might', negative: false }), /Unsupported sentence state/);
 assert.throws(() => generateSentence({ subject: 'he', tense: 'past', modal: 'can', negative: false }), /Unsupported sentence state/);
 
@@ -495,6 +509,11 @@ generatorDuplicateTarget[2].targetStates.push({ ...generatorDuplicateTarget[2].t
 assert.equal(validateProblems(generatorDuplicateTarget).valid, false);
 assert.equal(validateProblems([sentenceTransformerProblems[1]]).valid, true);
 assert.equal(validateProblems([sentenceGeneratorProblems[3]]).valid, true);
+const modalSentenceModelWithoutPast = structuredClone(sentenceTransformerProblems[1]);
+assert.equal(validateProblems([modalSentenceModelWithoutPast]).valid, true);
+const tenseSentenceModelWithoutPast = structuredClone(sentenceTransformerProblems[0]);
+delete tenseSentenceModelWithoutPast.sentenceModel.verb.past;
+assert.equal(validateProblems([tenseSentenceModelWithoutPast]).valid, false);
 const modalTransformerUnknown = structuredClone(sentenceTransformerProblems);
 modalTransformerUnknown[1].controls.modal[0].value = 'might';
 assert.equal(validateProblems(modalTransformerUnknown).valid, false);

@@ -62,7 +62,7 @@ export const sentenceTransformerProblems = [
         he: { label: 'He', number: 'singular' },
         they: { label: 'They', number: 'plural' },
       },
-      verb: { base: 'play', past: 'played' },
+      verb: { base: 'play' },
       object: 'tennis',
       punctuation: '.',
     },

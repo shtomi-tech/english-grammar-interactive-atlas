@@ -25,8 +25,10 @@ He cannot play tennis.
 
 Negative `can` is rendered as `cannot`; negative `could`, `should`, and `must` use `could not`, `should not`, and `must not`.
 
+The supported values are defined once in `src/lib/grammar/grammar-state.js`. The shared mode and control-label contracts are documented in [GRAMMAR_STATE_CONTRACT.md](./GRAMMAR_STATE_CONTRACT.md).
+
 ## Reuse and validation
 
-Sentence Transformer and Sentence Generator both call `src/lib/grammar/generateSentence.js`. The Validator checks the modal option set, defaults, target states, and the shared sentence model. A Problem must use either `tense` or `modal`; mixing both is outside this phase.
+Sentence Transformer and Sentence Generator both call `src/lib/grammar/generateSentence.js`. The Validator checks the modal option set, defaults, target states, and the shared sentence model. A Problem must use either `tense` or `modal`; mixing both is outside this phase. Modal-only sentence models need only `verb.base`, while tense models also need `verb.past`.
 
 Lesson 03 composes the existing six interaction families without adding a Component, InteractionEntry, Research Reference, backend, or persistent progress. Passive voice, perfect/progressive modal combinations, `may`/`might`, and free-text generation remain future extensions.

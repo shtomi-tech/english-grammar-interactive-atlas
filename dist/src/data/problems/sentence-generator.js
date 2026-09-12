@@ -23,6 +23,9 @@ const sharedSentenceModel = {
   punctuation: '.',
 };
 
+const modalSentenceModel = structuredClone(sharedSentenceModel);
+delete modalSentenceModel.verb.past;
+
 const modalControls = {
   subject: [
     { value: 'he', label: 'He' },
@@ -93,7 +96,7 @@ export const sentenceGeneratorProblems = [
     },
     controls: structuredClone(modalControls),
     targetStates: [{ subject: 'they', modal: 'should', negative: false }],
-    sentenceModel: structuredClone(sharedSentenceModel),
+    sentenceModel: structuredClone(modalSentenceModel),
     explanation: '助動詞 should の後ろには、主語が They でも動詞の原形 play を置きます。',
   },
 ];

@@ -124,7 +124,7 @@ Word Orderの正答は `acceptedAnswers` を正本とし、1問に1つ以上のI
 
 ## Modal support
 
-Sentence TransformerとSentence Generatorは、既存の生成ロジックを共有したまま、`subject`、`modal`、`negative` の状態も受け取れます。対応する助動詞は `can`、`could`、`should`、`must` です。時制用の `tense` と `modal` は同じProblemのcontrolsへ同時に置きません。Problem、Lesson 03、生成境界の詳細は [MODAL_SUPPORT.md](./MODAL_SUPPORT.md) を参照してください。
+Sentence TransformerとSentence Generatorは、既存の生成ロジックを共有したまま、`subject`、`modal`、`negative` の状態も受け取れます。対応する助動詞は `can`、`could`、`should`、`must` です。時制用の `tense` と `modal` は同じProblemのcontrolsへ同時に置きません。controlの表示名は `src/lib/grammar/grammar-controls.js` から共有します。Problem、Lesson 03、生成境界の詳細は [MODAL_SUPPORT.md](./MODAL_SUPPORT.md) と [GRAMMAR_STATE_CONTRACT.md](./GRAMMAR_STATE_CONTRACT.md) を参照してください。
 
 ## Lesson Registry and Problem injection
 

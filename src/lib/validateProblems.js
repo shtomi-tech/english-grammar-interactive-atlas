@@ -1,7 +1,7 @@
+import { getGrammarStateMode, SUPPORTED_MODALS, SUPPORTED_TENSES } from './grammar/grammar-state.js';
+
 const problemTypes = new Set(['word-order', 'mark-parts', 'grammar-classifier', 'sentence-transformer', 'sentence-pattern-diagram', 'modifier-connection-viewer', 'sentence-comparison', 'error-corrector', 'context-grammar', 'sentence-generator']);
 const transformerControlNames = new Set(['subject', 'tense', 'negative', 'modal']);
-const supportedTenses = new Set(['present', 'past']);
-const supportedModals = new Set(['can', 'could', 'should', 'must']);
 
 function hasText(value) {
   return typeof value === 'string' && value.trim().length > 0;
@@ -134,10 +134,10 @@ function validateGrammarControls(problem, label, errors) {
         const key = controlValueKey(option.value);
         if (seenValues.has(key)) errors.push(`${label}.controls.${name} has duplicate values`);
         seenValues.add(key);
-        if (name === 'tense' && !supportedTenses.has(option.value)) {
+        if (name === 'tense' && !SUPPORTED_TENSES.has(option.value)) {
           errors.push(`${label}.controls.tense has unsupported value: ${option.value}`);
         }
-        if (name === 'modal' && !supportedModals.has(option.value)) {
+        if (name === 'modal' && !SUPPORTED_MODALS.has(option.value)) {
           errors.push(`${label}.controls.modal has unsupported value: ${option.value}`);
         }
         if (name === 'negative' && typeof option.value !== 'boolean') {
@@ -146,7 +146,7 @@ function validateGrammarControls(problem, label, errors) {
       });
     }
   }
-  if (isRecord(problem.controls) && Object.prototype.hasOwnProperty.call(problem.controls, 'tense') && Object.prototype.hasOwnProperty.call(problem.controls, 'modal')) {
+  if (getGrammarStateMode(problem.controls) === 'invalid') {
     errors.push(`${label}.controls cannot contain both tense and modal`);
   }
 }
@@ -179,7 +179,10 @@ function validateSentenceModel(problem, label, errors) {
         errors.push(`${label}.sentenceModel.subjects.${subjectId} is invalid`);
       }
     }
-    if (!hasText(model.verb.base) || !hasText(model.verb.past)) errors.push(`${label}.sentenceModel.verb needs base and past`);
+    if (!hasText(model.verb.base)) errors.push(`${label}.sentenceModel.verb.base is required`);
+    if (getGrammarStateMode(problem.controls) === 'tense' && !hasText(model.verb.past)) {
+      errors.push(`${label}.sentenceModel.verb.past is required for tense controls`);
+    }
     if (model.punctuation !== undefined && !hasText(model.punctuation)) errors.push(`${label}.sentenceModel.punctuation is invalid`);
     const subjectOptions = problem.controls?.subject ?? [];
     subjectOptions.forEach((option) => {

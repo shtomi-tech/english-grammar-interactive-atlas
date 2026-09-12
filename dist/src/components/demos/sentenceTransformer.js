@@ -1,13 +1,7 @@
 import { escapeHtml } from '../../lib/dom.js';
 import { prepareMountRoot } from '../../lib/lifecycle.js';
 import { generateSentence } from '../../lib/grammar/generateSentence.js';
-
-const controlLabels = {
-  subject: 'Subject',
-  tense: 'Tense',
-  modal: 'Modal',
-  negative: 'Negative',
-};
+import { getControlLabel } from '../../lib/grammar/grammar-controls.js';
 
 function valueKey(value) {
   return `${typeof value}:${String(value)}`;
@@ -35,7 +29,7 @@ export function mountSentenceTransformer(root, problem, options = {}) {
           .map(
             ([name, values]) => `
               <fieldset class="control-group">
-                <legend>${escapeHtml(controlLabels[name] ?? name)}</legend>
+                <legend>${escapeHtml(getControlLabel(name))}</legend>
                 <div class="control-options">
                   ${values
                     .map((option, index) => {
@@ -67,7 +61,7 @@ export function mountSentenceTransformer(root, problem, options = {}) {
     const generatedSentence = generateSentence(state, problem.sentenceModel);
     sentence.textContent = generatedSentence;
     recipe.innerHTML = controls
-      .map(([name]) => `<span class="recipe-chip">${escapeHtml(controlLabels[name] ?? name)}: ${escapeHtml(getOptionLabel(name, state[name]))}</span>`)
+      .map(([name]) => `<span class="recipe-chip">${escapeHtml(getControlLabel(name))}: ${escapeHtml(getOptionLabel(name, state[name]))}</span>`)
       .join('');
     return generatedSentence;
   }
