@@ -64,6 +64,7 @@ import {
   researchReferenceRegistry,
 } from '../src/data/research/index.js';
 import { validateResearchReferences, validateResearchRegistry } from '../src/lib/validateResearch.js';
+import { getLessonProgress, isLessonStepComplete, markLessonStepComplete } from '../src/lib/lesson-progress.js';
 
 assert.equal(interactions.length, 40);
 assert.deepEqual(
@@ -280,6 +281,35 @@ assert.equal(getLessonById('LESSON-003').slug, 'modal-verbs');
 assert.equal(getLessonBySlug('modal-verbs').steps.length, 6);
 assert.equal(getLessonById('LESSON-004').slug, 'passive-voice');
 assert.equal(getLessonBySlug('passive-voice').steps.length, 6);
+
+const lessonProgress = lessons[0];
+const emptyLessonProgress = new Set();
+assert.deepEqual(getLessonProgress(lessonProgress, emptyLessonProgress), {
+  completedCount: 0,
+  totalCount: 6,
+  percentage: 0,
+  allComplete: false,
+});
+const firstStepProgress = markLessonStepComplete(emptyLessonProgress, lessonProgress.steps[0].id);
+assert.equal(emptyLessonProgress.has(lessonProgress.steps[0].id), false);
+assert.equal(isLessonStepComplete(firstStepProgress, lessonProgress.steps[0].id), true);
+assert.equal(getLessonProgress(lessonProgress, firstStepProgress).completedCount, 1);
+const repeatedStepProgress = markLessonStepComplete(firstStepProgress, lessonProgress.steps[0].id);
+assert.equal(getLessonProgress(lessonProgress, repeatedStepProgress).completedCount, 1);
+const twoStepProgress = markLessonStepComplete(repeatedStepProgress, lessonProgress.steps[1].id);
+assert.equal(getLessonProgress(lessonProgress, twoStepProgress).completedCount, 2);
+assert.equal(getLessonProgress(lessonProgress, twoStepProgress).percentage, 33);
+const allStepProgress = lessonProgress.steps.reduce(
+  (completedStepIds, step) => markLessonStepComplete(completedStepIds, step.id),
+  emptyLessonProgress,
+);
+assert.deepEqual(getLessonProgress(lessonProgress, allStepProgress), {
+  completedCount: 6,
+  totalCount: 6,
+  percentage: 100,
+  allComplete: true,
+});
+assert.equal(getLessonProgress(lessonProgress, new Set(['unknown-step'])).completedCount, 0);
 
 assert.equal(checkWordOrder(['i', 'play', 'tennis'], [['i', 'play', 'tennis']]), true);
 assert.equal(checkWordOrder(['play', 'i', 'tennis'], [['i', 'play', 'tennis']]), false);

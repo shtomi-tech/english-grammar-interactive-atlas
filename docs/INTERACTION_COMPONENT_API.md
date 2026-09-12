@@ -56,6 +56,8 @@ onComplete({
 
 Modifier PositionerはResetで選択中のmodifier、placement、feedback、completion状態を初期化します。placementの位置はbuttonで選び、完成文・relation・meaning・feedbackを `aria-live` で更新します。
 
+Lesson playerでは全Stepを原則completion requiredとして扱います。各Componentが `onComplete({ correct: true })` を返すまでNextを無効にし、完了したStep IDはLesson画面内のmemoryだけで追跡します。Previousで戻った完了済みStepは再回答なしでNextを使えます。現在のStep番号ではなく、完了済みStep数をLesson全体の進捗表示に使います。
+
 ## Reset and lifecycle
 
 ResetはProblemの初期状態へ戻します。LessonがStepを切り替えるときは、前のComponentのcleanupを呼び、同じrootへ新しいProblemをmountします。globalな `document` / `window` へのイベント登録は行いません。

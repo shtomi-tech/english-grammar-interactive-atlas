@@ -46,6 +46,7 @@ const files = [
   'src/lib/grammar/generation-goal.js',
   'src/lib/grammar/grammar-state.js',
   'src/lib/grammar/grammar-controls.js',
+  'src/lib/lesson-progress.js',
   'src/webmcp.js',
   'src/components/atlas/interactionCard.js',
   'src/components/atlas/filterBar.js',

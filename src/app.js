@@ -10,7 +10,6 @@ import {
   sourceTypeLabels,
 } from './data/interaction-schema.js';
 import { getLessonBySlug, lessons } from './data/lessons.js';
-import { getProblemById } from './data/problems/index.js';
 import {
   getResearchReferencesByIds,
   researchLicenseStatusLabels,
@@ -24,6 +23,7 @@ import { renderDemoPanel } from './components/demos/demoPanel.js';
 import { demoRegistry, mountDemo } from './components/demos/registry.js';
 import { filterInteractions, getAtlasStats, searchInteractions } from './lib/atlas.js';
 import { escapeHtml } from './lib/dom.js';
+import { getLessonProgress, isLessonStepComplete, markLessonStepComplete } from './lib/lesson-progress.js';
 import { registerAtlasWebMcp } from './webmcp.js';
 
 const app = document.querySelector('#app');
@@ -345,6 +345,7 @@ function renderLesson(lesson) {
   document.title = `${lesson.label}: ${lesson.title} · Interactive Grammar Atlas`;
   let stepIndex = 0;
   let cleanup = null;
+  let completedStepIds = new Set();
 
   app.innerHTML = `
     <main class="lesson-page shell">
@@ -392,28 +393,44 @@ function renderLesson(lesson) {
   const previousButton = app.querySelector('[data-lesson-previous]');
   const nextButton = app.querySelector('[data-lesson-next]');
 
+  function renderLessonProgress() {
+    const progress = getLessonProgress(lesson, completedStepIds);
+    progressText.textContent = `${progress.completedCount} / ${progress.totalCount} steps complete · ${progress.percentage}% complete`;
+    progressDots.innerHTML = lesson.steps
+      .map((step) => {
+        const completed = isLessonStepComplete(completedStepIds, step.id);
+        const current = step.id === lesson.steps[stepIndex].id;
+        return `<span class="progress-dot${completed ? ' is-complete' : ''}${current ? ' is-current' : ''}" aria-hidden="true"></span>`;
+      })
+      .join('');
+    return progress;
+  }
+
   function renderStep(shouldFocus = true) {
     const step = lesson.steps[stepIndex];
-    const requiresCompletion = Boolean(getProblemById(step.problemId)?.completion);
-    let stepComplete = !requiresCompletion;
+    const stepComplete = isLessonStepComplete(completedStepIds, step.id);
     cleanup?.();
     cleanup = null;
     stepLabel.textContent = `Step ${stepIndex + 1} / ${lesson.steps.length}`;
-    progressText.textContent = `${Math.round(((stepIndex + 1) / lesson.steps.length) * 100)}% complete`;
-    progressDots.innerHTML = lesson.steps
-      .map((_, index) => `<span class="progress-dot${index <= stepIndex ? ' is-complete' : ''}" aria-hidden="true"></span>`)
-      .join('');
+    const lessonProgress = renderLessonProgress();
     stepTitle.textContent = step.title;
     stepInstruction.textContent = step.instruction;
-    completion.textContent = '';
+    completion.textContent = stepComplete
+      ? lessonProgress.allComplete
+        ? 'Lesson complete — すべてのStepを完了しました。'
+        : 'Step complete — 次の気づきへ進めます。'
+      : '';
     previousButton.disabled = stepIndex === 0;
     nextButton.disabled = stepIndex === lesson.steps.length - 1 || !stepComplete;
     cleanup = mountDemo(step.interactionType, componentRoot, {
       problemId: step.problemId,
       onComplete(result) {
         if (result.correct) {
-          completion.textContent = 'Step complete — 次の気づきへ進めます。';
-          stepComplete = true;
+          completedStepIds = markLessonStepComplete(completedStepIds, step.id);
+          const progress = renderLessonProgress();
+          completion.textContent = progress.allComplete
+            ? 'Lesson complete — すべてのStepを完了しました。'
+            : 'Step complete — 次の気づきへ進めます。';
           nextButton.disabled = stepIndex === lesson.steps.length - 1;
         }
       },
