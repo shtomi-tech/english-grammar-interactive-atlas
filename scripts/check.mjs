@@ -12,6 +12,7 @@ const files = [
   'src/lib/grammar/word-order.js',
   'src/lib/grammar/parts.js',
   'src/lib/grammar/generateSentence.js',
+  'src/webmcp.js',
   'src/components/atlas/interactionCard.js',
   'src/components/atlas/filterBar.js',
   'src/components/demos/demoPanel.js',

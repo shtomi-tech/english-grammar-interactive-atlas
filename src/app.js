@@ -5,6 +5,7 @@ import { renderDemoPanel } from './components/demos/demoPanel.js';
 import { demoRegistry } from './components/demos/registry.js';
 import { filterInteractions, searchInteractions } from './lib/atlas.js';
 import { escapeHtml } from './lib/dom.js';
+import { registerAtlasWebMcp } from './webmcp.js';
 
 const app = document.querySelector('#app');
 const state = { query: '', category: 'all' };
@@ -77,6 +78,18 @@ function updateResults() {
   if (!results || !count) return;
   count.textContent = `${visible.length} ${visible.length === 1 ? 'entry' : 'entries'}`;
   results.innerHTML = visible.length ? visible.map(renderInteractionCard).join('') : renderEmptyState();
+}
+
+function showAtlasSearch(query) {
+  state.query = query;
+  if (getRoute().page !== 'atlas') {
+    renderAtlas();
+  } else {
+    const searchInput = app.querySelector('#interaction-search');
+    if (searchInput) searchInput.value = query;
+    updateResults();
+  }
+  return getVisibleInteractions();
 }
 
 function renderAtlas() {
@@ -188,4 +201,5 @@ function render() {
 }
 
 window.addEventListener('hashchange', render);
+registerAtlasWebMcp({ getRoute, showAtlasSearch });
 render();
