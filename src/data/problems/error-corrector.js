@@ -143,6 +143,33 @@ export const errorCorrectorProblems = [
     ],
     explanation: '受動態は be + 過去分詞で作ります。過去形と過去分詞が異なる動詞にも注意します。',
   },
+  {
+    id: 'EC-006',
+    type: 'error-corrector',
+    prompt: 'to の後ろの動詞を原形に直し、正しい英文を完成させてください。',
+    tokens: [
+      { id: 't1', text: 'She' },
+      { id: 't2', text: 'wants' },
+      { id: 't3', text: 'to' },
+      { id: 't4', text: 'studies', correctionId: 'infinitive-base-form' },
+      { id: 't5', text: 'abroad.' },
+    ],
+    corrections: [
+      {
+        id: 'infinitive-base-form',
+        tokenId: 't4',
+        options: [
+          { id: 'o16', text: 'study' },
+          { id: 'o17', text: 'studies' },
+          { id: 'o18', text: 'studying' },
+        ],
+        acceptedOptionIds: ['o16'],
+        ruleLabel: 'Base verb after to',
+        explanation: '不定詞ではtoの後ろに動詞の原形を置くため、studiesではなくstudyを使います。',
+      },
+    ],
+    explanation: 'to不定詞の基本形は to + 動詞原形です。主語が三人称単数でも、toの後ろに -s は付けません。',
+  },
 ];
 
 export const errorCorrectorProblem = errorCorrectorProblems[0];

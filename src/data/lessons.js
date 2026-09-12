@@ -207,6 +207,58 @@ export const lessons = [
       },
     ],
   },
+  {
+    id: 'LESSON-005',
+    slug: 'infinitives',
+    label: 'Lesson 05',
+    title: '不定詞を形・役割・目的から使う',
+    description: 'to + 動詞原形という形を確認し、文の中で名詞・形容詞・副詞のように働く違いを、位置・意味・場面から整理します。',
+    learningGoal: '不定詞の基本形を理解し、名詞的・形容詞的・副詞的な働きを見分け、文の意味や目的に応じて適切に使えるようにする。',
+    steps: [
+      {
+        id: 'LESSON-005-STEP-01',
+        interactionType: 'word-order',
+        problemId: 'WO-007',
+        title: '不定詞の基本形を組み立てる',
+        instruction: 'I want to study English. を組み立て、to + 動詞原形の語順を確認します。',
+      },
+      {
+        id: 'LESSON-005-STEP-02',
+        interactionType: 'grammar-classifier',
+        problemId: 'GC-004',
+        title: '不定詞の3つの働きを分類する',
+        instruction: '同じto + 動詞原形が、名詞・形容詞・副詞に近い働きをする違いを分類します。',
+      },
+      {
+        id: 'LESSON-005-STEP-03',
+        interactionType: 'modifier-positioner',
+        problemId: 'MPO-004',
+        title: '目的を表す不定詞の位置を見る',
+        instruction: 'to learn English を文頭と文末へ置き、どちらも映画を見る目的を表せることを確認します。',
+      },
+      {
+        id: 'LESSON-005-STEP-04',
+        interactionType: 'sentence-comparison',
+        problemId: 'SC-001',
+        title: '動名詞と不定詞の意味差を比べる',
+        instruction: 'stop の後ろの動名詞と不定詞を比べ、形の違いが意味の差を作ることを確認します。',
+      },
+      {
+        id: 'LESSON-005-STEP-05',
+        interactionType: 'error-corrector',
+        problemId: 'EC-006',
+        title: 'toの後ろの動詞を直す',
+        instruction: 'toの後ろには動詞の原形を置く規則を、誤文の訂正で確認します。',
+      },
+      {
+        id: 'LESSON-005-STEP-06',
+        interactionType: 'context-grammar',
+        problemId: 'CG-006',
+        title: '場面で不定詞を使い分ける',
+        instruction: '予定・必要なもの・目的の場面に合う不定詞の働きを会話の中で選びます。',
+      },
+    ],
+  },
 ];
 
 export const lessonRegistry = Object.fromEntries(lessons.map((lesson) => [lesson.id, lesson]));

@@ -69,6 +69,6 @@ Sentence TransformerとSentence Generatorの文法状態契約は [GRAMMAR_STATE
 
 Sentence Transformerでは、必要な値の探索をLessonの完了条件にするProblemだけ、`completion: { type: 'explore-control', control, requiredValues }` を追加できます。初期値は探索済みとして扱い、同一マウント中にrequiredValuesをすべて表示した時点で完了します。これは進捗の保存や採点ではありません。
 
-Lesson 01〜04の進捗は、各StepのComponentが返す `onComplete({ correct: true })` を正本とします。表示しただけのStepは未完了とし、完了済みStep IDをLesson画面内のmemoryにだけ保持してNextと進捗表示へ反映します。ページreloadやroute再入場でリセットされ、永続化はしません。
+Lesson 01〜05の進捗は、各StepのComponentが返す `onComplete({ correct: true })` を正本とします。表示しただけのStepは未完了とし、完了済みStep IDをLesson画面内のmemoryにだけ保持してNextと進捗表示へ反映します。ページreloadやroute再入場でリセットされ、永続化はしません。
 
 検証は `npm test`、`npm run check`、`npm run build` の順で実行します。

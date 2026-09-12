@@ -38,7 +38,7 @@
 
 Demoを作る場合、英文・正答・説明などの教材固有データは `src/data/problems/` の機能別ファイルへ置きます。Demoコンポーネントに問題文を直接書きません。分類Demoなら、`categories` と `items` の `answer` をデータ側に持たせ、分類軸を差し替えられる形にします。互換用の `src/data/demo-problems.js` は代表Problemの再エクスポートだけを行います。
 
-Problemは `type` と安定した `id` を持ち、`src/data/problems/index.js` のRegistryから `getProblemById('WO-001')` のように取得できます。現在のProblem数は Word Order 6、Mark the Parts 3、Grammar Classifier 3、Sentence Transformer 3、Sentence Pattern Diagram 3、Modifier Connection Viewer 3、Modifier Positioner 3、Sentence Comparison 4、Error Corrector 5、Context Grammar 5、Sentence Generator 5（計43件）です。Phase 6DのMPO-001〜003は、既存のModifier Connection Viewerとは別の、位置変更と関係変化を扱うProblem Dataの例です。Word Orderの正答は `acceptedAnswers`（許容順序の配列）を正本とし、任意で段階的な `hints` を指定できます。複数正答の判定は `src/lib/grammar/word-order.js` に置き、UIへ重複実装しません。
+Problemは `type` と安定した `id` を持ち、`src/data/problems/index.js` のRegistryから `getProblemById('WO-001')` のように取得できます。現在のProblem数は Word Order 7、Mark the Parts 3、Grammar Classifier 4、Sentence Transformer 3、Sentence Pattern Diagram 3、Modifier Connection Viewer 3、Modifier Positioner 4、Sentence Comparison 4、Error Corrector 6、Context Grammar 6、Sentence Generator 5（計48件）です。Phase 6DのMPO-001〜003とPhase 6FのMPO-004は、既存のModifier Connection Viewerとは別の、位置変更と関係変化を扱うProblem Dataの例です。Phase 6FのLesson 05はWO-007、GC-004、MPO-004、既存SC-001、EC-006、CG-006を組み合わせます。Word Orderの正答は `acceptedAnswers`（許容順序の配列）を正本とし、任意で段階的な `hints` を指定できます。複数正答の判定は `src/lib/grammar/word-order.js` に置き、UIへ重複実装しません。
 
 Sentence Pattern Diagramでは、英文のまとまりを `chunks`、文型の役割順を `pattern` としてProblem Dataへ置きます。chunkの `id` はrole記号とは別の一意な識別子です。SVOOのように同じroleが複数ある問題でも、英文chunkと図のnodeをchunk IDで対応づけます。`mountSentencePatternDiagram` はSVO専用にせず、Problem DataからSVC・SVO・SVOOなどの配置を生成します。
 

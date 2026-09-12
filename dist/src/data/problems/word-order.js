@@ -87,6 +87,21 @@ export const wordOrderProblems = [
     explanation: '受動態は Subject + be + Past Participle が中心で、必要なら by 句で動作主を示します。',
     grammar: ['passive-voice', 'past-participle', 'word-order'],
   },
+  {
+    id: 'WO-007',
+    type: 'word-order',
+    prompt: 'to + 動詞原形の語順を意識して、英文を組み立ててください。',
+    words: [
+      { id: 'i', text: 'I' },
+      { id: 'want', text: 'want' },
+      { id: 'to', text: 'to' },
+      { id: 'study', text: 'study' },
+      { id: 'english', text: 'English' },
+    ],
+    acceptedAnswers: [['i', 'want', 'to', 'study', 'english']],
+    explanation: 'want の後ろで「〜すること」を表す不定詞は、to + 動詞の原形で作ります。',
+    grammar: ['infinitive', 'noun-use', 'base-verb', 'word-order'],
+  },
 ];
 
 export const wordOrderProblem = wordOrderProblems[0];

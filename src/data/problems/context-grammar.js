@@ -296,6 +296,86 @@ export const contextGrammarProblems = [
     ],
     explanation: '受動態は単なる変形ではなく、何を主語として焦点に置くか、動作主を示す必要があるかに応じて選びます。',
   },
+  {
+    id: 'CG-006',
+    type: 'context-grammar',
+    prompt: '場面に合う不定詞の働きを選び、会話を進めてください。',
+    scenario: {
+      title: 'Plans, needs, and purposes',
+      setting: '週末の予定、必要なもの、英語を学ぶ目的について話す場面です。',
+      learnerRole: 'Student',
+      goal: '不定詞が何を表しているかを場面に合わせて選ぶ。',
+    },
+    steps: [
+      {
+        id: 'cg006-step-1',
+        speaker: 'Friend',
+        line: 'What do you want to do this weekend?',
+        instruction: 'want の内容として、週末にしたいことを不定詞で答えてください。',
+        choices: [
+          {
+            id: 'cg006-choice-1a',
+            text: 'I want to visit the museum.',
+            reply: 'That sounds fun. I hope you enjoy the visit.',
+            grammarLabel: 'Infinitive after want',
+            explanation: 'to visit the museum がwantの内容を表します。',
+          },
+          {
+            id: 'cg006-choice-1b',
+            text: 'I want visit the museum.',
+            grammarLabel: 'Missing to',
+            explanation: 'want の後ろで「訪れること」を表すには、to visit の形にします。',
+          },
+        ],
+        acceptedChoiceIds: ['cg006-choice-1a'],
+      },
+      {
+        id: 'cg006-step-2',
+        speaker: 'Friend',
+        line: 'What do you need for the train ride?',
+        instruction: '必要なものを、名詞を説明する不定詞で答えてください。',
+        choices: [
+          {
+            id: 'cg006-choice-2a',
+            text: 'I need a book to read.',
+            reply: 'Good idea. You can read it on the train.',
+            grammarLabel: 'Adjective-like infinitive',
+            explanation: 'to read がa bookを説明し、「読むための本」という意味を作ります。',
+          },
+          {
+            id: 'cg006-choice-2b',
+            text: 'I need to read a book.',
+            grammarLabel: 'Infinitive after need',
+            explanation: 'この文も文法的には正しいですが、「私は本を読む必要がある」という意味で、今回の「何が必要か」というgoalには一致しません。',
+          },
+        ],
+        acceptedChoiceIds: ['cg006-choice-2a'],
+      },
+      {
+        id: 'cg006-step-3',
+        speaker: 'Friend',
+        line: 'Why do you watch English videos?',
+        instruction: '映画を見る目的を、目的を表す不定詞で説明してください。',
+        choices: [
+          {
+            id: 'cg006-choice-3a',
+            text: 'I watch them to learn English.',
+            reply: 'That is a useful way to practice every day.',
+            grammarLabel: 'Adverb-like infinitive of purpose',
+            explanation: 'to learn English がwatch themの目的を表します。',
+          },
+          {
+            id: 'cg006-choice-3b',
+            text: 'I watch them to learning English.',
+            grammarLabel: 'Wrong form after to',
+            explanation: 'toの後ろには動詞の原形learnを置き、learningにはしません。',
+          },
+        ],
+        acceptedChoiceIds: ['cg006-choice-3a'],
+      },
+    ],
+    explanation: '不定詞は、wantの内容、名詞の説明、動作の目的など、文中でさまざまな働きをします。',
+  },
 ];
 
 export const contextGrammarProblem = contextGrammarProblems[0];

@@ -154,6 +154,57 @@ export const modifierPositionerProblems = [
     punctuation: '.',
     explanation: '時間を表す副詞句は、文頭と文末のどちらにも置ける場合があります。',
   },
+  {
+    id: 'MPO-004',
+    type: 'modifier-positioner',
+    prompt: 'to learn English を目的を表す位置へ置き、文頭と文末の両方を確認してください。',
+    goal: {
+      description: 'to learn English が、映画を見る目的を表すことを確かめる。',
+    },
+    chunks: [
+      { id: 'i', text: 'I' },
+      { id: 'watch-movies', text: 'watch movies' },
+    ],
+    modifier: {
+      id: 'to-learn-english',
+      text: 'to learn English',
+    },
+    placements: [
+      {
+        id: 'sentence-start',
+        position: 0,
+        label: 'Sentence start',
+        modifierText: 'To learn English,',
+        grammatical: true,
+        matchesGoal: true,
+        relation: {
+          modifierId: 'to-learn-english',
+          targetId: 'watch-movies',
+          relationType: 'modifies',
+          label: 'I watch moviesの目的を説明',
+          explanation: '文頭のTo learn Englishは、映画を見る目的を説明しています。',
+        },
+        meaning: '英語を学ぶために、私は映画を見る。',
+      },
+      {
+        id: 'sentence-end',
+        position: 2,
+        label: 'Sentence end',
+        grammatical: true,
+        matchesGoal: true,
+        relation: {
+          modifierId: 'to-learn-english',
+          targetId: 'watch-movies',
+          relationType: 'modifies',
+          label: 'I watch moviesの目的を説明',
+          explanation: '文末のto learn Englishも、映画を見る目的を説明しています。',
+        },
+        meaning: '私は英語を学ぶために映画を見る。',
+      },
+    ],
+    punctuation: '.',
+    explanation: '目的を表すto不定詞は、文頭・文末のどちらにも置ける場合があります。',
+  },
 ];
 
 export const modifierPositionerProblem = modifierPositionerProblems[0];

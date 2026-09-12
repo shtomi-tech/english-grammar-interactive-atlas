@@ -91,7 +91,7 @@ assert.deepEqual(getAtlasStats(interactions, demoRegistry), {
   workingDemos: 11,
 });
 
-assert.equal(problems.length, 43);
+assert.equal(problems.length, 48);
 assert.deepEqual(
   Object.fromEntries(Object.entries({
     'word-order': wordOrderProblems,
@@ -106,7 +106,7 @@ assert.deepEqual(
     'context-grammar': contextGrammarProblems,
     'sentence-generator': sentenceGeneratorProblems,
   }).map(([type, entries]) => [type, entries.length])),
-  { 'word-order': 6, 'mark-parts': 3, 'grammar-classifier': 3, 'sentence-transformer': 3, 'sentence-pattern-diagram': 3, 'modifier-connection-viewer': 3, 'modifier-positioner': 3, 'sentence-comparison': 4, 'error-corrector': 5, 'context-grammar': 5, 'sentence-generator': 5 },
+  { 'word-order': 7, 'mark-parts': 3, 'grammar-classifier': 4, 'sentence-transformer': 3, 'sentence-pattern-diagram': 3, 'modifier-connection-viewer': 3, 'modifier-positioner': 4, 'sentence-comparison': 4, 'error-corrector': 6, 'context-grammar': 6, 'sentence-generator': 5 },
 );
 assert.equal(problemRegistry['WO-001'], wordOrderProblems[0]);
 assert.equal(problemRegistry['SPD-001'], sentencePatternDiagramProblems[0]);
@@ -127,6 +127,11 @@ assert.equal(problemRegistry['WO-006'], wordOrderProblems[5]);
 assert.equal(problemRegistry['EC-005'], errorCorrectorProblems[4]);
 assert.equal(problemRegistry['SG-005'], sentenceGeneratorProblems[4]);
 assert.equal(problemRegistry['CG-005'], contextGrammarProblems[4]);
+assert.equal(problemRegistry['WO-007'], wordOrderProblems[6]);
+assert.equal(problemRegistry['GC-004'], grammarClassifierProblems[3]);
+assert.equal(problemRegistry['MPO-004'], modifierPositionerProblems[3]);
+assert.equal(problemRegistry['EC-006'], errorCorrectorProblems[5]);
+assert.equal(problemRegistry['CG-006'], contextGrammarProblems[5]);
 assert.equal(validateProblems(problems).valid, true);
 assert.equal(validateDemoRegistry(demoRegistry, problemRegistry).valid, true);
 for (const demo of Object.values(demoRegistry)) {
@@ -177,6 +182,10 @@ assert.equal(isGoalMatchingPlacement(modifierPositionerProblems[2], 'sentence-st
 assert.equal(isGoalMatchingPlacement(modifierPositionerProblems[2], 'sentence-end'), true);
 assert.equal(buildModifierPlacementSentence(modifierPositionerProblems[2], 'sentence-start'), 'On Sundays, they visit the museum.');
 assert.equal(buildModifierPlacementSentence(modifierPositionerProblems[2], 'sentence-end'), 'They visit the museum on Sundays.');
+assert.equal(buildModifierPlacementSentence(modifierPositionerProblems[3], 'sentence-start'), 'To learn English, I watch movies.');
+assert.equal(buildModifierPlacementSentence(modifierPositionerProblems[3], 'sentence-end'), 'I watch movies to learn English.');
+assert.equal(isGoalMatchingPlacement(modifierPositionerProblems[3], 'sentence-start'), true);
+assert.equal(isGoalMatchingPlacement(modifierPositionerProblems[3], 'sentence-end'), true);
 
 const comparisonProblem = sentenceComparisonProblems[0];
 assert.equal(getDifferenceByChunkId(comparisonProblem.differences, 'a-2').id, 'purpose-action');
@@ -200,6 +209,9 @@ assert.equal(hasCompletedAllCorrections(errorProblem.corrections, new Map()), fa
 assert.equal(hasCompletedAllCorrections(errorProblem.corrections, new Map([['agreement', 'o2']])), true);
 assert.equal(hasCompletedAllCorrections(errorCorrectorProblems[2].corrections, new Map([['auxiliary-agreement', 'o2']])), false);
 assert.equal(hasCompletedAllCorrections(errorCorrectorProblems[2].corrections, new Map([['auxiliary-agreement', 'o2'], ['past-participle', 'o5']])), true);
+assert.equal(isAcceptedCorrection(errorCorrectorProblems[5].corrections[0], 'o16'), true);
+assert.equal(isAcceptedCorrection(errorCorrectorProblems[5].corrections[0], 'o17'), false);
+assert.equal(hasCompletedAllCorrections(errorCorrectorProblems[5].corrections, new Map([['infinitive-base-form', 'o16']])), true);
 const errorStateTransition = new Map([['agreement', 'o2']]);
 assert.equal(hasCompletedAllCorrections(errorProblem.corrections, errorStateTransition), true);
 errorStateTransition.set('agreement', 'o1');
@@ -220,6 +232,12 @@ assert.equal(hasCompletedScenario(contextProblem.steps, new Set()), false);
 assert.equal(hasCompletedScenario(contextProblem.steps, new Set(['cg001-step-1'])), false);
 assert.equal(hasCompletedScenario(contextProblem.steps, new Set(['cg001-step-1', 'cg001-step-2'])), true);
 assert.equal(hasCompletedScenario(contextProblem.steps, new Set(['unknown-step'])), false);
+const infinitiveContextProblem = contextGrammarProblems[5];
+assert.equal(infinitiveContextProblem.steps.length, 3);
+assert.equal(isAcceptedScenarioChoice(infinitiveContextProblem.steps[0], 'cg006-choice-1a'), true);
+assert.equal(isAcceptedScenarioChoice(infinitiveContextProblem.steps[1], 'cg006-choice-2b'), false);
+assert.equal(hasCompletedScenario(infinitiveContextProblem.steps, new Set(['cg006-step-1', 'cg006-step-2'])), false);
+assert.equal(hasCompletedScenario(infinitiveContextProblem.steps, new Set(['cg006-step-1', 'cg006-step-2', 'cg006-step-3'])), true);
 
 const generationProblem = sentenceGeneratorProblems[0];
 assert.equal(hasCompleteGenerationState({}, generationProblem.controls), false);
@@ -272,7 +290,7 @@ const lessonValidation = validateLessons(lessons, {
   problemTypes: new Set(Object.keys(demoRegistry)),
 });
 assert.equal(lessonValidation.valid, true, lessonValidation.errors.join('; '));
-assert.equal(lessons.length, 4);
+assert.equal(lessons.length, 5);
 assert.equal(getLessonById('LESSON-002').slug, 'structural-reading');
 assert.equal(getLessonBySlug('structural-reading').id, 'LESSON-002');
 assert.equal(getLessonBySlug('structural-reading').steps.length, 6);
@@ -281,6 +299,11 @@ assert.equal(getLessonById('LESSON-003').slug, 'modal-verbs');
 assert.equal(getLessonBySlug('modal-verbs').steps.length, 6);
 assert.equal(getLessonById('LESSON-004').slug, 'passive-voice');
 assert.equal(getLessonBySlug('passive-voice').steps.length, 6);
+assert.equal(getLessonById('LESSON-005').slug, 'infinitives');
+assert.deepEqual(
+  getLessonBySlug('infinitives').steps.map((step) => step.problemId),
+  ['WO-007', 'GC-004', 'MPO-004', 'SC-001', 'EC-006', 'CG-006'],
+);
 
 const lessonProgress = lessons[0];
 const emptyLessonProgress = new Set();

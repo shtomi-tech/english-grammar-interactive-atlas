@@ -81,6 +81,39 @@ export const grammarClassifierProblems = [
     ],
     explanation: '品詞を分類すると、英文の中でそれぞれの語が担う役割を整理できます。',
   },
+  {
+    id: 'GC-004',
+    type: 'grammar-classifier',
+    classificationAxis: 'Infinitive function',
+    prompt: 'to + 動詞原形の語句を、文中での働きごとに分類してください。',
+    sentence: 'To stay healthy, I want to exercise and I need shoes to run in.',
+    categories: [
+      { id: 'noun', label: 'Noun-like', explanation: '名詞のように、動作や内容を表します。' },
+      { id: 'adjective', label: 'Adjective-like', explanation: '形容詞のように、名詞を説明します。' },
+      { id: 'adverb', label: 'Adverb-like', explanation: '副詞のように、文や動作の目的を説明します。' },
+    ],
+    items: [
+      {
+        id: 'to-stay-healthy',
+        text: 'To stay healthy',
+        answer: 'adverb',
+        explanation: '「健康でいるために」と、文全体の目的を説明しています。',
+      },
+      {
+        id: 'to-exercise',
+        text: 'to exercise',
+        answer: 'noun',
+        explanation: 'want の内容として、「運動すること」を表しています。',
+      },
+      {
+        id: 'to-run-in',
+        text: 'to run in',
+        answer: 'adjective',
+        explanation: 'shoes がどのような靴かを説明しています。',
+      },
+    ],
+    explanation: '同じ to + 動詞原形でも、文中で名詞・形容詞・副詞に近い働きを持つことがあります。',
+  },
 ];
 
 export const grammarClassifierProblem = grammarClassifierProblems[0];
