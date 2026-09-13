@@ -2,6 +2,7 @@ import { cpSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { interactions } from '../src/data/interactions.js';
 import {
+  e2eMaterialGenerationFixture,
   interactionRetrievalMetadata,
   learningRequirementsContract,
   lessonGenerationContract,
@@ -11,6 +12,7 @@ import {
 import { problems } from '../src/data/problems/index.js';
 import { lessons } from '../src/data/lessons.js';
 import { createAiRetrievalIndex } from '../src/lib/ai/retrieval-index.js';
+import { runMaterialGenerationProof } from '../src/lib/ai/material-generation-proof.js';
 
 const root = decodeURIComponent(new URL('..', import.meta.url).pathname).replace(/^\/([A-Za-z]):/, '$1:');
 const dist = join(root, 'dist');
@@ -46,5 +48,15 @@ writeFileSync(join(aiDist, 'problem-data.json'), `${JSON.stringify(problems, nul
 writeFileSync(join(aiDist, 'lesson-data.json'), `${JSON.stringify(lessons, null, 2)}\n`, 'utf8');
 writeFileSync(join(contractsDist, 'problem-generation.json'), `${JSON.stringify(problemGenerationContract, null, 2)}\n`, 'utf8');
 writeFileSync(join(contractsDist, 'lesson-generation.json'), `${JSON.stringify(lessonGenerationContract, null, 2)}\n`, 'utf8');
+const proofDist = join(aiDist, 'proofs');
+mkdirSync(proofDist, { recursive: true });
+const materialGenerationProof = runMaterialGenerationProof({
+  ...e2eMaterialGenerationFixture,
+  retrievalIndex,
+  canonicalProblems: problems,
+  canonicalLessons: lessons,
+});
+if (!materialGenerationProof.valid) throw new Error(`End-to-end material generation proof failed: ${materialGenerationProof.errors.join('; ')}`);
+writeFileSync(join(proofDist, 'end-to-end-material-generation.json'), `${JSON.stringify(materialGenerationProof.proof, null, 2)}\n`, 'utf8');
 
 console.log('Static build complete: dist/');

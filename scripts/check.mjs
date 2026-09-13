@@ -23,6 +23,7 @@ const files = [
   'src/data/ai/lesson-generation-schema.js',
   'src/data/ai/lesson-generation-fixtures.js',
   'src/data/ai/lesson-generation-contract.js',
+  'src/data/ai/e2e-material-generation-fixture.js',
   'src/data/interactions-additional.js',
   'src/data/demo-problems.js',
   'src/data/problems/word-order.js',
@@ -54,11 +55,13 @@ const files = [
   'src/lib/ai/material-planning.js',
   'src/lib/ai/problem-generation.js',
   'src/lib/ai/lesson-generation.js',
+  'src/lib/ai/material-generation-proof.js',
   'src/lib/validateAiRetrieval.js',
   'src/lib/validateLearningRequirements.js',
   'src/lib/validateMaterialPlan.js',
   'src/lib/validateProblemGeneration.js',
   'src/lib/validateLessonGeneration.js',
+  'src/lib/validateMaterialGenerationProof.js',
   'src/lib/dom.js',
   'src/lib/grammar/word-order.js',
   'src/lib/grammar/parts.js',
@@ -123,6 +126,7 @@ const {
   problemGenerationContexts,
   lessonGenerationFixtures,
   lessonGenerationContexts,
+  e2eMaterialGenerationFixture,
 } = await import('../src/data/ai/index.js');
 const { createAiRetrievalIndex } = await import('../src/lib/ai/retrieval-index.js');
 const { evaluateRetrievalBenchmarks } = await import('../src/lib/ai/retrieval-evaluation.js');
@@ -131,6 +135,7 @@ const { validateLearningRequirements } = await import('../src/lib/validateLearni
 const { validateMaterialPlan } = await import('../src/lib/validateMaterialPlan.js');
 const { validateProblemGeneration } = await import('../src/lib/validateProblemGeneration.js');
 const { validateLessonGeneration } = await import('../src/lib/validateLessonGeneration.js');
+const { runMaterialGenerationProof } = await import('../src/lib/ai/material-generation-proof.js');
 const { validateOutcomeRetrievalProfiles } = await import('../src/lib/ai/material-planning.js');
 const validation = validateInteractions(interactions, { registryKeys: Object.keys(demoRegistry) });
 if (!validation.valid) throw new Error(`Interaction validation failed: ${validation.errors.join('; ')}`);
@@ -210,3 +215,19 @@ const canonicalLessonSnapshotValidation = validateLessons(lessons, {
 });
 if (!canonicalLessonSnapshotValidation.valid) throw new Error(`Canonical Lesson snapshot validation failed: ${canonicalLessonSnapshotValidation.errors.join('; ')}`);
 console.log(`Canonical Lesson snapshot validation passed for ${lessons.length} lessons.`);
+const materialGenerationProof = runMaterialGenerationProof({
+  ...e2eMaterialGenerationFixture,
+  retrievalIndex: aiRetrievalIndex,
+  canonicalProblems: problems,
+  canonicalLessons: lessons,
+});
+if (!materialGenerationProof.valid) {
+  throw new Error(`End-to-end material generation proof failed: ${materialGenerationProof.errors.join('; ')}`);
+}
+console.log('End-to-end material generation proof passed.');
+console.log('E2E source: 1');
+console.log(`Learning Points: ${materialGenerationProof.proof.summary.learningPointCount}`);
+console.log(`Reuse: ${materialGenerationProof.proof.summary.reusedProblemIds.length}`);
+console.log(`Generate: ${materialGenerationProof.proof.summary.generatedProblemIds.length}`);
+console.log(`Unresolved: ${materialGenerationProof.proof.summary.unresolvedItemIds.length}`);
+console.log(`Candidate Lesson: ${materialGenerationProof.proof.summary.candidateLessonId ? 1 : 0}`);

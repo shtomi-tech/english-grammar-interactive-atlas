@@ -78,6 +78,7 @@ import {
   problemGenerationContract,
   problemGenerationContexts,
   problemGenerationFixtures,
+  e2eMaterialGenerationFixture,
   retrievalBenchmarks,
   validateRetrievalQuery,
 } from '../src/data/ai/index.js';
@@ -102,6 +103,8 @@ import {
   resolveMaterialPlanProblems,
 } from '../src/lib/ai/lesson-generation.js';
 import { validateLessonGeneration } from '../src/lib/validateLessonGeneration.js';
+import { runMaterialGenerationProof } from '../src/lib/ai/material-generation-proof.js';
+import { validateMaterialGenerationProof, validateSyntheticSourceTraceability } from '../src/lib/validateMaterialGenerationProof.js';
 
 assert.equal(interactions.length, 40);
 assert.deepEqual(
@@ -888,6 +891,81 @@ const canonicalLessonsBeforeLessonGeneration = structuredClone(lessons);
 assert.equal(validateLessonGeneration(lessonGenerationFixture, lessonGenerationContext).valid, true);
 assert.deepEqual(problems, canonicalProblemsBeforeLessonGeneration);
 assert.deepEqual(lessons, canonicalLessonsBeforeLessonGeneration);
+
+const e2eInput = {
+  ...structuredClone(e2eMaterialGenerationFixture),
+  retrievalIndex: aiRetrievalIndex,
+  canonicalProblems: problems,
+  canonicalLessons: lessons,
+};
+const e2eSourceTraceability = validateSyntheticSourceTraceability(
+  e2eInput.grammarReference,
+  e2eInput.learningRequirements,
+);
+assert.equal(e2eSourceTraceability.valid, true, e2eSourceTraceability.errors.join('; '));
+const e2eValidation = validateMaterialGenerationProof(e2eInput);
+assert.equal(e2eValidation.valid, true, e2eValidation.errors.join('; '));
+const e2eProof = runMaterialGenerationProof(e2eInput);
+assert.equal(e2eProof.valid, true, e2eProof.errors.join('; '));
+assert.deepEqual(e2eProof, runMaterialGenerationProof(e2eInput));
+assert.equal(e2eProof.proof.grammarReference.type, 'synthetic-text');
+assert.equal(e2eProof.proof.grammarReference.sourceId, 'SOURCE-E2E-001');
+assert.deepEqual(e2eProof.proof.summary.reusedProblemIds, ['SC-001']);
+assert.deepEqual(e2eProof.proof.summary.generatedProblemIds, ['E2E-WO-001', 'E2E-EC-001']);
+assert.deepEqual(e2eProof.proof.summary.unresolvedItemIds, []);
+assert.equal(e2eProof.proof.summary.learningPointCount, 3);
+assert.equal(e2eProof.proof.summary.candidateLessonId, 'E2E-LESSON-001');
+assert.deepEqual(e2eProof.proof.validation, {
+  sourceTraceability: true,
+  learningRequirements: true,
+  materialPlan: true,
+  problemGenerations: true,
+  lessonGeneration: true,
+});
+assert.deepEqual(e2eProof.resolved.problemRefs.map((reference) => reference.id), [
+  'SC-001',
+  'E2E-WO-001',
+  'E2E-EC-001',
+]);
+e2eProof.resolved.candidateLesson.steps.forEach((step) => assert.ok(demoRegistry[step.interactionType]));
+assert.equal(e2eProof.outputs.materialPlan.items.some((item) => item.problemDecision.action === 'reuse'), true);
+assert.equal(e2eProof.outputs.materialPlan.items.some((item) => item.problemDecision.action === 'generate'), true);
+assert.equal(validateProblems([
+  ...problems,
+  ...e2eProof.outputs.problemGenerations.map((generation) => generation.candidateProblem),
+]).valid, true);
+
+function assertInvalidE2eProof(name, mutate) {
+  const invalidInput = {
+    ...structuredClone(e2eMaterialGenerationFixture),
+    retrievalIndex: structuredClone(aiRetrievalIndex),
+    canonicalProblems: structuredClone(problems),
+    canonicalLessons: structuredClone(lessons),
+  };
+  mutate(invalidInput);
+  assert.equal(runMaterialGenerationProof(invalidInput).valid, false, name);
+}
+
+assertInvalidE2eProof('negative source traceability', (input) => {
+  input.learningRequirements.learningPoints[0].sourceEvidence[0].locator.section = 'Missing E2E section';
+});
+assertInvalidE2eProof('negative unresolved Material Plan', (input) => {
+  input.retrievalIndex.interactions.forEach((record) => { record.demoTypes = []; });
+});
+assertInvalidE2eProof('negative generated Problem schema', (input) => {
+  delete input.generatedProblemCandidates[0].candidateProblem.prompt;
+});
+assertInvalidE2eProof('negative candidate Problem ID collision', (input) => {
+  input.generatedProblemCandidates[0].candidateProblem.id = 'SC-001';
+});
+assertInvalidE2eProof('negative candidate Lesson unauthorized Problem', (input) => {
+  input.candidateLesson.steps[0].problemId = 'WO-001';
+});
+const canonicalProblemsBeforeE2e = structuredClone(problems);
+const canonicalLessonsBeforeE2e = structuredClone(lessons);
+assert.deepEqual(e2eProof.outputs.learningRequirements, e2eInput.learningRequirements);
+assert.deepEqual(problems, canonicalProblemsBeforeE2e);
+assert.deepEqual(lessons, canonicalLessonsBeforeE2e);
 
 const lessonProgress = lessons[0];
 const emptyLessonProgress = new Set();

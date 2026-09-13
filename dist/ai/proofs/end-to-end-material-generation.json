@@ -1,0 +1,478 @@
+{
+  "version": "1",
+  "id": "E2E-PROOF-001",
+  "valid": true,
+  "grammarReference": {
+    "id": "GRAMMAR-REF-E2E-001",
+    "sourceId": "SOURCE-E2E-001",
+    "title": "Verb Patterns — stop / decide / avoid",
+    "type": "synthetic-text",
+    "sections": [
+      {
+        "id": "SECTION-E2E-STOP",
+        "heading": "Stop patterns",
+        "content": "stop + -ing はその行為をやめることを表し、stop + to-infinitive は別の行為をするために立ち止まることを表す。"
+      },
+      {
+        "id": "SECTION-E2E-DECIDE",
+        "heading": "Decide pattern",
+        "content": "decide の後ろでは to-infinitive を用いて、何かをすることを決める意味を表す。"
+      },
+      {
+        "id": "SECTION-E2E-AVOID",
+        "heading": "Avoid pattern",
+        "content": "avoid の後ろでは gerund を用いる。"
+      }
+    ]
+  },
+  "outputs": {
+    "learningRequirements": {
+      "version": "1",
+      "id": "LR-E2E-001",
+      "topic": "verb patterns: stop, decide, avoid",
+      "sourceReferences": [
+        {
+          "id": "SOURCE-E2E-001",
+          "type": "user-provided",
+          "title": "Verb Patterns — stop / decide / avoid"
+        }
+      ],
+      "learningPoints": [
+        {
+          "id": "LP-E2E-001",
+          "concept": "stopped smoking",
+          "summary": "stop + gerund と stop + to-infinitive の意味を比較する。",
+          "importance": "core",
+          "desiredOutcomes": [
+            "compare-meaning"
+          ],
+          "sourceEvidence": [
+            {
+              "sourceId": "SOURCE-E2E-001",
+              "locator": {
+                "section": "Stop patterns"
+              },
+              "summary": "stopの後ろの形による意味の違いが説明されている。"
+            }
+          ]
+        },
+        {
+          "id": "LP-E2E-002",
+          "concept": "decide + to-infinitive",
+          "summary": "decideの後ろにto-infinitiveを置いて、決定の内容を表す。",
+          "importance": "core",
+          "desiredOutcomes": [
+            "produce-form"
+          ],
+          "sourceEvidence": [
+            {
+              "sourceId": "SOURCE-E2E-001",
+              "locator": {
+                "section": "Decide pattern"
+              },
+              "summary": "decideの後ろではto-infinitiveを使うと説明されている。"
+            }
+          ]
+        },
+        {
+          "id": "LP-E2E-003",
+          "concept": "avoid + gerund",
+          "summary": "avoidの後ろにgerundを置く形を、誤りの訂正で確認する。",
+          "importance": "supporting",
+          "desiredOutcomes": [
+            "correct-error"
+          ],
+          "sourceEvidence": [
+            {
+              "sourceId": "SOURCE-E2E-001",
+              "locator": {
+                "section": "Avoid pattern"
+              },
+              "summary": "avoidの後ろではgerundを使うと説明されている。"
+            }
+          ]
+        }
+      ]
+    },
+    "materialPlan": {
+      "version": "1",
+      "id": "MATPLAN-E2E-001",
+      "learningRequirementsRef": {
+        "id": "LR-E2E-001",
+        "version": "1"
+      },
+      "items": [
+        {
+          "id": "MPI-001",
+          "learningPointId": "LP-E2E-001",
+          "interactionSelection": {
+            "query": {
+              "kinds": [
+                "interaction"
+              ],
+              "learningIntents": [
+                "compare-meaning"
+              ],
+              "limit": 5,
+              "includeTerms": [
+                "stopped smoking"
+              ]
+            },
+            "selected": {
+              "canonicalRef": {
+                "kind": "interaction",
+                "id": "GRAM-INT-008"
+              },
+              "rank": 1,
+              "score": 8,
+              "reasons": [
+                {
+                  "field": "learningIntents",
+                  "value": "compare-meaning",
+                  "score": 8
+                }
+              ]
+            }
+          },
+          "problemDecision": {
+            "action": "reuse",
+            "problemSelection": {
+              "query": {
+                "kinds": [
+                  "problem"
+                ],
+                "demoTypes": [
+                  "sentence-comparison"
+                ],
+                "includeTerms": [
+                  "stopped smoking"
+                ],
+                "limit": 5
+              },
+              "selected": {
+                "canonicalRef": {
+                  "kind": "problem",
+                  "id": "SC-001",
+                  "type": "sentence-comparison"
+                },
+                "rank": 1,
+                "score": 5,
+                "reasons": [
+                  {
+                    "field": "searchText",
+                    "value": "stopped smoking",
+                    "score": 2
+                  },
+                  {
+                    "field": "demoTypes",
+                    "value": "sentence-comparison",
+                    "score": 3
+                  }
+                ]
+              }
+            }
+          },
+          "rationale": "既存の検索可能な学習活動で、このLearning Pointを操作して確認する。"
+        },
+        {
+          "id": "MPI-002",
+          "learningPointId": "LP-E2E-002",
+          "interactionSelection": {
+            "query": {
+              "kinds": [
+                "interaction"
+              ],
+              "learningIntents": [
+                "assemble-sentence",
+                "generate-from-conditions"
+              ],
+              "limit": 5,
+              "includeTerms": [
+                "decide + to-infinitive"
+              ]
+            },
+            "selected": {
+              "canonicalRef": {
+                "kind": "interaction",
+                "id": "GRAM-INT-001"
+              },
+              "rank": 1,
+              "score": 8,
+              "reasons": [
+                {
+                  "field": "learningIntents",
+                  "value": "assemble-sentence",
+                  "score": 8
+                }
+              ]
+            }
+          },
+          "problemDecision": {
+            "action": "generate",
+            "reason": "Existing problems do not cover the source-backed concept."
+          },
+          "rationale": "既存の検索可能な学習活動で、このLearning Pointを操作して確認する。"
+        },
+        {
+          "id": "MPI-003",
+          "learningPointId": "LP-E2E-003",
+          "interactionSelection": {
+            "query": {
+              "kinds": [
+                "interaction"
+              ],
+              "learningIntents": [
+                "correct-form"
+              ],
+              "limit": 5,
+              "includeTerms": [
+                "avoid + gerund"
+              ]
+            },
+            "selected": {
+              "canonicalRef": {
+                "kind": "interaction",
+                "id": "GRAM-INT-009"
+              },
+              "rank": 1,
+              "score": 8,
+              "reasons": [
+                {
+                  "field": "learningIntents",
+                  "value": "correct-form",
+                  "score": 8
+                }
+              ]
+            }
+          },
+          "problemDecision": {
+            "action": "generate",
+            "reason": "Existing problems do not cover the source-backed concept."
+          },
+          "rationale": "既存の検索可能な学習活動で、このLearning Pointを操作して確認する。"
+        }
+      ]
+    },
+    "problemGenerations": [
+      {
+        "version": "1",
+        "id": "PGEN-E2E-001",
+        "materialPlanRef": {
+          "id": "MATPLAN-E2E-001",
+          "version": "1"
+        },
+        "materialPlanItemId": "MPI-002",
+        "candidateProblem": {
+          "id": "E2E-WO-001",
+          "type": "word-order",
+          "prompt": "decide の後ろの to-infinitive に注目して、英文を組み立ててください。",
+          "words": [
+            {
+              "id": "they",
+              "text": "They"
+            },
+            {
+              "id": "decided",
+              "text": "decided"
+            },
+            {
+              "id": "to",
+              "text": "to"
+            },
+            {
+              "id": "study",
+              "text": "study"
+            },
+            {
+              "id": "english",
+              "text": "English"
+            }
+          ],
+          "acceptedAnswers": [
+            [
+              "they",
+              "decided",
+              "to",
+              "study",
+              "english"
+            ]
+          ],
+          "explanation": "decideの後ろでは、to + 動詞の原形で決めた内容を表します。",
+          "grammar": [
+            "infinitive",
+            "base-verb",
+            "word-order"
+          ]
+        },
+        "alignment": {
+          "learningPointId": "LP-E2E-002",
+          "sourceEvidenceRefs": [
+            {
+              "sourceId": "SOURCE-E2E-001",
+              "locator": {
+                "section": "Decide pattern"
+              }
+            }
+          ],
+          "rationale": "このProblemで対象Learning Pointを練習する。"
+        }
+      },
+      {
+        "version": "1",
+        "id": "PGEN-E2E-002",
+        "materialPlanRef": {
+          "id": "MATPLAN-E2E-001",
+          "version": "1"
+        },
+        "materialPlanItemId": "MPI-003",
+        "candidateProblem": {
+          "id": "E2E-EC-001",
+          "type": "error-corrector",
+          "prompt": "avoid の後ろの動詞の形を正しく直してください。",
+          "tokens": [
+            {
+              "id": "t1",
+              "text": "They"
+            },
+            {
+              "id": "t2",
+              "text": "avoid"
+            },
+            {
+              "id": "t3",
+              "text": "to waste",
+              "correctionId": "gerund-after-avoid"
+            },
+            {
+              "id": "t4",
+              "text": "water."
+            }
+          ],
+          "corrections": [
+            {
+              "id": "gerund-after-avoid",
+              "tokenId": "t3",
+              "options": [
+                {
+                  "id": "o19",
+                  "text": "wasting"
+                },
+                {
+                  "id": "o20",
+                  "text": "to waste"
+                },
+                {
+                  "id": "o21",
+                  "text": "waste"
+                }
+              ],
+              "acceptedOptionIds": [
+                "o19"
+              ],
+              "ruleLabel": "Gerund after avoid",
+              "explanation": "avoidの後ろでは、to不定詞ではなく動名詞を使うため、to wasteではなくwastingにします。"
+            }
+          ],
+          "explanation": "avoidは後ろに動名詞を取る動詞なので、avoid + gerundの形にします。"
+        },
+        "alignment": {
+          "learningPointId": "LP-E2E-003",
+          "sourceEvidenceRefs": [
+            {
+              "sourceId": "SOURCE-E2E-001",
+              "locator": {
+                "section": "Avoid pattern"
+              }
+            }
+          ],
+          "rationale": "このProblemで対象Learning Pointを練習する。"
+        }
+      }
+    ],
+    "lessonGeneration": {
+      "version": "1",
+      "id": "LGEN-E2E-001",
+      "materialPlanRef": {
+        "id": "MATPLAN-E2E-001",
+        "version": "1"
+      },
+      "problemGenerationRefs": [
+        {
+          "id": "PGEN-E2E-001",
+          "version": "1"
+        },
+        {
+          "id": "PGEN-E2E-002",
+          "version": "1"
+        }
+      ],
+      "candidateLesson": {
+        "id": "E2E-LESSON-001",
+        "slug": "verb-patterns-proof",
+        "label": "E2E Verb Patterns Proof",
+        "title": "動詞の後ろの形を比べて使う",
+        "description": "stop・decide・avoidの後ろに続く形を、比較・語順・訂正で確認します。",
+        "learningGoal": "動詞ごとの後続形式を意味と結び付け、正しい英文を組み立てたり誤りを直したりできるようにする。",
+        "steps": [
+          {
+            "id": "E2E-LESSON-001-STEP-01",
+            "interactionType": "sentence-comparison",
+            "problemId": "SC-001",
+            "title": "stopの後ろの意味を比べる",
+            "instruction": "stop + gerundとstop + to-infinitiveの二つの意味を、左右の英文で比較します。"
+          },
+          {
+            "id": "E2E-LESSON-001-STEP-02",
+            "interactionType": "word-order",
+            "problemId": "E2E-WO-001",
+            "title": "decide + to-infinitiveを組み立てる",
+            "instruction": "decideの後ろにtoと動詞の原形を置き、英文を完成させます。"
+          },
+          {
+            "id": "E2E-LESSON-001-STEP-03",
+            "interactionType": "error-corrector",
+            "problemId": "E2E-EC-001",
+            "title": "avoid + gerundへ訂正する",
+            "instruction": "avoidの後ろを動名詞に直し、正しい形を確認します。"
+          }
+        ]
+      },
+      "alignment": {
+        "stepMappings": [
+          {
+            "materialPlanItemId": "MPI-001",
+            "lessonStepId": "E2E-LESSON-001-STEP-01"
+          },
+          {
+            "materialPlanItemId": "MPI-002",
+            "lessonStepId": "E2E-LESSON-001-STEP-02"
+          },
+          {
+            "materialPlanItemId": "MPI-003",
+            "lessonStepId": "E2E-LESSON-001-STEP-03"
+          }
+        ],
+        "rationale": "Synthetic sourceから得たMaterial Planの活動を順番にLessonへ配置する。"
+      }
+    }
+  },
+  "summary": {
+    "learningPointCount": 3,
+    "reusedProblemIds": [
+      "SC-001"
+    ],
+    "generatedProblemIds": [
+      "E2E-WO-001",
+      "E2E-EC-001"
+    ],
+    "unresolvedItemIds": [],
+    "candidateLessonId": "E2E-LESSON-001"
+  },
+  "validation": {
+    "sourceTraceability": true,
+    "learningRequirements": true,
+    "materialPlan": true,
+    "problemGenerations": true,
+    "lessonGeneration": true
+  }
+}

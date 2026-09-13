@@ -65,3 +65,10 @@ export {
   lessonGenerationMaterialPlan,
   lessonGenerationProblemGenerations,
 } from './lesson-generation-fixtures.js';
+export {
+  candidateLesson,
+  e2eLearningRequirements,
+  e2eMaterialGenerationFixture,
+  generatedProblemCandidates,
+  syntheticGrammarReference,
+} from './e2e-material-generation-fixture.js';

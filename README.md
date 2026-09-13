@@ -98,6 +98,8 @@ Problem Generation
 Lesson Generation
 ```
 
+Phase 9では、Phase 8の各Contractを新しいsynthetic Grammar Referenceから一つにつないだE2E proofを追加します。Grammar ReferenceからLearning Requirementsへの意味抽出はfixtureでシミュレートし、Learning RequirementsからMaterial Planまでは現行Retrieval Indexの実ロジックを使います。実際のLLM、任意のPDF/Word解析、runtime表示はまだ実装しません。proof結果は [dist/ai/proofs/end-to-end-material-generation.json](./dist/ai/proofs/end-to-end-material-generation.json) に出力します。
+
 生成物は [dist/ai/catalog.json](./dist/ai/catalog.json)、用途別の `interactions.json`、`problems.json`、`lessons.json`、[dist/ai/problem-data.json](./dist/ai/problem-data.json)、[dist/ai/lesson-data.json](./dist/ai/lesson-data.json)、各Generation Contractです。現在のIndexは40 interactions、53 problems、6 lessons、99 unified documentsで、`npm run check` のAI retrieval validation、11件のretrieval benchmark、Learning Requirements 2件、Outcome profile 12件、Material Plan 2件、Problem Generation 2件、Lesson Generation 1件、Canonical Problem / Lesson snapshotで検証します。詳細は [docs/AI_RETRIEVAL.md](./docs/AI_RETRIEVAL.md)、[docs/LEARNING_REQUIREMENTS.md](./docs/LEARNING_REQUIREMENTS.md)、[docs/MATERIAL_PLAN.md](./docs/MATERIAL_PLAN.md)、[docs/PROBLEM_GENERATION.md](./docs/PROBLEM_GENERATION.md)、[docs/LESSON_GENERATION.md](./docs/LESSON_GENERATION.md) を参照してください。
 
 外部調査の採用基準とライセンス境界は [docs/RESEARCH_METHOD.md](./docs/RESEARCH_METHOD.md) にまとめています。Research Referenceは比較のための記録であり、外部コードや教材の取り込みを意味しません。
