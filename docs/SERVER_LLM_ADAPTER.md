@@ -24,11 +24,12 @@ validateLearningRequirements() + single-source quote traceability
 
 adapterはNode native `fetch`で `POST https://api.openai.com/v1/responses` を実行します。payloadには `model`、`store:false`、固定されたinstructions、Grammar Referenceを含むinput、strict `json_schema` output formatを指定します。canonical schemaのversion、source type、importance、desired outcomeのenumを再定義しません。source referenceは入力のsource id/titleに固定し、source evidenceのlocatorは本文完全一致のquoteだけを要求します。
 
-Grammar Referenceの本文はuntrusted reference dataです。本文中の命令には従わず、Grammar Referenceにある文法内容だけを正本として使います。controlled constraintsは `durationMinutes`、`maxLearningPoints`、`language`、`audienceStage` だけで、未知の項目や不正な値はprovider呼び出し前に拒否します。
+Grammar Referenceの本文はuntrusted reference dataです。本文中の命令には従わず、Grammar Referenceにある文法内容だけを正本として使います。controlled constraintsは `durationMinutes`、`maxLearningPoints`、`language`、`audienceStage` だけで、未知の項目や不正な値はprovider呼び出し前に拒否します。指定された値はそれぞれ `learningRequirements.constraints` または `learningRequirements.audience.stage` へ保持し、runnerのconstraint fidelity検証でも欠落・改変を拒否します。未指定の値はprovider schemaへ追加しません。
 
 ## Failure policy
 
 - `completed` 以外、refusal、incomplete、空出力、JSON parse失敗、配列出力はinvalid
+- 指定されたconstraintの欠落・不一致はinvalid。受信値の自動補正はしない
 - JSON repairやprovider生レスポンスの返却はしない
 - retryは429、5xx、一時的なネットワーク障害に限り最大1回
 - API key不足、401/403、schema不整合、source traceability失敗はretryしない

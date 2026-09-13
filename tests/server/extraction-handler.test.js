@@ -10,6 +10,11 @@ import { createExtractionHandler } from '../../server/http/extract-learning-requ
 function providerRequirements() {
   const output = structuredClone(comparisonLearningRequirements);
   output.learningPoints[0].sourceEvidence[0].locator = { quote: 'as ... as は同程度を表す。' };
+  output.constraints = {
+    durationMinutes: 10,
+    maxLearningPoints: 2,
+    language: 'ja',
+  };
   return output;
 }
 
@@ -42,7 +47,12 @@ async function post(url, body, headers = {}) {
 function validBody() {
   return {
     grammarReference: markdownGrammarReference,
-    constraints: { maxLearningPoints: 2, audienceStage: 'high-school' },
+    constraints: {
+      audienceStage: 'high-school',
+      durationMinutes: 10,
+      maxLearningPoints: 2,
+      language: 'ja',
+    },
   };
 }
 
@@ -99,6 +109,46 @@ test('extraction handler rejects provenance and output failures', async (t) => {
       output.learningPoints[0].sourceEvidence = [];
       return output;
     }, 'learning_requirements_invalid'],
+    ['missing audience', () => {
+      const output = providerRequirements();
+      delete output.audience;
+      return output;
+    }, 'constraint_fidelity_invalid'],
+    ['mismatched audience', () => {
+      const output = providerRequirements();
+      output.audience.stage = 'adult';
+      return output;
+    }, 'constraint_fidelity_invalid'],
+    ['missing duration', () => {
+      const output = providerRequirements();
+      delete output.constraints.durationMinutes;
+      return output;
+    }, 'constraint_fidelity_invalid'],
+    ['mismatched duration', () => {
+      const output = providerRequirements();
+      output.constraints.durationMinutes = 15;
+      return output;
+    }, 'constraint_fidelity_invalid'],
+    ['missing language', () => {
+      const output = providerRequirements();
+      delete output.constraints.language;
+      return output;
+    }, 'constraint_fidelity_invalid'],
+    ['mismatched language', () => {
+      const output = providerRequirements();
+      output.constraints.language = 'en';
+      return output;
+    }, 'constraint_fidelity_invalid'],
+    ['missing maxLearningPoints', () => {
+      const output = providerRequirements();
+      delete output.constraints.maxLearningPoints;
+      return output;
+    }, 'constraint_fidelity_invalid'],
+    ['mismatched maxLearningPoints', () => {
+      const output = providerRequirements();
+      output.constraints.maxLearningPoints = 3;
+      return output;
+    }, 'constraint_fidelity_invalid'],
   ];
   for (const [name, makeOutput, code] of cases) {
     const { server, url } = await startServer({ extractLearningRequirements: async () => makeOutput() });

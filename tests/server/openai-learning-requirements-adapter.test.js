@@ -26,7 +26,12 @@ const request = {
     doNotAddUnsupportedGrammar: true,
     requireSourceEvidence: true,
   },
-  constraints: { maxLearningPoints: 2, audienceStage: 'high-school' },
+  constraints: {
+    audienceStage: 'high-school',
+    durationMinutes: 10,
+    maxLearningPoints: 2,
+    language: 'ja',
+  },
 };
 
 function providerRequirements() {
@@ -84,11 +89,24 @@ test('OpenAI payload uses store false, strict JSON schema, canonical enums, and 
   assert.deepEqual(schema.properties.sourceReferences.items.properties.id.enum, [markdownGrammarReference.sourceId]);
   assert.deepEqual(schema.properties.sourceReferences.items.properties.title.enum, [markdownGrammarReference.title]);
   assert.equal(schema.properties.sourceReferences.maxItems, 1);
+  assert.deepEqual(schema.required.slice(-2), ['audience', 'constraints']);
+  assert.deepEqual(schema.properties.audience.required, ['stage']);
+  assert.deepEqual(schema.properties.audience.properties.stage.enum, ['high-school']);
+  assert.deepEqual(schema.properties.constraints.required, ['durationMinutes', 'maxLearningPoints', 'language']);
+  assert.deepEqual(schema.properties.constraints.properties.durationMinutes.enum, [10]);
+  assert.deepEqual(schema.properties.constraints.properties.maxLearningPoints.enum, [2]);
+  assert.deepEqual(schema.properties.constraints.properties.language.enum, ['ja']);
   assert.deepEqual(
     schema.properties.learningPoints.items.properties.sourceEvidence.items.properties.locator.required,
     ['quote'],
   );
   assert.equal(schema.properties.learningPoints.maxItems, 2);
+
+  const unconstrainedSchema = buildLearningRequirementsJsonSchema({ grammarReference: markdownGrammarReference });
+  assert.equal(unconstrainedSchema.properties.audience, undefined);
+  assert.equal(unconstrainedSchema.properties.constraints, undefined);
+  assert.equal(unconstrainedSchema.required.includes('audience'), false);
+  assert.equal(unconstrainedSchema.required.includes('constraints'), false);
 });
 test('OpenAI adapter requires API key and model without exposing credentials', async () => {
   await assert.rejects(

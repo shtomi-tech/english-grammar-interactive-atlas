@@ -36,6 +36,7 @@ function errorCode(message) {
   if (message.includes('adapter failed:')) return 'provider_error';
   if (message.includes('sourceIdentity:')) return 'source_identity_invalid';
   if (message.includes('sourceTraceability:')) return 'source_traceability_invalid';
+  if (message.includes('constraintFidelity:')) return 'constraint_fidelity_invalid';
   if (message.includes('learningRequirements:')) return 'learning_requirements_invalid';
   return 'invalid_request';
 }
@@ -119,6 +120,7 @@ export function createExtractionHandler({
         constraints: body.constraints,
         adapter,
         requireQuote: true,
+        requireConstraintFidelity: true,
       });
       if (!result.valid) {
         const errors = result.errors.map((message) => ({ code: errorCode(message), message: safeMessage(message) }));

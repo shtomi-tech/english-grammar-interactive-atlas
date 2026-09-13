@@ -17,6 +17,13 @@ if (!process.env.OPENAI_API_KEY || !process.env.OPENAI_MODEL) {
     grammarReference: markdownGrammarReference,
     adapter: createOpenAiLearningRequirementsAdapter(),
     requireQuote: true,
+    requireConstraintFidelity: true,
+    constraints: {
+      audienceStage: 'high-school',
+      durationMinutes: 10,
+      maxLearningPoints: 3,
+      language: 'ja',
+    },
   });
   if (!extraction.valid) {
     console.error(`Live LLM smoke failed: ${extraction.errors.join('; ')}`);

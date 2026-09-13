@@ -46,6 +46,23 @@ export function validateExtractionConstraints(constraints) {
   return { valid: errors.length === 0, errors };
 }
 
+export function validateExtractionConstraintFidelity(constraints, learningRequirements) {
+  const validation = validateExtractionConstraints(constraints);
+  if (!validation.valid) return validation;
+  if (constraints === undefined) return { valid: true, errors: [] };
+  const errors = [];
+  const audienceStage = constraints.audienceStage;
+  if (audienceStage !== undefined && learningRequirements?.audience?.stage !== audienceStage) {
+    errors.push('audience.stage must match constraints.audienceStage');
+  }
+  ['durationMinutes', 'maxLearningPoints', 'language'].forEach((field) => {
+    if (constraints[field] !== undefined && learningRequirements?.constraints?.[field] !== constraints[field]) {
+      errors.push(`constraints.${field} must match requested extraction constraint`);
+    }
+  });
+  return { valid: errors.length === 0, errors };
+}
+
 export function createLearningRequirementsExtractionRequest({ grammarReference, constraints } = {}) {
   const normalizedReference = normalizeGrammarReference(grammarReference);
   const referenceValidation = validateGrammarReference(normalizedReference);
@@ -89,7 +106,13 @@ function invalidResult(request, errors) {
   };
 }
 
-export async function runLearningRequirementsExtraction({ grammarReference, adapter, constraints, requireQuote = false } = {}) {
+export async function runLearningRequirementsExtraction({
+  grammarReference,
+  adapter,
+  constraints,
+  requireQuote = false,
+  requireConstraintFidelity = false,
+} = {}) {
   let request;
   try {
     request = createLearningRequirementsExtractionRequest({ grammarReference, constraints });
@@ -123,6 +146,10 @@ export async function runLearningRequirementsExtraction({ grammarReference, adap
   if (!sourceIdentity.valid) errors.push(`sourceIdentity: ${sourceIdentity.errors.join('; ')}`);
   const traceability = validateGrammarReferenceTraceability(grammarReference, learningRequirements, { requireQuote });
   if (!traceability.valid) errors.push(`sourceTraceability: ${traceability.errors.join('; ')}`);
+  if (requireConstraintFidelity) {
+    const constraintFidelity = validateExtractionConstraintFidelity(constraints, learningRequirements);
+    if (!constraintFidelity.valid) errors.push(`constraintFidelity: ${constraintFidelity.errors.join('; ')}`);
+  }
   return {
     valid: errors.length === 0,
     request: structuredClone(request),

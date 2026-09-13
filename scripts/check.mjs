@@ -171,6 +171,7 @@ const { validateLearningRequirements } = await import('../src/lib/validateLearni
 const { validateGrammarReference } = await import('../src/lib/validateGrammarReference.js');
 const {
   runLearningRequirementsExtraction,
+  validateExtractionConstraintFidelity,
   validateExtractionConstraints,
 } = await import('../src/lib/ai/learning-requirements-extraction.js');
 const { createMaterialPlan } = await import('../src/lib/ai/material-planning.js');
@@ -241,6 +242,12 @@ const extractionConstraintsValidation = validateExtractionConstraints({
 });
 if (!extractionConstraintsValidation.valid) throw new Error(`Extraction constraints validation failed: ${extractionConstraintsValidation.errors.join('; ')}`);
 if (validateExtractionConstraints({ unsupported: true }).valid) throw new Error('Unknown extraction constraints must be rejected.');
+if (!validateExtractionConstraintFidelity({ language: 'ja' }, { constraints: { language: 'ja' } }).valid) {
+  throw new Error('Extraction constraint fidelity validation failed.');
+}
+if (validateExtractionConstraintFidelity({ language: 'ja' }, { constraints: { language: 'en' } }).valid) {
+  throw new Error('Mismatched extraction constraint fidelity must be rejected.');
+}
 console.log('Extraction constraints validation passed.');
 const extractionFixtures = [
   [plainTextGrammarReference, plainTextLearningRequirements],
