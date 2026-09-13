@@ -10,6 +10,11 @@
     "title": "文の骨格を見抜く",
     "description": "英文を単語の列ではなく、役割を持つまとまりとして捉えます。",
     "learningGoal": "主語・動詞・目的語・補語などの役割に注目して、英文の基本構造を理解する。",
+    "demoTypes": [
+      "mark-parts",
+      "grammar-classifier",
+      "word-order"
+    ],
     "tags": [
       "lesson",
       "basic-sentence-structure",
@@ -25,6 +30,11 @@
         "WO-002",
         "WO-003",
         "GC-002"
+      ],
+      "demoTypes": [
+        "mark-parts",
+        "grammar-classifier",
+        "word-order"
       ],
       "interactionTypes": [
         "mark-parts",
@@ -45,6 +55,12 @@
     "title": "英文の構造を読む",
     "description": "文の骨格と、そこへ加わる修飾情報を順に見分けます。",
     "learningGoal": "英文の骨格と修飾部分を分け、文の中心と追加情報を構造として理解する。",
+    "demoTypes": [
+      "mark-parts",
+      "sentence-pattern-diagram",
+      "modifier-connection-viewer",
+      "grammar-classifier"
+    ],
     "tags": [
       "lesson",
       "structural-reading",
@@ -61,6 +77,12 @@
         "MCV-001",
         "MCV-002",
         "GC-002"
+      ],
+      "demoTypes": [
+        "mark-parts",
+        "sentence-pattern-diagram",
+        "modifier-connection-viewer",
+        "grammar-classifier"
       ],
       "interactionTypes": [
         "mark-parts",
@@ -82,6 +104,14 @@
     "title": "助動詞を形と場面から使う",
     "description": "助動詞の後ろに動詞の原形を置く基本形を確認し、can / should / must などの意味を場面に応じて使い分けます。",
     "learningGoal": "助動詞 + 動詞原形という形を理解し、能力・助言・義務などの意味と場面を対応づけて適切な助動詞を選べるようにする。",
+    "demoTypes": [
+      "sentence-transformer",
+      "word-order",
+      "error-corrector",
+      "sentence-comparison",
+      "sentence-generator",
+      "context-grammar"
+    ],
     "tags": [
       "lesson",
       "modal-verbs",
@@ -100,6 +130,14 @@
         "SC-004",
         "SG-004",
         "CG-004"
+      ],
+      "demoTypes": [
+        "sentence-transformer",
+        "word-order",
+        "error-corrector",
+        "sentence-comparison",
+        "sentence-generator",
+        "context-grammar"
       ],
       "interactionTypes": [
         "sentence-transformer",
@@ -123,6 +161,14 @@
     "title": "能動態と受動態で視点を変える",
     "description": "同じ出来事でも、何を主語として見るかによって英文の形が変わることを確認します。",
     "learningGoal": "能動態と受動態の形の違いを理解し、動作主と動作を受ける対象のどちらを主語として焦点化するかに応じて使い分ける。",
+    "demoTypes": [
+      "sentence-comparison",
+      "sentence-transformer",
+      "word-order",
+      "error-corrector",
+      "sentence-generator",
+      "context-grammar"
+    ],
     "tags": [
       "lesson",
       "passive-voice",
@@ -141,6 +187,14 @@
         "EC-005",
         "SG-005",
         "CG-005"
+      ],
+      "demoTypes": [
+        "sentence-comparison",
+        "sentence-transformer",
+        "word-order",
+        "error-corrector",
+        "sentence-generator",
+        "context-grammar"
       ],
       "interactionTypes": [
         "sentence-comparison",
@@ -164,6 +218,14 @@
     "title": "不定詞を形・役割・目的から使う",
     "description": "to + 動詞原形という形を確認し、文の中で名詞・形容詞・副詞のように働く違いを、位置・意味・場面から整理します。",
     "learningGoal": "不定詞の基本形を理解し、名詞的・形容詞的・副詞的な働きを見分け、文の意味や目的に応じて適切に使えるようにする。",
+    "demoTypes": [
+      "word-order",
+      "grammar-classifier",
+      "modifier-positioner",
+      "sentence-comparison",
+      "error-corrector",
+      "context-grammar"
+    ],
     "tags": [
       "lesson",
       "infinitives",
@@ -182,6 +244,14 @@
         "SC-001",
         "EC-006",
         "CG-006"
+      ],
+      "demoTypes": [
+        "word-order",
+        "grammar-classifier",
+        "modifier-positioner",
+        "sentence-comparison",
+        "error-corrector",
+        "context-grammar"
       ],
       "interactionTypes": [
         "word-order",
@@ -205,6 +275,14 @@
     "title": "動名詞を名詞の働きと動詞との組み合わせから使う",
     "description": "動詞 + ing が名詞のように働くことを確認し、主語・目的語・補語としての使い方や、不定詞との意味・verb patternの違いを整理します。",
     "learningGoal": "動名詞の基本形と名詞的な働きを理解し、文中での役割を見分け、動名詞を取る動詞や不定詞との意味差に応じて適切な形を選べるようにする。",
+    "demoTypes": [
+      "word-order",
+      "mark-parts",
+      "grammar-classifier",
+      "sentence-comparison",
+      "error-corrector",
+      "context-grammar"
+    ],
     "tags": [
       "lesson",
       "gerunds",
@@ -223,6 +301,14 @@
         "SC-001",
         "EC-007",
         "CG-007"
+      ],
+      "demoTypes": [
+        "word-order",
+        "mark-parts",
+        "grammar-classifier",
+        "sentence-comparison",
+        "error-corrector",
+        "context-grammar"
       ],
       "interactionTypes": [
         "word-order",

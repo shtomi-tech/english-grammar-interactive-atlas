@@ -86,6 +86,8 @@ function createInteractionRecords(interactions, problems, interactionRetrievalMe
       ...(metadata?.bestFor ?? []),
     ]);
     const negativeTags = uniqueIds([...(metadata?.notBestFor ?? [])]);
+    const demoTypes = interaction.demoType ? [interaction.demoType] : [];
+    const interactionPatterns = [...interaction.interactionType];
     const record = {
       kind: 'interaction',
       id: interaction.id,
@@ -101,6 +103,7 @@ function createInteractionRecords(interactions, problems, interactionRetrievalMe
       insight: interaction.insight,
       targetGrammar: [...interaction.targetGrammar],
       interactionType: [...interaction.interactionType],
+      interactionPatterns,
       feedbackType: [...interaction.feedbackType],
       learningIntents: [...(metadata?.learningIntents ?? [])],
       bestFor: [...(metadata?.bestFor ?? [])],
@@ -108,6 +111,7 @@ function createInteractionRecords(interactions, problems, interactionRetrievalMe
       positiveTags,
       negativeTags,
       tags: [...positiveTags],
+      demoTypes,
       relations: { problemIds },
       searchText: buildSearchText(
         {
@@ -139,6 +143,7 @@ function createProblemRecords(problems, interactions, lessonIdsByProblemId) {
     canonicalRef: { kind: 'problem', id: problem.id, type: problem.type },
     title: problem.id,
     type: problem.type,
+    demoTypes: [problem.type],
     tags: [problem.type],
     relations: {
       interactionIds: interactions
@@ -153,7 +158,7 @@ function createProblemRecords(problems, interactions, lessonIdsByProblemId) {
 function createLessonRecords(lessons) {
   return lessons.map((lesson) => {
     const problemIds = lesson.steps.map((step) => step.problemId);
-    const interactionTypes = uniqueIds(lesson.steps.map((step) => step.interactionType));
+    const demoTypes = uniqueIds(lesson.steps.map((step) => step.interactionType));
     return {
       kind: 'lesson',
       id: lesson.id,
@@ -162,8 +167,9 @@ function createLessonRecords(lessons) {
       title: lesson.title,
       description: lesson.description,
       learningGoal: lesson.learningGoal,
-      tags: uniqueIds(['lesson', lesson.slug, ...interactionTypes]),
-      relations: { problemIds, interactionTypes },
+      demoTypes,
+      tags: uniqueIds(['lesson', lesson.slug, ...demoTypes]),
+      relations: { problemIds, demoTypes, interactionTypes: [...demoTypes] },
       searchText: buildSearchText({
         slug: lesson.slug,
         title: lesson.title,
@@ -186,7 +192,9 @@ function toDocument(record) {
     relations: structuredClone(record.relations),
   };
   if (record.type) document.type = record.type;
+  if (Array.isArray(record.demoTypes)) document.demoTypes = [...record.demoTypes];
   if (Array.isArray(record.interactionType)) document.interactionType = [...record.interactionType];
+  if (Array.isArray(record.interactionPatterns)) document.interactionPatterns = [...record.interactionPatterns];
   if (Array.isArray(record.learningIntents)) document.learningIntents = [...record.learningIntents];
   if (Array.isArray(record.bestFor)) document.bestFor = [...record.bestFor];
   if (Array.isArray(record.negativeTags)) document.negativeTags = [...record.negativeTags];

@@ -24,6 +24,10 @@
       "tap-to-place",
       "sequence"
     ],
+    "interactionPatterns": [
+      "tap-to-place",
+      "sequence"
+    ],
     "feedbackType": [
       "正誤",
       "説明"
@@ -53,6 +57,9 @@
       "practice-word-order",
       "reconstructing-sentence-order",
       "checking-sequence-constraints"
+    ],
+    "demoTypes": [
+      "word-order"
     ],
     "relations": {
       "problemIds": [
@@ -94,6 +101,10 @@
       "tap-to-place",
       "drag-and-drop"
     ],
+    "interactionPatterns": [
+      "tap-to-place",
+      "drag-and-drop"
+    ],
     "feedbackType": [
       "正誤",
       "ヒント"
@@ -124,6 +135,7 @@
       "placing-a-phrase-in-context",
       "observing-slot-effects"
     ],
+    "demoTypes": [],
     "relations": {
       "problemIds": []
     },
@@ -151,6 +163,10 @@
       "S / V / O"
     ],
     "interactionType": [
+      "token-select",
+      "role-reveal"
+    ],
+    "interactionPatterns": [
       "token-select",
       "role-reveal"
     ],
@@ -183,6 +199,9 @@
       "identify-role",
       "finding-sentence-roles",
       "role-based-reading"
+    ],
+    "demoTypes": [
+      "mark-parts"
     ],
     "relations": {
       "problemIds": [
@@ -220,6 +239,10 @@
       "classification",
       "sorting"
     ],
+    "interactionPatterns": [
+      "classification",
+      "sorting"
+    ],
     "feedbackType": [
       "正誤",
       "分類理由"
@@ -252,6 +275,9 @@
       "classify-role",
       "classifying-phrase-function",
       "comparing-grammatical-roles"
+    ],
+    "demoTypes": [
+      "grammar-classifier"
     ],
     "relations": {
       "problemIds": [
@@ -290,6 +316,10 @@
       "state-selection",
       "sentence-generation"
     ],
+    "interactionPatterns": [
+      "state-selection",
+      "sentence-generation"
+    ],
     "feedbackType": [
       "即時変化",
       "構造ラベル"
@@ -322,6 +352,9 @@
       "connect-form-and-meaning",
       "comparing-grammar-states",
       "tracing-form-changes"
+    ],
+    "demoTypes": [
+      "sentence-transformer"
     ],
     "relations": {
       "problemIds": [
@@ -358,6 +391,10 @@
       "tree-view",
       "highlight"
     ],
+    "interactionPatterns": [
+      "tree-view",
+      "highlight"
+    ],
     "feedbackType": [
       "強調表示",
       "構造説明"
@@ -388,6 +425,7 @@
       "inspecting-sentence-hierarchy",
       "tracing-syntax-relations"
     ],
+    "demoTypes": [],
     "relations": {
       "problemIds": []
     },
@@ -415,6 +453,10 @@
       "態"
     ],
     "interactionType": [
+      "form-select",
+      "generation"
+    ],
+    "interactionPatterns": [
       "form-select",
       "generation"
     ],
@@ -447,6 +489,9 @@
       "connect-form-and-meaning",
       "generating-a-controlled-sentence",
       "testing-grammar-state"
+    ],
+    "demoTypes": [
+      "sentence-generator"
     ],
     "relations": {
       "problemIds": [
@@ -485,6 +530,10 @@
       "side-by-side",
       "diff-highlight"
     ],
+    "interactionPatterns": [
+      "side-by-side",
+      "diff-highlight"
+    ],
     "feedbackType": [
       "差分強調",
       "意味比較"
@@ -514,6 +563,9 @@
       "compare-meaning",
       "comparing-contrasting-sentences",
       "linking-form-to-meaning"
+    ],
+    "demoTypes": [
+      "sentence-comparison"
     ],
     "relations": {
       "problemIds": [
@@ -551,6 +603,10 @@
       "error-spotting",
       "correction"
     ],
+    "interactionPatterns": [
+      "error-spotting",
+      "correction"
+    ],
     "feedbackType": [
       "正誤",
       "修正理由"
@@ -580,6 +636,9 @@
       "diagnose-error",
       "diagnosing-a-patterned-error",
       "explaining-a-correction"
+    ],
+    "demoTypes": [
+      "error-corrector"
     ],
     "relations": {
       "problemIds": [
@@ -620,6 +679,10 @@
       "scenario",
       "choice"
     ],
+    "interactionPatterns": [
+      "scenario",
+      "choice"
+    ],
     "feedbackType": [
       "会話結果",
       "場面別ヒント"
@@ -652,6 +715,9 @@
       "connect-context-and-form",
       "choosing-a-contextual-response",
       "comparing-goal-fit"
+    ],
+    "demoTypes": [
+      "context-grammar"
     ],
     "relations": {
       "problemIds": [
@@ -692,6 +758,10 @@
       "slot-fill",
       "sequence"
     ],
+    "interactionPatterns": [
+      "slot-fill",
+      "sequence"
+    ],
     "feedbackType": [
       "正誤",
       "構造表示"
@@ -722,6 +792,7 @@
       "mapping-slots-to-roles",
       "building-a-sentence-skeleton"
     ],
+    "demoTypes": [],
     "relations": {
       "problemIds": []
     },
@@ -749,6 +820,10 @@
       "疑問詞"
     ],
     "interactionType": [
+      "sequence",
+      "slot-fill"
+    ],
+    "interactionPatterns": [
       "sequence",
       "slot-fill"
     ],
@@ -782,6 +857,7 @@
       "building-question-structure",
       "tracing-question-word-order"
     ],
+    "demoTypes": [],
     "relations": {
       "problemIds": []
     },
@@ -809,6 +885,10 @@
       "複文"
     ],
     "interactionType": [
+      "clause-combination",
+      "sequence"
+    ],
+    "interactionPatterns": [
       "clause-combination",
       "sequence"
     ],
@@ -842,6 +922,7 @@
       "joining-clause-relations",
       "building-a-complex-sentence"
     ],
+    "demoTypes": [],
     "relations": {
       "problemIds": []
     },
@@ -869,6 +950,10 @@
       "分詞"
     ],
     "interactionType": [
+      "tap-to-place",
+      "position-change"
+    ],
+    "interactionPatterns": [
       "tap-to-place",
       "position-change"
     ],
@@ -904,6 +989,9 @@
       "connect-position-and-meaning",
       "placement-affects-meaning",
       "multiple-valid-placements"
+    ],
+    "demoTypes": [
+      "modifier-positioner"
     ],
     "relations": {
       "problemIds": [
@@ -941,6 +1029,10 @@
       "position-change",
       "comparison"
     ],
+    "interactionPatterns": [
+      "position-change",
+      "comparison"
+    ],
     "feedbackType": [
       "意味メモ",
       "自然さの説明"
@@ -974,6 +1066,7 @@
       "observing-adverb-scope",
       "comparing-focus-shifts"
     ],
+    "demoTypes": [],
     "relations": {
       "problemIds": []
     },
@@ -1001,6 +1094,10 @@
       "句読点"
     ],
     "interactionType": [
+      "sequence",
+      "clause-reordering"
+    ],
+    "interactionPatterns": [
       "sequence",
       "clause-reordering"
     ],
@@ -1034,6 +1131,7 @@
       "reordering-clause-position",
       "comparing-punctuation-effects"
     ],
+    "demoTypes": [],
     "relations": {
       "problemIds": []
     },
@@ -1061,6 +1159,10 @@
       "句と節"
     ],
     "interactionType": [
+      "token-select",
+      "role-reveal"
+    ],
+    "interactionPatterns": [
       "token-select",
       "role-reveal"
     ],
@@ -1094,6 +1196,7 @@
       "finding-specified-sentence-roles",
       "role-based-reading"
     ],
+    "demoTypes": [],
     "relations": {
       "problemIds": []
     },
@@ -1121,6 +1224,10 @@
       "関係詞"
     ],
     "interactionType": [
+      "boundary-select",
+      "highlight"
+    ],
+    "interactionPatterns": [
       "boundary-select",
       "highlight"
     ],
@@ -1154,6 +1261,7 @@
       "marking-clause-boundaries",
       "identifying-clause-structure"
     ],
+    "demoTypes": [],
     "relations": {
       "problemIds": []
     },
@@ -1181,6 +1289,10 @@
       "分詞"
     ],
     "interactionType": [
+      "token-select",
+      "relation-reveal"
+    ],
+    "interactionPatterns": [
       "token-select",
       "relation-reveal"
     ],
@@ -1214,6 +1326,7 @@
       "finding-modifier-phrases",
       "tracing-modifier-targets"
     ],
+    "demoTypes": [],
     "relations": {
       "problemIds": []
     },
@@ -1242,6 +1355,10 @@
       "形容詞"
     ],
     "interactionType": [
+      "classification",
+      "sorting"
+    ],
+    "interactionPatterns": [
       "classification",
       "sorting"
     ],
@@ -1275,6 +1392,7 @@
       "classifying-parts-of-speech",
       "comparing-form-and-function"
     ],
+    "demoTypes": [],
     "relations": {
       "problemIds": []
     },
@@ -1302,6 +1420,10 @@
       "従属節"
     ],
     "interactionType": [
+      "classification",
+      "feature-check"
+    ],
+    "interactionPatterns": [
       "classification",
       "feature-check"
     ],
@@ -1335,6 +1457,7 @@
       "distinguishing-phrase-and-clause",
       "detecting-finite-verbs"
     ],
+    "demoTypes": [],
     "relations": {
       "problemIds": []
     },
@@ -1362,6 +1485,10 @@
       "文型"
     ],
     "interactionType": [
+      "classification",
+      "sentence-context"
+    ],
+    "interactionPatterns": [
       "classification",
       "sentence-context"
     ],
@@ -1395,6 +1522,7 @@
       "classifying-verb-valency",
       "linking-verbs-to-objects"
     ],
+    "demoTypes": [],
     "relations": {
       "problemIds": []
     },
@@ -1422,6 +1550,10 @@
       "文型"
     ],
     "interactionType": [
+      "state-selection",
+      "sentence-generation"
+    ],
+    "interactionPatterns": [
       "state-selection",
       "sentence-generation"
     ],
@@ -1458,6 +1590,7 @@
       "comparing-voice",
       "tracking-role-reversal"
     ],
+    "demoTypes": [],
     "relations": {
       "problemIds": []
     },
@@ -1485,6 +1618,10 @@
       "代名詞"
     ],
     "interactionType": [
+      "state-selection",
+      "sentence-transformation"
+    ],
+    "interactionPatterns": [
       "state-selection",
       "sentence-transformation"
     ],
@@ -1518,6 +1655,7 @@
       "tracing-reported-speech-changes",
       "comparing-tense-shifts"
     ],
+    "demoTypes": [],
     "relations": {
       "problemIds": []
     },
@@ -1546,6 +1684,10 @@
       "最上級"
     ],
     "interactionType": [
+      "state-selection",
+      "sentence-generation"
+    ],
+    "interactionPatterns": [
       "state-selection",
       "sentence-generation"
     ],
@@ -1582,6 +1724,7 @@
       "changing-comparison-degree",
       "linking-form-to-comparison"
     ],
+    "demoTypes": [],
     "relations": {
       "problemIds": []
     },
@@ -1609,6 +1752,10 @@
       "補語"
     ],
     "interactionType": [
+      "diagram",
+      "highlight"
+    ],
+    "interactionPatterns": [
       "diagram",
       "highlight"
     ],
@@ -1641,6 +1788,9 @@
       "identify-role",
       "inspecting-sentence-patterns",
       "mapping-roles-to-slots"
+    ],
+    "demoTypes": [
+      "sentence-pattern-diagram"
     ],
     "relations": {
       "problemIds": [
@@ -1677,6 +1827,10 @@
       "relation-graph",
       "highlight"
     ],
+    "interactionPatterns": [
+      "relation-graph",
+      "highlight"
+    ],
     "feedbackType": [
       "関係線",
       "短い説明"
@@ -1706,6 +1860,9 @@
       "identify-role",
       "inspecting-modifier-relations",
       "tracing-target-connections"
+    ],
+    "demoTypes": [
+      "modifier-connection-viewer"
     ],
     "relations": {
       "problemIds": [
@@ -1742,6 +1899,10 @@
       "tree-view",
       "collapse-expand"
     ],
+    "interactionPatterns": [
+      "tree-view",
+      "collapse-expand"
+    ],
     "feedbackType": [
       "階層表示",
       "構造説明"
@@ -1772,6 +1933,7 @@
       "inspecting-clause-hierarchy",
       "tracing-nested-clauses"
     ],
+    "demoTypes": [],
     "relations": {
       "problemIds": []
     },
@@ -1800,6 +1962,10 @@
       "進行形"
     ],
     "interactionType": [
+      "form-select",
+      "generation"
+    ],
+    "interactionPatterns": [
       "form-select",
       "generation"
     ],
@@ -1833,6 +1999,7 @@
       "generating-tense-variants",
       "connecting-time-to-form"
     ],
+    "demoTypes": [],
     "relations": {
       "problemIds": []
     },
@@ -1860,6 +2027,10 @@
       "助動詞"
     ],
     "interactionType": [
+      "form-select",
+      "generation"
+    ],
+    "interactionPatterns": [
       "form-select",
       "generation"
     ],
@@ -1893,6 +2064,7 @@
       "generating-a-question-from-a-target",
       "mapping-question-types"
     ],
+    "demoTypes": [],
     "relations": {
       "problemIds": []
     },
@@ -1920,6 +2092,10 @@
       "時制"
     ],
     "interactionType": [
+      "state-selection",
+      "generation"
+    ],
+    "interactionPatterns": [
       "state-selection",
       "generation"
     ],
@@ -1953,6 +2129,7 @@
       "building-condition-result-pairs",
       "connecting-tense-to-condition"
     ],
+    "demoTypes": [],
     "relations": {
       "problemIds": []
     },
@@ -1980,6 +2157,10 @@
       "動詞の語法"
     ],
     "interactionType": [
+      "side-by-side",
+      "diff-highlight"
+    ],
+    "interactionPatterns": [
       "side-by-side",
       "diff-highlight"
     ],
@@ -2013,6 +2194,7 @@
       "comparing-verb-patterns",
       "distinguishing-infinitive-and-gerund"
     ],
+    "demoTypes": [],
     "relations": {
       "problemIds": []
     },
@@ -2040,6 +2222,10 @@
       "過去分詞"
     ],
     "interactionType": [
+      "side-by-side",
+      "role-mapping"
+    ],
+    "interactionPatterns": [
       "side-by-side",
       "role-mapping"
     ],
@@ -2073,6 +2259,7 @@
       "comparing-voice-choices",
       "mapping-agent-and-patient"
     ],
+    "demoTypes": [],
     "relations": {
       "problemIds": []
     },
@@ -2100,6 +2287,10 @@
       "過去形"
     ],
     "interactionType": [
+      "side-by-side",
+      "timeline"
+    ],
+    "interactionPatterns": [
       "side-by-side",
       "timeline"
     ],
@@ -2133,6 +2324,7 @@
       "comparing-time-frames",
       "connecting-tense-to-meaning"
     ],
+    "demoTypes": [],
     "relations": {
       "problemIds": []
     },
@@ -2160,6 +2352,10 @@
       "複数主語"
     ],
     "interactionType": [
+      "error-spotting",
+      "choice"
+    ],
+    "interactionPatterns": [
       "error-spotting",
       "choice"
     ],
@@ -2193,6 +2389,7 @@
       "diagnosing-subject-verb-agreement",
       "correcting-inflection"
     ],
+    "demoTypes": [],
     "relations": {
       "problemIds": []
     },
@@ -2220,6 +2417,10 @@
       "現在完了"
     ],
     "interactionType": [
+      "error-spotting",
+      "sentence-correction"
+    ],
+    "interactionPatterns": [
       "error-spotting",
       "sentence-correction"
     ],
@@ -2256,6 +2457,7 @@
       "diagnosing-tense-mismatch",
       "aligning-time-cues-and-form"
     ],
+    "demoTypes": [],
     "relations": {
       "problemIds": []
     },
@@ -2283,6 +2485,10 @@
       "修飾語"
     ],
     "interactionType": [
+      "error-spotting",
+      "sequence"
+    ],
+    "interactionPatterns": [
       "error-spotting",
       "sequence"
     ],
@@ -2319,6 +2525,7 @@
       "diagnosing-order-errors",
       "reconstructing-sentence-order"
     ],
+    "demoTypes": [],
     "relations": {
       "problemIds": []
     },
@@ -2346,6 +2553,10 @@
       "丁寧表現"
     ],
     "interactionType": [
+      "scenario",
+      "choice"
+    ],
+    "interactionPatterns": [
       "scenario",
       "choice"
     ],
@@ -2382,6 +2593,7 @@
       "choosing-a-polite-request",
       "matching-register-to-situation"
     ],
+    "demoTypes": [],
     "relations": {
       "problemIds": []
     },
@@ -2409,6 +2621,10 @@
       "助動詞"
     ],
     "interactionType": [
+      "scenario",
+      "branching-choice"
+    ],
+    "interactionPatterns": [
       "scenario",
       "branching-choice"
     ],
@@ -2445,6 +2661,7 @@
       "practicing-travel-dialogue",
       "choosing-a-purpose-fit-response"
     ],
+    "demoTypes": [],
     "relations": {
       "problemIds": []
     },
@@ -2472,6 +2689,10 @@
       "過去形"
     ],
     "interactionType": [
+      "scenario",
+      "tense-choice"
+    ],
+    "interactionPatterns": [
       "scenario",
       "tense-choice"
     ],
@@ -2508,6 +2729,7 @@
       "selecting-tense-from-time-cues",
       "aligning-context-and-tense"
     ],
+    "demoTypes": [],
     "relations": {
       "problemIds": []
     },

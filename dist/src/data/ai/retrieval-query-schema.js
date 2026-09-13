@@ -7,6 +7,8 @@ export const retrievalQueryFields = Object.freeze([
   'includeTerms',
   'preferredTags',
   'avoidTags',
+  'demoTypes',
+  'interactionPatterns',
   'interactionTypes',
   'limit',
 ]);
@@ -61,6 +63,8 @@ export function validateRetrievalQuery(query) {
   validateNonEmptyStringArray(query, 'includeTerms', errors);
   validateNonEmptyStringArray(query, 'preferredTags', errors, { kebabCase: true });
   validateNonEmptyStringArray(query, 'avoidTags', errors, { kebabCase: true });
+  validateNonEmptyStringArray(query, 'demoTypes', errors, { kebabCase: true });
+  validateNonEmptyStringArray(query, 'interactionPatterns', errors, { kebabCase: true });
   validateNonEmptyStringArray(query, 'interactionTypes', errors, { kebabCase: true });
 
   if (query.limit !== undefined && (!Number.isInteger(query.limit) || query.limit < 1 || query.limit > retrievalMaxLimit)) {

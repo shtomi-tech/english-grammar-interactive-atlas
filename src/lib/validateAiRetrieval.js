@@ -103,6 +103,13 @@ function validateInteractionRecords(interactions, problems, recordsById, metadat
     if (!sameValue(record.canonicalRef, { kind: 'interaction', id: interaction.id })) {
       errors.push(`${interaction.id}.canonicalRef does not match canonical data`);
     }
+    const expectedDemoTypes = interaction.demoType ? [interaction.demoType] : [];
+    if (!sameValue(record.demoTypes, expectedDemoTypes)) {
+      errors.push(`${interaction.id}.demoTypes does not match canonical data`);
+    }
+    if (!sameValue(record.interactionPatterns, interaction.interactionType)) {
+      errors.push(`${interaction.id}.interactionPatterns does not match canonical data`);
+    }
     if (record.searchText?.trim() === '') errors.push(`${interaction.id}.searchText must not be empty`);
     ['learningIntents', 'bestFor', 'notBestFor'].forEach((field) => {
       if (!sameValue(record[field], expectedMetadata?.[field] ?? [])) {
@@ -143,6 +150,9 @@ function validateProblemRecords(problems, interactions, lessons, recordsById, er
     if (!sameValue(record.canonicalRef, { kind: 'problem', id: problem.id, type: problem.type })) {
       errors.push(`${problem.id}.canonicalRef does not match canonical data`);
     }
+    if (!sameValue(record.demoTypes, [problem.type])) {
+      errors.push(`${problem.id}.demoTypes does not match canonical data`);
+    }
     const expectedInteractionIds = interactions
       .filter((interaction) => interaction.demoType === problem.type)
       .map((interaction) => interaction.id);
@@ -173,12 +183,18 @@ function validateLessonRecords(lessons, problems, recordsById, errors) {
       errors.push(`${lesson.id}.canonicalRef does not match canonical data`);
     }
     const expectedProblemIds = lesson.steps.map((step) => step.problemId);
-    const expectedInteractionTypes = unique(lesson.steps.map((step) => step.interactionType));
+    const expectedDemoTypes = unique(lesson.steps.map((step) => step.interactionType));
+    if (!sameValue(record.demoTypes, expectedDemoTypes)) {
+      errors.push(`${lesson.id}.demoTypes does not match lesson steps`);
+    }
     if (!sameValue(record.relations?.problemIds, expectedProblemIds)) {
       errors.push(`${lesson.id}.relations.problemIds does not match lesson steps`);
     }
-    if (!sameValue(record.relations?.interactionTypes, expectedInteractionTypes)) {
-      errors.push(`${lesson.id}.relations.interactionTypes does not match lesson steps`);
+    if (!sameValue(record.relations?.demoTypes, expectedDemoTypes)) {
+      errors.push(`${lesson.id}.relations.demoTypes does not match lesson steps`);
+    }
+    if (!sameValue(record.relations?.interactionTypes, expectedDemoTypes)) {
+      errors.push(`${lesson.id}.relations.interactionTypes deprecated alias does not match lesson steps`);
     }
     expectedProblemIds
       .filter((problemId) => !problemIds.has(problemId))
@@ -211,7 +227,19 @@ function validateDocuments(index, interactionRecords, problemRecords, lessonReco
       errors.push(`Missing unified AI document: ${record.kind}:${record.id}`);
       return;
     }
-    ['title', 'searchText', 'tags', 'relations', 'canonicalRef'].forEach((field) => {
+    [
+      'title',
+      'searchText',
+      'tags',
+      'relations',
+      'canonicalRef',
+      'type',
+      'demoTypes',
+      'interactionType',
+      'interactionPatterns',
+      'learningIntents',
+      'bestFor',
+    ].forEach((field) => {
       if (!sameValue(document[field], record[field])) errors.push(`${record.kind}:${record.id}.${field} differs from record`);
     });
     if (record.negativeTags !== undefined && !sameValue(document.negativeTags, record.negativeTags)) {

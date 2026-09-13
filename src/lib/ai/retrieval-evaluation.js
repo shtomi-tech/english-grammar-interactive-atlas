@@ -4,6 +4,16 @@ export function evaluateRetrievalBenchmarks(index, benchmarks, search = searchRe
   const results = benchmarks.map((benchmark) => {
     try {
       const searchResults = search(index, benchmark.query);
+      if (benchmark.expectEmpty) {
+        return {
+          id: benchmark.id,
+          passed: searchResults.length === 0,
+          rank: null,
+          expectedTopIds: [],
+          maxRank: 0,
+          actualTopIds: searchResults.map((result) => result.id),
+        };
+      }
       const expectedTopIds = new Set(benchmark.expectedTopIds);
       const maxRank = benchmark.maxRank ?? 1;
       const matchingResult = searchResults.find((result, index) => expectedTopIds.has(result.id) && index + 1 <= maxRank);

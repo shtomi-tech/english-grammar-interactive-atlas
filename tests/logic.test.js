@@ -67,6 +67,8 @@ import { validateResearchReferences, validateResearchRegistry } from '../src/lib
 import { getLessonProgress, isLessonStepComplete, markLessonStepComplete } from '../src/lib/lesson-progress.js';
 import {
   interactionRetrievalMetadata,
+  learningRequirementsContract,
+  learningRequirementsFixtures,
   retrievalBenchmarks,
   validateRetrievalQuery,
 } from '../src/data/ai/index.js';
@@ -74,6 +76,7 @@ import { createAiRetrievalIndex } from '../src/lib/ai/retrieval-index.js';
 import { evaluateRetrievalBenchmarks } from '../src/lib/ai/retrieval-evaluation.js';
 import { searchRetrievalIndex } from '../src/lib/ai/retrieval-search.js';
 import { validateAiRetrieval } from '../src/lib/validateAiRetrieval.js';
+import { validateLearningRequirements } from '../src/lib/validateLearningRequirements.js';
 
 assert.equal(interactions.length, 40);
 assert.deepEqual(
@@ -365,9 +368,21 @@ assert.deepEqual(
   aiRetrievalIndex.interactions.find((record) => record.id === 'GRAM-INT-014').relations.problemIds,
   ['MPO-001', 'MPO-002', 'MPO-003', 'MPO-004'],
 );
+const sentenceComparisonInteraction = aiRetrievalIndex.interactions.find((record) => record.id === 'GRAM-INT-008');
+assert.deepEqual(sentenceComparisonInteraction.demoTypes, ['sentence-comparison']);
+assert.deepEqual(sentenceComparisonInteraction.interactionPatterns, sentenceComparisonInteraction.interactionType);
 const sentenceComparisonRecord = aiRetrievalIndex.problems.find((record) => record.id === 'SC-001');
+assert.deepEqual(sentenceComparisonRecord.demoTypes, ['sentence-comparison']);
 assert.deepEqual(sentenceComparisonRecord.relations.interactionIds, ['GRAM-INT-008']);
 assert.deepEqual(sentenceComparisonRecord.relations.lessonIds, ['LESSON-005', 'LESSON-006']);
+assert.deepEqual(aiRetrievalIndex.lessons.find((record) => record.id === 'LESSON-006').demoTypes, [
+  'word-order',
+  'mark-parts',
+  'grammar-classifier',
+  'sentence-comparison',
+  'error-corrector',
+  'context-grammar',
+]);
 assert.match(sentenceComparisonRecord.searchText, /stopped smoking/);
 assert.match(sentenceComparisonRecord.searchText, /stopped to smoke/);
 const modifierPositionerRecord = aiRetrievalIndex.interactions.find((record) => record.id === 'GRAM-INT-014');
@@ -391,10 +406,11 @@ const modifierPositionerDocument = aiRetrievalIndex.documents.find((document) =>
 assert.deepEqual(modifierPositionerDocument.negativeTags, modifierPositionerRecord.negativeTags);
 const retrievalEvaluation = evaluateRetrievalBenchmarks(aiRetrievalIndex, retrievalBenchmarks);
 assert.equal(retrievalEvaluation.failed, 0, JSON.stringify(retrievalEvaluation.results, null, 2));
-assert.equal(retrievalEvaluation.results.filter((result) => result.id.startsWith('interaction-')).length, 5);
+assert.equal(retrievalEvaluation.results.filter((result) => result.id.startsWith('interaction-')).length, 6);
 retrievalBenchmarks.forEach((benchmark) => {
   const results = searchRetrievalIndex(aiRetrievalIndex, benchmark.query);
-  assert.ok(results.length > 0, benchmark.id);
+  if (benchmark.expectEmpty) assert.equal(results.length, 0, benchmark.id);
+  else assert.ok(results.length > 0, benchmark.id);
   assert.equal(results.every((result) => result.reasons.length > 0), true, benchmark.id);
 });
 const modifierQuery = retrievalBenchmarks.find((benchmark) => benchmark.id === 'interaction-modifier-placement').query;
@@ -404,14 +420,72 @@ const negativeRegressionResults = searchRetrievalIndex(aiRetrievalIndex, {
   preferredTags: ['free-form-generation'],
   limit: 100,
 });
-const wordOrderNegativeResult = negativeRegressionResults.find((result) => result.id === 'GRAM-INT-001');
-assert.equal(wordOrderNegativeResult.score < 0, true);
-assert.notEqual(negativeRegressionResults[0].id, 'GRAM-INT-001');
+assert.deepEqual(negativeRegressionResults, []);
+assert.deepEqual(
+  searchRetrievalIndex(aiRetrievalIndex, {
+    kinds: ['interaction'],
+    demoTypes: ['sentence-comparison'],
+  }).map((result) => result.id),
+  ['GRAM-INT-008'],
+);
+assert.deepEqual(
+  searchRetrievalIndex(aiRetrievalIndex, {
+    kinds: ['problem'],
+    demoTypes: ['sentence-comparison'],
+  }).map((result) => result.id),
+  sentenceComparisonProblems.map((problem) => problem.id),
+);
+assert.deepEqual(
+  searchRetrievalIndex(aiRetrievalIndex, {
+    kinds: ['problem'],
+    interactionTypes: ['sentence-comparison'],
+  }),
+  searchRetrievalIndex(aiRetrievalIndex, {
+    kinds: ['problem'],
+    demoTypes: ['sentence-comparison'],
+  }),
+);
+assert.deepEqual(searchRetrievalIndex(aiRetrievalIndex, {
+  kinds: ['interaction'],
+  includeTerms: ['this-concept-does-not-exist-anywhere'],
+}), []);
 assert.equal(validateRetrievalQuery({}).valid, false);
 assert.equal(validateRetrievalQuery({ kinds: ['unknown'] }).valid, false);
 assert.equal(validateRetrievalQuery({ learningIntents: ['unknown-intent'] }).valid, false);
 assert.equal(validateRetrievalQuery({ includeTerms: ['  '] }).valid, false);
 assert.equal(validateRetrievalQuery({ kinds: ['interaction'], limit: 0 }).valid, false);
+assert.equal(validateRetrievalQuery({ demoTypes: ['sentence-comparison'] }).valid, true);
+assert.equal(validateRetrievalQuery({ interactionPatterns: ['side-by-side'] }).valid, true);
+assert.equal(validateRetrievalQuery({ demoTypes: ['not a tag'] }).valid, false);
+assert.equal(learningRequirementsContract.version, '1');
+assert.equal(learningRequirementsFixtures.length, 2);
+learningRequirementsFixtures.forEach((fixture) => {
+  assert.deepEqual(validateLearningRequirements(fixture), validateLearningRequirements(fixture));
+  assert.equal(validateLearningRequirements(fixture).valid, true);
+});
+const invalidLearningRequirementCases = [
+  ['duplicate source id', (value) => { value.sourceReferences.push({ ...value.sourceReferences[0] }); }],
+  ['duplicate learning point id', (value) => { value.learningPoints[1].id = value.learningPoints[0].id; }],
+  ['unknown source id', (value) => { value.learningPoints[0].sourceEvidence[0].sourceId = 'SOURCE-UNKNOWN'; }],
+  ['empty source evidence', (value) => { value.learningPoints[0].sourceEvidence = []; }],
+  ['unknown importance', (value) => { value.learningPoints[0].importance = 'essential'; }],
+  ['unknown outcome', (value) => { value.learningPoints[0].desiredOutcomes = ['memorize-fact']; }],
+  ['empty locator', (value) => { value.learningPoints[0].sourceEvidence[0].locator = {}; }],
+  ['atlas linkage', (value) => {
+    value.interactionId = 'GRAM-INT-001';
+    value.interactionIds = ['GRAM-INT-001'];
+    value.problemId = 'WO-001';
+    value.problemIds = ['WO-001'];
+    value.lessonId = 'LESSON-001';
+    value.lessonIds = ['LESSON-001'];
+    value.demoType = 'word-order';
+  }],
+];
+invalidLearningRequirementCases.forEach(([name, mutate]) => {
+  const invalidFixture = structuredClone(learningRequirementsFixtures[0]);
+  mutate(invalidFixture);
+  assert.equal(validateLearningRequirements(invalidFixture).valid, false, name);
+});
 assert.deepEqual(
   createAiRetrievalIndex({ interactions, problems, lessons, interactionRetrievalMetadata }),
   aiRetrievalIndex,

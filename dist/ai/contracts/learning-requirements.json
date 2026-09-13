@@ -1,0 +1,73 @@
+{
+  "version": "1",
+  "topLevelFields": [
+    "version",
+    "id",
+    "topic",
+    "sourceReferences",
+    "audience",
+    "constraints",
+    "learningPoints"
+  ],
+  "sourceReferenceFields": [
+    "id",
+    "type",
+    "title"
+  ],
+  "sourceReferenceTypes": [
+    "user-provided"
+  ],
+  "learningPointFields": [
+    "id",
+    "concept",
+    "summary",
+    "importance",
+    "desiredOutcomes",
+    "sourceEvidence"
+  ],
+  "importanceValues": [
+    "core",
+    "supporting",
+    "extension"
+  ],
+  "desiredOutcomeValues": [
+    "recognize-form",
+    "produce-form",
+    "identify-role",
+    "classify-function",
+    "understand-meaning",
+    "compare-meaning",
+    "understand-rule",
+    "apply-rule",
+    "diagnose-error",
+    "correct-error",
+    "choose-in-context",
+    "explain-choice"
+  ],
+  "sourceEvidenceFields": [
+    "sourceId",
+    "locator",
+    "summary"
+  ],
+  "locatorFields": [
+    "page",
+    "section",
+    "paragraph",
+    "line",
+    "heading",
+    "offset"
+  ],
+  "audienceFields": [
+    "stage"
+  ],
+  "audienceStageValues": [
+    "middle-school",
+    "high-school",
+    "adult"
+  ],
+  "constraintFields": [
+    "durationMinutes",
+    "maxLearningPoints",
+    "language"
+  ]
+}

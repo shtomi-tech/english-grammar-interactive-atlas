@@ -59,7 +59,7 @@ export const retrievalBenchmarks = Object.freeze([
     description: 'stop + 動名詞とstop + 不定詞の違いを比較する既存Problemを探したい',
     query: {
       kinds: ['problem'],
-      interactionTypes: ['sentence-comparison'],
+      demoTypes: ['sentence-comparison'],
       includeTerms: ['stopped smoking', 'stopped to smoke'],
     },
     expectedTopIds: ['SC-001'],
@@ -93,6 +93,27 @@ export const retrievalBenchmarks = Object.freeze([
       includeTerms: ['infinitive', '不定詞'],
     },
     expectedTopIds: ['LESSON-005'],
+    maxRank: 3,
+  },
+  {
+    id: 'retrieval-no-match',
+    description: '一致する検索シグナルがない場合は候補を返さない',
+    query: {
+      kinds: ['interaction'],
+      includeTerms: ['this-concept-does-not-exist-anywhere'],
+    },
+    expectedTopIds: [],
+    maxRank: 0,
+    expectEmpty: true,
+  },
+  {
+    id: 'interaction-demo-type',
+    description: 'InteractionのdemoTypeからUI部品候補を探したい',
+    query: {
+      kinds: ['interaction'],
+      demoTypes: ['sentence-comparison'],
+    },
+    expectedTopIds: ['GRAM-INT-008'],
     maxRank: 3,
   },
 ]);

@@ -33,6 +33,9 @@ jobs:
       - name: Validate project data
         run: npm run check
 
+      - name: Check diff whitespace
+        run: git diff --check
+
       - name: Build static site
         run: npm run build
 
