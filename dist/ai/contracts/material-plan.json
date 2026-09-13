@@ -1,0 +1,174 @@
+{
+  "version": "1",
+  "requiredFields": [
+    "version",
+    "id",
+    "learningRequirementsRef",
+    "items"
+  ],
+  "optionalFields": [],
+  "fieldDefinitions": {
+    "version": {
+      "type": "string",
+      "required": true,
+      "allowedValues": [
+        "1"
+      ],
+      "description": "Material Plan contract version."
+    },
+    "id": {
+      "type": "string",
+      "required": true,
+      "description": "Stable identifier for one material plan."
+    },
+    "learningRequirementsRef": {
+      "type": "object",
+      "required": true,
+      "fields": [
+        "id",
+        "version"
+      ],
+      "description": "Reference to the source Learning Requirements document."
+    },
+    "items": {
+      "type": "array",
+      "required": true,
+      "itemFields": [
+        "id",
+        "learningPointId",
+        "interactionSelection",
+        "problemDecision",
+        "rationale"
+      ],
+      "description": "One planned learning activity per item."
+    },
+    "interactionSelection": {
+      "type": "object",
+      "required": true,
+      "fields": [
+        "query",
+        "selected"
+      ],
+      "description": "Retrieval query and evidence for the selected Interaction."
+    },
+    "problemDecision": {
+      "type": "object",
+      "required": true,
+      "fields": [
+        "action",
+        "reason",
+        "problemSelection",
+        "sourceProblemSelection"
+      ],
+      "allowedValues": [
+        "reuse",
+        "adapt",
+        "generate",
+        "unresolved"
+      ],
+      "description": "Decision to reuse, adapt, generate, or leave unresolved."
+    }
+  },
+  "actionValues": [
+    "reuse",
+    "adapt",
+    "generate",
+    "unresolved"
+  ],
+  "learningRequirementsRefFields": [
+    "id",
+    "version"
+  ],
+  "itemFields": [
+    "id",
+    "learningPointId",
+    "interactionSelection",
+    "problemDecision",
+    "rationale"
+  ],
+  "interactionSelectionFields": [
+    "query",
+    "selected"
+  ],
+  "problemDecisionFields": [
+    "action",
+    "reason",
+    "problemSelection",
+    "sourceProblemSelection"
+  ],
+  "selectionFields": [
+    "query",
+    "selected"
+  ],
+  "selectedInteractionFields": [
+    "canonicalRef",
+    "rank",
+    "score",
+    "reasons"
+  ],
+  "selectedProblemFields": [
+    "canonicalRef",
+    "rank",
+    "score",
+    "reasons"
+  ],
+  "interactionCanonicalRefFields": [
+    "kind",
+    "id"
+  ],
+  "problemCanonicalRefFields": [
+    "kind",
+    "id",
+    "type"
+  ],
+  "reasonFields": [
+    "field",
+    "value",
+    "score"
+  ],
+  "example": {
+    "version": "1",
+    "id": "MATPLAN-EXAMPLE",
+    "learningRequirementsRef": {
+      "id": "LR-EXAMPLE",
+      "version": "1"
+    },
+    "items": [
+      {
+        "id": "MPI-EXAMPLE",
+        "learningPointId": "LP-EXAMPLE",
+        "interactionSelection": {
+          "query": {
+            "kinds": [
+              "interaction"
+            ],
+            "learningIntents": [
+              "recognize-form"
+            ],
+            "limit": 5
+          },
+          "selected": {
+            "canonicalRef": {
+              "kind": "interaction",
+              "id": "GRAM-INT-EXAMPLE"
+            },
+            "rank": 1,
+            "score": 0,
+            "reasons": [
+              {
+                "field": "learningIntents",
+                "value": "recognize-form",
+                "score": 0
+              }
+            ]
+          }
+        },
+        "problemDecision": {
+          "action": "unresolved",
+          "reason": "Example plan leaves the Problem unresolved."
+        },
+        "rationale": "Example rationale for a planned learning activity."
+      }
+    ]
+  }
+}

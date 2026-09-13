@@ -1,7 +1,11 @@
 import { cpSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { interactions } from '../src/data/interactions.js';
-import { interactionRetrievalMetadata, learningRequirementsContract } from '../src/data/ai/index.js';
+import {
+  interactionRetrievalMetadata,
+  learningRequirementsContract,
+  materialPlanContract,
+} from '../src/data/ai/index.js';
 import { problems } from '../src/data/problems/index.js';
 import { lessons } from '../src/data/lessons.js';
 import { createAiRetrievalIndex } from '../src/lib/ai/retrieval-index.js';
@@ -35,5 +39,6 @@ for (const [fileName, data] of Object.entries({
   writeFileSync(join(aiDist, fileName), `${JSON.stringify(data, null, 2)}\n`, 'utf8');
 }
 writeFileSync(join(contractsDist, 'learning-requirements.json'), `${JSON.stringify(learningRequirementsContract, null, 2)}\n`, 'utf8');
+writeFileSync(join(contractsDist, 'material-plan.json'), `${JSON.stringify(materialPlanContract, null, 2)}\n`, 'utf8');
 
 console.log('Static build complete: dist/');

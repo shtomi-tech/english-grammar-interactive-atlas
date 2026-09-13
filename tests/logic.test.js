@@ -69,14 +69,23 @@ import {
   interactionRetrievalMetadata,
   learningRequirementsContract,
   learningRequirementsFixtures,
+  materialPlanContract,
+  materialPlanFixtures,
+  outcomeRetrievalProfiles,
   retrievalBenchmarks,
   validateRetrievalQuery,
 } from '../src/data/ai/index.js';
 import { createAiRetrievalIndex } from '../src/lib/ai/retrieval-index.js';
 import { evaluateRetrievalBenchmarks } from '../src/lib/ai/retrieval-evaluation.js';
 import { searchRetrievalIndex } from '../src/lib/ai/retrieval-search.js';
+import {
+  captureRetrievalSelection,
+  createInteractionQueryForLearningPoint,
+  validateOutcomeRetrievalProfiles,
+} from '../src/lib/ai/material-planning.js';
 import { validateAiRetrieval } from '../src/lib/validateAiRetrieval.js';
 import { validateLearningRequirements } from '../src/lib/validateLearningRequirements.js';
+import { validateMaterialPlan } from '../src/lib/validateMaterialPlan.js';
 
 assert.equal(interactions.length, 40);
 assert.deepEqual(
@@ -471,6 +480,7 @@ const invalidLearningRequirementCases = [
   ['unknown importance', (value) => { value.learningPoints[0].importance = 'essential'; }],
   ['unknown outcome', (value) => { value.learningPoints[0].desiredOutcomes = ['memorize-fact']; }],
   ['empty locator', (value) => { value.learningPoints[0].sourceEvidence[0].locator = {}; }],
+  ['max learning points', (value) => { value.constraints.maxLearningPoints = 2; }],
   ['atlas linkage', (value) => {
     value.interactionId = 'GRAM-INT-001';
     value.interactionIds = ['GRAM-INT-001'];
@@ -486,6 +496,165 @@ invalidLearningRequirementCases.forEach(([name, mutate]) => {
   mutate(invalidFixture);
   assert.equal(validateLearningRequirements(invalidFixture).valid, false, name);
 });
+assert.deepEqual(learningRequirementsContract.requiredFields, ['version', 'id', 'topic', 'sourceReferences', 'learningPoints']);
+assert.deepEqual(learningRequirementsContract.optionalFields, ['audience', 'constraints']);
+assert.equal(learningRequirementsContract.fieldDefinitions.topic.type, 'string');
+assert.equal(learningRequirementsContract.fieldDefinitions.topic.required, true);
+assert.equal(typeof learningRequirementsContract.fieldDefinitions.topic.description, 'string');
+assert.ok(learningRequirementsContract.example.learningPoints.length > 0);
+assert.equal(validateOutcomeRetrievalProfiles(outcomeRetrievalProfiles).valid, true);
+assert.equal(Object.keys(outcomeRetrievalProfiles).length, 12);
+assert.equal(materialPlanContract.version, '1');
+assert.deepEqual(materialPlanContract.actionValues, ['reuse', 'adapt', 'generate', 'unresolved']);
+assert.equal(materialPlanContract.fieldDefinitions.items.type, 'array');
+materialPlanFixtures.forEach((fixture, index) => {
+  const validationResult = validateMaterialPlan(fixture, {
+    learningRequirements: learningRequirementsFixtures[index],
+    retrievalIndex: aiRetrievalIndex,
+  });
+  assert.equal(validationResult.valid, true, validationResult.errors.join('; '));
+  assert.deepEqual(
+    new Set(fixture.items.map((item) => item.learningPointId)),
+    new Set(learningRequirementsFixtures[index].learningPoints.map((point) => point.id)),
+  );
+});
+const comparisonLearningRequirements = structuredClone(learningRequirementsFixtures[0]);
+comparisonLearningRequirements.learningPoints = [comparisonLearningRequirements.learningPoints[2]];
+comparisonLearningRequirements.learningPoints[0].desiredOutcomes = ['compare-meaning'];
+comparisonLearningRequirements.learningPoints[0].concept = 'meaning comparison';
+const comparisonInteractionQuery = createInteractionQueryForLearningPoint(comparisonLearningRequirements.learningPoints[0], { includeTerms: false });
+const comparisonProblemQuery = {
+  kinds: ['problem'],
+  demoTypes: ['sentence-comparison'],
+  includeTerms: ['stopped smoking', 'stopped to smoke'],
+  limit: 5,
+};
+const comparisonPlan = {
+  version: '1',
+  id: 'MATPLAN-SC-001',
+  learningRequirementsRef: { id: comparisonLearningRequirements.id, version: comparisonLearningRequirements.version },
+  items: [{
+    id: 'MPI-SC-001',
+    learningPointId: comparisonLearningRequirements.learningPoints[0].id,
+    interactionSelection: captureRetrievalSelection(aiRetrievalIndex, comparisonInteractionQuery, {
+      kind: 'interaction',
+      id: 'GRAM-INT-008',
+    }),
+    problemDecision: {
+      action: 'reuse',
+      problemSelection: captureRetrievalSelection(aiRetrievalIndex, comparisonProblemQuery, {
+        kind: 'problem',
+        id: 'SC-001',
+        type: 'sentence-comparison',
+      }),
+    },
+    rationale: '意味の違いを左右の英文で比較する。',
+  }],
+};
+assert.equal(validateMaterialPlan(comparisonPlan, {
+  learningRequirements: comparisonLearningRequirements,
+  retrievalIndex: aiRetrievalIndex,
+}).valid, true);
+const evidenceMismatchPlan = structuredClone(materialPlanFixtures[0]);
+evidenceMismatchPlan.items[0].interactionSelection.selected.score += 1;
+assert.equal(validateMaterialPlan(evidenceMismatchPlan, {
+  learningRequirements: learningRequirementsFixtures[0],
+  retrievalIndex: aiRetrievalIndex,
+}).valid, false);
+const duplicateMaterialItemPlan = structuredClone(materialPlanFixtures[0]);
+duplicateMaterialItemPlan.items[1].id = duplicateMaterialItemPlan.items[0].id;
+assert.equal(validateMaterialPlan(duplicateMaterialItemPlan, {
+  learningRequirements: learningRequirementsFixtures[0],
+  retrievalIndex: aiRetrievalIndex,
+}).valid, false);
+const unknownLearningPointPlan = structuredClone(materialPlanFixtures[0]);
+unknownLearningPointPlan.items[0].learningPointId = 'LP-UNKNOWN';
+assert.equal(validateMaterialPlan(unknownLearningPointPlan, {
+  learningRequirements: learningRequirementsFixtures[0],
+  retrievalIndex: aiRetrievalIndex,
+}).valid, false);
+const noProblemForReusePlan = structuredClone(materialPlanFixtures[0]);
+delete noProblemForReusePlan.items[0].problemDecision.problemSelection;
+assert.equal(validateMaterialPlan(noProblemForReusePlan, {
+  learningRequirements: learningRequirementsFixtures[0],
+  retrievalIndex: aiRetrievalIndex,
+}).valid, false);
+const generateWithProblemPlan = structuredClone(materialPlanFixtures[0]);
+generateWithProblemPlan.items[0].problemDecision.action = 'generate';
+generateWithProblemPlan.items[0].problemDecision.reason = '既存Problemでは不足する。';
+assert.equal(validateMaterialPlan(generateWithProblemPlan, {
+  learningRequirements: learningRequirementsFixtures[0],
+  retrievalIndex: aiRetrievalIndex,
+}).valid, false);
+const validGeneratePlan = structuredClone(materialPlanFixtures[0]);
+validGeneratePlan.items[0].problemDecision.action = 'generate';
+validGeneratePlan.items[0].problemDecision.reason = '既存Problemでは不足する。';
+delete validGeneratePlan.items[0].problemDecision.problemSelection;
+assert.equal(validateMaterialPlan(validGeneratePlan, {
+  learningRequirements: learningRequirementsFixtures[0],
+  retrievalIndex: aiRetrievalIndex,
+}).valid, true);
+const unresolvedWithProblemPlan = structuredClone(materialPlanFixtures[0]);
+unresolvedWithProblemPlan.items[0].problemDecision.action = 'unresolved';
+unresolvedWithProblemPlan.items[0].problemDecision.reason = '実装済みComponentでは扱えない。';
+assert.equal(validateMaterialPlan(unresolvedWithProblemPlan, {
+  learningRequirements: learningRequirementsFixtures[0],
+  retrievalIndex: aiRetrievalIndex,
+}).valid, false);
+const adaptWithoutSourcePlan = structuredClone(materialPlanFixtures[0]);
+adaptWithoutSourcePlan.items[0].problemDecision.action = 'adapt';
+delete adaptWithoutSourcePlan.items[0].problemDecision.problemSelection;
+assert.equal(validateMaterialPlan(adaptWithoutSourcePlan, {
+  learningRequirements: learningRequirementsFixtures[0],
+  retrievalIndex: aiRetrievalIndex,
+}).valid, false);
+const missingInteractionPlan = structuredClone(materialPlanFixtures[0]);
+missingInteractionPlan.items[0].interactionSelection.selected.canonicalRef.id = 'GRAM-INT-999';
+assert.equal(validateMaterialPlan(missingInteractionPlan, {
+  learningRequirements: learningRequirementsFixtures[0],
+  retrievalIndex: aiRetrievalIndex,
+}).valid, false);
+const unimplementedInteraction = aiRetrievalIndex.interactions.find((record) => record.demoTypes.length === 0);
+assert.ok(unimplementedInteraction);
+const unimplementedInteractionQuery = {
+  kinds: ['interaction'],
+  includeTerms: [unimplementedInteraction.title],
+  limit: 100,
+};
+const unimplementedPlan = structuredClone(materialPlanFixtures[0]);
+unimplementedPlan.items[0].interactionSelection = captureRetrievalSelection(
+  aiRetrievalIndex,
+  unimplementedInteractionQuery,
+  unimplementedInteraction.canonicalRef,
+);
+assert.equal(validateMaterialPlan(unimplementedPlan, {
+  learningRequirements: learningRequirementsFixtures[0],
+  retrievalIndex: aiRetrievalIndex,
+}).valid, false);
+const mismatchedProblemTypePlan = structuredClone(comparisonPlan);
+mismatchedProblemTypePlan.items[0].problemDecision.problemSelection.selected.canonicalRef.type = 'word-order';
+assert.equal(validateMaterialPlan(mismatchedProblemTypePlan, {
+  learningRequirements: comparisonLearningRequirements,
+  retrievalIndex: aiRetrievalIndex,
+}).valid, false);
+const fakeRankPlan = structuredClone(comparisonPlan);
+fakeRankPlan.items[0].interactionSelection.selected.rank = 99;
+assert.equal(validateMaterialPlan(fakeRankPlan, {
+  learningRequirements: comparisonLearningRequirements,
+  retrievalIndex: aiRetrievalIndex,
+}).valid, false);
+const fakeScorePlan = structuredClone(comparisonPlan);
+fakeScorePlan.items[0].interactionSelection.selected.score += 1;
+assert.equal(validateMaterialPlan(fakeScorePlan, {
+  learningRequirements: comparisonLearningRequirements,
+  retrievalIndex: aiRetrievalIndex,
+}).valid, false);
+const fakeReasonsPlan = structuredClone(comparisonPlan);
+fakeReasonsPlan.items[0].interactionSelection.selected.reasons = [];
+assert.equal(validateMaterialPlan(fakeReasonsPlan, {
+  learningRequirements: comparisonLearningRequirements,
+  retrievalIndex: aiRetrievalIndex,
+}).valid, false);
 assert.deepEqual(
   createAiRetrievalIndex({ interactions, problems, lessons, interactionRetrievalMetadata }),
   aiRetrievalIndex,

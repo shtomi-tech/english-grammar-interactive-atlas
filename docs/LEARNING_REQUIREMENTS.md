@@ -35,6 +35,8 @@ Learning Requirementsは、英文法教材を生成・再利用する前に「�
 
 `version`、`id`、`topic`、`sourceReferences`、`learningPoints`は必須です。`audience` と `constraints` は情報がある場合だけ追加し、値を推測して補いません。
 
+`constraints.maxLearningPoints` を指定した場合、`learningPoints` の件数はその値以下にします。未指定の場合は件数制限を設けません。
+
 ## controlled vocabulary
 
 - source type: `user-provided`
@@ -59,3 +61,5 @@ Learning Requirementsには `interactionId`、`interactionIds`、`problemId`、`
 validatorは `src/lib/validateLearningRequirements.js` の `validateLearningRequirements()` です。合成fixtureは `src/data/ai/learning-requirements-fixtures.js` に2件あり、`npm run check` で検証されます。
 
 `npm run build` はスキーマ定数から `dist/ai/contracts/learning-requirements.json` を生成します。手動でJSONを編集せず、スキーマとvalidatorを正本にします。
+
+contract artifactには、必須・任意フィールド、各フィールドの型・説明・許容値、最小のexample shapeを含めます。Phase 8B以降の処理はこのartifactだけを読んでも入力形式を判定できます。

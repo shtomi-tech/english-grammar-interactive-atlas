@@ -52,8 +52,88 @@ export const learningRequirementConstraintFields = Object.freeze([
   'language',
 ]);
 
+export const learningRequirementRequiredFields = Object.freeze([
+  'version',
+  'id',
+  'topic',
+  'sourceReferences',
+  'learningPoints',
+]);
+export const learningRequirementOptionalFields = Object.freeze(['audience', 'constraints']);
+export const learningRequirementFieldDefinitions = Object.freeze({
+  version: {
+    type: 'string',
+    required: true,
+    allowedValues: [learningRequirementsVersion],
+    description: 'Learning Requirements contract version.',
+  },
+  id: {
+    type: 'string',
+    required: true,
+    description: 'Stable identifier for one Learning Requirements document.',
+  },
+  topic: {
+    type: 'string',
+    required: true,
+    description: 'Grammar topic described by the source material.',
+  },
+  sourceReferences: {
+    type: 'array',
+    required: true,
+    itemFields: [...learningRequirementSourceReferenceFields],
+    description: 'Sources that are authoritative for the learning content.',
+  },
+  audience: {
+    type: 'object',
+    required: false,
+    fields: [...learningRequirementAudienceFields],
+    allowedValues: [...learningRequirementAudienceStages],
+    description: 'Optional audience constraints.',
+  },
+  constraints: {
+    type: 'object',
+    required: false,
+    fields: [...learningRequirementConstraintFields],
+    description: 'Optional authoring constraints supplied by the user.',
+  },
+  learningPoints: {
+    type: 'array',
+    required: true,
+    itemFields: [...learningRequirementLearningPointFields],
+    description: 'Source-backed learning points to be planned later.',
+  },
+});
+
+export const learningRequirementsExample = Object.freeze({
+  version: '1',
+  id: 'LR-EXAMPLE',
+  topic: 'example-topic',
+  sourceReferences: [
+    { id: 'SOURCE-EXAMPLE', type: 'user-provided', title: 'Example source' },
+  ],
+  learningPoints: [
+    {
+      id: 'LP-EXAMPLE',
+      concept: 'example concept',
+      summary: 'Example source-backed learning point.',
+      importance: 'core',
+      desiredOutcomes: ['recognize-form'],
+      sourceEvidence: [
+        {
+          sourceId: 'SOURCE-EXAMPLE',
+          locator: { section: 'Example section' },
+          summary: 'Example evidence summary.',
+        },
+      ],
+    },
+  ],
+});
+
 export const learningRequirementsContract = Object.freeze({
   version: learningRequirementsVersion,
+  requiredFields: [...learningRequirementRequiredFields],
+  optionalFields: [...learningRequirementOptionalFields],
+  fieldDefinitions: learningRequirementFieldDefinitions,
   topLevelFields: [...learningRequirementTopLevelFields],
   sourceReferenceFields: [...learningRequirementSourceReferenceFields],
   sourceReferenceTypes: [...learningRequirementSourceTypes],
@@ -65,4 +145,5 @@ export const learningRequirementsContract = Object.freeze({
   audienceFields: [...learningRequirementAudienceFields],
   audienceStageValues: [...learningRequirementAudienceStages],
   constraintFields: [...learningRequirementConstraintFields],
+  example: learningRequirementsExample,
 });

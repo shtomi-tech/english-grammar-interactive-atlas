@@ -83,6 +83,7 @@ dist/ai/problems.json
 dist/ai/lessons.json
 dist/ai/catalog.json
 dist/ai/contracts/learning-requirements.json
+dist/ai/contracts/material-plan.json
 ```
 
 `catalog.json` はMetadata、Interaction / Problem / Lessonのrecords、統合した `documents` を含む。各recordとunified documentには、Canonical Dataへ戻るための `canonicalRef` を持たせる。統合documentは次の形を持つ。

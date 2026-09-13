@@ -172,5 +172,12 @@ export function validateLearningRequirements(requirements) {
   validateAudience(requirements.audience, errors);
   validateConstraints(requirements.constraints, errors);
   validateLearningPoints(requirements.learningPoints, sourceIds, errors);
+  if (
+    Number.isInteger(requirements.constraints?.maxLearningPoints)
+    && Array.isArray(requirements.learningPoints)
+    && requirements.learningPoints.length > requirements.constraints.maxLearningPoints
+  ) {
+    errors.push('learningPoints must not exceed constraints.maxLearningPoints');
+  }
   return { valid: errors.length === 0, errors };
 }

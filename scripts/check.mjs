@@ -14,6 +14,9 @@ const files = [
   'src/data/ai/retrieval-benchmarks.js',
   'src/data/ai/learning-requirements-schema.js',
   'src/data/ai/learning-requirements-fixtures.js',
+  'src/data/ai/material-plan-schema.js',
+  'src/data/ai/material-plan-fixtures.js',
+  'src/data/ai/outcome-retrieval-profiles.js',
   'src/data/interactions-additional.js',
   'src/data/demo-problems.js',
   'src/data/problems/word-order.js',
@@ -42,8 +45,10 @@ const files = [
   'src/lib/ai/retrieval-index.js',
   'src/lib/ai/retrieval-search.js',
   'src/lib/ai/retrieval-evaluation.js',
+  'src/lib/ai/material-planning.js',
   'src/lib/validateAiRetrieval.js',
   'src/lib/validateLearningRequirements.js',
+  'src/lib/validateMaterialPlan.js',
   'src/lib/dom.js',
   'src/lib/grammar/word-order.js',
   'src/lib/grammar/parts.js',
@@ -99,11 +104,18 @@ const { validateLessons } = await import('../src/lib/validateLessons.js');
 const { researchReferences, researchReferenceRegistry } = await import('../src/data/research/index.js');
 const { validateResearchReferences, validateResearchRegistry } = await import('../src/lib/validateResearch.js');
 const { interactionRetrievalMetadata } = await import('../src/data/ai/index.js');
-const { retrievalBenchmarks, learningRequirementsFixtures } = await import('../src/data/ai/index.js');
+const {
+  retrievalBenchmarks,
+  learningRequirementsFixtures,
+  materialPlanFixtures,
+  outcomeRetrievalProfiles,
+} = await import('../src/data/ai/index.js');
 const { createAiRetrievalIndex } = await import('../src/lib/ai/retrieval-index.js');
 const { evaluateRetrievalBenchmarks } = await import('../src/lib/ai/retrieval-evaluation.js');
 const { validateAiRetrieval } = await import('../src/lib/validateAiRetrieval.js');
 const { validateLearningRequirements } = await import('../src/lib/validateLearningRequirements.js');
+const { validateMaterialPlan } = await import('../src/lib/validateMaterialPlan.js');
+const { validateOutcomeRetrievalProfiles } = await import('../src/lib/ai/material-planning.js');
 const validation = validateInteractions(interactions, { registryKeys: Object.keys(demoRegistry) });
 if (!validation.valid) throw new Error(`Interaction validation failed: ${validation.errors.join('; ')}`);
 console.log(`Interaction validation passed for ${interactions.length} entries.`);
@@ -152,3 +164,14 @@ if (learningRequirementsValidation.some((result) => !result.valid)) {
   throw new Error(`Learning Requirements validation failed: ${learningRequirementsValidation.flatMap((result) => result.errors).join('; ')}`);
 }
 console.log(`Learning Requirements validation passed for ${learningRequirementsFixtures.length} fixtures.`);
+const outcomeProfilesValidation = validateOutcomeRetrievalProfiles(outcomeRetrievalProfiles);
+if (!outcomeProfilesValidation.valid) throw new Error(`Outcome retrieval profiles validation failed: ${outcomeProfilesValidation.errors.join('; ')}`);
+console.log(`Outcome retrieval profiles validation passed for ${Object.keys(outcomeRetrievalProfiles).length} outcomes.`);
+const materialPlanValidation = materialPlanFixtures.map((fixture, index) => validateMaterialPlan(fixture, {
+  learningRequirements: learningRequirementsFixtures[index],
+  retrievalIndex: aiRetrievalIndex,
+}));
+if (materialPlanValidation.some((result) => !result.valid)) {
+  throw new Error(`Material Plan validation failed: ${materialPlanValidation.flatMap((result) => result.errors).join('; ')}`);
+}
+console.log(`Material Plan validation passed for ${materialPlanFixtures.length} fixtures.`);

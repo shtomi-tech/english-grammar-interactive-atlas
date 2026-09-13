@@ -13,6 +13,7 @@ export {
   learningRequirementAudienceFields,
   learningRequirementConstraintFields,
   learningRequirementDesiredOutcomes,
+  learningRequirementFieldDefinitions,
   learningRequirementImportanceValues,
   learningRequirementLearningPointFields,
   learningRequirementLocatorFields,
@@ -22,5 +23,16 @@ export {
   learningRequirementSourceReferenceFields,
   learningRequirementSourceTypes,
   learningRequirementTopLevelFields,
+  learningRequirementOptionalFields,
+  learningRequirementRequiredFields,
+  learningRequirementsExample,
 } from './learning-requirements-schema.js';
 export { learningRequirementsFixtures } from './learning-requirements-fixtures.js';
+export {
+  materialPlanActionValues,
+  materialPlanContract,
+  materialPlanFieldDefinitions,
+  materialPlanVersion,
+} from './material-plan-schema.js';
+export { outcomeRetrievalProfiles } from './outcome-retrieval-profiles.js';
+export { materialPlanFixtures } from './material-plan-fixtures.js';

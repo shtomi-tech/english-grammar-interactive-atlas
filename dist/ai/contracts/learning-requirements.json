@@ -1,5 +1,82 @@
 {
   "version": "1",
+  "requiredFields": [
+    "version",
+    "id",
+    "topic",
+    "sourceReferences",
+    "learningPoints"
+  ],
+  "optionalFields": [
+    "audience",
+    "constraints"
+  ],
+  "fieldDefinitions": {
+    "version": {
+      "type": "string",
+      "required": true,
+      "allowedValues": [
+        "1"
+      ],
+      "description": "Learning Requirements contract version."
+    },
+    "id": {
+      "type": "string",
+      "required": true,
+      "description": "Stable identifier for one Learning Requirements document."
+    },
+    "topic": {
+      "type": "string",
+      "required": true,
+      "description": "Grammar topic described by the source material."
+    },
+    "sourceReferences": {
+      "type": "array",
+      "required": true,
+      "itemFields": [
+        "id",
+        "type",
+        "title"
+      ],
+      "description": "Sources that are authoritative for the learning content."
+    },
+    "audience": {
+      "type": "object",
+      "required": false,
+      "fields": [
+        "stage"
+      ],
+      "allowedValues": [
+        "middle-school",
+        "high-school",
+        "adult"
+      ],
+      "description": "Optional audience constraints."
+    },
+    "constraints": {
+      "type": "object",
+      "required": false,
+      "fields": [
+        "durationMinutes",
+        "maxLearningPoints",
+        "language"
+      ],
+      "description": "Optional authoring constraints supplied by the user."
+    },
+    "learningPoints": {
+      "type": "array",
+      "required": true,
+      "itemFields": [
+        "id",
+        "concept",
+        "summary",
+        "importance",
+        "desiredOutcomes",
+        "sourceEvidence"
+      ],
+      "description": "Source-backed learning points to be planned later."
+    }
+  },
   "topLevelFields": [
     "version",
     "id",
@@ -69,5 +146,37 @@
     "durationMinutes",
     "maxLearningPoints",
     "language"
-  ]
+  ],
+  "example": {
+    "version": "1",
+    "id": "LR-EXAMPLE",
+    "topic": "example-topic",
+    "sourceReferences": [
+      {
+        "id": "SOURCE-EXAMPLE",
+        "type": "user-provided",
+        "title": "Example source"
+      }
+    ],
+    "learningPoints": [
+      {
+        "id": "LP-EXAMPLE",
+        "concept": "example concept",
+        "summary": "Example source-backed learning point.",
+        "importance": "core",
+        "desiredOutcomes": [
+          "recognize-form"
+        ],
+        "sourceEvidence": [
+          {
+            "sourceId": "SOURCE-EXAMPLE",
+            "locator": {
+              "section": "Example section"
+            },
+            "summary": "Example evidence summary."
+          }
+        ]
+      }
+    ]
+  }
 }
