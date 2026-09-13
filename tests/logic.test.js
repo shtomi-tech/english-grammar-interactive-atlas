@@ -65,6 +65,9 @@ import {
 } from '../src/data/research/index.js';
 import { validateResearchReferences, validateResearchRegistry } from '../src/lib/validateResearch.js';
 import { getLessonProgress, isLessonStepComplete, markLessonStepComplete } from '../src/lib/lesson-progress.js';
+import { interactionRetrievalMetadata } from '../src/data/ai/index.js';
+import { createAiRetrievalIndex } from '../src/lib/ai/retrieval-index.js';
+import { validateAiRetrieval } from '../src/lib/validateAiRetrieval.js';
 
 assert.equal(interactions.length, 40);
 assert.deepEqual(
@@ -329,6 +332,44 @@ assert.deepEqual(
 assert.equal(getLessonBySlug('gerunds').steps.length, 6);
 assert.equal(getLessonBySlug('infinitives').steps[3].problemId, 'SC-001');
 assert.equal(getLessonBySlug('gerunds').steps[3].problemId, 'SC-001');
+
+const aiRetrievalIndex = createAiRetrievalIndex({
+  interactions,
+  problems,
+  lessons,
+  interactionRetrievalMetadata,
+});
+const aiRetrievalValidation = validateAiRetrieval(aiRetrievalIndex, {
+  interactions,
+  problems,
+  lessons,
+  interactionRetrievalMetadata,
+});
+assert.equal(aiRetrievalValidation.valid, true, aiRetrievalValidation.errors.join('; '));
+assert.equal(aiRetrievalIndex.interactions.length, 40);
+assert.equal(aiRetrievalIndex.problems.length, 53);
+assert.equal(aiRetrievalIndex.lessons.length, 6);
+assert.equal(aiRetrievalIndex.documents.length, 99);
+assert.deepEqual(
+  aiRetrievalIndex.interactions.find((record) => record.id === 'GRAM-INT-001').relations.problemIds,
+  ['WO-001', 'WO-002', 'WO-003', 'WO-004', 'WO-005', 'WO-006', 'WO-007', 'WO-008'],
+);
+assert.deepEqual(
+  aiRetrievalIndex.interactions.find((record) => record.id === 'GRAM-INT-014').relations.problemIds,
+  ['MPO-001', 'MPO-002', 'MPO-003', 'MPO-004'],
+);
+const sentenceComparisonRecord = aiRetrievalIndex.problems.find((record) => record.id === 'SC-001');
+assert.deepEqual(sentenceComparisonRecord.relations.interactionIds, ['GRAM-INT-008']);
+assert.deepEqual(sentenceComparisonRecord.relations.lessonIds, ['LESSON-005', 'LESSON-006']);
+assert.match(sentenceComparisonRecord.searchText, /stopped smoking/);
+assert.match(sentenceComparisonRecord.searchText, /stopped to smoke/);
+const modifierPositionerRecord = aiRetrievalIndex.interactions.find((record) => record.id === 'GRAM-INT-014');
+assert.match(modifierPositionerRecord.searchText, /modifier/i);
+assert.match(modifierPositionerRecord.searchText, /placement/i);
+assert.deepEqual(
+  createAiRetrievalIndex({ interactions, problems, lessons, interactionRetrievalMetadata }),
+  aiRetrievalIndex,
+);
 
 const lessonProgress = lessons[0];
 const emptyLessonProgress = new Set();

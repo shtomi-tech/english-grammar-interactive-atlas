@@ -1,0 +1,214 @@
+[
+  {
+    "kind": "lesson",
+    "id": "LESSON-001",
+    "slug": "basic-sentence-structure",
+    "title": "文の骨格を見抜く",
+    "description": "英文を単語の列ではなく、役割を持つまとまりとして捉えます。",
+    "learningGoal": "主語・動詞・目的語・補語などの役割に注目して、英文の基本構造を理解する。",
+    "tags": [
+      "lesson",
+      "basic-sentence-structure",
+      "mark-parts",
+      "grammar-classifier",
+      "word-order"
+    ],
+    "relations": {
+      "problemIds": [
+        "MP-001",
+        "GC-001",
+        "WO-001",
+        "WO-002",
+        "WO-003",
+        "GC-002"
+      ],
+      "interactionTypes": [
+        "mark-parts",
+        "grammar-classifier",
+        "word-order"
+      ]
+    },
+    "searchText": "basic-sentence-structure\n文の骨格を見抜く\n英文を単語の列ではなく、役割を持つまとまりとして捉えます。\n主語・動詞・目的語・補語などの役割に注目して、英文の基本構造を理解する。\nmark-parts\n文の主語と動詞を見つける\nまず、文の「だれが・なにが」にあたる部分を探します。\ngrammar-classifier\n語句を文中の役割に分類する\n見つけた語句を、Subject・Verb・Object・Modifierに分類します。\nword-order\n役割を意識して英文を組み立てる\n主語から始まる英語の語順を意識して、文を完成させます。\n主語に合う動詞の形を確かめる\n同じ語順でも、主語が変わると動詞の形が変わることに注目します。\n補語を使う文型を組み立てる\n動詞の後ろが目的語ではなく、主語を説明する補語になる文も組み立てます。\n句と節のまとまりを見分ける\n最後に、主語と動詞を含む節という別の構造にも目を向けます。"
+  },
+  {
+    "kind": "lesson",
+    "id": "LESSON-002",
+    "slug": "structural-reading",
+    "title": "英文の構造を読む",
+    "description": "文の骨格と、そこへ加わる修飾情報を順に見分けます。",
+    "learningGoal": "英文の骨格と修飾部分を分け、文の中心と追加情報を構造として理解する。",
+    "tags": [
+      "lesson",
+      "structural-reading",
+      "mark-parts",
+      "sentence-pattern-diagram",
+      "modifier-connection-viewer",
+      "grammar-classifier"
+    ],
+    "relations": {
+      "problemIds": [
+        "MP-001",
+        "SPD-001",
+        "SPD-002",
+        "MCV-001",
+        "MCV-002",
+        "GC-002"
+      ],
+      "interactionTypes": [
+        "mark-parts",
+        "sentence-pattern-diagram",
+        "modifier-connection-viewer",
+        "grammar-classifier"
+      ]
+    },
+    "searchText": "structural-reading\n英文の構造を読む\n文の骨格と、そこへ加わる修飾情報を順に見分けます。\n英文の骨格と修飾部分を分け、文の中心と追加情報を構造として理解する。\nmark-parts\nまず文の中心を見つける\n最初に、文の「だれが・なにが」にあたる中心部分を選びます。\nsentence-pattern-diagram\n骨格をS・V・Oで見る\n中心部分を確認したら、The boy plays soccer. の骨格をS・V・Oの配置として見てみましょう。\n別の文型と比べる\n次にS・V・Cの文を見て、動詞の後ろが主語を説明する場合も確認します。\nmodifier-connection-viewer\n追加情報のかかり先を見る\n骨格に with a red cap が加わりました。修飾語がThe boyへ追加情報を与える関係を確認します。\n動作への修飾を見る\n今度は after dinner が studies の時間を説明します。修飾先が変わることに注目します。\ngrammar-classifier\n句と節として整理する\n最後に句と節を分類し、語句のまとまりが文の構造を作ることを整理します。"
+  },
+  {
+    "kind": "lesson",
+    "id": "LESSON-003",
+    "slug": "modal-verbs",
+    "title": "助動詞を形と場面から使う",
+    "description": "助動詞の後ろに動詞の原形を置く基本形を確認し、can / should / must などの意味を場面に応じて使い分けます。",
+    "learningGoal": "助動詞 + 動詞原形という形を理解し、能力・助言・義務などの意味と場面を対応づけて適切な助動詞を選べるようにする。",
+    "tags": [
+      "lesson",
+      "modal-verbs",
+      "sentence-transformer",
+      "word-order",
+      "error-corrector",
+      "sentence-comparison",
+      "sentence-generator",
+      "context-grammar"
+    ],
+    "relations": {
+      "problemIds": [
+        "ST-002",
+        "WO-005",
+        "EC-004",
+        "SC-004",
+        "SG-004",
+        "CG-004"
+      ],
+      "interactionTypes": [
+        "sentence-transformer",
+        "word-order",
+        "error-corrector",
+        "sentence-comparison",
+        "sentence-generator",
+        "context-grammar"
+      ]
+    },
+    "searchText": "modal-verbs\n助動詞を形と場面から使う\n助動詞の後ろに動詞の原形を置く基本形を確認し、can / should / must などの意味を場面に応じて使い分けます。\n助動詞 + 動詞原形という形を理解し、能力・助言・義務などの意味と場面を対応づけて適切な助動詞を選べるようにする。\nsentence-transformer\n助動詞を変えて形を見る\ncan / could / should / must を切り替え、助動詞の後ろが動詞の原形のまま変わらないことを観察します。\nword-order\n助動詞を含む語順を組み立てる\nSubject + Modal + Base Verb の順に単語を並べ、助動詞の後ろの形を確かめます。\nerror-corrector\n助動詞後の動詞を直す\n助動詞の後ろに三単現の -s を付けない規則を、誤文の訂正で確認します。\nsentence-comparison\n助動詞で意味を比べる\ncan と must の形の差を、許可・可能と義務という意味の差に対応づけます。\nsentence-generator\n目標に合う助動詞を生成する\n助言というGoalに合う文法状態を選び、英文を生成して確かめます。\ncontext-grammar\n場面に合う助動詞を選ぶ\n相談の助言と安全規則の義務を、会話の場面に合う助動詞で表します。"
+  },
+  {
+    "kind": "lesson",
+    "id": "LESSON-004",
+    "slug": "passive-voice",
+    "title": "能動態と受動態で視点を変える",
+    "description": "同じ出来事でも、何を主語として見るかによって英文の形が変わることを確認します。",
+    "learningGoal": "能動態と受動態の形の違いを理解し、動作主と動作を受ける対象のどちらを主語として焦点化するかに応じて使い分ける。",
+    "tags": [
+      "lesson",
+      "passive-voice",
+      "sentence-comparison",
+      "sentence-transformer",
+      "word-order",
+      "error-corrector",
+      "sentence-generator",
+      "context-grammar"
+    ],
+    "relations": {
+      "problemIds": [
+        "SC-003",
+        "ST-003",
+        "WO-006",
+        "EC-005",
+        "SG-005",
+        "CG-005"
+      ],
+      "interactionTypes": [
+        "sentence-comparison",
+        "sentence-transformer",
+        "word-order",
+        "error-corrector",
+        "sentence-generator",
+        "context-grammar"
+      ]
+    },
+    "searchText": "passive-voice\n能動態と受動態で視点を変える\n同じ出来事でも、何を主語として見るかによって英文の形が変わることを確認します。\n能動態と受動態の形の違いを理解し、動作主と動作を受ける対象のどちらを主語として焦点化するかに応じて使い分ける。\nsentence-comparison\n能動態と受動態を比べる\n同じ出来事を表す2つの文を比べ、主語と動詞の形がどう変わるかを確認します。\nsentence-transformer\nVoiceを切り替えて形を見る\nActive と Passive を切り替え、agent と patient の文中での役割と動詞の形を観察します。\nword-order\n受動態の語順を組み立てる\nSubject + be + Past Participle の中心語順に、必要なby句を続けて文を完成させます。\nerror-corrector\n過去分詞の誤りを直す\nbe動詞の後ろに過去形ではなく過去分詞を置く規則を、誤文の訂正で確認します。\nsentence-generator\n目標に合う受動態を生成する\n対象を主語にした過去の受動態を目標として選び、英文を生成して確かめます。\ncontext-grammar\n場面に合う視点を選ぶ\n動作主が不明な場面や対象に焦点を置く場面で、受動態が合う理由を会話の中で確認します。"
+  },
+  {
+    "kind": "lesson",
+    "id": "LESSON-005",
+    "slug": "infinitives",
+    "title": "不定詞を形・役割・目的から使う",
+    "description": "to + 動詞原形という形を確認し、文の中で名詞・形容詞・副詞のように働く違いを、位置・意味・場面から整理します。",
+    "learningGoal": "不定詞の基本形を理解し、名詞的・形容詞的・副詞的な働きを見分け、文の意味や目的に応じて適切に使えるようにする。",
+    "tags": [
+      "lesson",
+      "infinitives",
+      "word-order",
+      "grammar-classifier",
+      "modifier-positioner",
+      "sentence-comparison",
+      "error-corrector",
+      "context-grammar"
+    ],
+    "relations": {
+      "problemIds": [
+        "WO-007",
+        "GC-004",
+        "MPO-004",
+        "SC-001",
+        "EC-006",
+        "CG-006"
+      ],
+      "interactionTypes": [
+        "word-order",
+        "grammar-classifier",
+        "modifier-positioner",
+        "sentence-comparison",
+        "error-corrector",
+        "context-grammar"
+      ]
+    },
+    "searchText": "infinitives\n不定詞を形・役割・目的から使う\nto + 動詞原形という形を確認し、文の中で名詞・形容詞・副詞のように働く違いを、位置・意味・場面から整理します。\n不定詞の基本形を理解し、名詞的・形容詞的・副詞的な働きを見分け、文の意味や目的に応じて適切に使えるようにする。\nword-order\n不定詞の基本形を組み立てる\nI want to study English. を組み立て、to + 動詞原形の語順を確認します。\ngrammar-classifier\n不定詞の3つの働きを分類する\n同じto + 動詞原形が、名詞・形容詞・副詞に近い働きをする違いを分類します。\nmodifier-positioner\n目的を表す不定詞の位置を見る\nto learn English を文頭と文末へ置き、どちらも映画を見る目的を表せることを確認します。\nsentence-comparison\n動名詞と不定詞の意味差を比べる\nstop の後ろの動名詞と不定詞を比べ、形の違いが意味の差を作ることを確認します。\nerror-corrector\ntoの後ろの動詞を直す\ntoの後ろには動詞の原形を置く規則を、誤文の訂正で確認します。\ncontext-grammar\n場面で不定詞を使い分ける\n予定・必要なもの・目的の場面に合う不定詞の働きを会話の中で選びます。"
+  },
+  {
+    "kind": "lesson",
+    "id": "LESSON-006",
+    "slug": "gerunds",
+    "title": "動名詞を名詞の働きと動詞との組み合わせから使う",
+    "description": "動詞 + ing が名詞のように働くことを確認し、主語・目的語・補語としての使い方や、不定詞との意味・verb patternの違いを整理します。",
+    "learningGoal": "動名詞の基本形と名詞的な働きを理解し、文中での役割を見分け、動名詞を取る動詞や不定詞との意味差に応じて適切な形を選べるようにする。",
+    "tags": [
+      "lesson",
+      "gerunds",
+      "word-order",
+      "mark-parts",
+      "grammar-classifier",
+      "sentence-comparison",
+      "error-corrector",
+      "context-grammar"
+    ],
+    "relations": {
+      "problemIds": [
+        "WO-008",
+        "MP-004",
+        "GC-005",
+        "SC-001",
+        "EC-007",
+        "CG-007"
+      ],
+      "interactionTypes": [
+        "word-order",
+        "mark-parts",
+        "grammar-classifier",
+        "sentence-comparison",
+        "error-corrector",
+        "context-grammar"
+      ]
+    },
+    "searchText": "gerunds\n動名詞を名詞の働きと動詞との組み合わせから使う\n動詞 + ing が名詞のように働くことを確認し、主語・目的語・補語としての使い方や、不定詞との意味・verb patternの違いを整理します。\n動名詞の基本形と名詞的な働きを理解し、文中での役割を見分け、動名詞を取る動詞や不定詞との意味差に応じて適切な形を選べるようにする。\nword-order\nenjoy + gerund の形を組み立てる\nenjoy の後ろに動名詞を置く語順を意識して、文を完成させます。\nmark-parts\n動名詞句の主語を見つける\nReading books 全体が文の主語として働くことを確認します。\ngrammar-classifier\n動名詞の文中の役割を分類する\n動名詞句が主語・目的語・補語のどの役割を担うか分類します。\nsentence-comparison\n動名詞と不定詞の意味差を比べる\nstop + 動名詞と stop + 不定詞を比べ、同じ動詞でも後ろの形によって意味が変わることを確認します。\nerror-corrector\nenjoy の後ろの形を直す\nenjoy の後ろでは動名詞を使う規則を、誤文の訂正で確認します。\ncontext-grammar\n場面で動名詞の形を使い分ける\n好きなこと、終えた行為、やめた行為の場面に合う動名詞の使い方を選びます。"
+  }
+]

@@ -1,0 +1,919 @@
+[
+  {
+    "kind": "problem",
+    "id": "WO-001",
+    "title": "WO-001",
+    "type": "word-order",
+    "tags": [
+      "word-order"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-001"
+      ],
+      "lessonIds": [
+        "LESSON-001"
+      ]
+    },
+    "searchText": "word-order\n単語カードをタップして、英文を完成させてください。\nI\nplay\ntennis\ni\n英語の基本語順は Subject + Verb + Object です。\nSVO\npresent-simple"
+  },
+  {
+    "kind": "problem",
+    "id": "WO-002",
+    "title": "WO-002",
+    "type": "word-order",
+    "tags": [
+      "word-order"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-001"
+      ],
+      "lessonIds": [
+        "LESSON-001"
+      ]
+    },
+    "searchText": "word-order\n主語に合わせて、自然な英文を組み立ててください。\nShe\nlikes\nmusic\nshe\n三人称単数の主語 She の現在形では、動詞に s がつきます。\nSVO\nthird-person-singular\npresent-simple"
+  },
+  {
+    "kind": "problem",
+    "id": "WO-003",
+    "title": "WO-003",
+    "type": "word-order",
+    "tags": [
+      "word-order"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-001"
+      ],
+      "lessonIds": [
+        "LESSON-001"
+      ]
+    },
+    "searchText": "word-order\n主語・動詞・補語の順に、英文を組み立ててください。\nMy brother\nis\nkind\nmy-brother\nbe動詞の後ろの補語が、主語の状態を説明する SVC の文です。\nSVC\nbe-verb\ncomplement"
+  },
+  {
+    "kind": "problem",
+    "id": "WO-004",
+    "title": "WO-004",
+    "type": "word-order",
+    "tags": [
+      "word-order"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-001"
+      ],
+      "lessonIds": []
+    },
+    "searchText": "word-order\nどちらも自然な語順になるように、英文を組み立ててください。\nThey\nvisit\nthe museum\non Sundays\nthey\nthe-museum\non-sundays\nまず、だれが行うかを表す主語を探してみましょう。\n時間を表す語句は、文の最後にも文の最初にも置けます。\nThey visit the museum on Sundays. と On Sundays they visit the museum. は、どちらも自然な語順です。\nSVO\nadverbial-phrase"
+  },
+  {
+    "kind": "problem",
+    "id": "WO-005",
+    "title": "WO-005",
+    "type": "word-order",
+    "tags": [
+      "word-order"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-001"
+      ],
+      "lessonIds": [
+        "LESSON-003"
+      ]
+    },
+    "searchText": "word-order\n助動詞を含む英文を、自然な語順に組み立ててください。\nYou\nshould\nstudy\ntoday\nyou\n助動詞の後ろには動詞の原形を置きます。基本語順は Subject + Modal + Base Verb です。\nmodal\nbase-verb"
+  },
+  {
+    "kind": "problem",
+    "id": "WO-006",
+    "title": "WO-006",
+    "type": "word-order",
+    "tags": [
+      "word-order"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-001"
+      ],
+      "lessonIds": [
+        "LESSON-004"
+      ]
+    },
+    "searchText": "word-order\n受動態の英文を、自然な語順に組み立ててください。\nThe report\nwas\nwritten\nby the teacher\nthe-report\nby-the-teacher\n受動態は Subject + be + Past Participle が中心で、必要なら by 句で動作主を示します。\npassive-voice\npast-participle"
+  },
+  {
+    "kind": "problem",
+    "id": "WO-007",
+    "title": "WO-007",
+    "type": "word-order",
+    "tags": [
+      "word-order"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-001"
+      ],
+      "lessonIds": [
+        "LESSON-005"
+      ]
+    },
+    "searchText": "word-order\nto + 動詞原形の語順を意識して、英文を組み立ててください。\nI\nwant\nto\nstudy\nEnglish\ni\nenglish\nwant の後ろで「〜すること」を表す不定詞は、to + 動詞の原形で作ります。\ninfinitive\nnoun-use\nbase-verb"
+  },
+  {
+    "kind": "problem",
+    "id": "WO-008",
+    "title": "WO-008",
+    "type": "word-order",
+    "tags": [
+      "word-order"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-001"
+      ],
+      "lessonIds": [
+        "LESSON-006"
+      ]
+    },
+    "searchText": "word-order\nenjoy + gerund の語順を意識して、英文を組み立ててください。\nI\nenjoy\nreading\nbooks\ni\nenjoy の後ろでは、動詞 read を reading の形にして「本を読むこと」を表します。ここでは enjoy + gerund という組み合わせを確認します。\ngerund\nverb-pattern\nnoun-like"
+  },
+  {
+    "kind": "problem",
+    "id": "MP-001",
+    "title": "MP-001",
+    "type": "mark-parts",
+    "tags": [
+      "mark-parts"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-003"
+      ],
+      "lessonIds": [
+        "LESSON-001",
+        "LESSON-002"
+      ]
+    },
+    "searchText": "mark-parts\n「主語を選んでください。」\nSubject\nThe\nboy\nplays\nVerb\nsoccer\nObject\nthe\n「だれが・なにが」にあたる語句が、この文の主語です。"
+  },
+  {
+    "kind": "problem",
+    "id": "MP-002",
+    "title": "MP-002",
+    "type": "mark-parts",
+    "tags": [
+      "mark-parts"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-003"
+      ],
+      "lessonIds": []
+    },
+    "searchText": "mark-parts\n「動作をする人・もの、つまり主語を選んでください。」\nSubject\nMy\nsister\nlikes\nVerb\nmusic\nObject\nmy\nMy sister が「だれが」にあたり、動作 likes の主語です。"
+  },
+  {
+    "kind": "problem",
+    "id": "MP-003",
+    "title": "MP-003",
+    "type": "mark-parts",
+    "tags": [
+      "mark-parts"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-003"
+      ],
+      "lessonIds": []
+    },
+    "searchText": "mark-parts\n「主語の状態を説明する補語を選んでください。」\nComplement\nTom\nSubject\nis\nVerb\nhappy\nhappy は be動詞 is の後ろで、Tom の状態を説明する補語です。"
+  },
+  {
+    "kind": "problem",
+    "id": "MP-004",
+    "title": "MP-004",
+    "type": "mark-parts",
+    "tags": [
+      "mark-parts"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-003"
+      ],
+      "lessonIds": [
+        "LESSON-006"
+      ]
+    },
+    "searchText": "mark-parts\n文の主語として働いている動名詞句を選んでください。\nSubject\nReading books is fun.\nReading\nbooks\nis\nVerb\nfun\nComplement\nreading\nReading books 全体が「本を読むこと」という一つの内容を表し、文の主語として働いています。"
+  },
+  {
+    "kind": "problem",
+    "id": "GC-001",
+    "title": "GC-001",
+    "type": "grammar-classifier",
+    "tags": [
+      "grammar-classifier"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-004"
+      ],
+      "lessonIds": [
+        "LESSON-001"
+      ]
+    },
+    "searchText": "grammar-classifier\nSentence role\n語句カードを、英文の中での役割ごとに分類してください。\nThe young boy plays soccer after school.\nSubject\n「だれが・なにが」にあたる主語です。\nVerb\n主語の動作や状態を表す動詞です。\nObject\n動作の対象を表す目的語です。\nModifier\nいつ・どこでなど、文に情報を加える修飾語です。\nThe young boy\nsubject\n「だれが」にあたり、文の主語です。\nplays\nverb\n主語の動作を表す動詞です。\nsoccer\nobject\nplay の動作の対象となる目的語です。\nafter school\nmodifier\n動作がいつ起きるかを加える修飾語です。\n英文は単語の列ではなく、役割を持つ語句のまとまりとして見ることができます。"
+  },
+  {
+    "kind": "problem",
+    "id": "GC-002",
+    "title": "GC-002",
+    "type": "grammar-classifier",
+    "tags": [
+      "grammar-classifier"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-004"
+      ],
+      "lessonIds": [
+        "LESSON-001",
+        "LESSON-002"
+      ]
+    },
+    "searchText": "grammar-classifier\nPhrase / Clause\n語句カードを、句（Phrase）と節（Clause）に分類してください。\nI know that she studies.\nPhrase\n主語と動詞の組み合わせを含まない語句のまとまりです。\nClause\n主語と動詞を含む節のまとまりです。\nI\nphrase\nI は主語として働く語句です。\nknow\nknow は動詞として働く語句です。\nthat she studies\nclause\nshe と studies を含む節です。\n句と節は、主語・動詞の組み合わせがあるかどうかに注目すると見分けられます。"
+  },
+  {
+    "kind": "problem",
+    "id": "GC-003",
+    "title": "GC-003",
+    "type": "grammar-classifier",
+    "tags": [
+      "grammar-classifier"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-004"
+      ],
+      "lessonIds": []
+    },
+    "searchText": "grammar-classifier\nPart of speech\n語句カードを、品詞ごとに分類してください。\nBright birds sing loudly.\nNoun\n人・もの・ことの名前を表す名詞です。\nVerb\n動作や状態を表す動詞です。\nAdjective\n名詞の性質や状態を説明する形容詞です。\nAdverb\n動作の様子などを説明する副詞です。\nBright\nadjective\nBright は birds の性質を説明します。\nbirds\nnoun\nbirds は生き物の名前を表します。\nsing\nverb\nsing は動作を表します。\nloudly\nadverb\nloudly は歌う様子を説明します。\n品詞を分類すると、英文の中でそれぞれの語が担う役割を整理できます。"
+  },
+  {
+    "kind": "problem",
+    "id": "GC-004",
+    "title": "GC-004",
+    "type": "grammar-classifier",
+    "tags": [
+      "grammar-classifier"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-004"
+      ],
+      "lessonIds": [
+        "LESSON-005"
+      ]
+    },
+    "searchText": "grammar-classifier\nInfinitive function\nto + 動詞原形の語句を、文中での働きごとに分類してください。\nTo stay healthy, I want to exercise and I need shoes to run in.\nNoun-like\n名詞のように、動作や内容を表します。\nAdjective-like\n形容詞のように、名詞を説明します。\nAdverb-like\n副詞のように、文や動作の目的を説明します。\nTo stay healthy\nadverb\n「健康でいるために」と、文全体の目的を説明しています。\nto exercise\nnoun\nwant の内容として、「運動すること」を表しています。\nto run in\nadjective\nshoes がどのような靴かを説明しています。\n同じ to + 動詞原形でも、文中で名詞・形容詞・副詞に近い働きを持つことがあります。"
+  },
+  {
+    "kind": "problem",
+    "id": "GC-005",
+    "title": "GC-005",
+    "type": "grammar-classifier",
+    "tags": [
+      "grammar-classifier"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-004"
+      ],
+      "lessonIds": [
+        "LESSON-006"
+      ]
+    },
+    "searchText": "grammar-classifier\nGerund phrase role\n動名詞句を、文中での役割ごとに分類してください。\nReading books is fun. I enjoy cooking. My favorite hobby is swimming.\nSubject\n文の主語として働く語句です。\nObject\n動詞の目的語として働く語句です。\nComplement\n主語の内容を説明する補語です。\nReading books\nsubject\nReading books が文の主語として働いています。\ncooking\nobject\ncooking は enjoy の目的語として、「料理すること」を表しています。\nswimming\ncomplement\nswimming は My favorite hobby の内容を説明する補語です。\n動名詞は動詞由来の -ing 形ですが、文の中では名詞のように主語・目的語・補語として働けます。"
+  },
+  {
+    "kind": "problem",
+    "id": "ST-001",
+    "title": "ST-001",
+    "type": "sentence-transformer",
+    "tags": [
+      "sentence-transformer"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-005"
+      ],
+      "lessonIds": []
+    },
+    "searchText": "sentence-transformer\n条件を変えると、英文の形がどう変わるか観察してください。\nhe\nHe\nthey\nThey\npresent\nPresent\npast\nPast\nOFF\nON\nsingular\nplural\nplay\nplayed\ntennis\n."
+  },
+  {
+    "kind": "problem",
+    "id": "ST-002",
+    "title": "ST-002",
+    "type": "sentence-transformer",
+    "tags": [
+      "sentence-transformer"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-005"
+      ],
+      "lessonIds": [
+        "LESSON-003"
+      ]
+    },
+    "searchText": "sentence-transformer\n助動詞を変えると、英文の形がどう変わるか観察してください。\nhe\nHe\nthey\nThey\ncan\nCan\ncould\nCould\nshould\nShould\nmust\nMust\nAffirmative\nNegative\nexplore-control\nmodal\nsingular\nplural\nplay\ntennis\n."
+  },
+  {
+    "kind": "problem",
+    "id": "ST-003",
+    "title": "ST-003",
+    "type": "sentence-transformer",
+    "tags": [
+      "sentence-transformer"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-005"
+      ],
+      "lessonIds": [
+        "LESSON-004"
+      ]
+    },
+    "searchText": "sentence-transformer\nVoiceを切り替えると、同じ出来事の視点と動詞の形がどう変わるか観察してください。\npresent\nPresent\npast\nPast\nactive\nActive\npassive\nPassive\nexplore-control\nvoice\nthe teacher\nsingular\nthe report\nwrite\nwrote\nwritten\n."
+  },
+  {
+    "kind": "problem",
+    "id": "SPD-001",
+    "title": "SPD-001",
+    "type": "sentence-pattern-diagram",
+    "tags": [
+      "sentence-pattern-diagram"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-026"
+      ],
+      "lessonIds": [
+        "LESSON-002"
+      ]
+    },
+    "searchText": "sentence-pattern-diagram\n英文の各要素を選び、文型の骨格を確認してください。\nThe boy plays soccer.\nThe boy\nS\nSubject\n「だれが・なにが」にあたる文の主語です。\nplays\nV\nVerb\n主語の動作を表す動詞です。\nsoccer\nO\nObject\nplays の動作の対象となる目的語です。\nこの文の骨格は S + V + O です。"
+  },
+  {
+    "kind": "problem",
+    "id": "SPD-002",
+    "title": "SPD-002",
+    "type": "sentence-pattern-diagram",
+    "tags": [
+      "sentence-pattern-diagram"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-026"
+      ],
+      "lessonIds": [
+        "LESSON-002"
+      ]
+    },
+    "searchText": "sentence-pattern-diagram\n各要素を選び、主語と補語の関係を確認してください。\nMy brother is kind.\nMy brother\nS\nSubject\n「だれが・なにが」にあたる文の主語です。\nis\nV\nVerb\n主語と補語をつなぐ動詞です。\nkind\nC\nComplement\n主語がどのようなものかを説明する補語です。\nこの文の骨格は S + V + C です。"
+  },
+  {
+    "kind": "problem",
+    "id": "SPD-003",
+    "title": "SPD-003",
+    "type": "sentence-pattern-diagram",
+    "tags": [
+      "sentence-pattern-diagram"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-026"
+      ],
+      "lessonIds": []
+    },
+    "searchText": "sentence-pattern-diagram\n同じ役割記号が二度現れる文型も、要素ごとに確認してください。\nThe teacher gave the class homework.\nThe teacher\nS\nSubject\n「だれが」にあたる文の主語です。\ngave\nV\nVerb\n与える動作を表す動詞です。\nthe class\nO\nIndirect Object\n何を受け取る人・ものかを表す間接目的語です。\nhomework\nDirect Object\n与えられるものを表す直接目的語です。\nこの文の骨格は S + V + O + O です。2つのOは別々のchunkとして見分けます。"
+  },
+  {
+    "kind": "problem",
+    "id": "MCV-001",
+    "title": "MCV-001",
+    "type": "modifier-connection-viewer",
+    "tags": [
+      "modifier-connection-viewer"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-027"
+      ],
+      "lessonIds": [
+        "LESSON-002"
+      ]
+    },
+    "searchText": "modifier-connection-viewer\n修飾語を選び、どの語句にかかっているか確認してください。\nThe boy with a red cap plays soccer.\nThe boy\ncore\nwith a red cap\nmodifier\nplays\nsoccer\nwith-a-red-cap\nthe-boy\nmodifies\nThe boyを説明\nwith a red cap は The boy に追加情報を与えています。\n修飾語は、文中の別の語句に情報を付け加えます。"
+  },
+  {
+    "kind": "problem",
+    "id": "MCV-002",
+    "title": "MCV-002",
+    "type": "modifier-connection-viewer",
+    "tags": [
+      "modifier-connection-viewer"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-027"
+      ],
+      "lessonIds": [
+        "LESSON-002"
+      ]
+    },
+    "searchText": "modifier-connection-viewer\n時間を表す修飾語と、説明している動作のつながりを確認してください。\nShe studies English after dinner.\nShe\ncore\nstudies\nEnglish\nafter dinner\nmodifier\nafter-dinner\nmodifies\nstudiesの時間を説明\nafter dinner は studies がいつ行われるかを説明しています。\n副詞句は、動作がいつ・どこで・どのように行われるかを説明できます。"
+  },
+  {
+    "kind": "problem",
+    "id": "MCV-003",
+    "title": "MCV-003",
+    "type": "modifier-connection-viewer",
+    "tags": [
+      "modifier-connection-viewer"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-027"
+      ],
+      "lessonIds": []
+    },
+    "searchText": "modifier-connection-viewer\n関係詞節が、どの名詞に追加情報を与えているか確認してください。\nThe student who studies hard passed the exam.\nThe student\ncore\nwho studies hard\nmodifier\npassed\nthe exam\nwho-studies-hard\nthe-student\nmodifies\nThe studentを説明\nwho studies hard は The student がどのような生徒かを説明しています。\n関係詞節は、前にある名詞へ説明を加えるまとまりとして働きます。"
+  },
+  {
+    "kind": "problem",
+    "id": "SC-001",
+    "title": "SC-001",
+    "type": "sentence-comparison",
+    "tags": [
+      "sentence-comparison"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-008"
+      ],
+      "lessonIds": [
+        "LESSON-005",
+        "LESSON-006"
+      ]
+    },
+    "searchText": "sentence-comparison\n2つの英文の違う部分を選び、意味の違いを確認してください。\nI stopped smoking.\nI stopped\nsmoking\npurpose-action\nI stopped to smoke.\nto smoke\n動名詞 / 不定詞\n動名詞は「喫煙をやめた」、不定詞は「喫煙するために立ち止まった」という違いを作ります。\n私は喫煙をやめた。\n私は喫煙するために立ち止まった。\n動詞の後ろの形が変わると、動作をやめたのか、その目的のために止まったのかが変わります。"
+  },
+  {
+    "kind": "problem",
+    "id": "SC-002",
+    "title": "SC-002",
+    "type": "sentence-comparison",
+    "tags": [
+      "sentence-comparison"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-008"
+      ],
+      "lessonIds": []
+    },
+    "searchText": "sentence-comparison\n比較表現の違う部分を選び、比較の強さと意味を確認してください。\nThis bag is as light as that one.\nThis bag is\nsubject\nas light as\ndegree-comparison\nthat one\nobject\nThis bag is lighter than that one.\nlighter than\nas ... as / 比較級\nas ... as は2つが同じ程度だと比べ、比較級は一方が他方より上回ることを示します。\nこのバッグはあのバッグと同じくらい軽い。\nこのバッグはあのバッグより軽い。\n比較する対象が同じでも、原級を使うか比較級を使うかで、伝わる関係が変わります。"
+  },
+  {
+    "kind": "problem",
+    "id": "SC-003",
+    "title": "SC-003",
+    "type": "sentence-comparison",
+    "tags": [
+      "sentence-comparison"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-008"
+      ],
+      "lessonIds": [
+        "LESSON-004"
+      ]
+    },
+    "searchText": "sentence-comparison\n能動態と受動態の違う部分を順に選び、視点の変化を確認してください。\nThe chef cooks the meal.\nThe chef\nsubject-agent\ncooks\nvoice-form\nthe meal\nmeal\nThe meal is cooked by the chef.\nThe meal\nis cooked\nby the chef\ncooks / is cooked\n能動態は主語が動作を行う形、受動態は主語が動作を受ける形です。\n料理人がその料理を作る。\nその料理が料理人によって作られる。\n主語 / by句\n能動態の主語は、受動態ではby句に移り、動作を受ける対象が主語になります。\nThe chef が文の主語です。\nby the chef は動作主を補足しています。\n同じ出来事でも、文の主語を誰・何にするかで、文の視点と動詞の形が変わります。"
+  },
+  {
+    "kind": "problem",
+    "id": "SC-004",
+    "title": "SC-004",
+    "type": "sentence-comparison",
+    "tags": [
+      "sentence-comparison"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-008"
+      ],
+      "lessonIds": [
+        "LESSON-003"
+      ]
+    },
+    "searchText": "sentence-comparison\n助動詞の違う部分を選び、話し手の意味の違いを確認してください。\nYou can leave now.\nYou\nsubject\ncan\nmodal-meaning\nleave now.\naction\nYou must leave now.\nmust\ncan / must\ncan は許可や可能を、must は強い必要や義務を表します。\n今、帰ってもよい。\n今、帰らなければならない。\n助動詞の小さな形の差が、許可・可能と義務という意味の差を作ります。"
+  },
+  {
+    "kind": "problem",
+    "id": "EC-001",
+    "title": "EC-001",
+    "type": "error-corrector",
+    "tags": [
+      "error-corrector"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-009"
+      ],
+      "lessonIds": []
+    },
+    "searchText": "error-corrector\n誤っている部分を選び、正しい英文に直してください。\nHe\nplay\ntennis.\nplays\nplayed\nSubject–verb agreement\n主語 He は三人称単数なので、現在形では動詞に -s を付けます。\n主語の人称・数と動詞の形を対応させます。"
+  },
+  {
+    "kind": "problem",
+    "id": "EC-002",
+    "title": "EC-002",
+    "type": "error-corrector",
+    "tags": [
+      "error-corrector"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-009"
+      ],
+      "lessonIds": []
+    },
+    "searchText": "error-corrector\n時間を表す語句に合う動詞の形を選んでください。\nYesterday\nI\ngo\nto\nschool.\nwent\ngoes\nPast tense with a finished time\nYesterday は過去の時点を表すので、動詞 go は過去形 went にします。\n過去の時点を示す時間表現に合わせて、動詞の時制を選びます。"
+  },
+  {
+    "kind": "problem",
+    "id": "EC-003",
+    "title": "EC-003",
+    "type": "error-corrector",
+    "tags": [
+      "error-corrector"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-009"
+      ],
+      "lessonIds": []
+    },
+    "searchText": "error-corrector\n2箇所の誤りを見つけ、それぞれ正しい形に直してください。\nShe\nhave\nfinish\nher\nhomework.\nhas\nhad\nSubject–auxiliary agreement\n主語 She は三人称単数なので、現在完了の助動詞は has にします。\nfinished\nfinishing\nPast participle after have / has\n現在完了では have / has の後ろに過去分詞を置くため、finish は finished にします。\n現在完了では、主語に合う助動詞と、その後ろの過去分詞を組み合わせます。"
+  },
+  {
+    "kind": "problem",
+    "id": "EC-004",
+    "title": "EC-004",
+    "type": "error-corrector",
+    "tags": [
+      "error-corrector"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-009"
+      ],
+      "lessonIds": [
+        "LESSON-003"
+      ]
+    },
+    "searchText": "error-corrector\n助動詞の後ろの動詞の形を正しく直してください。\nHe\ncan\nplays\ntennis.\nplay\nplaying\nBase verb after a modal\n助動詞 can の後ろでは、三単現の -s を付けずに動詞の原形 play を使います。\n助動詞の後ろには、主語が三人称単数でも動詞の原形を置きます。"
+  },
+  {
+    "kind": "problem",
+    "id": "EC-005",
+    "title": "EC-005",
+    "type": "error-corrector",
+    "tags": [
+      "error-corrector"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-009"
+      ],
+      "lessonIds": [
+        "LESSON-004"
+      ]
+    },
+    "searchText": "error-corrector\n受動態のbe動詞の後ろに置く動詞の形を正しく直してください。\nThe\nreport\nwas\nwrote\nby the teacher.\nwrite\nwritten\nPast participle in the passive\n受動態ではbe動詞の後ろに過去形 wrote ではなく、過去分詞 written を置きます。\n受動態は be + 過去分詞で作ります。過去形と過去分詞が異なる動詞にも注意します。"
+  },
+  {
+    "kind": "problem",
+    "id": "EC-006",
+    "title": "EC-006",
+    "type": "error-corrector",
+    "tags": [
+      "error-corrector"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-009"
+      ],
+      "lessonIds": [
+        "LESSON-005"
+      ]
+    },
+    "searchText": "error-corrector\nto の後ろの動詞を原形に直し、正しい英文を完成させてください。\nShe\nwants\nto\nstudies\nabroad.\nstudy\nstudying\nBase verb after to\n不定詞ではtoの後ろに動詞の原形を置くため、studiesではなくstudyを使います。\nto不定詞の基本形は to + 動詞原形です。主語が三人称単数でも、toの後ろに -s は付けません。"
+  },
+  {
+    "kind": "problem",
+    "id": "EC-007",
+    "title": "EC-007",
+    "type": "error-corrector",
+    "tags": [
+      "error-corrector"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-009"
+      ],
+      "lessonIds": [
+        "LESSON-006"
+      ]
+    },
+    "searchText": "error-corrector\nenjoy の後ろの動詞の形を正しく直してください。\nShe\nenjoys\nto read\nnovels.\nreading\nread\nGerund after enjoy\nenjoy の後ろでは、通常 to不定詞ではなく動名詞を使うため、to read ではなく reading にします。\n動詞によって、後ろに動名詞を取るか不定詞を取るかが異なります。enjoy は動名詞を取る代表例です。-ing が常に正しいわけではありません。"
+  },
+  {
+    "kind": "problem",
+    "id": "CG-001",
+    "title": "CG-001",
+    "type": "context-grammar",
+    "tags": [
+      "context-grammar"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-010"
+      ],
+      "lessonIds": []
+    },
+    "searchText": "context-grammar\n場面に合う表現を選び、ホテルとの会話を進めてください。\nLate checkout\nホテルのチェックアウト時刻を少し遅らせたい場面です。\nGuest\nホテルのスタッフに、丁寧にレイトチェックアウトを依頼する。\nHotel staff\nGood morning. How can I help you?\nチェックアウトを遅らせたいと、丁寧に依頼してください。\nCould I get a late checkout, please?\nCertainly. We can extend your checkout until noon.\nPolite request with could\nCould I ...? は許可や依頼を丁寧に尋ねる表現です。\nGive me a late checkout.\nImperative\n命令形なので、この場面では相手への依頼として直接的すぎます。\nWhat time would you like to check out?\n希望する時刻を、丁寧な依頼として伝えてください。\nCould we check out at noon, please?\nYes, noon will be fine. I will note it on your reservation.\nCould for a polite request\nCould we ...? は相手への配慮を含む丁寧な依頼に使えます。\nWe check out at noon.\nPresent statement\n希望を尋ねられているので、単なる事実の断定より依頼表現が適切です。\n依頼表現は、文法的に正しいだけでなく、場面や相手との関係に合わせて選びます。"
+  },
+  {
+    "kind": "problem",
+    "id": "CG-002",
+    "title": "CG-002",
+    "type": "context-grammar",
+    "tags": [
+      "context-grammar"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-010"
+      ],
+      "lessonIds": []
+    },
+    "searchText": "context-grammar\n時間の手がかりに合う表現を選び、学校での会話を進めてください。\nYesterday after school\n昨日の放課後にしたことを先生へ説明する場面です。\nStudent\n終わった過去の出来事を、適切な過去形で説明する。\nTeacher\nWhat did you do after school yesterday?\nYesterday に合う過去形で答えてください。\nI practiced the piano.\nThat sounds like a productive afternoon.\nPast tense with yesterday\nYesterday は終わった過去の時点なので、practice の過去形 practiced を使います。\nI practice the piano.\nPresent tense\nYesterday という過去の手がかりには、現在形より過去形が合います。\nDid you finish your science report?\n昨夜に終えたことを、過去形で答えてください。\nYes, I finished it last night.\nExcellent. Please put it on my desk before class.\nPast tense with last night\nLast night は終わった過去の時点なので、finish の過去形 finished を使います。\nYes, I finish it last night.\nPresent tense with a finished time\nLast night と一緒に使う動詞は、終わった過去を表す finished にします。\nYesterday や last night のような時間情報は、終わった出来事を表す過去形の手がかりになります。"
+  },
+  {
+    "kind": "problem",
+    "id": "CG-003",
+    "title": "CG-003",
+    "type": "context-grammar",
+    "tags": [
+      "context-grammar"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-010"
+      ],
+      "lessonIds": []
+    },
+    "searchText": "context-grammar\n経験と具体的な過去時点を区別し、旅行の会話を進めてください。\nTalking about a trip\n旅行経験について友人と話し、いつ行ったかを続けて説明する場面です。\nTraveler\n経験には現在完了、具体的な過去時点には過去形を使い分ける。\nFriend\nHave you ever been to Kyoto?\n経験があるかどうかを、現在完了を使って答えてください。\nYes, I have.\nWhen did you go there?\nPresent perfect for experience\nHave you ever ...? という経験の質問には、Yes, I have. と現在完了で答えます。\nYes, I went there last year.\nPast detail too early\nこの質問はまず経験の有無を聞いているので、最初は Yes, I have. が焦点に合います。\n具体的な過去時点に合う過去形で答えてください。\nI went there last year.\nThat must have been a memorable trip.\nPast tense with a finished time\nLast year は具体的な過去時点なので、go の過去形 went を使います。\nI have gone there last year.\nPresent perfect with a finished time\nLast year のような具体的に終わった時点には、現在完了ではなく過去形を使います。\n経験を尋ねるときは現在完了、いつ起きたかを示す具体的な過去時点には過去形を使います。"
+  },
+  {
+    "kind": "problem",
+    "id": "CG-004",
+    "title": "CG-004",
+    "type": "context-grammar",
+    "tags": [
+      "context-grammar"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-010"
+      ],
+      "lessonIds": [
+        "LESSON-003"
+      ]
+    },
+    "searchText": "context-grammar\n助言と義務の場面に合う助動詞を選び、会話を進めてください。\nAdvice and obligation\n勉強の相談と、実験室の安全規則について話す場面です。\nStudent\n助言には should、明確な義務には must を使い分ける。\nFriend\nI have an important test tomorrow. What do you recommend?\n相手への助言として、今夜勉強することを伝えてください。\nYou should study tonight.\nThat sounds helpful. I will start tonight.\nshould for advice\nshould は相手にとってよい行動をすすめる、穏やかな助言に使います。\nYou could study tonight.\nThat is another good idea. I will make a study plan.\ncould for a suggestion\ncould も選択肢の一つを提案する助言に使えるため、この場面で自然です。\nYou must not study tonight.\nmust not for prohibition\nmust not は禁止を表すので、勉強をすすめるこの場面の目的に合いません。\nLab supervisor\nStudents are required to wear safety glasses in the lab.\n明確な安全規則による義務として、保護めがねを着用するよう伝えてください。\nYou must wear safety glasses.\nExactly. Please put them on before you enter.\nmust for obligation\nmust は規則や必要性にもとづく、強い義務を表します。\nYou should wear safety glasses.\nshould は助言としては自然ですが、required と示された規則の強い義務には must が合います。\nshould や could は助言・提案、must は規則にもとづく強い義務を表します。場面と話し手の意図を合わせて選びます。"
+  },
+  {
+    "kind": "problem",
+    "id": "CG-005",
+    "title": "CG-005",
+    "type": "context-grammar",
+    "tags": [
+      "context-grammar"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-010"
+      ],
+      "lessonIds": [
+        "LESSON-004"
+      ]
+    },
+    "searchText": "context-grammar\n何に焦点を置くかに合う能動態・受動態を選び、会話を進めてください。\nChoosing the focus\n出来事の対象に焦点を置くか、動作主を前面に出すかを考える場面です。\nReporter\n動作主が不明なときや対象に焦点を置きたいときに、受動態を選ぶ。\nEditor\nWhat happened to the window last night?\n誰がしたか分からない出来事として、窓に焦点を置いて報告してください。\nThe window was broken last night.\nGood. The report focuses on the window, and the agent is unknown.\nPassive when the agent is unknown\n今回のreporting goalでは、誰がしたかを示さず、対象のwindowに焦点を置くため受動態が合います。\nSomeone broke the window last night.\nActive with an unspecified agent\nこの文も文法的ですが、今回は動作主を前面に出さず、対象に焦点を置くことが目的です。\nThe school festival was a success. Who organized it?\n対象を主語にしつつ、必要な動作主をby句で示してください。\nThe school festival was organized by the students.\nExactly. The festival stays in focus, while the students are added as the agent.\nPassive with a by-phrase\n受動態では対象のschool festivalを主語に置き、by the studentsで動作主を補足できます。\nThe students organized the school festival.\nActive with the agent as subject\nこの文も文法的ですが、今回は対象のschool festivalを主語として焦点に置く指定です。\n受動態は単なる変形ではなく、何を主語として焦点に置くか、動作主を示す必要があるかに応じて選びます。"
+  },
+  {
+    "kind": "problem",
+    "id": "CG-006",
+    "title": "CG-006",
+    "type": "context-grammar",
+    "tags": [
+      "context-grammar"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-010"
+      ],
+      "lessonIds": [
+        "LESSON-005"
+      ]
+    },
+    "searchText": "context-grammar\n場面に合う不定詞の働きを選び、会話を進めてください。\nPlans, needs, and purposes\n週末の予定、必要なもの、英語を学ぶ目的について話す場面です。\nStudent\n不定詞が何を表しているかを場面に合わせて選ぶ。\nFriend\nWhat do you want to do this weekend?\nwant の内容として、週末にしたいことを不定詞で答えてください。\nI want to visit the museum.\nThat sounds fun. I hope you enjoy the visit.\nInfinitive after want\nto visit the museum がwantの内容を表します。\nI want visit the museum.\nMissing to\nwant の後ろで「訪れること」を表すには、to visit の形にします。\nWhat do you need for the train ride?\n必要なものを、名詞を説明する不定詞で答えてください。\nI need a book to read.\nGood idea. You can read it on the train.\nAdjective-like infinitive\nto read がa bookを説明し、「読むための本」という意味を作ります。\nI need to read a book.\nInfinitive after need\nこの文も文法的には正しいですが、「私は本を読む必要がある」という意味で、今回の「何が必要か」というgoalには一致しません。\nWhy do you watch English videos?\n英語の動画を見る目的を、目的を表す不定詞で説明してください。\nI watch them to learn English.\nThat is a useful way to practice every day.\nAdverb-like infinitive of purpose\nto learn English がwatch themの目的を表します。\nI watch them to learning English.\nWrong form after to\ntoの後ろには動詞の原形learnを置き、learningにはしません。\n不定詞は、wantの内容、名詞の説明、動作の目的など、文中でさまざまな働きをします。"
+  },
+  {
+    "kind": "problem",
+    "id": "CG-007",
+    "title": "CG-007",
+    "type": "context-grammar",
+    "tags": [
+      "context-grammar"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-010"
+      ],
+      "lessonIds": [
+        "LESSON-006"
+      ]
+    },
+    "searchText": "context-grammar\n場面に合う動名詞の使い方を選び、会話を進めてください。\nHobbies, finishing, and stopping\n好きなこと、終えた行為、やめた行為について話す場面です。\nStudent\n動名詞を取る表現と、動名詞・不定詞で意味が変わる表現を場面に合わせて選ぶ。\nFriend\nWhat do you enjoy doing after work?\nenjoy の後ろに動名詞を置いて、好きなことを答えてください。\nI enjoy cooking.\nThat sounds relaxing. Cooking can be a great hobby.\nGerund after enjoy\nenjoy の後ろでは cooking のような動名詞を使います。\nI enjoy to cook.\nInfinitive after enjoy\nenjoy の後ろでは通常to不定詞ではなく、動名詞 cooking を使います。\nTeacher\nDid you finish your report?\nfinish の後ろに動名詞を置いて、終えた行為を答えてください。\nYes, I finished writing it.\nGood. Now you can submit the report.\nGerund after finish\nfinish の後ろでは writing のような動名詞を使って、終えた行為の内容を表します。\nYes, I finished to write it.\nInfinitive after finish\nfinish の後ろで行為を表す場合は、通常to不定詞ではなく動名詞を使います。\nDid you stop talking when class started?\n話すのをやめたことを、stop + 動名詞で答えてください。\nYes, I stopped talking.\nThat was considerate. The class could begin quietly.\nstop + gerund\nstop talking は、「話すという行為をやめる」という意味です。\nYes, I stopped to talk to my teacher.\nstop + infinitive\nこの文も文法的ですが、stop to talk は「話すために立ち止まる／別の行動を止める」という意味で、今回のgoalとは異なります。\nenjoy や finish の後ろでは動名詞を使い、stop は後ろの形によって意味が変わります。"
+  },
+  {
+    "kind": "problem",
+    "id": "SG-001",
+    "title": "SG-001",
+    "type": "sentence-generator",
+    "tags": [
+      "sentence-generator"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-007"
+      ],
+      "lessonIds": []
+    },
+    "searchText": "sentence-generator\n目標に合う英文を組み立て、Generateで確かめてください。\nPresent affirmative\nHe を主語にして、現在形の肯定文を作る。\nhe\nHe\nthey\nThey\npresent\nPresent\npast\nPast\nAffirmative\nNegative\nsingular\nplural\nplay\nplayed\ntennis\n.\n三人称単数の現在形では、主語 He に合わせて動詞に -s が付きます。"
+  },
+  {
+    "kind": "problem",
+    "id": "SG-002",
+    "title": "SG-002",
+    "type": "sentence-generator",
+    "tags": [
+      "sentence-generator"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-007"
+      ],
+      "lessonIds": []
+    },
+    "searchText": "sentence-generator\n目標に合う英文を組み立て、Generateで確かめてください。\nPast negative\nThey を主語にして、過去形の否定文を作る。\nhe\nHe\nthey\nThey\npresent\nPresent\npast\nPast\nAffirmative\nNegative\nsingular\nplural\nplay\nplayed\ntennis\n.\n過去形の否定文では did not の後ろに動詞の原形 play を置きます。"
+  },
+  {
+    "kind": "problem",
+    "id": "SG-003",
+    "title": "SG-003",
+    "type": "sentence-generator",
+    "tags": [
+      "sentence-generator"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-007"
+      ],
+      "lessonIds": []
+    },
+    "searchText": "sentence-generator\n目標に合う英文を組み立て、複数の許容状態を確かめてください。\nPast negative for either subject\nHe または They を主語にして、過去形の否定文を作る。\nhe\nHe\nthey\nThey\npresent\nPresent\npast\nPast\nAffirmative\nNegative\nsingular\nplural\nplay\nplayed\ntennis\n.\n主語が変わっても、過去形の否定では did not の後ろに動詞の原形を置きます。"
+  },
+  {
+    "kind": "problem",
+    "id": "SG-004",
+    "title": "SG-004",
+    "type": "sentence-generator",
+    "tags": [
+      "sentence-generator"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-007"
+      ],
+      "lessonIds": [
+        "LESSON-003"
+      ]
+    },
+    "searchText": "sentence-generator\n助動詞を含む目標に合う英文を組み立て、Generateで確かめてください。\nAdvice with should\nThey を主語にして、「〜すべきだ」という助言の肯定文を作る。\nhe\nHe\nthey\nThey\ncan\nCan\ncould\nCould\nshould\nShould\nmust\nMust\nAffirmative\nNegative\nsingular\nplural\nplay\ntennis\n.\n助動詞 should の後ろには、主語が They でも動詞の原形 play を置きます。"
+  },
+  {
+    "kind": "problem",
+    "id": "SG-005",
+    "title": "SG-005",
+    "type": "sentence-generator",
+    "tags": [
+      "sentence-generator"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-007"
+      ],
+      "lessonIds": [
+        "LESSON-004"
+      ]
+    },
+    "searchText": "sentence-generator\n目標に合う能動態または受動態の英文を組み立て、Generateで確かめてください。\nPast passive\n過去の出来事を、the report を主語にした受動態で表す。\npresent\nPresent\npast\nPast\nactive\nActive\npassive\nPassive\nthe teacher\nsingular\nthe report\nwrite\nwrote\nwritten\n.\n受動態では動作を受ける対象を主語にし、be動詞の過去形 was の後ろに過去分詞 written を置きます。"
+  },
+  {
+    "kind": "problem",
+    "id": "MPO-001",
+    "title": "MPO-001",
+    "type": "modifier-positioner",
+    "tags": [
+      "modifier-positioner"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-014"
+      ],
+      "lessonIds": []
+    },
+    "searchText": "modifier-positioner\nin the library が The students を説明する位置へ置いてください。\n場所そのものではなく、どのstudentsかを説明する。\nThe students\nare studying\nin the library\nAfter “The students”\nin-the-library\nthe-students\nmodifies\nThe studentsを説明\nin the library が、どのstudentsかを限定しています。\n図書館にいる生徒たちが勉強している。\nSentence end\nare-studying\nare studyingを説明\n文末では、勉強している場所を表す読みになります。\n生徒たちは図書館で勉強している。\n.\n同じ語句でも、置く位置によってどこへ情報を加えるかが変わります。"
+  },
+  {
+    "kind": "problem",
+    "id": "MPO-002",
+    "title": "MPO-002",
+    "type": "modifier-positioner",
+    "tags": [
+      "modifier-positioner"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-014"
+      ],
+      "lessonIds": []
+    },
+    "searchText": "modifier-positioner\nwearing a blue hat が The girl を説明する位置へ置いてください。\nwearing a blue hat がどのgirlを説明するかを確かめる。\nThe girl\nwaved to us\nwearing a blue hat\nAfter “The girl”\nwearing-a-blue-hat\nthe-girl\nmodifies\nThe girlを説明\nwearing a blue hat が、どのgirlかを説明しています。\n青い帽子をかぶっている女の子が私たちに手を振った。\nSentence end\nwaved-to-us\nwaved to usを説明\n文末では、手を振った動作に付随する情報のように読め、girlへの直接の説明が弱くなります。\n女の子は青い帽子をかぶりながら私たちに手を振った。\n.\n分詞句は置く位置によって、名詞への説明か動作への付随情報かが変わります。"
+  },
+  {
+    "kind": "problem",
+    "id": "MPO-003",
+    "title": "MPO-003",
+    "type": "modifier-positioner",
+    "tags": [
+      "modifier-positioner"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-014"
+      ],
+      "lessonIds": []
+    },
+    "searchText": "modifier-positioner\non Sundays を自然な位置へ置き、どちらも使えることを確認してください。\non Sundays のような時間の副詞句を、文頭と文末の両方で使う。\nThey\nvisit the museum\non Sundays\nSentence start\nOn Sundays,\nthey\non-sundays\nvisit-the-museum\nmodifies\nvisit the museumの頻度を説明\nOn Sundays は visit the museum がいつ行われるかを説明しています。\n日曜日には、彼らは博物館を訪れる。\nSentence end\n文末のon Sundaysも、visit the museumがいつ行われるかを説明しています。\n彼らは日曜日に博物館を訪れる。\n.\n時間を表す副詞句は、文頭と文末のどちらにも置ける場合があります。"
+  },
+  {
+    "kind": "problem",
+    "id": "MPO-004",
+    "title": "MPO-004",
+    "type": "modifier-positioner",
+    "tags": [
+      "modifier-positioner"
+    ],
+    "relations": {
+      "interactionIds": [
+        "GRAM-INT-014"
+      ],
+      "lessonIds": [
+        "LESSON-005"
+      ]
+    },
+    "searchText": "modifier-positioner\nto learn English を目的を表す位置へ置き、文頭と文末の両方を確認してください。\nto learn English が、映画を見る目的を表すことを確かめる。\nI\nwatch movies\nto learn English\nSentence start\nTo learn English,\nto-learn-english\nwatch-movies\nmodifies\nI watch moviesの目的を説明\n文頭のTo learn Englishは、映画を見る目的を説明しています。\n英語を学ぶために、私は映画を見る。\nSentence end\n文末のto learn Englishも、映画を見る目的を説明しています。\n私は英語を学ぶために映画を見る。\n.\n目的を表すto不定詞は、文頭・文末のどちらにも置ける場合があります。"
+  }
+]

@@ -1,0 +1,2024 @@
+[
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-001",
+    "slug": "word-order-builder",
+    "title": "Word Order Builder",
+    "category": "build",
+    "description": "単語カードを並べ替えて、英文の骨格を組み立てる。",
+    "learningGoal": "主語・動詞・目的語の基本語順を、手を動かして理解する。",
+    "touchTarget": "単語カード",
+    "userAction": "タップ / クリック",
+    "changingElement": "回答欄の語順",
+    "insight": "英語の基本語順は Subject + Verb + Object で組み立てる。",
+    "targetGrammar": [
+      "文型",
+      "SVO",
+      "関係詞 (relative clauses)"
+    ],
+    "interactionType": [
+      "tap-to-place",
+      "sequence"
+    ],
+    "feedbackType": [
+      "正誤",
+      "説明"
+    ],
+    "learningIntents": [
+      "assemble-sentence",
+      "practice-word-order"
+    ],
+    "bestFor": [
+      "reconstructing-sentence-order",
+      "checking-sequence-constraints"
+    ],
+    "notBestFor": [
+      "free-form-generation"
+    ],
+    "tags": [
+      "assemble-sentence",
+      "practice-word-order",
+      "reconstructing-sentence-order",
+      "checking-sequence-constraints",
+      "free-form-generation"
+    ],
+    "relations": {
+      "problemIds": [
+        "WO-001",
+        "WO-002",
+        "WO-003",
+        "WO-004",
+        "WO-005",
+        "WO-006",
+        "WO-007",
+        "WO-008"
+      ]
+    },
+    "searchText": "word-order-builder\nWord Order Builder\nbuild\n単語カードを並べ替えて、英文の骨格を組み立てる。\n主語・動詞・目的語の基本語順を、手を動かして理解する。\n単語カード\nタップ / クリック\n回答欄の語順\n英語の基本語順は Subject + Verb + Object で組み立てる。\n文型\nSVO\n関係詞 (relative clauses)\ntap-to-place\nsequence\n正誤\n説明\nassemble-sentence\npractice-word-order\nreconstructing-sentence-order\nchecking-sequence-constraints\nfree-form-generation",
+    "demoType": "word-order"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-002",
+    "slug": "drag-into-blank",
+    "title": "Drag into Blank",
+    "category": "move",
+    "description": "語句を空欄へ移動し、文の中での役割を確かめる。",
+    "learningGoal": "語句の位置と、文全体の意味のつながりを意識する。",
+    "touchTarget": "選択肢カードと空欄",
+    "userAction": "タップ / ドラッグ",
+    "changingElement": "文中の空欄",
+    "insight": "同じ語句でも置く場所で文の意味や自然さが変わる。",
+    "targetGrammar": [
+      "語順",
+      "修飾語",
+      "前置詞"
+    ],
+    "interactionType": [
+      "tap-to-place",
+      "drag-and-drop"
+    ],
+    "feedbackType": [
+      "正誤",
+      "ヒント"
+    ],
+    "learningIntents": [
+      "explore-placement",
+      "connect-position-and-meaning"
+    ],
+    "bestFor": [
+      "placing-a-phrase-in-context",
+      "observing-slot-effects"
+    ],
+    "notBestFor": [
+      "assembling-an-entire-sentence"
+    ],
+    "tags": [
+      "explore-placement",
+      "connect-position-and-meaning",
+      "placing-a-phrase-in-context",
+      "observing-slot-effects",
+      "assembling-an-entire-sentence"
+    ],
+    "relations": {
+      "problemIds": []
+    },
+    "searchText": "drag-into-blank\nDrag into Blank\nmove\n語句を空欄へ移動し、文の中での役割を確かめる。\n語句の位置と、文全体の意味のつながりを意識する。\n選択肢カードと空欄\nタップ / ドラッグ\n文中の空欄\n同じ語句でも置く場所で文の意味や自然さが変わる。\n語順\n修飾語\n前置詞\ntap-to-place\ndrag-and-drop\n正誤\nヒント\nexplore-placement\nconnect-position-and-meaning\nplacing-a-phrase-in-context\nobserving-slot-effects\nassembling-an-entire-sentence"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-003",
+    "slug": "mark-the-parts",
+    "title": "Mark the Parts",
+    "category": "select",
+    "description": "英文中の語を選び、主語・動詞・目的語の関係を見つける。",
+    "learningGoal": "英文を意味のかたまりではなく、文の役割から読めるようにする。",
+    "touchTarget": "英文中のトークン",
+    "userAction": "タップ / クリック",
+    "changingElement": "選択状態と構造ラベル",
+    "insight": "文の要素にはそれぞれ役割があり、組み合わせで文ができる。",
+    "targetGrammar": [
+      "文型",
+      "品詞",
+      "S / V / O"
+    ],
+    "interactionType": [
+      "token-select",
+      "role-reveal"
+    ],
+    "feedbackType": [
+      "正誤",
+      "構造表示"
+    ],
+    "learningIntents": [
+      "identify-element",
+      "identify-role"
+    ],
+    "bestFor": [
+      "finding-sentence-roles",
+      "role-based-reading"
+    ],
+    "notBestFor": [
+      "free-form-generation"
+    ],
+    "tags": [
+      "identify-element",
+      "identify-role",
+      "finding-sentence-roles",
+      "role-based-reading",
+      "free-form-generation"
+    ],
+    "relations": {
+      "problemIds": [
+        "MP-001",
+        "MP-002",
+        "MP-003",
+        "MP-004"
+      ]
+    },
+    "searchText": "mark-the-parts\nMark the Parts\nselect\n英文中の語を選び、主語・動詞・目的語の関係を見つける。\n英文を意味のかたまりではなく、文の役割から読めるようにする。\n英文中のトークン\nタップ / クリック\n選択状態と構造ラベル\n文の要素にはそれぞれ役割があり、組み合わせで文ができる。\n文型\n品詞\nS / V / O\ntoken-select\nrole-reveal\n正誤\n構造表示\nidentify-element\nidentify-role\nfinding-sentence-roles\nrole-based-reading\nfree-form-generation",
+    "demoType": "mark-parts"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-004",
+    "slug": "grammar-classifier",
+    "title": "Grammar Classifier",
+    "category": "classify",
+    "description": "語句を品詞や文の役割ごとのグループへ分類する。",
+    "learningGoal": "形ではなく、文中での働きによって語句を捉える。",
+    "touchTarget": "語句カードと分類先",
+    "userAction": "タップ / クリック",
+    "changingElement": "分類先と分類結果",
+    "insight": "語句の種類と文中の役割を区別して考えられる。",
+    "targetGrammar": [
+      "品詞",
+      "S / V / O / C",
+      "句と節"
+    ],
+    "interactionType": [
+      "classification",
+      "sorting"
+    ],
+    "feedbackType": [
+      "正誤",
+      "分類理由"
+    ],
+    "learningIntents": [
+      "classify-form",
+      "classify-function",
+      "classify-role"
+    ],
+    "bestFor": [
+      "classifying-phrase-function",
+      "comparing-grammatical-roles"
+    ],
+    "notBestFor": [
+      "assembling-sentence-order"
+    ],
+    "tags": [
+      "classify-form",
+      "classify-function",
+      "classify-role",
+      "classifying-phrase-function",
+      "comparing-grammatical-roles",
+      "assembling-sentence-order"
+    ],
+    "relations": {
+      "problemIds": [
+        "GC-001",
+        "GC-002",
+        "GC-003",
+        "GC-004",
+        "GC-005"
+      ]
+    },
+    "searchText": "grammar-classifier\nGrammar Classifier\nclassify\n語句を品詞や文の役割ごとのグループへ分類する。\n形ではなく、文中での働きによって語句を捉える。\n語句カードと分類先\nタップ / クリック\n分類先と分類結果\n語句の種類と文中の役割を区別して考えられる。\n品詞\nS / V / O / C\n句と節\nclassification\nsorting\n正誤\n分類理由\nclassify-form\nclassify-function\nclassify-role\nclassifying-phrase-function\ncomparing-grammatical-roles\nassembling-sentence-order",
+    "demoType": "grammar-classifier"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-005",
+    "slug": "sentence-transformer",
+    "title": "Sentence Transformer",
+    "category": "transform",
+    "description": "主語・時制・否定の条件を変え、英文の変化を比較する。",
+    "learningGoal": "文法条件の変更が、動詞や助動詞へどう反映されるかを理解する。",
+    "touchTarget": "主語・時制・否定のコントロール",
+    "userAction": "選択 / 切り替え",
+    "changingElement": "生成された英文",
+    "insight": "文法情報を組み合わせると、必要な形が決まる。",
+    "targetGrammar": [
+      "時制",
+      "三単現",
+      "否定文"
+    ],
+    "interactionType": [
+      "state-selection",
+      "sentence-generation"
+    ],
+    "feedbackType": [
+      "即時変化",
+      "構造ラベル"
+    ],
+    "learningIntents": [
+      "observe-transformation",
+      "observe-state-change",
+      "connect-form-and-meaning"
+    ],
+    "bestFor": [
+      "comparing-grammar-states",
+      "tracing-form-changes"
+    ],
+    "notBestFor": [
+      "open-ended-sentence-authoring"
+    ],
+    "tags": [
+      "observe-transformation",
+      "observe-state-change",
+      "connect-form-and-meaning",
+      "comparing-grammar-states",
+      "tracing-form-changes",
+      "open-ended-sentence-authoring"
+    ],
+    "relations": {
+      "problemIds": [
+        "ST-001",
+        "ST-002",
+        "ST-003"
+      ]
+    },
+    "searchText": "sentence-transformer\nSentence Transformer\ntransform\n主語・時制・否定の条件を変え、英文の変化を比較する。\n文法条件の変更が、動詞や助動詞へどう反映されるかを理解する。\n主語・時制・否定のコントロール\n選択 / 切り替え\n生成された英文\n文法情報を組み合わせると、必要な形が決まる。\n時制\n三単現\n否定文\nstate-selection\nsentence-generation\n即時変化\n構造ラベル\nobserve-transformation\nobserve-state-change\nconnect-form-and-meaning\ncomparing-grammar-states\ntracing-form-changes\nopen-ended-sentence-authoring",
+    "demoType": "sentence-transformer"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-006",
+    "slug": "syntax-visualizer",
+    "title": "Syntax Visualizer",
+    "category": "visualize",
+    "description": "英文を句・節・修飾関係の図として表示する。",
+    "learningGoal": "目に見えにくい英文の階層構造を、位置関係で捉える。",
+    "touchTarget": "語句・ノード・関係線",
+    "userAction": "クリック / 展開",
+    "changingElement": "構造図の階層",
+    "insight": "英文は単語の列ではなく、まとまりが重なった構造である。",
+    "targetGrammar": [
+      "文型",
+      "句と節",
+      "関係詞 (relative clauses)"
+    ],
+    "interactionType": [
+      "tree-view",
+      "highlight"
+    ],
+    "feedbackType": [
+      "強調表示",
+      "構造説明"
+    ],
+    "learningIntents": [
+      "visualize-structure",
+      "visualize-relation"
+    ],
+    "bestFor": [
+      "inspecting-sentence-hierarchy",
+      "tracing-syntax-relations"
+    ],
+    "notBestFor": [
+      "correcting-surface-errors"
+    ],
+    "tags": [
+      "visualize-structure",
+      "visualize-relation",
+      "inspecting-sentence-hierarchy",
+      "tracing-syntax-relations",
+      "correcting-surface-errors"
+    ],
+    "relations": {
+      "problemIds": []
+    },
+    "searchText": "syntax-visualizer\nSyntax Visualizer\nvisualize\n英文を句・節・修飾関係の図として表示する。\n目に見えにくい英文の階層構造を、位置関係で捉える。\n語句・ノード・関係線\nクリック / 展開\n構造図の階層\n英文は単語の列ではなく、まとまりが重なった構造である。\n文型\n句と節\n関係詞 (relative clauses)\ntree-view\nhighlight\n強調表示\n構造説明\nvisualize-structure\nvisualize-relation\ninspecting-sentence-hierarchy\ntracing-syntax-relations\ncorrecting-surface-errors"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-007",
+    "slug": "sentence-generator",
+    "title": "Sentence Generator",
+    "category": "generate",
+    "description": "主語・動詞・時制などの条件から、文法的な英文を生成する。",
+    "learningGoal": "文法規則を、完成した英文を作る手順として理解する。",
+    "touchTarget": "文法条件の選択肢",
+    "userAction": "選択 / 生成",
+    "changingElement": "生成文と構造情報",
+    "insight": "英文は単語を並べるだけでなく、条件に応じて形を変える。",
+    "targetGrammar": [
+      "時制",
+      "助動詞",
+      "態"
+    ],
+    "interactionType": [
+      "form-select",
+      "generation"
+    ],
+    "feedbackType": [
+      "生成結果",
+      "規則説明"
+    ],
+    "learningIntents": [
+      "generate-from-conditions",
+      "connect-form-and-meaning"
+    ],
+    "bestFor": [
+      "generating-a-controlled-sentence",
+      "testing-grammar-state"
+    ],
+    "notBestFor": [
+      "unstructured-free-text-generation"
+    ],
+    "tags": [
+      "generate-from-conditions",
+      "connect-form-and-meaning",
+      "generating-a-controlled-sentence",
+      "testing-grammar-state",
+      "unstructured-free-text-generation"
+    ],
+    "relations": {
+      "problemIds": [
+        "SG-001",
+        "SG-002",
+        "SG-003",
+        "SG-004",
+        "SG-005"
+      ]
+    },
+    "searchText": "sentence-generator\nSentence Generator\ngenerate\n主語・動詞・時制などの条件から、文法的な英文を生成する。\n文法規則を、完成した英文を作る手順として理解する。\n文法条件の選択肢\n選択 / 生成\n生成文と構造情報\n英文は単語を並べるだけでなく、条件に応じて形を変える。\n時制\n助動詞\n態\nform-select\ngeneration\n生成結果\n規則説明\ngenerate-from-conditions\nconnect-form-and-meaning\ngenerating-a-controlled-sentence\ntesting-grammar-state\nunstructured-free-text-generation",
+    "demoType": "sentence-generator"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-008",
+    "slug": "sentence-comparison",
+    "title": "Sentence Comparison",
+    "category": "compare",
+    "description": "似た英文を並べ、形の差と意味の差を対応づける。",
+    "learningGoal": "似た表現を、文脈と構造の違いから使い分ける。",
+    "touchTarget": "比較する英文と差分箇所",
+    "userAction": "切り替え / 強調",
+    "changingElement": "差分表示と意味メモ",
+    "insight": "小さな形の差が、動作の捉え方や意味の差になる。",
+    "targetGrammar": [
+      "不定詞",
+      "動名詞",
+      "比較"
+    ],
+    "interactionType": [
+      "side-by-side",
+      "diff-highlight"
+    ],
+    "feedbackType": [
+      "差分強調",
+      "意味比較"
+    ],
+    "learningIntents": [
+      "compare-form",
+      "compare-meaning"
+    ],
+    "bestFor": [
+      "comparing-contrasting-sentences",
+      "linking-form-to-meaning"
+    ],
+    "notBestFor": [
+      "building-a-single-sentence"
+    ],
+    "tags": [
+      "compare-form",
+      "compare-meaning",
+      "comparing-contrasting-sentences",
+      "linking-form-to-meaning",
+      "building-a-single-sentence"
+    ],
+    "relations": {
+      "problemIds": [
+        "SC-001",
+        "SC-002",
+        "SC-003",
+        "SC-004"
+      ]
+    },
+    "searchText": "sentence-comparison\nSentence Comparison\ncompare\n似た英文を並べ、形の差と意味の差を対応づける。\n似た表現を、文脈と構造の違いから使い分ける。\n比較する英文と差分箇所\n切り替え / 強調\n差分表示と意味メモ\n小さな形の差が、動作の捉え方や意味の差になる。\n不定詞\n動名詞\n比較\nside-by-side\ndiff-highlight\n差分強調\n意味比較\ncompare-form\ncompare-meaning\ncomparing-contrasting-sentences\nlinking-form-to-meaning\nbuilding-a-single-sentence",
+    "demoType": "sentence-comparison"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-009",
+    "slug": "error-corrector",
+    "title": "Error Corrector",
+    "category": "correct",
+    "description": "誤りのある英文を直し、どこをなぜ変えたかを確認する。",
+    "learningGoal": "文法規則を、誤りを発見して修正する判断へ結びつける。",
+    "touchTarget": "誤りのある語句",
+    "userAction": "選択 / 修正",
+    "changingElement": "誤りの箇所と訂正文",
+    "insight": "正しい形だけでなく、誤りが生まれた条件まで説明できる。",
+    "targetGrammar": [
+      "三単現",
+      "時制",
+      "一致"
+    ],
+    "interactionType": [
+      "error-spotting",
+      "correction"
+    ],
+    "feedbackType": [
+      "正誤",
+      "修正理由"
+    ],
+    "learningIntents": [
+      "correct-form",
+      "diagnose-error"
+    ],
+    "bestFor": [
+      "diagnosing-a-patterned-error",
+      "explaining-a-correction"
+    ],
+    "notBestFor": [
+      "open-ended-proofreading"
+    ],
+    "tags": [
+      "correct-form",
+      "diagnose-error",
+      "diagnosing-a-patterned-error",
+      "explaining-a-correction",
+      "open-ended-proofreading"
+    ],
+    "relations": {
+      "problemIds": [
+        "EC-001",
+        "EC-002",
+        "EC-003",
+        "EC-004",
+        "EC-005",
+        "EC-006",
+        "EC-007"
+      ]
+    },
+    "searchText": "error-corrector\nError Corrector\ncorrect\n誤りのある英文を直し、どこをなぜ変えたかを確認する。\n文法規則を、誤りを発見して修正する判断へ結びつける。\n誤りのある語句\n選択 / 修正\n誤りの箇所と訂正文\n正しい形だけでなく、誤りが生まれた条件まで説明できる。\n三単現\n時制\n一致\nerror-spotting\ncorrection\n正誤\n修正理由\ncorrect-form\ndiagnose-error\ndiagnosing-a-patterned-error\nexplaining-a-correction\nopen-ended-proofreading",
+    "demoType": "error-corrector"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-010",
+    "slug": "context-grammar",
+    "title": "Context Grammar",
+    "category": "simulate",
+    "description": "場面と会話の流れの中で、適切な文法表現を選ぶ。",
+    "learningGoal": "文法形式を、実際の目的や文脈に合う選択として使う。",
+    "touchTarget": "会話の選択肢",
+    "userAction": "選択 / 返答",
+    "changingElement": "場面の進行と返答",
+    "insight": "文法の選択は、話し手の目的と場面に結びついている。",
+    "targetGrammar": [
+      "助動詞",
+      "依頼表現",
+      "時制"
+    ],
+    "interactionType": [
+      "scenario",
+      "choice"
+    ],
+    "feedbackType": [
+      "会話結果",
+      "場面別ヒント"
+    ],
+    "learningIntents": [
+      "choose-in-context",
+      "match-form-to-purpose",
+      "connect-context-and-form"
+    ],
+    "bestFor": [
+      "choosing-a-contextual-response",
+      "comparing-goal-fit"
+    ],
+    "notBestFor": [
+      "isolated-form-drills"
+    ],
+    "tags": [
+      "choose-in-context",
+      "match-form-to-purpose",
+      "connect-context-and-form",
+      "choosing-a-contextual-response",
+      "comparing-goal-fit",
+      "isolated-form-drills"
+    ],
+    "relations": {
+      "problemIds": [
+        "CG-001",
+        "CG-002",
+        "CG-003",
+        "CG-004",
+        "CG-005",
+        "CG-006",
+        "CG-007"
+      ]
+    },
+    "searchText": "context-grammar\nContext Grammar\nsimulate\n場面と会話の流れの中で、適切な文法表現を選ぶ。\n文法形式を、実際の目的や文脈に合う選択として使う。\n会話の選択肢\n選択 / 返答\n場面の進行と返答\n文法の選択は、話し手の目的と場面に結びついている。\n助動詞\n依頼表現\n時制\nscenario\nchoice\n会話結果\n場面別ヒント\nchoose-in-context\nmatch-form-to-purpose\nconnect-context-and-form\nchoosing-a-contextual-response\ncomparing-goal-fit\nisolated-form-drills",
+    "demoType": "context-grammar"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-011",
+    "slug": "sentence-pattern-builder",
+    "title": "Sentence Pattern Builder",
+    "category": "build",
+    "description": "文型スロットへ語句を置き、英文の骨格を組み立てる。",
+    "learningGoal": "文型の違いを、語句の役割と位置の組み合わせとして理解する。",
+    "touchTarget": "主語・動詞・目的語・補語のスロット",
+    "userAction": "タップ / 配置",
+    "changingElement": "文型スロットと完成文",
+    "insight": "語句の役割が変わると、英文の骨格も変わる。",
+    "targetGrammar": [
+      "文型",
+      "SVC",
+      "SVO"
+    ],
+    "interactionType": [
+      "slot-fill",
+      "sequence"
+    ],
+    "feedbackType": [
+      "正誤",
+      "構造表示"
+    ],
+    "learningIntents": [
+      "assemble-sentence",
+      "identify-role"
+    ],
+    "bestFor": [
+      "mapping-slots-to-roles",
+      "building-a-sentence-skeleton"
+    ],
+    "notBestFor": [
+      "paragraph-composition"
+    ],
+    "tags": [
+      "assemble-sentence",
+      "identify-role",
+      "mapping-slots-to-roles",
+      "building-a-sentence-skeleton",
+      "paragraph-composition"
+    ],
+    "relations": {
+      "problemIds": []
+    },
+    "searchText": "sentence-pattern-builder\nSentence Pattern Builder\nbuild\n文型スロットへ語句を置き、英文の骨格を組み立てる。\n文型の違いを、語句の役割と位置の組み合わせとして理解する。\n主語・動詞・目的語・補語のスロット\nタップ / 配置\n文型スロットと完成文\n語句の役割が変わると、英文の骨格も変わる。\n文型\nSVC\nSVO\nslot-fill\nsequence\n正誤\n構造表示\nassemble-sentence\nidentify-role\nmapping-slots-to-roles\nbuilding-a-sentence-skeleton\nparagraph-composition"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-012",
+    "slug": "question-builder",
+    "title": "Question Builder",
+    "category": "build",
+    "description": "疑問詞・助動詞・主語などを組み合わせて疑問文を作る。",
+    "learningGoal": "疑問文で語順が変わる理由を、構成要素の移動として理解する。",
+    "touchTarget": "疑問詞と文の構成カード",
+    "userAction": "タップ / 並べ替え",
+    "changingElement": "疑問文の語順",
+    "insight": "疑問文では、尋ねたい内容に応じて文の構造が組み替わる。",
+    "targetGrammar": [
+      "疑問文",
+      "助動詞",
+      "疑問詞"
+    ],
+    "interactionType": [
+      "sequence",
+      "slot-fill"
+    ],
+    "feedbackType": [
+      "正誤",
+      "語順ヒント"
+    ],
+    "learningIntents": [
+      "assemble-sentence",
+      "practice-word-order"
+    ],
+    "bestFor": [
+      "building-question-structure",
+      "tracing-question-word-order"
+    ],
+    "notBestFor": [
+      "evaluating-a-conversation-answer"
+    ],
+    "tags": [
+      "assemble-sentence",
+      "practice-word-order",
+      "building-question-structure",
+      "tracing-question-word-order",
+      "evaluating-a-conversation-answer"
+    ],
+    "relations": {
+      "problemIds": []
+    },
+    "searchText": "question-builder\nQuestion Builder\nbuild\n疑問詞・助動詞・主語などを組み合わせて疑問文を作る。\n疑問文で語順が変わる理由を、構成要素の移動として理解する。\n疑問詞と文の構成カード\nタップ / 並べ替え\n疑問文の語順\n疑問文では、尋ねたい内容に応じて文の構造が組み替わる。\n疑問文\n助動詞\n疑問詞\nsequence\nslot-fill\n正誤\n語順ヒント\nassemble-sentence\npractice-word-order\nbuilding-question-structure\ntracing-question-word-order\nevaluating-a-conversation-answer"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-013",
+    "slug": "clause-combiner",
+    "title": "Clause Combiner",
+    "category": "build",
+    "description": "主節と従属節を接続詞で結び、複文を組み立てる。",
+    "learningGoal": "節の役割と接続詞の働きを、文の組み合わせから理解する。",
+    "touchTarget": "主節・従属節・接続詞カード",
+    "userAction": "タップ / 結合",
+    "changingElement": "節の結合位置と文の意味",
+    "insight": "従属節は主節に対して意味上の役割を持つ。",
+    "targetGrammar": [
+      "句と節",
+      "接続詞",
+      "複文"
+    ],
+    "interactionType": [
+      "clause-combination",
+      "sequence"
+    ],
+    "feedbackType": [
+      "正誤",
+      "節の説明"
+    ],
+    "learningIntents": [
+      "assemble-sentence",
+      "connect-form-and-meaning"
+    ],
+    "bestFor": [
+      "joining-clause-relations",
+      "building-a-complex-sentence"
+    ],
+    "notBestFor": [
+      "isolated-word-order-drills"
+    ],
+    "tags": [
+      "assemble-sentence",
+      "connect-form-and-meaning",
+      "joining-clause-relations",
+      "building-a-complex-sentence",
+      "isolated-word-order-drills"
+    ],
+    "relations": {
+      "problemIds": []
+    },
+    "searchText": "clause-combiner\nClause Combiner\nbuild\n主節と従属節を接続詞で結び、複文を組み立てる。\n節の役割と接続詞の働きを、文の組み合わせから理解する。\n主節・従属節・接続詞カード\nタップ / 結合\n節の結合位置と文の意味\n従属節は主節に対して意味上の役割を持つ。\n句と節\n接続詞\n複文\nclause-combination\nsequence\n正誤\n節の説明\nassemble-sentence\nconnect-form-and-meaning\njoining-clause-relations\nbuilding-a-complex-sentence\nisolated-word-order-drills"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-014",
+    "slug": "modifier-positioner",
+    "title": "Modifier Positioner",
+    "category": "move",
+    "description": "修飾語を文中の位置へ移動し、かかり方を確かめる。",
+    "learningGoal": "修飾語の位置と、どの語句にかかるかの関係を理解する。",
+    "touchTarget": "修飾語カードと文中の位置",
+    "userAction": "タップ / 配置",
+    "changingElement": "修飾関係と文の意味",
+    "insight": "修飾語の位置によって、意味のまとまりが変わる。",
+    "targetGrammar": [
+      "修飾語",
+      "語順",
+      "分詞"
+    ],
+    "interactionType": [
+      "tap-to-place",
+      "position-change"
+    ],
+    "feedbackType": [
+      "正誤",
+      "修飾関係表示"
+    ],
+    "learningIntents": [
+      "explore-placement",
+      "compare-placement",
+      "connect-position-and-meaning"
+    ],
+    "bestFor": [
+      "placement-affects-meaning",
+      "multiple-valid-placements"
+    ],
+    "notBestFor": [
+      "assembling-an-entire-sentence"
+    ],
+    "tags": [
+      "explore-placement",
+      "compare-placement",
+      "connect-position-and-meaning",
+      "placement-affects-meaning",
+      "multiple-valid-placements",
+      "assembling-an-entire-sentence"
+    ],
+    "relations": {
+      "problemIds": [
+        "MPO-001",
+        "MPO-002",
+        "MPO-003",
+        "MPO-004"
+      ]
+    },
+    "searchText": "modifier-positioner\nModifier Positioner\nmove\n修飾語を文中の位置へ移動し、かかり方を確かめる。\n修飾語の位置と、どの語句にかかるかの関係を理解する。\n修飾語カードと文中の位置\nタップ / 配置\n修飾関係と文の意味\n修飾語の位置によって、意味のまとまりが変わる。\n修飾語\n語順\n分詞\ntap-to-place\nposition-change\n正誤\n修飾関係表示\nexplore-placement\ncompare-placement\nconnect-position-and-meaning\nplacement-affects-meaning\nmultiple-valid-placements\nassembling-an-entire-sentence",
+    "demoType": "modifier-positioner"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-015",
+    "slug": "adverb-placement-explorer",
+    "title": "Adverb Placement Explorer",
+    "category": "move",
+    "description": "副詞を複数の位置へ移動し、自然さと意味の違いを比べる。",
+    "learningGoal": "副詞の位置が文の焦点や自然さへ与える影響を観察する。",
+    "touchTarget": "副詞句と配置スロット",
+    "userAction": "選択 / 移動",
+    "changingElement": "副詞の位置と読み手の焦点",
+    "insight": "副詞は文のどこに置くかで、強調される情報が変わる。",
+    "targetGrammar": [
+      "副詞",
+      "語順",
+      "文の焦点"
+    ],
+    "interactionType": [
+      "position-change",
+      "comparison"
+    ],
+    "feedbackType": [
+      "意味メモ",
+      "自然さの説明"
+    ],
+    "learningIntents": [
+      "explore-placement",
+      "compare-placement",
+      "observe-state-change"
+    ],
+    "bestFor": [
+      "observing-adverb-scope",
+      "comparing-focus-shifts"
+    ],
+    "notBestFor": [
+      "combining-independent-clauses"
+    ],
+    "tags": [
+      "explore-placement",
+      "compare-placement",
+      "observe-state-change",
+      "observing-adverb-scope",
+      "comparing-focus-shifts",
+      "combining-independent-clauses"
+    ],
+    "relations": {
+      "problemIds": []
+    },
+    "searchText": "adverb-placement-explorer\nAdverb Placement Explorer\nmove\n副詞を複数の位置へ移動し、自然さと意味の違いを比べる。\n副詞の位置が文の焦点や自然さへ与える影響を観察する。\n副詞句と配置スロット\n選択 / 移動\n副詞の位置と読み手の焦点\n副詞は文のどこに置くかで、強調される情報が変わる。\n副詞\n語順\n文の焦点\nposition-change\ncomparison\n意味メモ\n自然さの説明\nexplore-placement\ncompare-placement\nobserve-state-change\nobserving-adverb-scope\ncomparing-focus-shifts\ncombining-independent-clauses"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-016",
+    "slug": "clause-reordering",
+    "title": "Clause Reordering",
+    "category": "move",
+    "description": "節を並べ替え、接続詞と句読点の働きを確かめる。",
+    "learningGoal": "節の位置が変わっても、節同士の関係を保てることを理解する。",
+    "touchTarget": "主節・従属節のカード",
+    "userAction": "タップ / 並べ替え",
+    "changingElement": "節の順序と句読点",
+    "insight": "節の位置が変わると、必要な句読点や読みやすさも変わる。",
+    "targetGrammar": [
+      "句と節",
+      "接続詞",
+      "句読点"
+    ],
+    "interactionType": [
+      "sequence",
+      "clause-reordering"
+    ],
+    "feedbackType": [
+      "正誤",
+      "構造ヒント"
+    ],
+    "learningIntents": [
+      "observe-transformation",
+      "practice-word-order"
+    ],
+    "bestFor": [
+      "reordering-clause-position",
+      "comparing-punctuation-effects"
+    ],
+    "notBestFor": [
+      "word-level-error-correction"
+    ],
+    "tags": [
+      "observe-transformation",
+      "practice-word-order",
+      "reordering-clause-position",
+      "comparing-punctuation-effects",
+      "word-level-error-correction"
+    ],
+    "relations": {
+      "problemIds": []
+    },
+    "searchText": "clause-reordering\nClause Reordering\nmove\n節を並べ替え、接続詞と句読点の働きを確かめる。\n節の位置が変わっても、節同士の関係を保てることを理解する。\n主節・従属節のカード\nタップ / 並べ替え\n節の順序と句読点\n節の位置が変わると、必要な句読点や読みやすさも変わる。\n句と節\n接続詞\n句読点\nsequence\n正誤\n構造ヒント\nobserve-transformation\npractice-word-order\nreordering-clause-position\ncomparing-punctuation-effects\nword-level-error-correction"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-017",
+    "slug": "sentence-role-finder",
+    "title": "Sentence Role Finder",
+    "category": "select",
+    "description": "英文から指定された文の役割を選び、構造を見つける。",
+    "learningGoal": "主語・動詞・目的語などを、文全体の関係から見つける。",
+    "touchTarget": "文中の語句のまとまり",
+    "userAction": "タップ / 選択",
+    "changingElement": "選択箇所と文の役割ラベル",
+    "insight": "同じ語でも、文の中での位置と働きから役割が決まる。",
+    "targetGrammar": [
+      "文型",
+      "S / V / O / C",
+      "句と節"
+    ],
+    "interactionType": [
+      "token-select",
+      "role-reveal"
+    ],
+    "feedbackType": [
+      "正誤",
+      "役割説明"
+    ],
+    "learningIntents": [
+      "identify-element",
+      "identify-role"
+    ],
+    "bestFor": [
+      "finding-specified-sentence-roles",
+      "role-based-reading"
+    ],
+    "notBestFor": [
+      "word-definition-practice"
+    ],
+    "tags": [
+      "identify-element",
+      "identify-role",
+      "finding-specified-sentence-roles",
+      "role-based-reading",
+      "word-definition-practice"
+    ],
+    "relations": {
+      "problemIds": []
+    },
+    "searchText": "sentence-role-finder\nSentence Role Finder\nselect\n英文から指定された文の役割を選び、構造を見つける。\n主語・動詞・目的語などを、文全体の関係から見つける。\n文中の語句のまとまり\nタップ / 選択\n選択箇所と文の役割ラベル\n同じ語でも、文の中での位置と働きから役割が決まる。\n文型\nS / V / O / C\n句と節\ntoken-select\nrole-reveal\n正誤\n役割説明\nidentify-element\nidentify-role\nfinding-specified-sentence-roles\nrole-based-reading\nword-definition-practice"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-018",
+    "slug": "clause-boundary-marker",
+    "title": "Clause Boundary Marker",
+    "category": "select",
+    "description": "英文中で節の境界を選び、主節と従属節を見分ける。",
+    "learningGoal": "節の始まりと終わりを、接続詞や動詞の関係から見つける。",
+    "touchTarget": "語句間の境界と接続詞",
+    "userAction": "タップ / マーク",
+    "changingElement": "節の境界線と階層",
+    "insight": "節は動詞を中心としたまとまりとして文の中に組み込まれる。",
+    "targetGrammar": [
+      "句と節",
+      "接続詞",
+      "関係詞"
+    ],
+    "interactionType": [
+      "boundary-select",
+      "highlight"
+    ],
+    "feedbackType": [
+      "正誤",
+      "節の説明"
+    ],
+    "learningIntents": [
+      "identify-element",
+      "identify-role"
+    ],
+    "bestFor": [
+      "marking-clause-boundaries",
+      "identifying-clause-structure"
+    ],
+    "notBestFor": [
+      "full-sentence-generation"
+    ],
+    "tags": [
+      "identify-element",
+      "identify-role",
+      "marking-clause-boundaries",
+      "identifying-clause-structure",
+      "full-sentence-generation"
+    ],
+    "relations": {
+      "problemIds": []
+    },
+    "searchText": "clause-boundary-marker\nClause Boundary Marker\nselect\n英文中で節の境界を選び、主節と従属節を見分ける。\n節の始まりと終わりを、接続詞や動詞の関係から見つける。\n語句間の境界と接続詞\nタップ / マーク\n節の境界線と階層\n節は動詞を中心としたまとまりとして文の中に組み込まれる。\n句と節\n接続詞\n関係詞\nboundary-select\nhighlight\n正誤\n節の説明\nidentify-element\nidentify-role\nmarking-clause-boundaries\nidentifying-clause-structure\nfull-sentence-generation"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-019",
+    "slug": "modifier-finder",
+    "title": "Modifier Finder",
+    "category": "select",
+    "description": "英文から修飾語を選び、どの語句にかかるかを確かめる。",
+    "learningGoal": "文の中心部分と、情報を追加する修飾部分を区別する。",
+    "touchTarget": "修飾語句と被修飾語",
+    "userAction": "タップ / 選択",
+    "changingElement": "修飾関係の強調表示",
+    "insight": "修飾語は文の中心を支えながら、時間や場所などの情報を加える。",
+    "targetGrammar": [
+      "修飾語",
+      "前置詞句",
+      "分詞"
+    ],
+    "interactionType": [
+      "token-select",
+      "relation-reveal"
+    ],
+    "feedbackType": [
+      "正誤",
+      "関係線"
+    ],
+    "learningIntents": [
+      "identify-element",
+      "visualize-relation"
+    ],
+    "bestFor": [
+      "finding-modifier-phrases",
+      "tracing-modifier-targets"
+    ],
+    "notBestFor": [
+      "moving-a-modifier-between-positions"
+    ],
+    "tags": [
+      "identify-element",
+      "visualize-relation",
+      "finding-modifier-phrases",
+      "tracing-modifier-targets",
+      "moving-a-modifier-between-positions"
+    ],
+    "relations": {
+      "problemIds": []
+    },
+    "searchText": "modifier-finder\nModifier Finder\nselect\n英文から修飾語を選び、どの語句にかかるかを確かめる。\n文の中心部分と、情報を追加する修飾部分を区別する。\n修飾語句と被修飾語\nタップ / 選択\n修飾関係の強調表示\n修飾語は文の中心を支えながら、時間や場所などの情報を加える。\n修飾語\n前置詞句\n分詞\ntoken-select\nrelation-reveal\n正誤\n関係線\nidentify-element\nvisualize-relation\nfinding-modifier-phrases\ntracing-modifier-targets\nmoving-a-modifier-between-positions"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-020",
+    "slug": "part-of-speech-sorter",
+    "title": "Part of Speech Sorter",
+    "category": "classify",
+    "description": "語句を名詞・動詞・形容詞などの品詞へ分類する。",
+    "learningGoal": "語の形だけでなく、文中での働きから品詞を判断する。",
+    "touchTarget": "単語または語句カード",
+    "userAction": "タップ / 分類",
+    "changingElement": "品詞カテゴリと分類理由",
+    "insight": "品詞は文中での働きと周囲の語との関係から考えられる。",
+    "targetGrammar": [
+      "品詞",
+      "名詞",
+      "動詞",
+      "形容詞"
+    ],
+    "interactionType": [
+      "classification",
+      "sorting"
+    ],
+    "feedbackType": [
+      "正誤",
+      "品詞説明"
+    ],
+    "learningIntents": [
+      "classify-form",
+      "classify-role"
+    ],
+    "bestFor": [
+      "classifying-parts-of-speech",
+      "comparing-form-and-function"
+    ],
+    "notBestFor": [
+      "assembling-sentence-order"
+    ],
+    "tags": [
+      "classify-form",
+      "classify-role",
+      "classifying-parts-of-speech",
+      "comparing-form-and-function",
+      "assembling-sentence-order"
+    ],
+    "relations": {
+      "problemIds": []
+    },
+    "searchText": "part-of-speech-sorter\nPart of Speech Sorter\nclassify\n語句を名詞・動詞・形容詞などの品詞へ分類する。\n語の形だけでなく、文中での働きから品詞を判断する。\n単語または語句カード\nタップ / 分類\n品詞カテゴリと分類理由\n品詞は文中での働きと周囲の語との関係から考えられる。\n品詞\n名詞\n動詞\n形容詞\nclassification\nsorting\n正誤\n品詞説明\nclassify-form\nclassify-role\nclassifying-parts-of-speech\ncomparing-form-and-function\nassembling-sentence-order"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-021",
+    "slug": "phrase-vs-clause-classifier",
+    "title": "Phrase vs Clause Classifier",
+    "category": "classify",
+    "description": "語句を句と節に分類し、動詞を含むまとまりを見分ける。",
+    "learningGoal": "句と節の違いを、まとまりの中の動詞の有無から理解する。",
+    "touchTarget": "語句のまとまりカード",
+    "userAction": "タップ / 分類",
+    "changingElement": "Phrase / Clauseの分類先",
+    "insight": "節には中心となる動詞があり、句とは構造上の役割が異なる。",
+    "targetGrammar": [
+      "句と節",
+      "動詞",
+      "従属節"
+    ],
+    "interactionType": [
+      "classification",
+      "feature-check"
+    ],
+    "feedbackType": [
+      "正誤",
+      "根拠表示"
+    ],
+    "learningIntents": [
+      "classify-form",
+      "classify-function"
+    ],
+    "bestFor": [
+      "distinguishing-phrase-and-clause",
+      "detecting-finite-verbs"
+    ],
+    "notBestFor": [
+      "generating-syntax"
+    ],
+    "tags": [
+      "classify-form",
+      "classify-function",
+      "distinguishing-phrase-and-clause",
+      "detecting-finite-verbs",
+      "generating-syntax"
+    ],
+    "relations": {
+      "problemIds": []
+    },
+    "searchText": "phrase-vs-clause-classifier\nPhrase vs Clause Classifier\nclassify\n語句を句と節に分類し、動詞を含むまとまりを見分ける。\n句と節の違いを、まとまりの中の動詞の有無から理解する。\n語句のまとまりカード\nタップ / 分類\nPhrase / Clauseの分類先\n節には中心となる動詞があり、句とは構造上の役割が異なる。\n句と節\n動詞\n従属節\nclassification\nfeature-check\n正誤\n根拠表示\nclassify-form\nclassify-function\ndistinguishing-phrase-and-clause\ndetecting-finite-verbs\ngenerating-syntax"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-022",
+    "slug": "transitive-vs-intransitive-classifier",
+    "title": "Transitive vs Intransitive Classifier",
+    "category": "classify",
+    "description": "動詞を目的語の有無で分類し、文型との関係を確かめる。",
+    "learningGoal": "動詞の性質と、目的語を必要とする文型の関係を理解する。",
+    "touchTarget": "動詞カードと例文",
+    "userAction": "タップ / 分類",
+    "changingElement": "動詞の分類と文型ラベル",
+    "insight": "動詞の性質によって、後ろに置ける語句の構造が変わる。",
+    "targetGrammar": [
+      "自動詞",
+      "他動詞",
+      "文型"
+    ],
+    "interactionType": [
+      "classification",
+      "sentence-context"
+    ],
+    "feedbackType": [
+      "正誤",
+      "目的語の説明"
+    ],
+    "learningIntents": [
+      "classify-function",
+      "connect-form-and-meaning"
+    ],
+    "bestFor": [
+      "classifying-verb-valency",
+      "linking-verbs-to-objects"
+    ],
+    "notBestFor": [
+      "conjugation-drills"
+    ],
+    "tags": [
+      "classify-function",
+      "connect-form-and-meaning",
+      "classifying-verb-valency",
+      "linking-verbs-to-objects",
+      "conjugation-drills"
+    ],
+    "relations": {
+      "problemIds": []
+    },
+    "searchText": "transitive-vs-intransitive-classifier\nTransitive vs Intransitive Classifier\nclassify\n動詞を目的語の有無で分類し、文型との関係を確かめる。\n動詞の性質と、目的語を必要とする文型の関係を理解する。\n動詞カードと例文\nタップ / 分類\n動詞の分類と文型ラベル\n動詞の性質によって、後ろに置ける語句の構造が変わる。\n自動詞\n他動詞\n文型\nclassification\nsentence-context\n正誤\n目的語の説明\nclassify-function\nconnect-form-and-meaning\nclassifying-verb-valency\nlinking-verbs-to-objects\nconjugation-drills"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-023",
+    "slug": "active-passive-transformer",
+    "title": "Active Passive Transformer",
+    "category": "transform",
+    "description": "能動態と受動態を切り替え、主語と目的語の関係を追う。",
+    "learningGoal": "態の変化で、文の焦点と動詞の形がどう変わるかを理解する。",
+    "touchTarget": "態の切り替えコントロール",
+    "userAction": "選択 / 切り替え",
+    "changingElement": "主語・目的語・be動詞・過去分詞",
+    "insight": "受動態では、動作を受けるものが文の主語になる。",
+    "targetGrammar": [
+      "受動態",
+      "過去分詞",
+      "文型"
+    ],
+    "interactionType": [
+      "state-selection",
+      "sentence-generation"
+    ],
+    "feedbackType": [
+      "即時変化",
+      "役割比較"
+    ],
+    "learningIntents": [
+      "observe-transformation",
+      "observe-state-change",
+      "connect-form-and-meaning"
+    ],
+    "bestFor": [
+      "comparing-voice",
+      "tracking-role-reversal"
+    ],
+    "notBestFor": [
+      "stylistic-free-writing"
+    ],
+    "tags": [
+      "observe-transformation",
+      "observe-state-change",
+      "connect-form-and-meaning",
+      "comparing-voice",
+      "tracking-role-reversal",
+      "stylistic-free-writing"
+    ],
+    "relations": {
+      "problemIds": []
+    },
+    "searchText": "active-passive-transformer\nActive Passive Transformer\ntransform\n能動態と受動態を切り替え、主語と目的語の関係を追う。\n態の変化で、文の焦点と動詞の形がどう変わるかを理解する。\n態の切り替えコントロール\n選択 / 切り替え\n主語・目的語・be動詞・過去分詞\n受動態では、動作を受けるものが文の主語になる。\n受動態\n過去分詞\n文型\nstate-selection\nsentence-generation\n即時変化\n役割比較\nobserve-transformation\nobserve-state-change\nconnect-form-and-meaning\ncomparing-voice\ntracking-role-reversal\nstylistic-free-writing"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-024",
+    "slug": "direct-indirect-speech-transformer",
+    "title": "Direct Indirect Speech Transformer",
+    "category": "transform",
+    "description": "直接話法と間接話法を変換し、時制や代名詞の変化を追う。",
+    "learningGoal": "引用する視点が変わると、文法形式も連動して変わることを理解する。",
+    "touchTarget": "話法の切り替えと変換対象",
+    "userAction": "選択 / 変換",
+    "changingElement": "引用節の時制・代名詞・時を表す語",
+    "insight": "話し手の視点に合わせて、引用内容の形が調整される。",
+    "targetGrammar": [
+      "話法",
+      "時制の一致",
+      "代名詞"
+    ],
+    "interactionType": [
+      "state-selection",
+      "sentence-transformation"
+    ],
+    "feedbackType": [
+      "差分表示",
+      "変化理由"
+    ],
+    "learningIntents": [
+      "observe-transformation",
+      "connect-form-and-meaning"
+    ],
+    "bestFor": [
+      "tracing-reported-speech-changes",
+      "comparing-tense-shifts"
+    ],
+    "notBestFor": [
+      "writing-an-open-ended-dialogue"
+    ],
+    "tags": [
+      "observe-transformation",
+      "connect-form-and-meaning",
+      "tracing-reported-speech-changes",
+      "comparing-tense-shifts",
+      "writing-an-open-ended-dialogue"
+    ],
+    "relations": {
+      "problemIds": []
+    },
+    "searchText": "direct-indirect-speech-transformer\nDirect Indirect Speech Transformer\ntransform\n直接話法と間接話法を変換し、時制や代名詞の変化を追う。\n引用する視点が変わると、文法形式も連動して変わることを理解する。\n話法の切り替えと変換対象\n選択 / 変換\n引用節の時制・代名詞・時を表す語\n話し手の視点に合わせて、引用内容の形が調整される。\n話法\n時制の一致\n代名詞\nstate-selection\nsentence-transformation\n差分表示\n変化理由\nobserve-transformation\nconnect-form-and-meaning\ntracing-reported-speech-changes\ncomparing-tense-shifts\nwriting-an-open-ended-dialogue"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-025",
+    "slug": "comparison-transformer",
+    "title": "Comparison Transformer",
+    "category": "transform",
+    "description": "原級・比較級・最上級を切り替え、比較の形を変える。",
+    "learningGoal": "比較対象の数と意味に応じて、形容詞の形が変わることを理解する。",
+    "touchTarget": "比較の種類と比較対象",
+    "userAction": "選択 / 切り替え",
+    "changingElement": "形容詞の形と比較構造",
+    "insight": "比べる対象と範囲によって、使う比較表現が決まる。",
+    "targetGrammar": [
+      "比較",
+      "原級",
+      "比較級",
+      "最上級"
+    ],
+    "interactionType": [
+      "state-selection",
+      "sentence-generation"
+    ],
+    "feedbackType": [
+      "即時変化",
+      "比較対象表示"
+    ],
+    "learningIntents": [
+      "observe-transformation",
+      "compare-form",
+      "compare-meaning"
+    ],
+    "bestFor": [
+      "changing-comparison-degree",
+      "linking-form-to-comparison"
+    ],
+    "notBestFor": [
+      "ranking-unstated-meaning"
+    ],
+    "tags": [
+      "observe-transformation",
+      "compare-form",
+      "compare-meaning",
+      "changing-comparison-degree",
+      "linking-form-to-comparison",
+      "ranking-unstated-meaning"
+    ],
+    "relations": {
+      "problemIds": []
+    },
+    "searchText": "comparison-transformer\nComparison Transformer\ntransform\n原級・比較級・最上級を切り替え、比較の形を変える。\n比較対象の数と意味に応じて、形容詞の形が変わることを理解する。\n比較の種類と比較対象\n選択 / 切り替え\n形容詞の形と比較構造\n比べる対象と範囲によって、使う比較表現が決まる。\n比較\n原級\n比較級\n最上級\nstate-selection\nsentence-generation\n即時変化\n比較対象表示\nobserve-transformation\ncompare-form\ncompare-meaning\nchanging-comparison-degree\nlinking-form-to-comparison\nranking-unstated-meaning"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-026",
+    "slug": "sentence-pattern-diagram",
+    "title": "Sentence Pattern Diagram",
+    "category": "visualize",
+    "description": "英文をS・V・O・Cの配置図として表示する。",
+    "learningGoal": "文型を、役割ラベルと位置関係の図として捉える。",
+    "touchTarget": "文型図の要素と表示切り替え",
+    "userAction": "クリック / 強調",
+    "changingElement": "文型図と対応する語句",
+    "insight": "文の骨格は、役割を持つ要素の配置として見ることができる。",
+    "targetGrammar": [
+      "文型",
+      "S / V / O / C",
+      "補語"
+    ],
+    "interactionType": [
+      "diagram",
+      "highlight"
+    ],
+    "feedbackType": [
+      "対応強調",
+      "構造説明"
+    ],
+    "learningIntents": [
+      "visualize-structure",
+      "identify-role"
+    ],
+    "bestFor": [
+      "inspecting-sentence-patterns",
+      "mapping-roles-to-slots"
+    ],
+    "notBestFor": [
+      "creative-sentence-generation"
+    ],
+    "tags": [
+      "visualize-structure",
+      "identify-role",
+      "inspecting-sentence-patterns",
+      "mapping-roles-to-slots",
+      "creative-sentence-generation"
+    ],
+    "relations": {
+      "problemIds": [
+        "SPD-001",
+        "SPD-002",
+        "SPD-003"
+      ]
+    },
+    "searchText": "sentence-pattern-diagram\nSentence Pattern Diagram\nvisualize\n英文をS・V・O・Cの配置図として表示する。\n文型を、役割ラベルと位置関係の図として捉える。\n文型図の要素と表示切り替え\nクリック / 強調\n文型図と対応する語句\n文の骨格は、役割を持つ要素の配置として見ることができる。\n文型\nS / V / O / C\n補語\ndiagram\nhighlight\n対応強調\n構造説明\nvisualize-structure\nidentify-role\ninspecting-sentence-patterns\nmapping-roles-to-slots\ncreative-sentence-generation",
+    "demoType": "sentence-pattern-diagram"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-027",
+    "slug": "modifier-connection-viewer",
+    "title": "Modifier Connection Viewer",
+    "category": "visualize",
+    "description": "修飾語から被修飾語へのつながりを線で表示する。",
+    "learningGoal": "語順だけでは見えにくい修飾関係を、接続として理解する。",
+    "touchTarget": "語句ノードと修飾関係",
+    "userAction": "クリック / 展開",
+    "changingElement": "修飾関係の線と強調箇所",
+    "insight": "離れた位置にある語句も、文中では意味上つながっている。",
+    "targetGrammar": [
+      "修飾語",
+      "関係詞",
+      "分詞"
+    ],
+    "interactionType": [
+      "relation-graph",
+      "highlight"
+    ],
+    "feedbackType": [
+      "関係線",
+      "短い説明"
+    ],
+    "learningIntents": [
+      "visualize-relation",
+      "identify-role"
+    ],
+    "bestFor": [
+      "inspecting-modifier-relations",
+      "tracing-target-connections"
+    ],
+    "notBestFor": [
+      "changing-modifier-placement"
+    ],
+    "tags": [
+      "visualize-relation",
+      "identify-role",
+      "inspecting-modifier-relations",
+      "tracing-target-connections",
+      "changing-modifier-placement"
+    ],
+    "relations": {
+      "problemIds": [
+        "MCV-001",
+        "MCV-002",
+        "MCV-003"
+      ]
+    },
+    "searchText": "modifier-connection-viewer\nModifier Connection Viewer\nvisualize\n修飾語から被修飾語へのつながりを線で表示する。\n語順だけでは見えにくい修飾関係を、接続として理解する。\n語句ノードと修飾関係\nクリック / 展開\n修飾関係の線と強調箇所\n離れた位置にある語句も、文中では意味上つながっている。\n修飾語\n関係詞\n分詞\nrelation-graph\nhighlight\n関係線\n短い説明\nvisualize-relation\nidentify-role\ninspecting-modifier-relations\ntracing-target-connections\nchanging-modifier-placement",
+    "demoType": "modifier-connection-viewer"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-028",
+    "slug": "clause-hierarchy-viewer",
+    "title": "Clause Hierarchy Viewer",
+    "category": "visualize",
+    "description": "主節と従属節の階層を、入れ子構造として表示する。",
+    "learningGoal": "複雑な英文の中で、節がどの階層にあるかを理解する。",
+    "touchTarget": "節ノードと折りたたみ操作",
+    "userAction": "クリック / 展開",
+    "changingElement": "節の階層と対応する英文",
+    "insight": "英文は節が入れ子になった階層構造として組み立てられる。",
+    "targetGrammar": [
+      "句と節",
+      "関係詞節",
+      "名詞節"
+    ],
+    "interactionType": [
+      "tree-view",
+      "collapse-expand"
+    ],
+    "feedbackType": [
+      "階層表示",
+      "構造説明"
+    ],
+    "learningIntents": [
+      "visualize-structure",
+      "visualize-relation"
+    ],
+    "bestFor": [
+      "inspecting-clause-hierarchy",
+      "tracing-nested-clauses"
+    ],
+    "notBestFor": [
+      "correcting-word-forms"
+    ],
+    "tags": [
+      "visualize-structure",
+      "visualize-relation",
+      "inspecting-clause-hierarchy",
+      "tracing-nested-clauses",
+      "correcting-word-forms"
+    ],
+    "relations": {
+      "problemIds": []
+    },
+    "searchText": "clause-hierarchy-viewer\nClause Hierarchy Viewer\nvisualize\n主節と従属節の階層を、入れ子構造として表示する。\n複雑な英文の中で、節がどの階層にあるかを理解する。\n節ノードと折りたたみ操作\nクリック / 展開\n節の階層と対応する英文\n英文は節が入れ子になった階層構造として組み立てられる。\n句と節\n関係詞節\n名詞節\ntree-view\ncollapse-expand\n階層表示\n構造説明\nvisualize-structure\nvisualize-relation\ninspecting-clause-hierarchy\ntracing-nested-clauses\ncorrecting-word-forms"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-029",
+    "slug": "tense-generator",
+    "title": "Tense Generator",
+    "category": "generate",
+    "description": "時制の条件から英文を生成し、動詞の形の変化を示す。",
+    "learningGoal": "時間の捉え方が、動詞の形や助動詞へ反映されることを理解する。",
+    "touchTarget": "時制・主語・動詞の条件",
+    "userAction": "選択 / 生成",
+    "changingElement": "動詞の形と助動詞",
+    "insight": "文の時間情報に応じて、動詞の形が体系的に変わる。",
+    "targetGrammar": [
+      "時制",
+      "現在形",
+      "過去形",
+      "進行形"
+    ],
+    "interactionType": [
+      "form-select",
+      "generation"
+    ],
+    "feedbackType": [
+      "生成結果",
+      "形の説明"
+    ],
+    "learningIntents": [
+      "generate-from-conditions",
+      "observe-state-change"
+    ],
+    "bestFor": [
+      "generating-tense-variants",
+      "connecting-time-to-form"
+    ],
+    "notBestFor": [
+      "open-ended-writing"
+    ],
+    "tags": [
+      "generate-from-conditions",
+      "observe-state-change",
+      "generating-tense-variants",
+      "connecting-time-to-form",
+      "open-ended-writing"
+    ],
+    "relations": {
+      "problemIds": []
+    },
+    "searchText": "tense-generator\nTense Generator\ngenerate\n時制の条件から英文を生成し、動詞の形の変化を示す。\n時間の捉え方が、動詞の形や助動詞へ反映されることを理解する。\n時制・主語・動詞の条件\n選択 / 生成\n動詞の形と助動詞\n文の時間情報に応じて、動詞の形が体系的に変わる。\n時制\n現在形\n過去形\n進行形\nform-select\ngeneration\n生成結果\n形の説明\ngenerate-from-conditions\nobserve-state-change\ngenerating-tense-variants\nconnecting-time-to-form\nopen-ended-writing"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-030",
+    "slug": "question-generator",
+    "title": "Question Generator",
+    "category": "generate",
+    "description": "答えたい情報の条件から、適切な疑問文を生成する。",
+    "learningGoal": "疑問文の種類と尋ねる対象の関係を、生成手順として理解する。",
+    "touchTarget": "疑問詞・時制・答えの条件",
+    "userAction": "選択 / 生成",
+    "changingElement": "疑問文の構造と語順",
+    "insight": "尋ねる対象によって、疑問詞と文の構造が決まる。",
+    "targetGrammar": [
+      "疑問文",
+      "疑問詞",
+      "助動詞"
+    ],
+    "interactionType": [
+      "form-select",
+      "generation"
+    ],
+    "feedbackType": [
+      "生成結果",
+      "構造説明"
+    ],
+    "learningIntents": [
+      "generate-from-conditions",
+      "observe-transformation"
+    ],
+    "bestFor": [
+      "generating-a-question-from-a-target",
+      "mapping-question-types"
+    ],
+    "notBestFor": [
+      "simulating-a-whole-conversation"
+    ],
+    "tags": [
+      "generate-from-conditions",
+      "observe-transformation",
+      "generating-a-question-from-a-target",
+      "mapping-question-types",
+      "simulating-a-whole-conversation"
+    ],
+    "relations": {
+      "problemIds": []
+    },
+    "searchText": "question-generator\nQuestion Generator\ngenerate\n答えたい情報の条件から、適切な疑問文を生成する。\n疑問文の種類と尋ねる対象の関係を、生成手順として理解する。\n疑問詞・時制・答えの条件\n選択 / 生成\n疑問文の構造と語順\n尋ねる対象によって、疑問詞と文の構造が決まる。\n疑問文\n疑問詞\n助動詞\nform-select\ngeneration\n生成結果\n構造説明\ngenerate-from-conditions\nobserve-transformation\ngenerating-a-question-from-a-target\nmapping-question-types\nsimulating-a-whole-conversation"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-031",
+    "slug": "conditional-generator",
+    "title": "Conditional Generator",
+    "category": "generate",
+    "description": "条件と結果の組み合わせから、仮定法の文を生成する。",
+    "learningGoal": "条件節と結果節の関係、時制の組み合わせを理解する。",
+    "touchTarget": "条件の種類と結果の条件",
+    "userAction": "選択 / 生成",
+    "changingElement": "条件節・結果節・時制",
+    "insight": "現実との距離や時間によって、条件文の形が変わる。",
+    "targetGrammar": [
+      "仮定法",
+      "条件文",
+      "時制"
+    ],
+    "interactionType": [
+      "state-selection",
+      "generation"
+    ],
+    "feedbackType": [
+      "生成結果",
+      "時制の説明"
+    ],
+    "learningIntents": [
+      "generate-from-conditions",
+      "connect-form-and-meaning"
+    ],
+    "bestFor": [
+      "building-condition-result-pairs",
+      "connecting-tense-to-condition"
+    ],
+    "notBestFor": [
+      "open-ended-argument-writing"
+    ],
+    "tags": [
+      "generate-from-conditions",
+      "connect-form-and-meaning",
+      "building-condition-result-pairs",
+      "connecting-tense-to-condition",
+      "open-ended-argument-writing"
+    ],
+    "relations": {
+      "problemIds": []
+    },
+    "searchText": "conditional-generator\nConditional Generator\ngenerate\n条件と結果の組み合わせから、仮定法の文を生成する。\n条件節と結果節の関係、時制の組み合わせを理解する。\n条件の種類と結果の条件\n選択 / 生成\n条件節・結果節・時制\n現実との距離や時間によって、条件文の形が変わる。\n仮定法\n条件文\n時制\nstate-selection\ngeneration\n生成結果\n時制の説明\ngenerate-from-conditions\nconnect-form-and-meaning\nbuilding-condition-result-pairs\nconnecting-tense-to-condition\nopen-ended-argument-writing"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-032",
+    "slug": "infinitive-vs-gerund-comparison",
+    "title": "Infinitive vs Gerund Comparison",
+    "category": "compare",
+    "description": "不定詞と動名詞を使う英文を並べ、意味の差を比較する。",
+    "learningGoal": "動詞の後ろの形が、行為の捉え方や意味へ与える影響を理解する。",
+    "touchTarget": "比較する英文と形の差分",
+    "userAction": "切り替え / 強調",
+    "changingElement": "動詞後の形と意味メモ",
+    "insight": "似た形でも、不定詞と動名詞で行為の捉え方が変わる。",
+    "targetGrammar": [
+      "不定詞",
+      "動名詞",
+      "動詞の語法"
+    ],
+    "interactionType": [
+      "side-by-side",
+      "diff-highlight"
+    ],
+    "feedbackType": [
+      "差分強調",
+      "意味比較"
+    ],
+    "learningIntents": [
+      "compare-form",
+      "compare-meaning"
+    ],
+    "bestFor": [
+      "comparing-verb-patterns",
+      "distinguishing-infinitive-and-gerund"
+    ],
+    "notBestFor": [
+      "full-sentence-construction"
+    ],
+    "tags": [
+      "compare-form",
+      "compare-meaning",
+      "comparing-verb-patterns",
+      "distinguishing-infinitive-and-gerund",
+      "full-sentence-construction"
+    ],
+    "relations": {
+      "problemIds": []
+    },
+    "searchText": "infinitive-vs-gerund-comparison\nInfinitive vs Gerund Comparison\ncompare\n不定詞と動名詞を使う英文を並べ、意味の差を比較する。\n動詞の後ろの形が、行為の捉え方や意味へ与える影響を理解する。\n比較する英文と形の差分\n切り替え / 強調\n動詞後の形と意味メモ\n似た形でも、不定詞と動名詞で行為の捉え方が変わる。\n不定詞\n動名詞\n動詞の語法\nside-by-side\ndiff-highlight\n差分強調\n意味比較\ncompare-form\ncompare-meaning\ncomparing-verb-patterns\ndistinguishing-infinitive-and-gerund\nfull-sentence-construction"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-033",
+    "slug": "active-vs-passive-comparison",
+    "title": "Active vs Passive Comparison",
+    "category": "compare",
+    "description": "能動態と受動態を並べ、視点と役割の差を比較する。",
+    "learningGoal": "同じ出来事を異なる主語から述べる効果を理解する。",
+    "touchTarget": "2つの英文と対応する語句",
+    "userAction": "切り替え / 対応付け",
+    "changingElement": "主語・目的語・動詞の形",
+    "insight": "態が変わると、文の焦点と語句の役割が入れ替わる。",
+    "targetGrammar": [
+      "受動態",
+      "文型",
+      "過去分詞"
+    ],
+    "interactionType": [
+      "side-by-side",
+      "role-mapping"
+    ],
+    "feedbackType": [
+      "差分強調",
+      "役割比較"
+    ],
+    "learningIntents": [
+      "compare-form",
+      "compare-meaning"
+    ],
+    "bestFor": [
+      "comparing-voice-choices",
+      "mapping-agent-and-patient"
+    ],
+    "notBestFor": [
+      "open-ended-style-editing"
+    ],
+    "tags": [
+      "compare-form",
+      "compare-meaning",
+      "comparing-voice-choices",
+      "mapping-agent-and-patient",
+      "open-ended-style-editing"
+    ],
+    "relations": {
+      "problemIds": []
+    },
+    "searchText": "active-vs-passive-comparison\nActive vs Passive Comparison\ncompare\n能動態と受動態を並べ、視点と役割の差を比較する。\n同じ出来事を異なる主語から述べる効果を理解する。\n2つの英文と対応する語句\n切り替え / 対応付け\n主語・目的語・動詞の形\n態が変わると、文の焦点と語句の役割が入れ替わる。\n受動態\n文型\n過去分詞\nside-by-side\nrole-mapping\n差分強調\n役割比較\ncompare-form\ncompare-meaning\ncomparing-voice-choices\nmapping-agent-and-patient\nopen-ended-style-editing"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-034",
+    "slug": "tense-comparison",
+    "title": "Tense Comparison",
+    "category": "compare",
+    "description": "同じ内容を異なる時制で並べ、時間の捉え方を比較する。",
+    "learningGoal": "時制の違いが時間関係と文の意味へ与える影響を理解する。",
+    "touchTarget": "時制の切り替えと差分箇所",
+    "userAction": "選択 / 比較",
+    "changingElement": "動詞の形と時間表現",
+    "insight": "時制は動詞の形だけでなく、出来事の時間関係を表す。",
+    "targetGrammar": [
+      "時制",
+      "現在完了",
+      "過去形"
+    ],
+    "interactionType": [
+      "side-by-side",
+      "timeline"
+    ],
+    "feedbackType": [
+      "時間軸",
+      "意味比較"
+    ],
+    "learningIntents": [
+      "compare-form",
+      "compare-meaning"
+    ],
+    "bestFor": [
+      "comparing-time-frames",
+      "connecting-tense-to-meaning"
+    ],
+    "notBestFor": [
+      "spontaneous-sentence-generation"
+    ],
+    "tags": [
+      "compare-form",
+      "compare-meaning",
+      "comparing-time-frames",
+      "connecting-tense-to-meaning",
+      "spontaneous-sentence-generation"
+    ],
+    "relations": {
+      "problemIds": []
+    },
+    "searchText": "tense-comparison\nTense Comparison\ncompare\n同じ内容を異なる時制で並べ、時間の捉え方を比較する。\n時制の違いが時間関係と文の意味へ与える影響を理解する。\n時制の切り替えと差分箇所\n選択 / 比較\n動詞の形と時間表現\n時制は動詞の形だけでなく、出来事の時間関係を表す。\n時制\n現在完了\n過去形\nside-by-side\ntimeline\n時間軸\n意味比較\ncompare-form\ncompare-meaning\ncomparing-time-frames\nconnecting-tense-to-meaning\nspontaneous-sentence-generation"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-035",
+    "slug": "agreement-fixer",
+    "title": "Agreement Fixer",
+    "category": "correct",
+    "description": "主語と動詞の一致の誤りを見つけ、正しい形へ直す。",
+    "learningGoal": "主語の数や人称が、動詞の形を決めることを理解する。",
+    "touchTarget": "誤りのある動詞と訂正候補",
+    "userAction": "選択 / 修正",
+    "changingElement": "動詞の形と一致ラベル",
+    "insight": "動詞は主語の人称と数に合わせて形を変える。",
+    "targetGrammar": [
+      "主語と動詞の一致",
+      "三単現",
+      "複数主語"
+    ],
+    "interactionType": [
+      "error-spotting",
+      "choice"
+    ],
+    "feedbackType": [
+      "正誤",
+      "修正理由"
+    ],
+    "learningIntents": [
+      "correct-form",
+      "diagnose-error"
+    ],
+    "bestFor": [
+      "diagnosing-subject-verb-agreement",
+      "correcting-inflection"
+    ],
+    "notBestFor": [
+      "free-form-proofreading"
+    ],
+    "tags": [
+      "correct-form",
+      "diagnose-error",
+      "diagnosing-subject-verb-agreement",
+      "correcting-inflection",
+      "free-form-proofreading"
+    ],
+    "relations": {
+      "problemIds": []
+    },
+    "searchText": "agreement-fixer\nAgreement Fixer\ncorrect\n主語と動詞の一致の誤りを見つけ、正しい形へ直す。\n主語の数や人称が、動詞の形を決めることを理解する。\n誤りのある動詞と訂正候補\n選択 / 修正\n動詞の形と一致ラベル\n動詞は主語の人称と数に合わせて形を変える。\n主語と動詞の一致\n三単現\n複数主語\nerror-spotting\nchoice\n正誤\n修正理由\ncorrect-form\ndiagnose-error\ndiagnosing-subject-verb-agreement\ncorrecting-inflection\nfree-form-proofreading"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-036",
+    "slug": "tense-error-finder",
+    "title": "Tense Error Finder",
+    "category": "correct",
+    "description": "文脈に合わない時制を見つけ、動詞の形を修正する。",
+    "learningGoal": "時間を表す語と動詞の時制を対応づけて考える。",
+    "touchTarget": "時間表現と動詞の形",
+    "userAction": "選択 / 修正",
+    "changingElement": "誤りの箇所と時間関係",
+    "insight": "文脈の時間情報と動詞の時制は対応している。",
+    "targetGrammar": [
+      "時制",
+      "時間表現",
+      "現在完了"
+    ],
+    "interactionType": [
+      "error-spotting",
+      "sentence-correction"
+    ],
+    "feedbackType": [
+      "正誤",
+      "時間軸ヒント"
+    ],
+    "learningIntents": [
+      "correct-form",
+      "diagnose-error",
+      "connect-form-and-meaning"
+    ],
+    "bestFor": [
+      "diagnosing-tense-mismatch",
+      "aligning-time-cues-and-form"
+    ],
+    "notBestFor": [
+      "stylistic-editing"
+    ],
+    "tags": [
+      "correct-form",
+      "diagnose-error",
+      "connect-form-and-meaning",
+      "diagnosing-tense-mismatch",
+      "aligning-time-cues-and-form",
+      "stylistic-editing"
+    ],
+    "relations": {
+      "problemIds": []
+    },
+    "searchText": "tense-error-finder\nTense Error Finder\ncorrect\n文脈に合わない時制を見つけ、動詞の形を修正する。\n時間を表す語と動詞の時制を対応づけて考える。\n時間表現と動詞の形\n選択 / 修正\n誤りの箇所と時間関係\n文脈の時間情報と動詞の時制は対応している。\n時制\n時間表現\n現在完了\nerror-spotting\nsentence-correction\n正誤\n時間軸ヒント\ncorrect-form\ndiagnose-error\nconnect-form-and-meaning\ndiagnosing-tense-mismatch\naligning-time-cues-and-form\nstylistic-editing"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-037",
+    "slug": "word-order-error-fixer",
+    "title": "Word Order Error Fixer",
+    "category": "correct",
+    "description": "語順の誤りを見つけ、英文の骨格に沿って修正する。",
+    "learningGoal": "語順の誤りを、単語の暗記ではなく文型から説明する。",
+    "touchTarget": "誤った語順と移動対象",
+    "userAction": "タップ / 並べ替え",
+    "changingElement": "語句の位置と文型ラベル",
+    "insight": "英文の語順には、語句の役割に基づく基本的な制約がある。",
+    "targetGrammar": [
+      "語順",
+      "文型",
+      "修飾語"
+    ],
+    "interactionType": [
+      "error-spotting",
+      "sequence"
+    ],
+    "feedbackType": [
+      "正誤",
+      "語順ヒント"
+    ],
+    "learningIntents": [
+      "correct-form",
+      "diagnose-error",
+      "practice-word-order"
+    ],
+    "bestFor": [
+      "diagnosing-order-errors",
+      "reconstructing-sentence-order"
+    ],
+    "notBestFor": [
+      "meaning-only-comparison"
+    ],
+    "tags": [
+      "correct-form",
+      "diagnose-error",
+      "practice-word-order",
+      "diagnosing-order-errors",
+      "reconstructing-sentence-order",
+      "meaning-only-comparison"
+    ],
+    "relations": {
+      "problemIds": []
+    },
+    "searchText": "word-order-error-fixer\nWord Order Error Fixer\ncorrect\n語順の誤りを見つけ、英文の骨格に沿って修正する。\n語順の誤りを、単語の暗記ではなく文型から説明する。\n誤った語順と移動対象\nタップ / 並べ替え\n語句の位置と文型ラベル\n英文の語順には、語句の役割に基づく基本的な制約がある。\n語順\n文型\n修飾語\nerror-spotting\nsequence\n正誤\n語順ヒント\ncorrect-form\ndiagnose-error\npractice-word-order\ndiagnosing-order-errors\nreconstructing-sentence-order\nmeaning-only-comparison"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-038",
+    "slug": "request-simulator",
+    "title": "Request Simulator",
+    "category": "simulate",
+    "description": "場面に応じた依頼表現を選び、会話の流れを進める。",
+    "learningGoal": "相手との関係や目的に応じて、依頼の形を選ぶ。",
+    "touchTarget": "場面情報と依頼表現の選択肢",
+    "userAction": "選択 / 返答",
+    "changingElement": "会話の返答と丁寧さ",
+    "insight": "文法形式は、場面と相手への配慮を表す。",
+    "targetGrammar": [
+      "助動詞",
+      "依頼表現",
+      "丁寧表現"
+    ],
+    "interactionType": [
+      "scenario",
+      "choice"
+    ],
+    "feedbackType": [
+      "会話結果",
+      "場面別ヒント"
+    ],
+    "learningIntents": [
+      "choose-in-context",
+      "match-form-to-purpose",
+      "connect-context-and-form"
+    ],
+    "bestFor": [
+      "choosing-a-polite-request",
+      "matching-register-to-situation"
+    ],
+    "notBestFor": [
+      "isolated-conjugation"
+    ],
+    "tags": [
+      "choose-in-context",
+      "match-form-to-purpose",
+      "connect-context-and-form",
+      "choosing-a-polite-request",
+      "matching-register-to-situation",
+      "isolated-conjugation"
+    ],
+    "relations": {
+      "problemIds": []
+    },
+    "searchText": "request-simulator\nRequest Simulator\nsimulate\n場面に応じた依頼表現を選び、会話の流れを進める。\n相手との関係や目的に応じて、依頼の形を選ぶ。\n場面情報と依頼表現の選択肢\n選択 / 返答\n会話の返答と丁寧さ\n文法形式は、場面と相手への配慮を表す。\n助動詞\n依頼表現\n丁寧表現\nscenario\nchoice\n会話結果\n場面別ヒント\nchoose-in-context\nmatch-form-to-purpose\nconnect-context-and-form\nchoosing-a-polite-request\nmatching-register-to-situation\nisolated-conjugation"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-039",
+    "slug": "travel-conversation-grammar",
+    "title": "Travel Conversation Grammar",
+    "category": "simulate",
+    "description": "旅行場面の会話で、時制や依頼表現を使い分ける。",
+    "learningGoal": "旅行中の目的に合う文法表現を、会話の選択として使う。",
+    "touchTarget": "会話の文脈と返答候補",
+    "userAction": "選択 / 会話",
+    "changingElement": "会話の進行と適切な返答",
+    "insight": "文法の選択は、場面で達成したい目的に結びついている。",
+    "targetGrammar": [
+      "時制",
+      "依頼表現",
+      "助動詞"
+    ],
+    "interactionType": [
+      "scenario",
+      "branching-choice"
+    ],
+    "feedbackType": [
+      "会話結果",
+      "文法メモ"
+    ],
+    "learningIntents": [
+      "choose-in-context",
+      "match-form-to-purpose",
+      "connect-context-and-form"
+    ],
+    "bestFor": [
+      "practicing-travel-dialogue",
+      "choosing-a-purpose-fit-response"
+    ],
+    "notBestFor": [
+      "sentence-diagramming"
+    ],
+    "tags": [
+      "choose-in-context",
+      "match-form-to-purpose",
+      "connect-context-and-form",
+      "practicing-travel-dialogue",
+      "choosing-a-purpose-fit-response",
+      "sentence-diagramming"
+    ],
+    "relations": {
+      "problemIds": []
+    },
+    "searchText": "travel-conversation-grammar\nTravel Conversation Grammar\nsimulate\n旅行場面の会話で、時制や依頼表現を使い分ける。\n旅行中の目的に合う文法表現を、会話の選択として使う。\n会話の文脈と返答候補\n選択 / 会話\n会話の進行と適切な返答\n文法の選択は、場面で達成したい目的に結びついている。\n時制\n依頼表現\n助動詞\nscenario\nbranching-choice\n会話結果\n文法メモ\nchoose-in-context\nmatch-form-to-purpose\nconnect-context-and-form\npracticing-travel-dialogue\nchoosing-a-purpose-fit-response\nsentence-diagramming"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-040",
+    "slug": "situation-tense-choice",
+    "title": "Situation Tense Choice",
+    "category": "simulate",
+    "description": "状況と時間の手がかりから、適切な時制を選ぶ。",
+    "learningGoal": "文脈の時間情報を読み取り、時制の選択へ結びつける。",
+    "touchTarget": "状況文・時間の手がかり・時制候補",
+    "userAction": "選択 / 確認",
+    "changingElement": "選択した時制と場面の結果",
+    "insight": "時制は文だけで決めず、出来事の時間関係から選ぶ。",
+    "targetGrammar": [
+      "時制",
+      "現在完了",
+      "過去形"
+    ],
+    "interactionType": [
+      "scenario",
+      "tense-choice"
+    ],
+    "feedbackType": [
+      "正誤",
+      "時間関係の説明"
+    ],
+    "learningIntents": [
+      "choose-in-context",
+      "match-form-to-purpose",
+      "connect-context-and-form"
+    ],
+    "bestFor": [
+      "selecting-tense-from-time-cues",
+      "aligning-context-and-tense"
+    ],
+    "notBestFor": [
+      "generating-all-tense-forms"
+    ],
+    "tags": [
+      "choose-in-context",
+      "match-form-to-purpose",
+      "connect-context-and-form",
+      "selecting-tense-from-time-cues",
+      "aligning-context-and-tense",
+      "generating-all-tense-forms"
+    ],
+    "relations": {
+      "problemIds": []
+    },
+    "searchText": "situation-tense-choice\nSituation Tense Choice\nsimulate\n状況と時間の手がかりから、適切な時制を選ぶ。\n文脈の時間情報を読み取り、時制の選択へ結びつける。\n状況文・時間の手がかり・時制候補\n選択 / 確認\n選択した時制と場面の結果\n時制は文だけで決めず、出来事の時間関係から選ぶ。\n時制\n現在完了\n過去形\nscenario\ntense-choice\n正誤\n時間関係の説明\nchoose-in-context\nmatch-form-to-purpose\nconnect-context-and-form\nselecting-tense-from-time-cues\naligning-context-and-tense\ngenerating-all-tense-forms"
+  }
+]

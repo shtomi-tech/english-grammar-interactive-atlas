@@ -7,6 +7,9 @@ const files = [
   'src/app.js',
   'src/data/interactions.js',
   'src/data/interaction-schema.js',
+  'src/data/ai/schema.js',
+  'src/data/ai/interaction-retrieval.js',
+  'src/data/ai/index.js',
   'src/data/interactions-additional.js',
   'src/data/demo-problems.js',
   'src/data/problems/word-order.js',
@@ -32,6 +35,8 @@ const files = [
   'src/lib/validateProblems.js',
   'src/lib/validateLessons.js',
   'src/lib/validateResearch.js',
+  'src/lib/ai/retrieval-index.js',
+  'src/lib/validateAiRetrieval.js',
   'src/lib/dom.js',
   'src/lib/grammar/word-order.js',
   'src/lib/grammar/parts.js',
@@ -86,6 +91,9 @@ const { validateDemoRegistry, validateProblems } = await import('../src/lib/vali
 const { validateLessons } = await import('../src/lib/validateLessons.js');
 const { researchReferences, researchReferenceRegistry } = await import('../src/data/research/index.js');
 const { validateResearchReferences, validateResearchRegistry } = await import('../src/lib/validateResearch.js');
+const { interactionRetrievalMetadata } = await import('../src/data/ai/index.js');
+const { createAiRetrievalIndex } = await import('../src/lib/ai/retrieval-index.js');
+const { validateAiRetrieval } = await import('../src/lib/validateAiRetrieval.js');
 const validation = validateInteractions(interactions, { registryKeys: Object.keys(demoRegistry) });
 if (!validation.valid) throw new Error(`Interaction validation failed: ${validation.errors.join('; ')}`);
 console.log(`Interaction validation passed for ${interactions.length} entries.`);
@@ -112,3 +120,17 @@ const lessonValidation = validateLessons(lessons, {
 });
 if (!lessonValidation.valid) throw new Error(`Lesson validation failed: ${lessonValidation.errors.join('; ')}`);
 console.log(`Lesson validation passed for ${lessons.length} lessons.`);
+const aiRetrievalIndex = createAiRetrievalIndex({
+  interactions,
+  problems,
+  lessons,
+  interactionRetrievalMetadata,
+});
+const aiRetrievalValidation = validateAiRetrieval(aiRetrievalIndex, {
+  interactions,
+  problems,
+  lessons,
+  interactionRetrievalMetadata,
+});
+if (!aiRetrievalValidation.valid) throw new Error(`AI retrieval validation failed: ${aiRetrievalValidation.errors.join('; ')}`);
+console.log(`AI retrieval validation passed for ${interactions.length} interactions, ${problems.length} problems, ${lessons.length} lessons, ${aiRetrievalIndex.documents.length} documents.`);

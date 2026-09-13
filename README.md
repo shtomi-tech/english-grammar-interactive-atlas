@@ -32,6 +32,7 @@ npm start
 - `src/data/interactions.js`: 図鑑データと `InteractionEntry` のJSDoc定義
 - `src/data/interaction-schema.js`: カテゴリ、ランク、再利用性、出典メタデータの定義
 - `src/data/interactions-additional.js`: GRAM-INT-011〜040のカタログ項目
+- `src/data/ai/`: AI検索用controlled vocabularyとInteraction Retrieval Metadata
 - `src/data/problems/`: Interaction Typeごとの教材Problem Data
 - `src/data/problems/index.js`: Problem RegistryとID検索
 - `src/data/lessons.js`: Lesson Data Model、Lesson Registry、Lesson一覧
@@ -41,6 +42,8 @@ npm start
 - `src/lib/grammar/`: 正誤判定、分類判定、文型図生成、修飾関係検索、修飾語配置、比較・訂正判定、場面文法判定、生成目標判定、時制・助動詞・能動態/受動態を含む文法状態からの英文生成、文法状態・control label契約
 - `src/lib/validateInteractions.js`: 図鑑データと出典メタデータの整合性検証
 - `src/lib/validateProblems.js`, `src/lib/validateLessons.js`: Problem/Lessonの整合性検証
+- `src/lib/ai/retrieval-index.js`: Canonical DataからAI Retrieval Indexを生成するpure function
+- `src/lib/validateAiRetrieval.js`: Retrieval Metadata、relations、統合documentの整合性検証
 - `src/lib/validateResearch.js`: Research ReferenceとInteractionの参照整合性検証
 - `tests/logic.test.js`: カタログ、Registry、Problem/Lesson、正誤判定・分類・英文生成のテスト
 - `docs/ADDING_INTERACTION.md`: 新しい図鑑項目とDemoの追加手順
@@ -66,5 +69,9 @@ Phase 1の基盤とPhase 2AのGrammar Classifierをもとに、Phase 2Bで40件�
 Lesson 01「文の骨格を見抜く」、Lesson 02「英文の構造を読む」、Lesson 03「助動詞を形と場面から使う」、Lesson 04「能動態と受動態で視点を変える」、Lesson 05「不定詞を形・役割・目的から使う」、Lesson 06「動名詞を名詞の働きと動詞との組み合わせから使う」はCatalogのGuided lessonsから開けます。LessonはProblem IDで問題を参照し、同じComponentへ別のProblem Dataを渡せます。助動詞と受動態のTransformerでは、Problem Dataに定めた値を実際に見比べるまでLessonを先へ進めない探索完了条件も使えます。全LessonのStepはComponentのcorrect completionまでNextをロックし、完了済みStep数をin-memoryで進捗表示します。ProblemとLessonの検証は `npm run check` に含まれます。助動詞の対応範囲は [docs/MODAL_SUPPORT.md](./docs/MODAL_SUPPORT.md)、受動態の対応範囲は [docs/PASSIVE_SUPPORT.md](./docs/PASSIVE_SUPPORT.md)、文法状態の共通契約は [docs/GRAMMAR_STATE_CONTRACT.md](./docs/GRAMMAR_STATE_CONTRACT.md) に記録しています。
 
 画面は、スマートフォンのタップ操作とキーボード操作で利用できるようにしています。BackendやDBはまだ導入していません。外部Repositoryやサイトのコード・教材を推測で取り込まず、未調査の出典は明示的に未調査として扱います。
+
+## AI Retrieval Index
+
+Phase 7Aでは、既存のInteraction・Problem・LessonをAIが学習目的から検索・再利用できるよう、Canonical Dataから決定的なRetrieval Indexをbuildで生成します。Interactionごとの不足する意味情報だけをRetrieval Metadataとして補い、Problem / Lessonの関係とProblemの検索本文はデータから自動導出します。生成物は [dist/ai/catalog.json](./dist/ai/catalog.json) と、用途別の `interactions.json`、`problems.json`、`lessons.json` です。現在のIndexは40 interactions、53 problems、6 lessons、99 unified documentsで、`npm run check` のAI retrieval validationでも検証します。詳細は [docs/AI_RETRIEVAL.md](./docs/AI_RETRIEVAL.md) を参照してください。
 
 外部調査の採用基準とライセンス境界は [docs/RESEARCH_METHOD.md](./docs/RESEARCH_METHOD.md) にまとめています。Research Referenceは比較のための記録であり、外部コードや教材の取り込みを意味しません。
