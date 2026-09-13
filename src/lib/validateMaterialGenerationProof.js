@@ -11,6 +11,8 @@ import { validateLessonGeneration } from './validateLessonGeneration.js';
 import { validateMaterialPlan } from './validateMaterialPlan.js';
 import { validateProblemGeneration } from './validateProblemGeneration.js';
 import { sameLocator } from './validateProblemGeneration.js';
+import { extractMarkdownSections, normalizeGrammarReference } from './ai/grammar-reference.js';
+import { validateGrammarReference } from './validateGrammarReference.js';
 
 function isObject(value) {
   return Boolean(value) && typeof value === 'object' && !Array.isArray(value);
@@ -18,6 +20,63 @@ function isObject(value) {
 
 function addErrors(errors, prefix, result) {
   if (!result.valid) errors.push(`${prefix}: ${result.errors.join('; ')}`);
+}
+
+export function validateGrammarReferenceTraceability(grammarReference, learningRequirements) {
+  const errors = [];
+  const grammarValidation = validateGrammarReference(grammarReference);
+  addErrors(errors, 'grammarReference', grammarValidation);
+  if (!isObject(grammarReference) || !isObject(learningRequirements)) {
+    if (!isObject(learningRequirements)) errors.push('learningRequirements must be an object');
+    return { valid: errors.length === 0, errors };
+  }
+  const normalizedReference = normalizeGrammarReference(grammarReference);
+  const sourceId = normalizedReference.sourceId;
+  const sourceReferences = learningRequirements.sourceReferences ?? [];
+  if (!sourceReferences.some((reference) => reference?.id === sourceId)) {
+    errors.push('Learning Requirements must reference grammarReference.sourceId');
+  }
+  const markdownSections = normalizedReference.format === 'markdown'
+    ? extractMarkdownSections(normalizedReference.content)
+    : [];
+  if (!Array.isArray(learningRequirements.learningPoints) || learningRequirements.learningPoints.length === 0) {
+    errors.push('learningRequirements.learningPoints must be a non-empty array');
+    return { valid: errors.length === 0, errors };
+  }
+  learningRequirements.learningPoints.forEach((point, pointIndex) => {
+    if (!Array.isArray(point?.sourceEvidence) || point.sourceEvidence.length === 0) {
+      errors.push(`learningPoints[${pointIndex}].sourceEvidence must be a non-empty array`);
+      return;
+    }
+    point.sourceEvidence.forEach((evidence, evidenceIndex) => {
+      const path = `learningPoints[${pointIndex}].sourceEvidence[${evidenceIndex}]`;
+      if (!isObject(evidence)) {
+        errors.push(`${path} must be an object`);
+        return;
+      }
+      if (evidence.sourceId !== sourceId) errors.push(`${path}.sourceId does not match grammarReference.sourceId`);
+      const locator = evidence.locator;
+      if (!isObject(locator)) {
+        errors.push(`${path}.locator must be an object`);
+        return;
+      }
+      if (typeof locator.quote === 'string' && locator.quote.trim() !== '') {
+        if (!normalizedReference.content.includes(locator.quote)) {
+          errors.push(`${path}.locator.quote does not occur in grammarReference.content`);
+        }
+      }
+      if (typeof locator.section === 'string' && locator.section.trim() !== '') {
+        const sectionExists = normalizedReference.format === 'markdown'
+          ? markdownSections.some((section) => section.heading === locator.section.trim())
+          : normalizedReference.content.includes(locator.section.trim());
+        if (!sectionExists) errors.push(`${path}.locator.section does not reference grammarReference content`);
+      }
+      if (!locator.quote && !locator.section) {
+        errors.push(`${path}.locator must contain quote or section for text/markdown traceability`);
+      }
+    });
+  });
+  return { valid: errors.length === 0, errors };
 }
 
 export function validateSyntheticSourceTraceability(grammarReference, learningRequirements) {

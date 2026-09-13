@@ -79,6 +79,10 @@ import {
   problemGenerationContexts,
   problemGenerationFixtures,
   e2eMaterialGenerationFixture,
+  comparisonLearningRequirements as aiComparisonLearningRequirements,
+  createFixtureLearningRequirementsAdapter,
+  markdownGrammarReference,
+  plainTextGrammarReference,
   retrievalBenchmarks,
   validateRetrievalQuery,
 } from '../src/data/ai/index.js';
@@ -87,6 +91,7 @@ import { evaluateRetrievalBenchmarks } from '../src/lib/ai/retrieval-evaluation.
 import { searchRetrievalIndex } from '../src/lib/ai/retrieval-search.js';
 import {
   captureRetrievalSelection,
+  createMaterialPlan,
   createInteractionQueryForLearningPoint,
   hasProblemContentMatch,
   validateOutcomeRetrievalProfiles,
@@ -106,6 +111,17 @@ import { validateLessonGeneration } from '../src/lib/validateLessonGeneration.js
 import { runMaterialGenerationProof } from '../src/lib/ai/material-generation-proof.js';
 import { validateMaterialGenerationProof, validateSyntheticSourceTraceability } from '../src/lib/validateMaterialGenerationProof.js';
 import { createRuntimePreviewModel } from '../src/lib/ai/runtime-preview.js';
+import {
+  createLearningRequirementsExtractionRequest,
+  runLearningRequirementsExtraction,
+} from '../src/lib/ai/learning-requirements-extraction.js';
+import {
+  extractMarkdownSections,
+  grammarReferenceLimits,
+  normalizeGrammarReference,
+} from '../src/lib/ai/grammar-reference.js';
+import { validateGrammarReference } from '../src/lib/validateGrammarReference.js';
+import { validateGrammarReferenceTraceability } from '../src/lib/validateMaterialGenerationProof.js';
 
 assert.equal(interactions.length, 40);
 assert.deepEqual(
@@ -997,6 +1013,122 @@ assert.throws(() => createRuntimePreviewModel(runtimeSummaryMismatchProof, {
   canonicalLessons: lessons,
   problemTypes: new Set(Object.keys(demoRegistry)),
 }), /Material Plan summary/);
+
+assert.equal(validateGrammarReference(plainTextGrammarReference).valid, true);
+assert.equal(validateGrammarReference(markdownGrammarReference).valid, true);
+const emptyGrammarReference = structuredClone(plainTextGrammarReference);
+emptyGrammarReference.content = ' \r\n ';
+assert.equal(validateGrammarReference(emptyGrammarReference).valid, false);
+const unknownGrammarFormat = structuredClone(plainTextGrammarReference);
+unknownGrammarFormat.format = 'pdf';
+assert.equal(validateGrammarReference(unknownGrammarFormat).valid, false);
+const unknownGrammarField = structuredClone(plainTextGrammarReference);
+unknownGrammarField.owner = 'unexpected';
+assert.equal(validateGrammarReference(unknownGrammarField).valid, false);
+const oversizedGrammarReference = structuredClone(plainTextGrammarReference);
+oversizedGrammarReference.content = 'x'.repeat(grammarReferenceLimits.maxCharacters + 1);
+assert.equal(validateGrammarReference(oversizedGrammarReference).valid, false);
+const unnormalizedGrammarReference = structuredClone(markdownGrammarReference);
+unnormalizedGrammarReference.content = `\r\n${unnormalizedGrammarReference.content}\r\n`;
+const unnormalizedBefore = structuredClone(unnormalizedGrammarReference);
+const normalizedGrammarReference = normalizeGrammarReference(unnormalizedGrammarReference);
+assert.equal(normalizedGrammarReference.content, markdownGrammarReference.content);
+assert.deepEqual(unnormalizedGrammarReference, unnormalizedBefore);
+assert.deepEqual(normalizedGrammarReference, normalizeGrammarReference(unnormalizedGrammarReference));
+assert.deepEqual(extractMarkdownSections(markdownGrammarReference.content).map((section) => section.heading), ['同程度', '比較級']);
+assert.deepEqual(extractMarkdownSections(markdownGrammarReference.content), extractMarkdownSections(markdownGrammarReference.content));
+
+const extractionInputBefore = structuredClone(unnormalizedGrammarReference);
+const requirementsInputBefore = structuredClone(aiComparisonLearningRequirements);
+const extractionRequest = createLearningRequirementsExtractionRequest({
+  grammarReference: unnormalizedGrammarReference,
+  constraints: { maxLearningPoints: 2 },
+});
+assert.deepEqual(extractionRequest, createLearningRequirementsExtractionRequest({
+  grammarReference: unnormalizedGrammarReference,
+  constraints: { maxLearningPoints: 2 },
+}));
+assert.deepEqual(extractionRequest.outputContract, {
+  name: 'learning-requirements',
+  version: learningRequirementsContract.version,
+});
+assert.equal(extractionRequest.grammarReference.content, markdownGrammarReference.content);
+assert.deepEqual(unnormalizedGrammarReference, extractionInputBefore);
+const validExtraction = await runLearningRequirementsExtraction({
+  grammarReference: unnormalizedGrammarReference,
+  adapter: createFixtureLearningRequirementsAdapter(),
+});
+assert.equal(validExtraction.valid, true, validExtraction.errors.join('; '));
+assert.deepEqual(validExtraction.learningRequirements, aiComparisonLearningRequirements);
+assert.deepEqual(aiComparisonLearningRequirements, requirementsInputBefore);
+assert.deepEqual(validExtraction, await runLearningRequirementsExtraction({
+  grammarReference: unnormalizedGrammarReference,
+  adapter: createFixtureLearningRequirementsAdapter(),
+}));
+const extractedMaterialPlan = createMaterialPlan({
+  learningRequirements: validExtraction.learningRequirements,
+  retrievalIndex: aiRetrievalIndex,
+  id: 'MATPLAN-AI-001',
+});
+assert.equal(validateMaterialPlan(extractedMaterialPlan, {
+  learningRequirements: validExtraction.learningRequirements,
+  retrievalIndex: aiRetrievalIndex,
+}).valid, true);
+
+const validTraceability = validateGrammarReferenceTraceability(
+  markdownGrammarReference,
+  aiComparisonLearningRequirements,
+);
+assert.equal(validTraceability.valid, true, validTraceability.errors.join('; '));
+const missingQuoteReference = structuredClone(aiComparisonLearningRequirements);
+missingQuoteReference.learningPoints[1].sourceEvidence[0].locator.quote = 'not in the source';
+assert.equal(validateGrammarReferenceTraceability(markdownGrammarReference, missingQuoteReference).valid, false);
+const missingSectionReference = structuredClone(aiComparisonLearningRequirements);
+missingSectionReference.learningPoints[0].sourceEvidence[0].locator.section = 'Missing heading';
+assert.equal(validateGrammarReferenceTraceability(markdownGrammarReference, missingSectionReference).valid, false);
+const mismatchedSourceReference = structuredClone(aiComparisonLearningRequirements);
+mismatchedSourceReference.learningPoints[0].sourceEvidence[0].sourceId = 'SOURCE-OTHER';
+assert.equal(validateGrammarReferenceTraceability(markdownGrammarReference, mismatchedSourceReference).valid, false);
+
+const invalidExtraction = await runLearningRequirementsExtraction({
+  grammarReference: markdownGrammarReference,
+  adapter: {
+    async extractLearningRequirements() {
+      const output = structuredClone(aiComparisonLearningRequirements);
+      output.learningPoints[0].desiredOutcomes = ['unknown-outcome'];
+      return output;
+    },
+  },
+});
+assert.equal(invalidExtraction.valid, false);
+assert.equal(invalidExtraction.learningRequirements, null);
+assert.match(invalidExtraction.errors.join('; '), /unknown outcome/);
+const missingEvidenceExtraction = await runLearningRequirementsExtraction({
+  grammarReference: markdownGrammarReference,
+  adapter: {
+    async extractLearningRequirements() {
+      const output = structuredClone(aiComparisonLearningRequirements);
+      delete output.learningPoints[0].sourceEvidence;
+      return output;
+    },
+  },
+});
+assert.equal(missingEvidenceExtraction.valid, false);
+assert.match(missingEvidenceExtraction.errors.join('; '), /sourceEvidence/);
+const nullExtraction = await runLearningRequirementsExtraction({
+  grammarReference: markdownGrammarReference,
+  adapter: { async extractLearningRequirements() { return null; } },
+});
+assert.equal(nullExtraction.valid, false);
+const throwingExtraction = await runLearningRequirementsExtraction({
+  grammarReference: markdownGrammarReference,
+  adapter: { async extractLearningRequirements() { throw new Error('fixture adapter failed'); } },
+});
+assert.equal(throwingExtraction.valid, false);
+assert.match(throwingExtraction.errors.join('; '), /fixture adapter failed/);
+const missingAdapterExtraction = await runLearningRequirementsExtraction({ grammarReference: markdownGrammarReference });
+assert.equal(missingAdapterExtraction.valid, false);
+assert.match(missingAdapterExtraction.errors.join('; '), /adapter/);
 
 function assertInvalidE2eProof(name, mutate) {
   const invalidInput = {

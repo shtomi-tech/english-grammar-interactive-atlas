@@ -99,6 +99,7 @@ function validateLocator(locator, path, errors) {
   ['section', 'heading'].forEach((field) => {
     if (locator[field] !== undefined) requireNonEmptyString(locator[field], `${path}.${field}`, errors);
   });
+  if (locator.quote !== undefined) requireNonEmptyString(locator.quote, `${path}.quote`, errors);
 }
 
 function validateSourceEvidence(sourceEvidence, sourceIds, path, errors) {

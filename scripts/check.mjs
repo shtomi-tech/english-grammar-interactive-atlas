@@ -24,6 +24,7 @@ const files = [
   'src/data/ai/lesson-generation-fixtures.js',
   'src/data/ai/lesson-generation-contract.js',
   'src/data/ai/e2e-material-generation-fixture.js',
+  'src/data/ai/learning-requirements-adapter-fixtures.js',
   'src/data/interactions-additional.js',
   'src/data/demo-problems.js',
   'src/data/problems/word-order.js',
@@ -57,12 +58,15 @@ const files = [
   'src/lib/ai/lesson-generation.js',
   'src/lib/ai/material-generation-proof.js',
   'src/lib/ai/runtime-preview.js',
+  'src/lib/ai/grammar-reference.js',
+  'src/lib/ai/learning-requirements-extraction.js',
   'src/lib/validateAiRetrieval.js',
   'src/lib/validateLearningRequirements.js',
   'src/lib/validateMaterialPlan.js',
   'src/lib/validateProblemGeneration.js',
   'src/lib/validateLessonGeneration.js',
   'src/lib/validateMaterialGenerationProof.js',
+  'src/lib/validateGrammarReference.js',
   'src/lib/dom.js',
   'src/lib/grammar/word-order.js',
   'src/lib/grammar/parts.js',
@@ -128,11 +132,19 @@ const {
   lessonGenerationFixtures,
   lessonGenerationContexts,
   e2eMaterialGenerationFixture,
+  comparisonLearningRequirements,
+  createFixtureLearningRequirementsAdapter,
+  markdownGrammarReference,
+  plainTextGrammarReference,
+  plainTextLearningRequirements,
 } = await import('../src/data/ai/index.js');
 const { createAiRetrievalIndex } = await import('../src/lib/ai/retrieval-index.js');
 const { evaluateRetrievalBenchmarks } = await import('../src/lib/ai/retrieval-evaluation.js');
 const { validateAiRetrieval } = await import('../src/lib/validateAiRetrieval.js');
 const { validateLearningRequirements } = await import('../src/lib/validateLearningRequirements.js');
+const { validateGrammarReference } = await import('../src/lib/validateGrammarReference.js');
+const { runLearningRequirementsExtraction } = await import('../src/lib/ai/learning-requirements-extraction.js');
+const { createMaterialPlan } = await import('../src/lib/ai/material-planning.js');
 const { validateMaterialPlan } = await import('../src/lib/validateMaterialPlan.js');
 const { validateProblemGeneration } = await import('../src/lib/validateProblemGeneration.js');
 const { validateLessonGeneration } = await import('../src/lib/validateLessonGeneration.js');
@@ -186,6 +198,38 @@ if (learningRequirementsValidation.some((result) => !result.valid)) {
   throw new Error(`Learning Requirements validation failed: ${learningRequirementsValidation.flatMap((result) => result.errors).join('; ')}`);
 }
 console.log(`Learning Requirements validation passed for ${learningRequirementsFixtures.length} fixtures.`);
+const grammarReferenceFixtures = [plainTextGrammarReference, markdownGrammarReference];
+grammarReferenceFixtures.forEach((fixture) => {
+  const result = validateGrammarReference(fixture);
+  if (!result.valid) throw new Error(`Grammar Reference validation failed: ${result.errors.join('; ')}`);
+});
+console.log(`Grammar Reference validation passed for ${grammarReferenceFixtures.length} fixtures.`);
+const extractionFixtures = [
+  [plainTextGrammarReference, plainTextLearningRequirements],
+  [markdownGrammarReference, comparisonLearningRequirements],
+];
+const extractionResults = await Promise.all(extractionFixtures.map(([grammarReference, learningRequirements]) => (
+  runLearningRequirementsExtraction({
+    grammarReference,
+    adapter: createFixtureLearningRequirementsAdapter(learningRequirements),
+  })
+)));
+if (extractionResults.some((result) => !result.valid)) {
+  throw new Error(`Learning Requirements extraction validation failed: ${extractionResults.flatMap((result) => result.errors).join('; ')}`);
+}
+console.log(`Learning Requirements extraction adapter validation passed for ${extractionResults.length} fixtures.`);
+const extractedSmokePlan = createMaterialPlan({
+  learningRequirements: extractionResults[1].learningRequirements,
+  retrievalIndex: aiRetrievalIndex,
+  id: 'MATPLAN-AI-CHECK-001',
+});
+const extractedSmokePlanValidation = validateMaterialPlan(extractedSmokePlan, {
+  learningRequirements: extractionResults[1].learningRequirements,
+  retrievalIndex: aiRetrievalIndex,
+});
+if (!extractedSmokePlanValidation.valid) {
+  throw new Error(`Extracted Learning Requirements Material Plan validation failed: ${extractedSmokePlanValidation.errors.join('; ')}`);
+}
 const outcomeProfilesValidation = validateOutcomeRetrievalProfiles(outcomeRetrievalProfiles);
 if (!outcomeProfilesValidation.valid) throw new Error(`Outcome retrieval profiles validation failed: ${outcomeProfilesValidation.errors.join('; ')}`);
 console.log(`Outcome retrieval profiles validation passed for ${Object.keys(outcomeRetrievalProfiles).length} outcomes.`);

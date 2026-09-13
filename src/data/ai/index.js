@@ -29,6 +29,13 @@ export {
 } from './learning-requirements-schema.js';
 export { learningRequirementsFixtures } from './learning-requirements-fixtures.js';
 export {
+  comparisonLearningRequirements,
+  createFixtureLearningRequirementsAdapter,
+  markdownGrammarReference,
+  plainTextGrammarReference,
+  plainTextLearningRequirements,
+} from './learning-requirements-adapter-fixtures.js';
+export {
   materialPlanActionValues,
   materialPlanContract,
   materialPlanFieldDefinitions,

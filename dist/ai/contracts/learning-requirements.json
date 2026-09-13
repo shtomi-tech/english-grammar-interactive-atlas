@@ -132,7 +132,8 @@
     "paragraph",
     "line",
     "heading",
-    "offset"
+    "offset",
+    "quote"
   ],
   "audienceFields": [
     "stage"

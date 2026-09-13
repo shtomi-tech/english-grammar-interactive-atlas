@@ -57,6 +57,9 @@ npm start
 - `src/lib/validateProblemGeneration.js`: Material Planから導出したProblem候補を既存`validateProblems()`へ通す検証
 - `src/lib/validateResearch.js`: Research ReferenceとInteractionの参照整合性検証
 - `src/lib/ai/runtime-preview.js`: proof artifactからtransientなruntime Lessonを再検証して組み立てるpure model
+- `src/lib/ai/grammar-reference.js`: text/markdown Grammar Referenceの正規化とMarkdown section抽出
+- `src/lib/ai/learning-requirements-extraction.js`: provider-neutralなLearning Requirements extraction request / runner
+- `src/lib/validateGrammarReference.js`: Grammar Referenceの入力検証
 - `tests/logic.test.js`: カタログ、Registry、Problem/Lesson、正誤判定・分類・英文生成のテスト
 - `docs/ADDING_INTERACTION.md`: 新しい図鑑項目とDemoの追加手順
 - `docs/INTERACTION_SCHEMA.md`: データ契約、出典メタデータ、ランク基準
@@ -100,7 +103,7 @@ Problem Generation
 Lesson Generation
 ```
 
-Phase 9では、Phase 8の各Contractを新しいsynthetic Grammar Referenceから一つにつないだE2E proofを追加します。Grammar ReferenceからLearning Requirementsへの意味抽出はfixtureでシミュレートし、Learning RequirementsからMaterial Planまでは現行Retrieval Indexの実ロジックを使います。proof結果は [dist/ai/proofs/end-to-end-material-generation.json](./dist/ai/proofs/end-to-end-material-generation.json) に出力します。Phase 10ではこのartifactを入力として、transientなcandidate Lessonとgenerated Problemを既存Componentへ渡す `#preview/e2e-material-generation` を追加しました。詳しくは [docs/RUNTIME_E2E_PREVIEW.md](./docs/RUNTIME_E2E_PREVIEW.md) を参照してください。
+Phase 9では、Phase 8の各Contractを新しいsynthetic Grammar Referenceから一つにつないだE2E proofを追加します。Grammar ReferenceからLearning Requirementsへの意味抽出はfixtureでシミュレートし、Learning RequirementsからMaterial Planまでは現行Retrieval Indexの実ロジックを使います。proof結果は [dist/ai/proofs/end-to-end-material-generation.json](./dist/ai/proofs/end-to-end-material-generation.json) に出力します。Phase 10ではこのartifactを入力として、transientなcandidate Lessonとgenerated Problemを既存Componentへ渡す `#preview/e2e-material-generation` を追加しました。Phase 11Aでは、text/markdownの実ユーザー入力をprovider-neutralなadapter境界へ渡し、Learning Requirements v1とsource traceabilityでfail closedに検証するpure runnerを追加しました。詳しくは [docs/RUNTIME_E2E_PREVIEW.md](./docs/RUNTIME_E2E_PREVIEW.md) と [docs/GRAMMAR_REFERENCE_INTAKE.md](./docs/GRAMMAR_REFERENCE_INTAKE.md) を参照してください。
 
 生成物は [dist/ai/catalog.json](./dist/ai/catalog.json)、用途別の `interactions.json`、`problems.json`、`lessons.json`、[dist/ai/problem-data.json](./dist/ai/problem-data.json)、[dist/ai/lesson-data.json](./dist/ai/lesson-data.json)、各Generation Contractです。現在のIndexは40 interactions、53 problems、6 lessons、99 unified documentsで、`npm run check` のAI retrieval validation、11件のretrieval benchmark、Learning Requirements 2件、Outcome profile 12件、Material Plan 2件、Problem Generation 2件、Lesson Generation 1件、Canonical Problem / Lesson snapshotで検証します。詳細は [docs/AI_RETRIEVAL.md](./docs/AI_RETRIEVAL.md)、[docs/LEARNING_REQUIREMENTS.md](./docs/LEARNING_REQUIREMENTS.md)、[docs/MATERIAL_PLAN.md](./docs/MATERIAL_PLAN.md)、[docs/PROBLEM_GENERATION.md](./docs/PROBLEM_GENERATION.md)、[docs/LESSON_GENERATION.md](./docs/LESSON_GENERATION.md) を参照してください。
 

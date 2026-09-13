@@ -23,6 +23,7 @@ export const learningRequirementLocatorFields = Object.freeze([
   'line',
   'heading',
   'offset',
+  'quote',
 ]);
 export const learningRequirementAudienceStages = Object.freeze(['middle-school', 'high-school', 'adult']);
 
