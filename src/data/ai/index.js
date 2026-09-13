@@ -47,3 +47,21 @@ export {
   problemGenerationVersion,
 } from './problem-generation-contract.js';
 export { problemGenerationContexts, problemGenerationFixtures } from './problem-generation-fixtures.js';
+export {
+  lessonGenerationAlignmentFields,
+  lessonGenerationFieldDefinitions,
+  lessonGenerationMaterialPlanRefFields,
+  lessonGenerationProblemGenerationRefFields,
+  lessonGenerationStepMappingFields,
+  lessonGenerationTopLevelFields,
+  lessonGenerationVersion,
+} from './lesson-generation-schema.js';
+export { lessonGenerationContract } from './lesson-generation-contract.js';
+export {
+  lessonGenerationCandidateLesson,
+  lessonGenerationContexts,
+  lessonGenerationFixtures,
+  lessonGenerationLearningRequirements,
+  lessonGenerationMaterialPlan,
+  lessonGenerationProblemGenerations,
+} from './lesson-generation-fixtures.js';

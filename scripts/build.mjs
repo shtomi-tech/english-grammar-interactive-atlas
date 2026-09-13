@@ -4,6 +4,7 @@ import { interactions } from '../src/data/interactions.js';
 import {
   interactionRetrievalMetadata,
   learningRequirementsContract,
+  lessonGenerationContract,
   materialPlanContract,
   problemGenerationContract,
 } from '../src/data/ai/index.js';
@@ -42,6 +43,8 @@ for (const [fileName, data] of Object.entries({
 writeFileSync(join(contractsDist, 'learning-requirements.json'), `${JSON.stringify(learningRequirementsContract, null, 2)}\n`, 'utf8');
 writeFileSync(join(contractsDist, 'material-plan.json'), `${JSON.stringify(materialPlanContract, null, 2)}\n`, 'utf8');
 writeFileSync(join(aiDist, 'problem-data.json'), `${JSON.stringify(problems, null, 2)}\n`, 'utf8');
+writeFileSync(join(aiDist, 'lesson-data.json'), `${JSON.stringify(lessons, null, 2)}\n`, 'utf8');
 writeFileSync(join(contractsDist, 'problem-generation.json'), `${JSON.stringify(problemGenerationContract, null, 2)}\n`, 'utf8');
+writeFileSync(join(contractsDist, 'lesson-generation.json'), `${JSON.stringify(lessonGenerationContract, null, 2)}\n`, 'utf8');
 
 console.log('Static build complete: dist/');

@@ -1,0 +1,141 @@
+{
+  "version": "1",
+  "requiredFields": [
+    "version",
+    "id",
+    "materialPlanRef",
+    "problemGenerationRefs",
+    "candidateLesson",
+    "alignment"
+  ],
+  "optionalFields": [],
+  "fieldDefinitions": {
+    "version": {
+      "type": "string",
+      "required": true,
+      "allowedValues": [
+        "1"
+      ],
+      "description": "Lesson Generation contract version."
+    },
+    "id": {
+      "type": "string",
+      "required": true,
+      "description": "Stable identifier for one generated Lesson proposal."
+    },
+    "materialPlanRef": {
+      "type": "object",
+      "required": true,
+      "fields": [
+        "id",
+        "version"
+      ],
+      "description": "Reference to the Material Plan that orders the Lesson steps."
+    },
+    "problemGenerationRefs": {
+      "type": "array",
+      "required": true,
+      "itemFields": [
+        "id",
+        "version"
+      ],
+      "description": "Problem Generation references needed by generate and adapt items."
+    },
+    "candidateLesson": {
+      "type": "object",
+      "required": true,
+      "description": "Lesson data using the existing Lesson Contract."
+    },
+    "alignment": {
+      "type": "object",
+      "required": true,
+      "fields": [
+        "stepMappings",
+        "rationale"
+      ],
+      "description": "Traceability from each Lesson step to one Material Plan item."
+    }
+  },
+  "materialPlanRefFields": [
+    "id",
+    "version"
+  ],
+  "problemGenerationRefFields": [
+    "id",
+    "version"
+  ],
+  "alignmentFields": [
+    "stepMappings",
+    "rationale"
+  ],
+  "stepMappingFields": [
+    "materialPlanItemId",
+    "lessonStepId"
+  ],
+  "example": {
+    "version": "1",
+    "id": "LGEN-001",
+    "materialPlanRef": {
+      "id": "MATPLAN-MIX-001",
+      "version": "1"
+    },
+    "problemGenerationRefs": [
+      {
+        "id": "PGEN-MIX-B",
+        "version": "1"
+      },
+      {
+        "id": "PGEN-MIX-C",
+        "version": "1"
+      }
+    ],
+    "candidateLesson": {
+      "id": "GEN-LESSON-MIX-001",
+      "slug": "generated-mixed-lesson",
+      "label": "Generated Mixed Lesson",
+      "title": "意味を比べ、文を組み立てる",
+      "description": "既存Problemの再利用と生成・適応を一つのLessonへまとめるfixture。",
+      "learningGoal": "文法上の意味を比較し、対応する英文を組み立てられるようにする。",
+      "steps": [
+        {
+          "id": "GEN-LESSON-MIX-001-STEP-01",
+          "interactionType": "sentence-comparison",
+          "problemId": "SC-001",
+          "title": "既存の意味比較を使う",
+          "instruction": "二つの英文の意味の違いを比較します。"
+        },
+        {
+          "id": "GEN-LESSON-MIX-001-STEP-02",
+          "interactionType": "word-order",
+          "problemId": "GEN-MIX-WO-001",
+          "title": "新しい文を組み立てる",
+          "instruction": "単語を正しい順序に並べて文を完成させます。"
+        },
+        {
+          "id": "GEN-LESSON-MIX-001-STEP-03",
+          "interactionType": "sentence-comparison",
+          "problemId": "GEN-MIX-SC-001",
+          "title": "比較Problemを適応する",
+          "instruction": "適応したProblemで二つの意味をもう一度比べます。"
+        }
+      ]
+    },
+    "alignment": {
+      "stepMappings": [
+        {
+          "materialPlanItemId": "MPI-MIX-A",
+          "lessonStepId": "GEN-LESSON-MIX-001-STEP-01"
+        },
+        {
+          "materialPlanItemId": "MPI-MIX-B",
+          "lessonStepId": "GEN-LESSON-MIX-001-STEP-02"
+        },
+        {
+          "materialPlanItemId": "MPI-MIX-C",
+          "lessonStepId": "GEN-LESSON-MIX-001-STEP-03"
+        }
+      ],
+      "rationale": "Learning Requirementsの三つの活動を順番に一つのLessonへ配置する。"
+    }
+  }
+}

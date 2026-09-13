@@ -36,6 +36,7 @@ npm start
 - `src/data/ai/material-plan-schema.js`, `src/data/ai/outcome-retrieval-profiles.js`: Material Plan v1の契約とOutcome→Retrieval Profile
 - `src/data/ai/material-plan-fixtures.js`: 実際のRetrieval evidenceから生成する合成Material Plan
 - `src/data/ai/problem-generation-schema.js`, `src/lib/ai/problem-generation.js`: 既存Problem Contractへ接続するProblem Generation v1の契約とpure helper
+- `src/data/ai/lesson-generation-schema.js`, `src/lib/ai/lesson-generation.js`: Resolved Problemを既存Lesson Contractへ接続するLesson Generation v1の契約とpure helper
 - `src/data/problems/`: Interaction Typeごとの教材Problem Data
 - `src/data/problems/index.js`: Problem RegistryとID検索
 - `src/data/lessons.js`: Lesson Data Model、Lesson Registry、Lesson一覧
@@ -83,6 +84,20 @@ Lesson 01「文の骨格を見抜く」、Lesson 02「英文の構造を読む�
 
 ## AI Retrieval Index
 
-Phase 7A〜7Bでは、既存のInteraction・Problem・LessonをAIが学習目的から検索・再利用できるよう、Canonical Dataから決定的なRetrieval Index v2をbuildで生成します。Interactionごとの不足する意味情報だけをRetrieval Metadataとして補い、Problem / Lessonの関係とProblemの検索本文はデータから自動導出します。Phase 8Aでは、学習内容・出典根拠・期待する学習成果を分離したLearning Requirements v1契約を追加し、positive signalがない検索を空配列にするpreflightも整えました。Phase 8Bでは、Learning PointからcontrolledなRetrieval Queryを作り、実検索結果のrank・score・reasons・canonicalRefを保持するMaterial Plan v1を追加しました。Phase 8Cでは、Material Planの`generate` / `adapt`から既存Problem Contractへ候補を接続し、最終検証を既存`validateProblems()`へ委譲するProblem Generation v1契約を追加しました。生成物は [dist/ai/catalog.json](./dist/ai/catalog.json)、用途別の `interactions.json`、`problems.json`、`lessons.json`、[dist/ai/problem-data.json](./dist/ai/problem-data.json)、[dist/ai/contracts/learning-requirements.json](./dist/ai/contracts/learning-requirements.json)、[dist/ai/contracts/material-plan.json](./dist/ai/contracts/material-plan.json)、[dist/ai/contracts/problem-generation.json](./dist/ai/contracts/problem-generation.json) です。現在のIndexは40 interactions、53 problems、6 lessons、99 unified documentsで、`npm run check` のAI retrieval validation、11件のretrieval benchmark、Learning Requirements 2件、Outcome profile 12件、Material Plan 2件、Problem Generation 2件、Canonical Problem snapshot 53件で検証します。詳細は [docs/AI_RETRIEVAL.md](./docs/AI_RETRIEVAL.md)、[docs/LEARNING_REQUIREMENTS.md](./docs/LEARNING_REQUIREMENTS.md)、[docs/MATERIAL_PLAN.md](./docs/MATERIAL_PLAN.md)、[docs/PROBLEM_GENERATION.md](./docs/PROBLEM_GENERATION.md) を参照してください。
+Phase 7A〜7Bでは、既存のInteraction・Problem・LessonをAIが学習目的から検索・再利用できるよう、Canonical Dataから決定的なRetrieval Index v2をbuildで生成します。Interactionごとの不足する意味情報だけをRetrieval Metadataとして補い、Problem / Lessonの関係とProblemの検索本文はデータから自動導出します。Phase 8AではLearning Requirements、Phase 8BではMaterial Plan、Phase 8Cでは既存Problem Contractへ候補を接続するProblem Generation、Phase 8DではResolved Problemを既存Lesson Contractへ接続するLesson Generationを追加しました。生成パイプラインは次の順です。
+
+```text
+Grammar Reference
+        ↓
+Learning Requirements
+        ↓
+Material Plan
+        ↓
+Problem Generation
+        ↓
+Lesson Generation
+```
+
+生成物は [dist/ai/catalog.json](./dist/ai/catalog.json)、用途別の `interactions.json`、`problems.json`、`lessons.json`、[dist/ai/problem-data.json](./dist/ai/problem-data.json)、[dist/ai/lesson-data.json](./dist/ai/lesson-data.json)、各Generation Contractです。現在のIndexは40 interactions、53 problems、6 lessons、99 unified documentsで、`npm run check` のAI retrieval validation、11件のretrieval benchmark、Learning Requirements 2件、Outcome profile 12件、Material Plan 2件、Problem Generation 2件、Lesson Generation 1件、Canonical Problem / Lesson snapshotで検証します。詳細は [docs/AI_RETRIEVAL.md](./docs/AI_RETRIEVAL.md)、[docs/LEARNING_REQUIREMENTS.md](./docs/LEARNING_REQUIREMENTS.md)、[docs/MATERIAL_PLAN.md](./docs/MATERIAL_PLAN.md)、[docs/PROBLEM_GENERATION.md](./docs/PROBLEM_GENERATION.md)、[docs/LESSON_GENERATION.md](./docs/LESSON_GENERATION.md) を参照してください。
 
 外部調査の採用基準とライセンス境界は [docs/RESEARCH_METHOD.md](./docs/RESEARCH_METHOD.md) にまとめています。Research Referenceは比較のための記録であり、外部コードや教材の取り込みを意味しません。

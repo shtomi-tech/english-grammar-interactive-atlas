@@ -20,6 +20,9 @@ const files = [
   'src/data/ai/problem-generation-schema.js',
   'src/data/ai/problem-generation-fixtures.js',
   'src/data/ai/problem-generation-contract.js',
+  'src/data/ai/lesson-generation-schema.js',
+  'src/data/ai/lesson-generation-fixtures.js',
+  'src/data/ai/lesson-generation-contract.js',
   'src/data/interactions-additional.js',
   'src/data/demo-problems.js',
   'src/data/problems/word-order.js',
@@ -50,10 +53,12 @@ const files = [
   'src/lib/ai/retrieval-evaluation.js',
   'src/lib/ai/material-planning.js',
   'src/lib/ai/problem-generation.js',
+  'src/lib/ai/lesson-generation.js',
   'src/lib/validateAiRetrieval.js',
   'src/lib/validateLearningRequirements.js',
   'src/lib/validateMaterialPlan.js',
   'src/lib/validateProblemGeneration.js',
+  'src/lib/validateLessonGeneration.js',
   'src/lib/dom.js',
   'src/lib/grammar/word-order.js',
   'src/lib/grammar/parts.js',
@@ -116,6 +121,8 @@ const {
   outcomeRetrievalProfiles,
   problemGenerationFixtures,
   problemGenerationContexts,
+  lessonGenerationFixtures,
+  lessonGenerationContexts,
 } = await import('../src/data/ai/index.js');
 const { createAiRetrievalIndex } = await import('../src/lib/ai/retrieval-index.js');
 const { evaluateRetrievalBenchmarks } = await import('../src/lib/ai/retrieval-evaluation.js');
@@ -123,6 +130,7 @@ const { validateAiRetrieval } = await import('../src/lib/validateAiRetrieval.js'
 const { validateLearningRequirements } = await import('../src/lib/validateLearningRequirements.js');
 const { validateMaterialPlan } = await import('../src/lib/validateMaterialPlan.js');
 const { validateProblemGeneration } = await import('../src/lib/validateProblemGeneration.js');
+const { validateLessonGeneration } = await import('../src/lib/validateLessonGeneration.js');
 const { validateOutcomeRetrievalProfiles } = await import('../src/lib/ai/material-planning.js');
 const validation = validateInteractions(interactions, { registryKeys: Object.keys(demoRegistry) });
 if (!validation.valid) throw new Error(`Interaction validation failed: ${validation.errors.join('; ')}`);
@@ -188,6 +196,17 @@ if (problemGenerationValidation.some((result) => !result.valid)) {
   throw new Error(`Problem Generation validation failed: ${problemGenerationValidation.flatMap((result) => result.errors).join('; ')}`);
 }
 console.log(`Problem Generation validation passed for ${problemGenerationFixtures.length} fixtures.`);
+const lessonGenerationValidation = lessonGenerationFixtures.map((fixture, index) => validateLessonGeneration(fixture, lessonGenerationContexts[index]));
+if (lessonGenerationValidation.some((result) => !result.valid)) {
+  throw new Error(`Lesson Generation validation failed: ${lessonGenerationValidation.flatMap((result) => result.errors).join('; ')}`);
+}
+console.log(`Lesson Generation validation passed for ${lessonGenerationFixtures.length} fixtures.`);
 const canonicalProblemSnapshotValidation = validateProblems(problems);
 if (!canonicalProblemSnapshotValidation.valid) throw new Error(`Canonical Problem snapshot validation failed: ${canonicalProblemSnapshotValidation.errors.join('; ')}`);
 console.log(`Canonical Problem snapshot validation passed for ${problems.length} problems.`);
+const canonicalLessonSnapshotValidation = validateLessons(lessons, {
+  problemRegistry,
+  problemTypes: new Set(Object.keys(demoRegistry)),
+});
+if (!canonicalLessonSnapshotValidation.valid) throw new Error(`Canonical Lesson snapshot validation failed: ${canonicalLessonSnapshotValidation.errors.join('; ')}`);
+console.log(`Canonical Lesson snapshot validation passed for ${lessons.length} lessons.`);

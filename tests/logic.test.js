@@ -69,6 +69,9 @@ import {
   interactionRetrievalMetadata,
   learningRequirementsContract,
   learningRequirementsFixtures,
+  lessonGenerationContract,
+  lessonGenerationContexts,
+  lessonGenerationFixtures,
   materialPlanContract,
   materialPlanFixtures,
   outcomeRetrievalProfiles,
@@ -91,7 +94,14 @@ import { createProblemGeneration, createProblemGenerationContext, resolveCanonic
 import { validateAiRetrieval } from '../src/lib/validateAiRetrieval.js';
 import { validateLearningRequirements } from '../src/lib/validateLearningRequirements.js';
 import { validateMaterialPlan } from '../src/lib/validateMaterialPlan.js';
-import { validateProblemGeneration } from '../src/lib/validateProblemGeneration.js';
+import { sameLocator, validateProblemGeneration } from '../src/lib/validateProblemGeneration.js';
+import {
+  createLessonGeneration,
+  createLessonGenerationContext,
+  createResolvedProblemRegistry,
+  resolveMaterialPlanProblems,
+} from '../src/lib/ai/lesson-generation.js';
+import { validateLessonGeneration } from '../src/lib/validateLessonGeneration.js';
 
 assert.equal(interactions.length, 40);
 assert.deepEqual(
@@ -742,6 +752,142 @@ assert.deepEqual(
   createProblemGenerationContext(adaptedProblemContext).exampleProblemRefs[0],
   { kind: 'problem', id: 'SC-001', type: 'sentence-comparison' },
 );
+
+assert.equal(sameLocator({ section: 'A', page: 2 }, { page: 2, section: 'A' }), true);
+const orderedLocatorGeneration = structuredClone(problemGenerationFixtures[0]);
+const orderedLocatorContext = structuredClone(problemGenerationContexts[0]);
+orderedLocatorContext.learningRequirements.learningPoints[0].sourceEvidence[0].locator = {
+  section: 'Synthetic generation case',
+  page: 2,
+};
+orderedLocatorGeneration.alignment.sourceEvidenceRefs[0].locator = {
+  page: 2,
+  section: 'Synthetic generation case',
+};
+assert.equal(validateProblemGeneration(orderedLocatorGeneration, orderedLocatorContext).valid, true);
+
+assert.equal(lessonGenerationContract.version, '1');
+assert.deepEqual(lessonGenerationContract.requiredFields, [
+  'version',
+  'id',
+  'materialPlanRef',
+  'problemGenerationRefs',
+  'candidateLesson',
+  'alignment',
+]);
+assert.equal(lessonGenerationContract.fieldDefinitions.candidateLesson.type, 'object');
+assert.deepEqual(lessonGenerationContract.example, lessonGenerationFixtures[0]);
+const lessonGenerationFixture = lessonGenerationFixtures[0];
+const lessonGenerationContext = lessonGenerationContexts[0];
+assert.equal(validateLessonGeneration(lessonGenerationFixture, lessonGenerationContext).valid, true);
+assert.deepEqual(
+  createLessonGenerationContext(lessonGenerationContext),
+  createLessonGenerationContext(lessonGenerationContext),
+);
+assert.deepEqual(
+  createLessonGeneration({
+    context: createLessonGenerationContext(lessonGenerationContext),
+    candidateLesson: lessonGenerationFixture.candidateLesson,
+    id: lessonGenerationFixture.id,
+    rationale: lessonGenerationFixture.alignment.rationale,
+  }),
+  lessonGenerationFixture,
+);
+const resolvedMixedProblems = resolveMaterialPlanProblems(lessonGenerationContext);
+assert.deepEqual(resolvedMixedProblems.resolvedItems.map((item) => item.problemRef.id), [
+  'SC-001',
+  'GEN-MIX-WO-001',
+  'GEN-MIX-SC-001',
+]);
+assert.deepEqual(resolvedMixedProblems.generatedProblemRefs.map((reference) => reference.id), ['PGEN-MIX-B', 'PGEN-MIX-C']);
+assert.equal(validateProblems([...problems, ...resolvedMixedProblems.generatedProblems]).valid, true);
+const resolvedProblemRegistry = createResolvedProblemRegistry({
+  canonicalProblems: problems,
+  generatedProblems: resolvedMixedProblems.generatedProblems,
+});
+assert.equal(validateLessons([...lessons, lessonGenerationFixture.candidateLesson], {
+  problemRegistry: resolvedProblemRegistry,
+  problemTypes: new Set(Object.keys(demoRegistry)),
+}).valid, true);
+
+function assertInvalidLessonGeneration(name, mutateGeneration = () => {}, mutateContext = () => {}) {
+  const invalidGeneration = structuredClone(lessonGenerationFixture);
+  const invalidContext = structuredClone(lessonGenerationContext);
+  mutateGeneration(invalidGeneration);
+  mutateContext(invalidContext);
+  assert.equal(validateLessonGeneration(invalidGeneration, invalidContext).valid, false, name);
+}
+
+assertInvalidLessonGeneration('unresolved item', () => {}, (context) => {
+  context.materialPlan.items[0].problemDecision = {
+    action: 'unresolved',
+    reason: 'No implemented activity is available.',
+  };
+});
+assertInvalidLessonGeneration('missing Problem Generation', () => {}, (context) => {
+  context.problemGenerations = [context.problemGenerations[1]];
+});
+assertInvalidLessonGeneration('duplicate Problem Generation for same item', () => {}, (context) => {
+  const duplicate = structuredClone(context.problemGenerations[0]);
+  duplicate.id = 'PGEN-MIX-B-DUP';
+  context.problemGenerations.push(duplicate);
+});
+assertInvalidLessonGeneration('Problem Generation ref version mismatch', (generation) => {
+  generation.problemGenerationRefs[0].version = '2';
+});
+assertInvalidLessonGeneration('extra unused Problem Generation ref', (generation) => {
+  generation.problemGenerationRefs.push({ id: 'PGEN-UNUSED', version: '1' });
+});
+assertInvalidLessonGeneration('cross-generated Problem ID collision', () => {}, (context) => {
+  context.problemGenerations[1].candidateProblem.id = context.problemGenerations[0].candidateProblem.id;
+});
+assertInvalidLessonGeneration('candidate Lesson ID collision with Canonical', (generation) => {
+  generation.candidateLesson.id = lessons[0].id;
+});
+assertInvalidLessonGeneration('candidate Lesson slug collision with Canonical', (generation) => {
+  generation.candidateLesson.slug = lessons[0].slug;
+});
+assertInvalidLessonGeneration('unknown Problem in step', (generation) => {
+  generation.candidateLesson.steps[0].problemId = 'PROBLEM-UNKNOWN';
+});
+assertInvalidLessonGeneration('Problem type and interactionType mismatch', (generation) => {
+  generation.candidateLesson.steps[0].interactionType = 'word-order';
+});
+assertInvalidLessonGeneration('unauthorized Material Plan outside Problem', (generation) => {
+  generation.candidateLesson.steps[0].problemId = 'WO-001';
+});
+assertInvalidLessonGeneration('stepMappings missing', (generation) => {
+  delete generation.alignment.stepMappings;
+});
+assertInvalidLessonGeneration('duplicate step mapping', (generation) => {
+  generation.alignment.stepMappings[1].materialPlanItemId = generation.alignment.stepMappings[0].materialPlanItemId;
+});
+assertInvalidLessonGeneration('unknown materialPlanItemId', (generation) => {
+  generation.alignment.stepMappings[0].materialPlanItemId = 'MPI-UNKNOWN';
+});
+assertInvalidLessonGeneration('unknown lessonStepId', (generation) => {
+  generation.alignment.stepMappings[0].lessonStepId = 'STEP-UNKNOWN';
+});
+assertInvalidLessonGeneration('step order mismatch', (generation) => {
+  [generation.candidateLesson.steps[0], generation.candidateLesson.steps[1]] = [
+    generation.candidateLesson.steps[1],
+    generation.candidateLesson.steps[0],
+  ];
+});
+assertInvalidLessonGeneration('generated item uses canonical Problem', (generation) => {
+  generation.candidateLesson.steps[1].problemId = 'WO-007';
+});
+assertInvalidLessonGeneration('reuse item uses different Problem', (generation) => {
+  generation.candidateLesson.steps[0].problemId = 'SC-002';
+});
+assertInvalidLessonGeneration('candidateLesson steps count mismatch', (generation) => {
+  generation.candidateLesson.steps.pop();
+});
+const canonicalProblemsBeforeLessonGeneration = structuredClone(problems);
+const canonicalLessonsBeforeLessonGeneration = structuredClone(lessons);
+assert.equal(validateLessonGeneration(lessonGenerationFixture, lessonGenerationContext).valid, true);
+assert.deepEqual(problems, canonicalProblemsBeforeLessonGeneration);
+assert.deepEqual(lessons, canonicalLessonsBeforeLessonGeneration);
 
 const lessonProgress = lessons[0];
 const emptyLessonProgress = new Set();

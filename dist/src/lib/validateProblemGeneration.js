@@ -16,8 +16,15 @@ function isObject(value) {
   return Boolean(value) && typeof value === 'object' && !Array.isArray(value);
 }
 
-function sameValue(left, right) {
-  return JSON.stringify(left) === JSON.stringify(right);
+export function sameLocator(left, right) {
+  if (!isObject(left) || !isObject(right)) return false;
+  return learningRequirementLocatorFields.every((field) => left[field] === right[field]);
+}
+
+function locatorKey(locator) {
+  return learningRequirementLocatorFields
+    .map((field) => `${field}:${JSON.stringify(locator?.[field])}`)
+    .join('|');
 }
 
 function addUnknownFields(value, allowedFields, path, errors) {
@@ -64,11 +71,11 @@ function validateSourceEvidenceRefs(refs, learningPoint, errors) {
     addUnknownFields(ref, problemGenerationSourceEvidenceRefFields, path, errors);
     requireNonEmptyString(ref.sourceId, `${path}.sourceId`, errors);
     validateLocator(ref.locator, `${path}.locator`, errors);
-    const key = `${ref.sourceId}:${JSON.stringify(ref.locator)}`;
+    const key = `${ref.sourceId}:${locatorKey(ref.locator)}`;
     if (seen.has(key)) errors.push(`${path} must not duplicate a source evidence reference`);
     seen.add(key);
     const matchesSourceEvidence = learningPoint?.sourceEvidence?.some((evidence) => (
-      evidence.sourceId === ref.sourceId && sameValue(evidence.locator, ref.locator)
+      evidence.sourceId === ref.sourceId && sameLocator(evidence.locator, ref.locator)
     ));
     if (!matchesSourceEvidence) errors.push(`${path} must reference Learning Requirements sourceEvidence`);
   });
