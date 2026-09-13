@@ -54,13 +54,17 @@ Material PlanにはInteractionのtitle・description、Problem本文、Lesson本
           query: {
             kinds: ['problem'],
             demoTypes: ['word-order'],
+            includeTerms: ['to'],
             limit: 5
           },
           selected: {
-            canonicalRef: { kind: 'problem', id: 'WO-001', type: 'word-order' },
+            canonicalRef: { kind: 'problem', id: 'WO-007', type: 'word-order' },
             rank: 1,
-            score: 3,
-            reasons: [{ field: 'demoTypes', value: 'word-order', score: 3 }]
+            score: 5,
+            reasons: [
+              { field: 'demoTypes', value: 'word-order', score: 3 },
+              { field: 'searchText', value: 'to', score: 2 }
+            ]
           }
         }
       },
@@ -79,6 +83,8 @@ Material PlanにはInteractionのtitle・description、Problem本文、Lesson本
 `createInteractionQueryForLearningPoint()` はDOM、filesystem、network、randomを使わず、`kinds: ['interaction']`、profile由来のlearningIntents、Learning Pointのconcept、limitからQueryを組み立てます。tokenizer、stemming、Embeddingは追加しません。
 
 ## InteractionとProblemの選択
+
+`demoTypes`はComponent互換性のfilterであり、教材内容の一致証拠ではありません。`reuse`には、同じdemoTypeに加えて`includeTerms`由来の`searchText` content matchが少なくとも1件必要です。該当しない場合は無関係なProblemをreuseせず、原則`generate`または明示的な`adapt`へ進めます。
 
 40 Interactionは検索対象ですが、実際にrenderできるInteractionだけをreuse・adapt・generateの対象にします。実装済みの判定はRetrieval recordの `demoTypes.length === 1` です。未実装Interactionが最適な場合は、無理に別候補へ置き換えず `unresolved` と理由を記録できます。この場合Problem selectionは持てません。
 
@@ -114,3 +120,5 @@ selected.reasons
 Phase 8BではProblem Data、Lesson Data、LLM、OCR、PDF/Word parser、外部DB、UI editorを追加しません。`action: 'generate'` は必要性の記録までで、生成契約と `validateProblems()` への接続はPhase 8Cの責務です。
 
 machine-readable契約は `dist/ai/contracts/material-plan.json` です。手動編集せず、`src/data/ai/material-plan-schema.js` からbuildで生成します。
+
+Contract exampleのQueryは実際のRetrieval Query vocabularyで構成し、validatorで妥当性を確認します。

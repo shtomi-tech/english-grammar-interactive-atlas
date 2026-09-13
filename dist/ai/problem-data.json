@@ -1,0 +1,2779 @@
+[
+  {
+    "id": "WO-001",
+    "type": "word-order",
+    "prompt": "単語カードをタップして、英文を完成させてください。",
+    "words": [
+      {
+        "id": "i",
+        "text": "I"
+      },
+      {
+        "id": "play",
+        "text": "play"
+      },
+      {
+        "id": "tennis",
+        "text": "tennis"
+      }
+    ],
+    "acceptedAnswers": [
+      [
+        "i",
+        "play",
+        "tennis"
+      ]
+    ],
+    "explanation": "英語の基本語順は Subject + Verb + Object です。",
+    "grammar": [
+      "SVO",
+      "present-simple"
+    ]
+  },
+  {
+    "id": "WO-002",
+    "type": "word-order",
+    "prompt": "主語に合わせて、自然な英文を組み立ててください。",
+    "words": [
+      {
+        "id": "she",
+        "text": "She"
+      },
+      {
+        "id": "likes",
+        "text": "likes"
+      },
+      {
+        "id": "music",
+        "text": "music"
+      }
+    ],
+    "acceptedAnswers": [
+      [
+        "she",
+        "likes",
+        "music"
+      ]
+    ],
+    "explanation": "三人称単数の主語 She の現在形では、動詞に s がつきます。",
+    "grammar": [
+      "SVO",
+      "third-person-singular",
+      "present-simple"
+    ]
+  },
+  {
+    "id": "WO-003",
+    "type": "word-order",
+    "prompt": "主語・動詞・補語の順に、英文を組み立ててください。",
+    "words": [
+      {
+        "id": "my-brother",
+        "text": "My brother"
+      },
+      {
+        "id": "is",
+        "text": "is"
+      },
+      {
+        "id": "kind",
+        "text": "kind"
+      }
+    ],
+    "acceptedAnswers": [
+      [
+        "my-brother",
+        "is",
+        "kind"
+      ]
+    ],
+    "explanation": "be動詞の後ろの補語が、主語の状態を説明する SVC の文です。",
+    "grammar": [
+      "SVC",
+      "be-verb",
+      "complement"
+    ]
+  },
+  {
+    "id": "WO-004",
+    "type": "word-order",
+    "prompt": "どちらも自然な語順になるように、英文を組み立ててください。",
+    "words": [
+      {
+        "id": "they",
+        "text": "They"
+      },
+      {
+        "id": "visit",
+        "text": "visit"
+      },
+      {
+        "id": "the-museum",
+        "text": "the museum"
+      },
+      {
+        "id": "on-sundays",
+        "text": "on Sundays"
+      }
+    ],
+    "acceptedAnswers": [
+      [
+        "they",
+        "visit",
+        "the-museum",
+        "on-sundays"
+      ],
+      [
+        "on-sundays",
+        "they",
+        "visit",
+        "the-museum"
+      ]
+    ],
+    "hints": [
+      "まず、だれが行うかを表す主語を探してみましょう。",
+      "時間を表す語句は、文の最後にも文の最初にも置けます。"
+    ],
+    "explanation": "They visit the museum on Sundays. と On Sundays they visit the museum. は、どちらも自然な語順です。",
+    "grammar": [
+      "SVO",
+      "adverbial-phrase",
+      "word-order"
+    ]
+  },
+  {
+    "id": "WO-005",
+    "type": "word-order",
+    "prompt": "助動詞を含む英文を、自然な語順に組み立ててください。",
+    "words": [
+      {
+        "id": "you",
+        "text": "You"
+      },
+      {
+        "id": "should",
+        "text": "should"
+      },
+      {
+        "id": "study",
+        "text": "study"
+      },
+      {
+        "id": "today",
+        "text": "today"
+      }
+    ],
+    "acceptedAnswers": [
+      [
+        "you",
+        "should",
+        "study",
+        "today"
+      ]
+    ],
+    "explanation": "助動詞の後ろには動詞の原形を置きます。基本語順は Subject + Modal + Base Verb です。",
+    "grammar": [
+      "modal",
+      "base-verb",
+      "word-order"
+    ]
+  },
+  {
+    "id": "WO-006",
+    "type": "word-order",
+    "prompt": "受動態の英文を、自然な語順に組み立ててください。",
+    "words": [
+      {
+        "id": "the-report",
+        "text": "The report"
+      },
+      {
+        "id": "was",
+        "text": "was"
+      },
+      {
+        "id": "written",
+        "text": "written"
+      },
+      {
+        "id": "by-the-teacher",
+        "text": "by the teacher"
+      }
+    ],
+    "acceptedAnswers": [
+      [
+        "the-report",
+        "was",
+        "written",
+        "by-the-teacher"
+      ]
+    ],
+    "explanation": "受動態は Subject + be + Past Participle が中心で、必要なら by 句で動作主を示します。",
+    "grammar": [
+      "passive-voice",
+      "past-participle",
+      "word-order"
+    ]
+  },
+  {
+    "id": "WO-007",
+    "type": "word-order",
+    "prompt": "to + 動詞原形の語順を意識して、英文を組み立ててください。",
+    "words": [
+      {
+        "id": "i",
+        "text": "I"
+      },
+      {
+        "id": "want",
+        "text": "want"
+      },
+      {
+        "id": "to",
+        "text": "to"
+      },
+      {
+        "id": "study",
+        "text": "study"
+      },
+      {
+        "id": "english",
+        "text": "English"
+      }
+    ],
+    "acceptedAnswers": [
+      [
+        "i",
+        "want",
+        "to",
+        "study",
+        "english"
+      ]
+    ],
+    "explanation": "want の後ろで「〜すること」を表す不定詞は、to + 動詞の原形で作ります。",
+    "grammar": [
+      "infinitive",
+      "noun-use",
+      "base-verb",
+      "word-order"
+    ]
+  },
+  {
+    "id": "WO-008",
+    "type": "word-order",
+    "prompt": "enjoy + gerund の語順を意識して、英文を組み立ててください。",
+    "words": [
+      {
+        "id": "i",
+        "text": "I"
+      },
+      {
+        "id": "enjoy",
+        "text": "enjoy"
+      },
+      {
+        "id": "reading",
+        "text": "reading"
+      },
+      {
+        "id": "books",
+        "text": "books"
+      }
+    ],
+    "acceptedAnswers": [
+      [
+        "i",
+        "enjoy",
+        "reading",
+        "books"
+      ]
+    ],
+    "explanation": "enjoy の後ろでは、動詞 read を reading の形にして「本を読むこと」を表します。ここでは enjoy + gerund という組み合わせを確認します。",
+    "grammar": [
+      "gerund",
+      "verb-pattern",
+      "noun-like",
+      "word-order"
+    ]
+  },
+  {
+    "id": "MP-001",
+    "type": "mark-parts",
+    "prompt": "「主語を選んでください。」",
+    "targetRole": "Subject",
+    "tokens": [
+      {
+        "id": "the",
+        "text": "The",
+        "role": "Subject"
+      },
+      {
+        "id": "boy",
+        "text": "boy",
+        "role": "Subject"
+      },
+      {
+        "id": "plays",
+        "text": "plays",
+        "role": "Verb"
+      },
+      {
+        "id": "soccer",
+        "text": "soccer",
+        "role": "Object"
+      }
+    ],
+    "answer": [
+      "the",
+      "boy"
+    ],
+    "explanation": "「だれが・なにが」にあたる語句が、この文の主語です。"
+  },
+  {
+    "id": "MP-002",
+    "type": "mark-parts",
+    "prompt": "「動作をする人・もの、つまり主語を選んでください。」",
+    "targetRole": "Subject",
+    "tokens": [
+      {
+        "id": "my",
+        "text": "My",
+        "role": "Subject"
+      },
+      {
+        "id": "sister",
+        "text": "sister",
+        "role": "Subject"
+      },
+      {
+        "id": "likes",
+        "text": "likes",
+        "role": "Verb"
+      },
+      {
+        "id": "music",
+        "text": "music",
+        "role": "Object"
+      }
+    ],
+    "answer": [
+      "my",
+      "sister"
+    ],
+    "explanation": "My sister が「だれが」にあたり、動作 likes の主語です。"
+  },
+  {
+    "id": "MP-003",
+    "type": "mark-parts",
+    "prompt": "「主語の状態を説明する補語を選んでください。」",
+    "targetRole": "Complement",
+    "tokens": [
+      {
+        "id": "tom",
+        "text": "Tom",
+        "role": "Subject"
+      },
+      {
+        "id": "is",
+        "text": "is",
+        "role": "Verb"
+      },
+      {
+        "id": "happy",
+        "text": "happy",
+        "role": "Complement"
+      }
+    ],
+    "answer": [
+      "happy"
+    ],
+    "explanation": "happy は be動詞 is の後ろで、Tom の状態を説明する補語です。"
+  },
+  {
+    "id": "MP-004",
+    "type": "mark-parts",
+    "prompt": "文の主語として働いている動名詞句を選んでください。",
+    "targetRole": "Subject",
+    "sentence": "Reading books is fun.",
+    "tokens": [
+      {
+        "id": "reading",
+        "text": "Reading",
+        "role": "Subject"
+      },
+      {
+        "id": "books",
+        "text": "books",
+        "role": "Subject"
+      },
+      {
+        "id": "is",
+        "text": "is",
+        "role": "Verb"
+      },
+      {
+        "id": "fun",
+        "text": "fun",
+        "role": "Complement"
+      }
+    ],
+    "answer": [
+      "reading",
+      "books"
+    ],
+    "explanation": "Reading books 全体が「本を読むこと」という一つの内容を表し、文の主語として働いています。"
+  },
+  {
+    "id": "GC-001",
+    "type": "grammar-classifier",
+    "classificationAxis": "Sentence role",
+    "prompt": "語句カードを、英文の中での役割ごとに分類してください。",
+    "sentence": "The young boy plays soccer after school.",
+    "categories": [
+      {
+        "id": "subject",
+        "label": "Subject",
+        "explanation": "「だれが・なにが」にあたる主語です。"
+      },
+      {
+        "id": "verb",
+        "label": "Verb",
+        "explanation": "主語の動作や状態を表す動詞です。"
+      },
+      {
+        "id": "object",
+        "label": "Object",
+        "explanation": "動作の対象を表す目的語です。"
+      },
+      {
+        "id": "modifier",
+        "label": "Modifier",
+        "explanation": "いつ・どこでなど、文に情報を加える修飾語です。"
+      }
+    ],
+    "items": [
+      {
+        "id": "young-boy",
+        "text": "The young boy",
+        "answer": "subject",
+        "explanation": "「だれが」にあたり、文の主語です。"
+      },
+      {
+        "id": "plays",
+        "text": "plays",
+        "answer": "verb",
+        "explanation": "主語の動作を表す動詞です。"
+      },
+      {
+        "id": "soccer",
+        "text": "soccer",
+        "answer": "object",
+        "explanation": "play の動作の対象となる目的語です。"
+      },
+      {
+        "id": "after-school",
+        "text": "after school",
+        "answer": "modifier",
+        "explanation": "動作がいつ起きるかを加える修飾語です。"
+      }
+    ],
+    "explanation": "英文は単語の列ではなく、役割を持つ語句のまとまりとして見ることができます。"
+  },
+  {
+    "id": "GC-002",
+    "type": "grammar-classifier",
+    "classificationAxis": "Phrase / Clause",
+    "prompt": "語句カードを、句（Phrase）と節（Clause）に分類してください。",
+    "sentence": "I know that she studies.",
+    "categories": [
+      {
+        "id": "phrase",
+        "label": "Phrase",
+        "explanation": "主語と動詞の組み合わせを含まない語句のまとまりです。"
+      },
+      {
+        "id": "clause",
+        "label": "Clause",
+        "explanation": "主語と動詞を含む節のまとまりです。"
+      }
+    ],
+    "items": [
+      {
+        "id": "i",
+        "text": "I",
+        "answer": "phrase",
+        "explanation": "I は主語として働く語句です。"
+      },
+      {
+        "id": "know",
+        "text": "know",
+        "answer": "phrase",
+        "explanation": "know は動詞として働く語句です。"
+      },
+      {
+        "id": "that-she-studies",
+        "text": "that she studies",
+        "answer": "clause",
+        "explanation": "she と studies を含む節です。"
+      }
+    ],
+    "explanation": "句と節は、主語・動詞の組み合わせがあるかどうかに注目すると見分けられます。"
+  },
+  {
+    "id": "GC-003",
+    "type": "grammar-classifier",
+    "classificationAxis": "Part of speech",
+    "prompt": "語句カードを、品詞ごとに分類してください。",
+    "sentence": "Bright birds sing loudly.",
+    "categories": [
+      {
+        "id": "noun",
+        "label": "Noun",
+        "explanation": "人・もの・ことの名前を表す名詞です。"
+      },
+      {
+        "id": "verb",
+        "label": "Verb",
+        "explanation": "動作や状態を表す動詞です。"
+      },
+      {
+        "id": "adjective",
+        "label": "Adjective",
+        "explanation": "名詞の性質や状態を説明する形容詞です。"
+      },
+      {
+        "id": "adverb",
+        "label": "Adverb",
+        "explanation": "動作の様子などを説明する副詞です。"
+      }
+    ],
+    "items": [
+      {
+        "id": "bright",
+        "text": "Bright",
+        "answer": "adjective",
+        "explanation": "Bright は birds の性質を説明します。"
+      },
+      {
+        "id": "birds",
+        "text": "birds",
+        "answer": "noun",
+        "explanation": "birds は生き物の名前を表します。"
+      },
+      {
+        "id": "sing",
+        "text": "sing",
+        "answer": "verb",
+        "explanation": "sing は動作を表します。"
+      },
+      {
+        "id": "loudly",
+        "text": "loudly",
+        "answer": "adverb",
+        "explanation": "loudly は歌う様子を説明します。"
+      }
+    ],
+    "explanation": "品詞を分類すると、英文の中でそれぞれの語が担う役割を整理できます。"
+  },
+  {
+    "id": "GC-004",
+    "type": "grammar-classifier",
+    "classificationAxis": "Infinitive function",
+    "prompt": "to + 動詞原形の語句を、文中での働きごとに分類してください。",
+    "sentence": "To stay healthy, I want to exercise and I need shoes to run in.",
+    "categories": [
+      {
+        "id": "noun",
+        "label": "Noun-like",
+        "explanation": "名詞のように、動作や内容を表します。"
+      },
+      {
+        "id": "adjective",
+        "label": "Adjective-like",
+        "explanation": "形容詞のように、名詞を説明します。"
+      },
+      {
+        "id": "adverb",
+        "label": "Adverb-like",
+        "explanation": "副詞のように、文や動作の目的を説明します。"
+      }
+    ],
+    "items": [
+      {
+        "id": "to-stay-healthy",
+        "text": "To stay healthy",
+        "answer": "adverb",
+        "explanation": "「健康でいるために」と、文全体の目的を説明しています。"
+      },
+      {
+        "id": "to-exercise",
+        "text": "to exercise",
+        "answer": "noun",
+        "explanation": "want の内容として、「運動すること」を表しています。"
+      },
+      {
+        "id": "to-run-in",
+        "text": "to run in",
+        "answer": "adjective",
+        "explanation": "shoes がどのような靴かを説明しています。"
+      }
+    ],
+    "explanation": "同じ to + 動詞原形でも、文中で名詞・形容詞・副詞に近い働きを持つことがあります。"
+  },
+  {
+    "id": "GC-005",
+    "type": "grammar-classifier",
+    "classificationAxis": "Gerund phrase role",
+    "prompt": "動名詞句を、文中での役割ごとに分類してください。",
+    "sentence": "Reading books is fun. I enjoy cooking. My favorite hobby is swimming.",
+    "categories": [
+      {
+        "id": "subject",
+        "label": "Subject",
+        "explanation": "文の主語として働く語句です。"
+      },
+      {
+        "id": "object",
+        "label": "Object",
+        "explanation": "動詞の目的語として働く語句です。"
+      },
+      {
+        "id": "complement",
+        "label": "Complement",
+        "explanation": "主語の内容を説明する補語です。"
+      }
+    ],
+    "items": [
+      {
+        "id": "reading-books",
+        "text": "Reading books",
+        "answer": "subject",
+        "explanation": "Reading books が文の主語として働いています。"
+      },
+      {
+        "id": "cooking",
+        "text": "cooking",
+        "answer": "object",
+        "explanation": "cooking は enjoy の目的語として、「料理すること」を表しています。"
+      },
+      {
+        "id": "swimming",
+        "text": "swimming",
+        "answer": "complement",
+        "explanation": "swimming は My favorite hobby の内容を説明する補語です。"
+      }
+    ],
+    "explanation": "動名詞は動詞由来の -ing 形ですが、文の中では名詞のように主語・目的語・補語として働けます。"
+  },
+  {
+    "id": "ST-001",
+    "type": "sentence-transformer",
+    "prompt": "条件を変えると、英文の形がどう変わるか観察してください。",
+    "controls": {
+      "subject": [
+        {
+          "value": "he",
+          "label": "He"
+        },
+        {
+          "value": "they",
+          "label": "They"
+        }
+      ],
+      "tense": [
+        {
+          "value": "present",
+          "label": "Present"
+        },
+        {
+          "value": "past",
+          "label": "Past"
+        }
+      ],
+      "negative": [
+        {
+          "value": false,
+          "label": "OFF"
+        },
+        {
+          "value": true,
+          "label": "ON"
+        }
+      ]
+    },
+    "defaults": {
+      "subject": "he",
+      "tense": "present",
+      "negative": false
+    },
+    "sentenceModel": {
+      "subjects": {
+        "he": {
+          "label": "He",
+          "number": "singular"
+        },
+        "they": {
+          "label": "They",
+          "number": "plural"
+        }
+      },
+      "verb": {
+        "base": "play",
+        "past": "played"
+      },
+      "object": "tennis",
+      "punctuation": "."
+    }
+  },
+  {
+    "id": "ST-002",
+    "type": "sentence-transformer",
+    "prompt": "助動詞を変えると、英文の形がどう変わるか観察してください。",
+    "controls": {
+      "subject": [
+        {
+          "value": "he",
+          "label": "He"
+        },
+        {
+          "value": "they",
+          "label": "They"
+        }
+      ],
+      "modal": [
+        {
+          "value": "can",
+          "label": "Can"
+        },
+        {
+          "value": "could",
+          "label": "Could"
+        },
+        {
+          "value": "should",
+          "label": "Should"
+        },
+        {
+          "value": "must",
+          "label": "Must"
+        }
+      ],
+      "negative": [
+        {
+          "value": false,
+          "label": "Affirmative"
+        },
+        {
+          "value": true,
+          "label": "Negative"
+        }
+      ]
+    },
+    "defaults": {
+      "subject": "he",
+      "modal": "can",
+      "negative": false
+    },
+    "completion": {
+      "type": "explore-control",
+      "control": "modal",
+      "requiredValues": [
+        "can",
+        "could",
+        "should",
+        "must"
+      ]
+    },
+    "sentenceModel": {
+      "subjects": {
+        "he": {
+          "label": "He",
+          "number": "singular"
+        },
+        "they": {
+          "label": "They",
+          "number": "plural"
+        }
+      },
+      "verb": {
+        "base": "play"
+      },
+      "object": "tennis",
+      "punctuation": "."
+    }
+  },
+  {
+    "id": "ST-003",
+    "type": "sentence-transformer",
+    "prompt": "Voiceを切り替えると、同じ出来事の視点と動詞の形がどう変わるか観察してください。",
+    "controls": {
+      "tense": [
+        {
+          "value": "present",
+          "label": "Present"
+        },
+        {
+          "value": "past",
+          "label": "Past"
+        }
+      ],
+      "voice": [
+        {
+          "value": "active",
+          "label": "Active"
+        },
+        {
+          "value": "passive",
+          "label": "Passive"
+        }
+      ]
+    },
+    "defaults": {
+      "tense": "present",
+      "voice": "active"
+    },
+    "completion": {
+      "type": "explore-control",
+      "control": "voice",
+      "requiredValues": [
+        "active",
+        "passive"
+      ]
+    },
+    "sentenceModel": {
+      "roles": {
+        "agent": {
+          "label": "the teacher",
+          "number": "singular"
+        },
+        "patient": {
+          "label": "the report",
+          "number": "singular"
+        }
+      },
+      "verb": {
+        "base": "write",
+        "past": "wrote",
+        "pastParticiple": "written"
+      },
+      "punctuation": "."
+    }
+  },
+  {
+    "id": "SPD-001",
+    "type": "sentence-pattern-diagram",
+    "prompt": "英文の各要素を選び、文型の骨格を確認してください。",
+    "sentence": "The boy plays soccer.",
+    "chunks": [
+      {
+        "id": "subject",
+        "text": "The boy",
+        "role": "S",
+        "label": "Subject",
+        "explanation": "「だれが・なにが」にあたる文の主語です。"
+      },
+      {
+        "id": "verb",
+        "text": "plays",
+        "role": "V",
+        "label": "Verb",
+        "explanation": "主語の動作を表す動詞です。"
+      },
+      {
+        "id": "object",
+        "text": "soccer",
+        "role": "O",
+        "label": "Object",
+        "explanation": "plays の動作の対象となる目的語です。"
+      }
+    ],
+    "pattern": [
+      "S",
+      "V",
+      "O"
+    ],
+    "explanation": "この文の骨格は S + V + O です。"
+  },
+  {
+    "id": "SPD-002",
+    "type": "sentence-pattern-diagram",
+    "prompt": "各要素を選び、主語と補語の関係を確認してください。",
+    "sentence": "My brother is kind.",
+    "chunks": [
+      {
+        "id": "subject",
+        "text": "My brother",
+        "role": "S",
+        "label": "Subject",
+        "explanation": "「だれが・なにが」にあたる文の主語です。"
+      },
+      {
+        "id": "verb",
+        "text": "is",
+        "role": "V",
+        "label": "Verb",
+        "explanation": "主語と補語をつなぐ動詞です。"
+      },
+      {
+        "id": "complement",
+        "text": "kind",
+        "role": "C",
+        "label": "Complement",
+        "explanation": "主語がどのようなものかを説明する補語です。"
+      }
+    ],
+    "pattern": [
+      "S",
+      "V",
+      "C"
+    ],
+    "explanation": "この文の骨格は S + V + C です。"
+  },
+  {
+    "id": "SPD-003",
+    "type": "sentence-pattern-diagram",
+    "prompt": "同じ役割記号が二度現れる文型も、要素ごとに確認してください。",
+    "sentence": "The teacher gave the class homework.",
+    "chunks": [
+      {
+        "id": "subject",
+        "text": "The teacher",
+        "role": "S",
+        "label": "Subject",
+        "explanation": "「だれが」にあたる文の主語です。"
+      },
+      {
+        "id": "verb",
+        "text": "gave",
+        "role": "V",
+        "label": "Verb",
+        "explanation": "与える動作を表す動詞です。"
+      },
+      {
+        "id": "indirect-object",
+        "text": "the class",
+        "role": "O",
+        "label": "Indirect Object",
+        "explanation": "何を受け取る人・ものかを表す間接目的語です。"
+      },
+      {
+        "id": "direct-object",
+        "text": "homework",
+        "role": "O",
+        "label": "Direct Object",
+        "explanation": "与えられるものを表す直接目的語です。"
+      }
+    ],
+    "pattern": [
+      "S",
+      "V",
+      "O",
+      "O"
+    ],
+    "explanation": "この文の骨格は S + V + O + O です。2つのOは別々のchunkとして見分けます。"
+  },
+  {
+    "id": "MCV-001",
+    "type": "modifier-connection-viewer",
+    "prompt": "修飾語を選び、どの語句にかかっているか確認してください。",
+    "sentence": "The boy with a red cap plays soccer.",
+    "chunks": [
+      {
+        "id": "the-boy",
+        "text": "The boy",
+        "kind": "core"
+      },
+      {
+        "id": "with-a-red-cap",
+        "text": "with a red cap",
+        "kind": "modifier"
+      },
+      {
+        "id": "plays",
+        "text": "plays",
+        "kind": "core"
+      },
+      {
+        "id": "soccer",
+        "text": "soccer",
+        "kind": "core"
+      }
+    ],
+    "relations": [
+      {
+        "id": "relation-1",
+        "modifierId": "with-a-red-cap",
+        "targetId": "the-boy",
+        "relationType": "modifies",
+        "label": "The boyを説明",
+        "explanation": "with a red cap は The boy に追加情報を与えています。"
+      }
+    ],
+    "explanation": "修飾語は、文中の別の語句に情報を付け加えます。"
+  },
+  {
+    "id": "MCV-002",
+    "type": "modifier-connection-viewer",
+    "prompt": "時間を表す修飾語と、説明している動作のつながりを確認してください。",
+    "sentence": "She studies English after dinner.",
+    "chunks": [
+      {
+        "id": "she",
+        "text": "She",
+        "kind": "core"
+      },
+      {
+        "id": "studies",
+        "text": "studies",
+        "kind": "core"
+      },
+      {
+        "id": "english",
+        "text": "English",
+        "kind": "core"
+      },
+      {
+        "id": "after-dinner",
+        "text": "after dinner",
+        "kind": "modifier"
+      }
+    ],
+    "relations": [
+      {
+        "id": "relation-1",
+        "modifierId": "after-dinner",
+        "targetId": "studies",
+        "relationType": "modifies",
+        "label": "studiesの時間を説明",
+        "explanation": "after dinner は studies がいつ行われるかを説明しています。"
+      }
+    ],
+    "explanation": "副詞句は、動作がいつ・どこで・どのように行われるかを説明できます。"
+  },
+  {
+    "id": "MCV-003",
+    "type": "modifier-connection-viewer",
+    "prompt": "関係詞節が、どの名詞に追加情報を与えているか確認してください。",
+    "sentence": "The student who studies hard passed the exam.",
+    "chunks": [
+      {
+        "id": "the-student",
+        "text": "The student",
+        "kind": "core"
+      },
+      {
+        "id": "who-studies-hard",
+        "text": "who studies hard",
+        "kind": "modifier"
+      },
+      {
+        "id": "passed",
+        "text": "passed",
+        "kind": "core"
+      },
+      {
+        "id": "the-exam",
+        "text": "the exam",
+        "kind": "core"
+      }
+    ],
+    "relations": [
+      {
+        "id": "relation-1",
+        "modifierId": "who-studies-hard",
+        "targetId": "the-student",
+        "relationType": "modifies",
+        "label": "The studentを説明",
+        "explanation": "who studies hard は The student がどのような生徒かを説明しています。"
+      }
+    ],
+    "explanation": "関係詞節は、前にある名詞へ説明を加えるまとまりとして働きます。"
+  },
+  {
+    "id": "SC-001",
+    "type": "sentence-comparison",
+    "prompt": "2つの英文の違う部分を選び、意味の違いを確認してください。",
+    "sentences": [
+      {
+        "id": "a",
+        "text": "I stopped smoking.",
+        "chunks": [
+          {
+            "id": "a-1",
+            "text": "I stopped",
+            "matchKey": "shared-1"
+          },
+          {
+            "id": "a-2",
+            "text": "smoking",
+            "differenceId": "purpose-action"
+          }
+        ]
+      },
+      {
+        "id": "b",
+        "text": "I stopped to smoke.",
+        "chunks": [
+          {
+            "id": "b-1",
+            "text": "I stopped",
+            "matchKey": "shared-1"
+          },
+          {
+            "id": "b-2",
+            "text": "to smoke",
+            "differenceId": "purpose-action"
+          }
+        ]
+      }
+    ],
+    "differences": [
+      {
+        "id": "purpose-action",
+        "leftChunkId": "a-2",
+        "rightChunkId": "b-2",
+        "label": "動名詞 / 不定詞",
+        "explanation": "動名詞は「喫煙をやめた」、不定詞は「喫煙するために立ち止まった」という違いを作ります。",
+        "meaningLeft": "私は喫煙をやめた。",
+        "meaningRight": "私は喫煙するために立ち止まった。"
+      }
+    ],
+    "explanation": "動詞の後ろの形が変わると、動作をやめたのか、その目的のために止まったのかが変わります。"
+  },
+  {
+    "id": "SC-002",
+    "type": "sentence-comparison",
+    "prompt": "比較表現の違う部分を選び、比較の強さと意味を確認してください。",
+    "sentences": [
+      {
+        "id": "a",
+        "text": "This bag is as light as that one.",
+        "chunks": [
+          {
+            "id": "a-1",
+            "text": "This bag is",
+            "matchKey": "subject"
+          },
+          {
+            "id": "a-2",
+            "text": "as light as",
+            "differenceId": "degree-comparison"
+          },
+          {
+            "id": "a-3",
+            "text": "that one",
+            "matchKey": "object"
+          }
+        ]
+      },
+      {
+        "id": "b",
+        "text": "This bag is lighter than that one.",
+        "chunks": [
+          {
+            "id": "b-1",
+            "text": "This bag is",
+            "matchKey": "subject"
+          },
+          {
+            "id": "b-2",
+            "text": "lighter than",
+            "differenceId": "degree-comparison"
+          },
+          {
+            "id": "b-3",
+            "text": "that one",
+            "matchKey": "object"
+          }
+        ]
+      }
+    ],
+    "differences": [
+      {
+        "id": "degree-comparison",
+        "leftChunkId": "a-2",
+        "rightChunkId": "b-2",
+        "label": "as ... as / 比較級",
+        "explanation": "as ... as は2つが同じ程度だと比べ、比較級は一方が他方より上回ることを示します。",
+        "meaningLeft": "このバッグはあのバッグと同じくらい軽い。",
+        "meaningRight": "このバッグはあのバッグより軽い。"
+      }
+    ],
+    "explanation": "比較する対象が同じでも、原級を使うか比較級を使うかで、伝わる関係が変わります。"
+  },
+  {
+    "id": "SC-003",
+    "type": "sentence-comparison",
+    "prompt": "能動態と受動態の違う部分を順に選び、視点の変化を確認してください。",
+    "sentences": [
+      {
+        "id": "a",
+        "text": "The chef cooks the meal.",
+        "chunks": [
+          {
+            "id": "a-1",
+            "text": "The chef",
+            "differenceId": "subject-agent"
+          },
+          {
+            "id": "a-2",
+            "text": "cooks",
+            "differenceId": "voice-form"
+          },
+          {
+            "id": "a-3",
+            "text": "the meal",
+            "matchKey": "meal"
+          }
+        ]
+      },
+      {
+        "id": "b",
+        "text": "The meal is cooked by the chef.",
+        "chunks": [
+          {
+            "id": "b-1",
+            "text": "The meal",
+            "matchKey": "meal"
+          },
+          {
+            "id": "b-2",
+            "text": "is cooked",
+            "differenceId": "voice-form"
+          },
+          {
+            "id": "b-3",
+            "text": "by the chef",
+            "differenceId": "subject-agent"
+          }
+        ]
+      }
+    ],
+    "differences": [
+      {
+        "id": "voice-form",
+        "leftChunkId": "a-2",
+        "rightChunkId": "b-2",
+        "label": "cooks / is cooked",
+        "explanation": "能動態は主語が動作を行う形、受動態は主語が動作を受ける形です。",
+        "meaningLeft": "料理人がその料理を作る。",
+        "meaningRight": "その料理が料理人によって作られる。"
+      },
+      {
+        "id": "subject-agent",
+        "leftChunkId": "a-1",
+        "rightChunkId": "b-3",
+        "label": "主語 / by句",
+        "explanation": "能動態の主語は、受動態ではby句に移り、動作を受ける対象が主語になります。",
+        "meaningLeft": "The chef が文の主語です。",
+        "meaningRight": "by the chef は動作主を補足しています。"
+      }
+    ],
+    "explanation": "同じ出来事でも、文の主語を誰・何にするかで、文の視点と動詞の形が変わります。"
+  },
+  {
+    "id": "SC-004",
+    "type": "sentence-comparison",
+    "prompt": "助動詞の違う部分を選び、話し手の意味の違いを確認してください。",
+    "sentences": [
+      {
+        "id": "a",
+        "text": "You can leave now.",
+        "chunks": [
+          {
+            "id": "a-1",
+            "text": "You",
+            "matchKey": "subject"
+          },
+          {
+            "id": "a-2",
+            "text": "can",
+            "differenceId": "modal-meaning"
+          },
+          {
+            "id": "a-3",
+            "text": "leave now.",
+            "matchKey": "action"
+          }
+        ]
+      },
+      {
+        "id": "b",
+        "text": "You must leave now.",
+        "chunks": [
+          {
+            "id": "b-1",
+            "text": "You",
+            "matchKey": "subject"
+          },
+          {
+            "id": "b-2",
+            "text": "must",
+            "differenceId": "modal-meaning"
+          },
+          {
+            "id": "b-3",
+            "text": "leave now.",
+            "matchKey": "action"
+          }
+        ]
+      }
+    ],
+    "differences": [
+      {
+        "id": "modal-meaning",
+        "leftChunkId": "a-2",
+        "rightChunkId": "b-2",
+        "label": "can / must",
+        "explanation": "can は許可や可能を、must は強い必要や義務を表します。",
+        "meaningLeft": "今、帰ってもよい。",
+        "meaningRight": "今、帰らなければならない。"
+      }
+    ],
+    "explanation": "助動詞の小さな形の差が、許可・可能と義務という意味の差を作ります。"
+  },
+  {
+    "id": "EC-001",
+    "type": "error-corrector",
+    "prompt": "誤っている部分を選び、正しい英文に直してください。",
+    "tokens": [
+      {
+        "id": "t1",
+        "text": "He"
+      },
+      {
+        "id": "t2",
+        "text": "play",
+        "correctionId": "agreement"
+      },
+      {
+        "id": "t3",
+        "text": "tennis."
+      }
+    ],
+    "corrections": [
+      {
+        "id": "agreement",
+        "tokenId": "t2",
+        "options": [
+          {
+            "id": "o1",
+            "text": "play"
+          },
+          {
+            "id": "o2",
+            "text": "plays"
+          },
+          {
+            "id": "o3",
+            "text": "played"
+          }
+        ],
+        "acceptedOptionIds": [
+          "o2"
+        ],
+        "ruleLabel": "Subject–verb agreement",
+        "explanation": "主語 He は三人称単数なので、現在形では動詞に -s を付けます。"
+      }
+    ],
+    "explanation": "主語の人称・数と動詞の形を対応させます。"
+  },
+  {
+    "id": "EC-002",
+    "type": "error-corrector",
+    "prompt": "時間を表す語句に合う動詞の形を選んでください。",
+    "tokens": [
+      {
+        "id": "t1",
+        "text": "Yesterday"
+      },
+      {
+        "id": "t2",
+        "text": "I"
+      },
+      {
+        "id": "t3",
+        "text": "go",
+        "correctionId": "past-tense"
+      },
+      {
+        "id": "t4",
+        "text": "to"
+      },
+      {
+        "id": "t5",
+        "text": "school."
+      }
+    ],
+    "corrections": [
+      {
+        "id": "past-tense",
+        "tokenId": "t3",
+        "options": [
+          {
+            "id": "o1",
+            "text": "go"
+          },
+          {
+            "id": "o2",
+            "text": "went"
+          },
+          {
+            "id": "o3",
+            "text": "goes"
+          }
+        ],
+        "acceptedOptionIds": [
+          "o2"
+        ],
+        "ruleLabel": "Past tense with a finished time",
+        "explanation": "Yesterday は過去の時点を表すので、動詞 go は過去形 went にします。"
+      }
+    ],
+    "explanation": "過去の時点を示す時間表現に合わせて、動詞の時制を選びます。"
+  },
+  {
+    "id": "EC-003",
+    "type": "error-corrector",
+    "prompt": "2箇所の誤りを見つけ、それぞれ正しい形に直してください。",
+    "tokens": [
+      {
+        "id": "t1",
+        "text": "She"
+      },
+      {
+        "id": "t2",
+        "text": "have",
+        "correctionId": "auxiliary-agreement"
+      },
+      {
+        "id": "t3",
+        "text": "finish",
+        "correctionId": "past-participle"
+      },
+      {
+        "id": "t4",
+        "text": "her"
+      },
+      {
+        "id": "t5",
+        "text": "homework."
+      }
+    ],
+    "corrections": [
+      {
+        "id": "auxiliary-agreement",
+        "tokenId": "t2",
+        "options": [
+          {
+            "id": "o1",
+            "text": "have"
+          },
+          {
+            "id": "o2",
+            "text": "has"
+          },
+          {
+            "id": "o3",
+            "text": "had"
+          }
+        ],
+        "acceptedOptionIds": [
+          "o2"
+        ],
+        "ruleLabel": "Subject–auxiliary agreement",
+        "explanation": "主語 She は三人称単数なので、現在完了の助動詞は has にします。"
+      },
+      {
+        "id": "past-participle",
+        "tokenId": "t3",
+        "options": [
+          {
+            "id": "o4",
+            "text": "finish"
+          },
+          {
+            "id": "o5",
+            "text": "finished"
+          },
+          {
+            "id": "o6",
+            "text": "finishing"
+          }
+        ],
+        "acceptedOptionIds": [
+          "o5"
+        ],
+        "ruleLabel": "Past participle after have / has",
+        "explanation": "現在完了では have / has の後ろに過去分詞を置くため、finish は finished にします。"
+      }
+    ],
+    "explanation": "現在完了では、主語に合う助動詞と、その後ろの過去分詞を組み合わせます。"
+  },
+  {
+    "id": "EC-004",
+    "type": "error-corrector",
+    "prompt": "助動詞の後ろの動詞の形を正しく直してください。",
+    "tokens": [
+      {
+        "id": "t1",
+        "text": "He"
+      },
+      {
+        "id": "t2",
+        "text": "can"
+      },
+      {
+        "id": "t3",
+        "text": "plays",
+        "correctionId": "modal-base-form"
+      },
+      {
+        "id": "t4",
+        "text": "tennis."
+      }
+    ],
+    "corrections": [
+      {
+        "id": "modal-base-form",
+        "tokenId": "t3",
+        "options": [
+          {
+            "id": "o7",
+            "text": "play"
+          },
+          {
+            "id": "o8",
+            "text": "plays"
+          },
+          {
+            "id": "o9",
+            "text": "playing"
+          }
+        ],
+        "acceptedOptionIds": [
+          "o7"
+        ],
+        "ruleLabel": "Base verb after a modal",
+        "explanation": "助動詞 can の後ろでは、三単現の -s を付けずに動詞の原形 play を使います。"
+      }
+    ],
+    "explanation": "助動詞の後ろには、主語が三人称単数でも動詞の原形を置きます。"
+  },
+  {
+    "id": "EC-005",
+    "type": "error-corrector",
+    "prompt": "受動態のbe動詞の後ろに置く動詞の形を正しく直してください。",
+    "tokens": [
+      {
+        "id": "t1",
+        "text": "The"
+      },
+      {
+        "id": "t2",
+        "text": "report"
+      },
+      {
+        "id": "t3",
+        "text": "was"
+      },
+      {
+        "id": "t4",
+        "text": "wrote",
+        "correctionId": "passive-participle"
+      },
+      {
+        "id": "t5",
+        "text": "by the teacher."
+      }
+    ],
+    "corrections": [
+      {
+        "id": "passive-participle",
+        "tokenId": "t4",
+        "options": [
+          {
+            "id": "o7",
+            "text": "write"
+          },
+          {
+            "id": "o8",
+            "text": "wrote"
+          },
+          {
+            "id": "o9",
+            "text": "written"
+          }
+        ],
+        "acceptedOptionIds": [
+          "o9"
+        ],
+        "ruleLabel": "Past participle in the passive",
+        "explanation": "受動態ではbe動詞の後ろに過去形 wrote ではなく、過去分詞 written を置きます。"
+      }
+    ],
+    "explanation": "受動態は be + 過去分詞で作ります。過去形と過去分詞が異なる動詞にも注意します。"
+  },
+  {
+    "id": "EC-006",
+    "type": "error-corrector",
+    "prompt": "to の後ろの動詞を原形に直し、正しい英文を完成させてください。",
+    "tokens": [
+      {
+        "id": "t1",
+        "text": "She"
+      },
+      {
+        "id": "t2",
+        "text": "wants"
+      },
+      {
+        "id": "t3",
+        "text": "to"
+      },
+      {
+        "id": "t4",
+        "text": "studies",
+        "correctionId": "infinitive-base-form"
+      },
+      {
+        "id": "t5",
+        "text": "abroad."
+      }
+    ],
+    "corrections": [
+      {
+        "id": "infinitive-base-form",
+        "tokenId": "t4",
+        "options": [
+          {
+            "id": "o16",
+            "text": "study"
+          },
+          {
+            "id": "o17",
+            "text": "studies"
+          },
+          {
+            "id": "o18",
+            "text": "studying"
+          }
+        ],
+        "acceptedOptionIds": [
+          "o16"
+        ],
+        "ruleLabel": "Base verb after to",
+        "explanation": "不定詞ではtoの後ろに動詞の原形を置くため、studiesではなくstudyを使います。"
+      }
+    ],
+    "explanation": "to不定詞の基本形は to + 動詞原形です。主語が三人称単数でも、toの後ろに -s は付けません。"
+  },
+  {
+    "id": "EC-007",
+    "type": "error-corrector",
+    "prompt": "enjoy の後ろの動詞の形を正しく直してください。",
+    "tokens": [
+      {
+        "id": "t1",
+        "text": "She"
+      },
+      {
+        "id": "t2",
+        "text": "enjoys"
+      },
+      {
+        "id": "t3",
+        "text": "to read",
+        "correctionId": "gerund-after-enjoy"
+      },
+      {
+        "id": "t4",
+        "text": "novels."
+      }
+    ],
+    "corrections": [
+      {
+        "id": "gerund-after-enjoy",
+        "tokenId": "t3",
+        "options": [
+          {
+            "id": "o19",
+            "text": "reading"
+          },
+          {
+            "id": "o20",
+            "text": "to read"
+          },
+          {
+            "id": "o21",
+            "text": "read"
+          }
+        ],
+        "acceptedOptionIds": [
+          "o19"
+        ],
+        "ruleLabel": "Gerund after enjoy",
+        "explanation": "enjoy の後ろでは、通常 to不定詞ではなく動名詞を使うため、to read ではなく reading にします。"
+      }
+    ],
+    "explanation": "動詞によって、後ろに動名詞を取るか不定詞を取るかが異なります。enjoy は動名詞を取る代表例です。-ing が常に正しいわけではありません。"
+  },
+  {
+    "id": "CG-001",
+    "type": "context-grammar",
+    "prompt": "場面に合う表現を選び、ホテルとの会話を進めてください。",
+    "scenario": {
+      "title": "Late checkout",
+      "setting": "ホテルのチェックアウト時刻を少し遅らせたい場面です。",
+      "learnerRole": "Guest",
+      "goal": "ホテルのスタッフに、丁寧にレイトチェックアウトを依頼する。"
+    },
+    "steps": [
+      {
+        "id": "cg001-step-1",
+        "speaker": "Hotel staff",
+        "line": "Good morning. How can I help you?",
+        "instruction": "チェックアウトを遅らせたいと、丁寧に依頼してください。",
+        "choices": [
+          {
+            "id": "cg001-choice-1a",
+            "text": "Could I get a late checkout, please?",
+            "reply": "Certainly. We can extend your checkout until noon.",
+            "grammarLabel": "Polite request with could",
+            "explanation": "Could I ...? は許可や依頼を丁寧に尋ねる表現です。"
+          },
+          {
+            "id": "cg001-choice-1b",
+            "text": "Give me a late checkout.",
+            "grammarLabel": "Imperative",
+            "explanation": "命令形なので、この場面では相手への依頼として直接的すぎます。"
+          }
+        ],
+        "acceptedChoiceIds": [
+          "cg001-choice-1a"
+        ]
+      },
+      {
+        "id": "cg001-step-2",
+        "speaker": "Hotel staff",
+        "line": "What time would you like to check out?",
+        "instruction": "希望する時刻を、丁寧な依頼として伝えてください。",
+        "choices": [
+          {
+            "id": "cg001-choice-2a",
+            "text": "Could we check out at noon, please?",
+            "reply": "Yes, noon will be fine. I will note it on your reservation.",
+            "grammarLabel": "Could for a polite request",
+            "explanation": "Could we ...? は相手への配慮を含む丁寧な依頼に使えます。"
+          },
+          {
+            "id": "cg001-choice-2b",
+            "text": "We check out at noon.",
+            "grammarLabel": "Present statement",
+            "explanation": "希望を尋ねられているので、単なる事実の断定より依頼表現が適切です。"
+          }
+        ],
+        "acceptedChoiceIds": [
+          "cg001-choice-2a"
+        ]
+      }
+    ],
+    "explanation": "依頼表現は、文法的に正しいだけでなく、場面や相手との関係に合わせて選びます。"
+  },
+  {
+    "id": "CG-002",
+    "type": "context-grammar",
+    "prompt": "時間の手がかりに合う表現を選び、学校での会話を進めてください。",
+    "scenario": {
+      "title": "Yesterday after school",
+      "setting": "昨日の放課後にしたことを先生へ説明する場面です。",
+      "learnerRole": "Student",
+      "goal": "終わった過去の出来事を、適切な過去形で説明する。"
+    },
+    "steps": [
+      {
+        "id": "cg002-step-1",
+        "speaker": "Teacher",
+        "line": "What did you do after school yesterday?",
+        "instruction": "Yesterday に合う過去形で答えてください。",
+        "choices": [
+          {
+            "id": "cg002-choice-1a",
+            "text": "I practiced the piano.",
+            "reply": "That sounds like a productive afternoon.",
+            "grammarLabel": "Past tense with yesterday",
+            "explanation": "Yesterday は終わった過去の時点なので、practice の過去形 practiced を使います。"
+          },
+          {
+            "id": "cg002-choice-1b",
+            "text": "I practice the piano.",
+            "grammarLabel": "Present tense",
+            "explanation": "Yesterday という過去の手がかりには、現在形より過去形が合います。"
+          }
+        ],
+        "acceptedChoiceIds": [
+          "cg002-choice-1a"
+        ]
+      },
+      {
+        "id": "cg002-step-2",
+        "speaker": "Teacher",
+        "line": "Did you finish your science report?",
+        "instruction": "昨夜に終えたことを、過去形で答えてください。",
+        "choices": [
+          {
+            "id": "cg002-choice-2a",
+            "text": "Yes, I finished it last night.",
+            "reply": "Excellent. Please put it on my desk before class.",
+            "grammarLabel": "Past tense with last night",
+            "explanation": "Last night は終わった過去の時点なので、finish の過去形 finished を使います。"
+          },
+          {
+            "id": "cg002-choice-2b",
+            "text": "Yes, I finish it last night.",
+            "grammarLabel": "Present tense with a finished time",
+            "explanation": "Last night と一緒に使う動詞は、終わった過去を表す finished にします。"
+          }
+        ],
+        "acceptedChoiceIds": [
+          "cg002-choice-2a"
+        ]
+      }
+    ],
+    "explanation": "Yesterday や last night のような時間情報は、終わった出来事を表す過去形の手がかりになります。"
+  },
+  {
+    "id": "CG-003",
+    "type": "context-grammar",
+    "prompt": "経験と具体的な過去時点を区別し、旅行の会話を進めてください。",
+    "scenario": {
+      "title": "Talking about a trip",
+      "setting": "旅行経験について友人と話し、いつ行ったかを続けて説明する場面です。",
+      "learnerRole": "Traveler",
+      "goal": "経験には現在完了、具体的な過去時点には過去形を使い分ける。"
+    },
+    "steps": [
+      {
+        "id": "cg003-step-1",
+        "speaker": "Friend",
+        "line": "Have you ever been to Kyoto?",
+        "instruction": "経験があるかどうかを、現在完了を使って答えてください。",
+        "choices": [
+          {
+            "id": "cg003-choice-1a",
+            "text": "Yes, I have.",
+            "reply": "When did you go there?",
+            "grammarLabel": "Present perfect for experience",
+            "explanation": "Have you ever ...? という経験の質問には、Yes, I have. と現在完了で答えます。"
+          },
+          {
+            "id": "cg003-choice-1b",
+            "text": "Yes, I went there last year.",
+            "grammarLabel": "Past detail too early",
+            "explanation": "この質問はまず経験の有無を聞いているので、最初は Yes, I have. が焦点に合います。"
+          }
+        ],
+        "acceptedChoiceIds": [
+          "cg003-choice-1a"
+        ]
+      },
+      {
+        "id": "cg003-step-2",
+        "speaker": "Friend",
+        "line": "When did you go there?",
+        "instruction": "具体的な過去時点に合う過去形で答えてください。",
+        "choices": [
+          {
+            "id": "cg003-choice-2a",
+            "text": "I went there last year.",
+            "reply": "That must have been a memorable trip.",
+            "grammarLabel": "Past tense with a finished time",
+            "explanation": "Last year は具体的な過去時点なので、go の過去形 went を使います。"
+          },
+          {
+            "id": "cg003-choice-2b",
+            "text": "I have gone there last year.",
+            "grammarLabel": "Present perfect with a finished time",
+            "explanation": "Last year のような具体的に終わった時点には、現在完了ではなく過去形を使います。"
+          }
+        ],
+        "acceptedChoiceIds": [
+          "cg003-choice-2a"
+        ]
+      }
+    ],
+    "explanation": "経験を尋ねるときは現在完了、いつ起きたかを示す具体的な過去時点には過去形を使います。"
+  },
+  {
+    "id": "CG-004",
+    "type": "context-grammar",
+    "prompt": "助言と義務の場面に合う助動詞を選び、会話を進めてください。",
+    "scenario": {
+      "title": "Advice and obligation",
+      "setting": "勉強の相談と、実験室の安全規則について話す場面です。",
+      "learnerRole": "Student",
+      "goal": "助言には should、明確な義務には must を使い分ける。"
+    },
+    "steps": [
+      {
+        "id": "cg004-step-1",
+        "speaker": "Friend",
+        "line": "I have an important test tomorrow. What do you recommend?",
+        "instruction": "相手への助言として、今夜勉強することを伝えてください。",
+        "choices": [
+          {
+            "id": "cg004-choice-1a",
+            "text": "You should study tonight.",
+            "reply": "That sounds helpful. I will start tonight.",
+            "grammarLabel": "should for advice",
+            "explanation": "should は相手にとってよい行動をすすめる、穏やかな助言に使います。"
+          },
+          {
+            "id": "cg004-choice-1b",
+            "text": "You could study tonight.",
+            "reply": "That is another good idea. I will make a study plan.",
+            "grammarLabel": "could for a suggestion",
+            "explanation": "could も選択肢の一つを提案する助言に使えるため、この場面で自然です。"
+          },
+          {
+            "id": "cg004-choice-1c",
+            "text": "You must not study tonight.",
+            "grammarLabel": "must not for prohibition",
+            "explanation": "must not は禁止を表すので、勉強をすすめるこの場面の目的に合いません。"
+          }
+        ],
+        "acceptedChoiceIds": [
+          "cg004-choice-1a",
+          "cg004-choice-1b"
+        ]
+      },
+      {
+        "id": "cg004-step-2",
+        "speaker": "Lab supervisor",
+        "line": "Students are required to wear safety glasses in the lab.",
+        "instruction": "明確な安全規則による義務として、保護めがねを着用するよう伝えてください。",
+        "choices": [
+          {
+            "id": "cg004-choice-2a",
+            "text": "You must wear safety glasses.",
+            "reply": "Exactly. Please put them on before you enter.",
+            "grammarLabel": "must for obligation",
+            "explanation": "must は規則や必要性にもとづく、強い義務を表します。"
+          },
+          {
+            "id": "cg004-choice-2b",
+            "text": "You should wear safety glasses.",
+            "grammarLabel": "should for advice",
+            "explanation": "should は助言としては自然ですが、required と示された規則の強い義務には must が合います。"
+          }
+        ],
+        "acceptedChoiceIds": [
+          "cg004-choice-2a"
+        ]
+      }
+    ],
+    "explanation": "should や could は助言・提案、must は規則にもとづく強い義務を表します。場面と話し手の意図を合わせて選びます。"
+  },
+  {
+    "id": "CG-005",
+    "type": "context-grammar",
+    "prompt": "何に焦点を置くかに合う能動態・受動態を選び、会話を進めてください。",
+    "scenario": {
+      "title": "Choosing the focus",
+      "setting": "出来事の対象に焦点を置くか、動作主を前面に出すかを考える場面です。",
+      "learnerRole": "Reporter",
+      "goal": "動作主が不明なときや対象に焦点を置きたいときに、受動態を選ぶ。"
+    },
+    "steps": [
+      {
+        "id": "cg005-step-1",
+        "speaker": "Editor",
+        "line": "What happened to the window last night?",
+        "instruction": "誰がしたか分からない出来事として、窓に焦点を置いて報告してください。",
+        "choices": [
+          {
+            "id": "cg005-choice-1a",
+            "text": "The window was broken last night.",
+            "reply": "Good. The report focuses on the window, and the agent is unknown.",
+            "grammarLabel": "Passive when the agent is unknown",
+            "explanation": "今回のreporting goalでは、誰がしたかを示さず、対象のwindowに焦点を置くため受動態が合います。"
+          },
+          {
+            "id": "cg005-choice-1b",
+            "text": "Someone broke the window last night.",
+            "grammarLabel": "Active with an unspecified agent",
+            "explanation": "この文も文法的ですが、今回は動作主を前面に出さず、対象に焦点を置くことが目的です。"
+          }
+        ],
+        "acceptedChoiceIds": [
+          "cg005-choice-1a"
+        ]
+      },
+      {
+        "id": "cg005-step-2",
+        "speaker": "Editor",
+        "line": "The school festival was a success. Who organized it?",
+        "instruction": "対象を主語にしつつ、必要な動作主をby句で示してください。",
+        "choices": [
+          {
+            "id": "cg005-choice-2a",
+            "text": "The school festival was organized by the students.",
+            "reply": "Exactly. The festival stays in focus, while the students are added as the agent.",
+            "grammarLabel": "Passive with a by-phrase",
+            "explanation": "受動態では対象のschool festivalを主語に置き、by the studentsで動作主を補足できます。"
+          },
+          {
+            "id": "cg005-choice-2b",
+            "text": "The students organized the school festival.",
+            "grammarLabel": "Active with the agent as subject",
+            "explanation": "この文も文法的ですが、今回は対象のschool festivalを主語として焦点に置く指定です。"
+          }
+        ],
+        "acceptedChoiceIds": [
+          "cg005-choice-2a"
+        ]
+      }
+    ],
+    "explanation": "受動態は単なる変形ではなく、何を主語として焦点に置くか、動作主を示す必要があるかに応じて選びます。"
+  },
+  {
+    "id": "CG-006",
+    "type": "context-grammar",
+    "prompt": "場面に合う不定詞の働きを選び、会話を進めてください。",
+    "scenario": {
+      "title": "Plans, needs, and purposes",
+      "setting": "週末の予定、必要なもの、英語を学ぶ目的について話す場面です。",
+      "learnerRole": "Student",
+      "goal": "不定詞が何を表しているかを場面に合わせて選ぶ。"
+    },
+    "steps": [
+      {
+        "id": "cg006-step-1",
+        "speaker": "Friend",
+        "line": "What do you want to do this weekend?",
+        "instruction": "want の内容として、週末にしたいことを不定詞で答えてください。",
+        "choices": [
+          {
+            "id": "cg006-choice-1a",
+            "text": "I want to visit the museum.",
+            "reply": "That sounds fun. I hope you enjoy the visit.",
+            "grammarLabel": "Infinitive after want",
+            "explanation": "to visit the museum がwantの内容を表します。"
+          },
+          {
+            "id": "cg006-choice-1b",
+            "text": "I want visit the museum.",
+            "grammarLabel": "Missing to",
+            "explanation": "want の後ろで「訪れること」を表すには、to visit の形にします。"
+          }
+        ],
+        "acceptedChoiceIds": [
+          "cg006-choice-1a"
+        ]
+      },
+      {
+        "id": "cg006-step-2",
+        "speaker": "Friend",
+        "line": "What do you need for the train ride?",
+        "instruction": "必要なものを、名詞を説明する不定詞で答えてください。",
+        "choices": [
+          {
+            "id": "cg006-choice-2a",
+            "text": "I need a book to read.",
+            "reply": "Good idea. You can read it on the train.",
+            "grammarLabel": "Adjective-like infinitive",
+            "explanation": "to read がa bookを説明し、「読むための本」という意味を作ります。"
+          },
+          {
+            "id": "cg006-choice-2b",
+            "text": "I need to read a book.",
+            "grammarLabel": "Infinitive after need",
+            "explanation": "この文も文法的には正しいですが、「私は本を読む必要がある」という意味で、今回の「何が必要か」というgoalには一致しません。"
+          }
+        ],
+        "acceptedChoiceIds": [
+          "cg006-choice-2a"
+        ]
+      },
+      {
+        "id": "cg006-step-3",
+        "speaker": "Friend",
+        "line": "Why do you watch English videos?",
+        "instruction": "英語の動画を見る目的を、目的を表す不定詞で説明してください。",
+        "choices": [
+          {
+            "id": "cg006-choice-3a",
+            "text": "I watch them to learn English.",
+            "reply": "That is a useful way to practice every day.",
+            "grammarLabel": "Adverb-like infinitive of purpose",
+            "explanation": "to learn English がwatch themの目的を表します。"
+          },
+          {
+            "id": "cg006-choice-3b",
+            "text": "I watch them to learning English.",
+            "grammarLabel": "Wrong form after to",
+            "explanation": "toの後ろには動詞の原形learnを置き、learningにはしません。"
+          }
+        ],
+        "acceptedChoiceIds": [
+          "cg006-choice-3a"
+        ]
+      }
+    ],
+    "explanation": "不定詞は、wantの内容、名詞の説明、動作の目的など、文中でさまざまな働きをします。"
+  },
+  {
+    "id": "CG-007",
+    "type": "context-grammar",
+    "prompt": "場面に合う動名詞の使い方を選び、会話を進めてください。",
+    "scenario": {
+      "title": "Hobbies, finishing, and stopping",
+      "setting": "好きなこと、終えた行為、やめた行為について話す場面です。",
+      "learnerRole": "Student",
+      "goal": "動名詞を取る表現と、動名詞・不定詞で意味が変わる表現を場面に合わせて選ぶ。"
+    },
+    "steps": [
+      {
+        "id": "cg007-step-1",
+        "speaker": "Friend",
+        "line": "What do you enjoy doing after work?",
+        "instruction": "enjoy の後ろに動名詞を置いて、好きなことを答えてください。",
+        "choices": [
+          {
+            "id": "cg007-choice-1a",
+            "text": "I enjoy cooking.",
+            "reply": "That sounds relaxing. Cooking can be a great hobby.",
+            "grammarLabel": "Gerund after enjoy",
+            "explanation": "enjoy の後ろでは cooking のような動名詞を使います。"
+          },
+          {
+            "id": "cg007-choice-1b",
+            "text": "I enjoy to cook.",
+            "grammarLabel": "Infinitive after enjoy",
+            "explanation": "enjoy の後ろでは通常to不定詞ではなく、動名詞 cooking を使います。"
+          }
+        ],
+        "acceptedChoiceIds": [
+          "cg007-choice-1a"
+        ]
+      },
+      {
+        "id": "cg007-step-2",
+        "speaker": "Teacher",
+        "line": "Did you finish your report?",
+        "instruction": "finish の後ろに動名詞を置いて、終えた行為を答えてください。",
+        "choices": [
+          {
+            "id": "cg007-choice-2a",
+            "text": "Yes, I finished writing it.",
+            "reply": "Good. Now you can submit the report.",
+            "grammarLabel": "Gerund after finish",
+            "explanation": "finish の後ろでは writing のような動名詞を使って、終えた行為の内容を表します。"
+          },
+          {
+            "id": "cg007-choice-2b",
+            "text": "Yes, I finished to write it.",
+            "grammarLabel": "Infinitive after finish",
+            "explanation": "finish の後ろで行為を表す場合は、通常to不定詞ではなく動名詞を使います。"
+          }
+        ],
+        "acceptedChoiceIds": [
+          "cg007-choice-2a"
+        ]
+      },
+      {
+        "id": "cg007-step-3",
+        "speaker": "Friend",
+        "line": "Did you stop talking when class started?",
+        "instruction": "話すのをやめたことを、stop + 動名詞で答えてください。",
+        "choices": [
+          {
+            "id": "cg007-choice-3a",
+            "text": "Yes, I stopped talking.",
+            "reply": "That was considerate. The class could begin quietly.",
+            "grammarLabel": "stop + gerund",
+            "explanation": "stop talking は、「話すという行為をやめる」という意味です。"
+          },
+          {
+            "id": "cg007-choice-3b",
+            "text": "Yes, I stopped to talk to my teacher.",
+            "grammarLabel": "stop + infinitive",
+            "explanation": "この文も文法的ですが、stop to talk は「話すために立ち止まる／別の行動を止める」という意味で、今回のgoalとは異なります。"
+          }
+        ],
+        "acceptedChoiceIds": [
+          "cg007-choice-3a"
+        ]
+      }
+    ],
+    "explanation": "enjoy や finish の後ろでは動名詞を使い、stop は後ろの形によって意味が変わります。"
+  },
+  {
+    "id": "SG-001",
+    "type": "sentence-generator",
+    "prompt": "目標に合う英文を組み立て、Generateで確かめてください。",
+    "goal": {
+      "title": "Present affirmative",
+      "description": "He を主語にして、現在形の肯定文を作る。"
+    },
+    "controls": {
+      "subject": [
+        {
+          "value": "he",
+          "label": "He"
+        },
+        {
+          "value": "they",
+          "label": "They"
+        }
+      ],
+      "tense": [
+        {
+          "value": "present",
+          "label": "Present"
+        },
+        {
+          "value": "past",
+          "label": "Past"
+        }
+      ],
+      "negative": [
+        {
+          "value": false,
+          "label": "Affirmative"
+        },
+        {
+          "value": true,
+          "label": "Negative"
+        }
+      ]
+    },
+    "targetStates": [
+      {
+        "subject": "he",
+        "tense": "present",
+        "negative": false
+      }
+    ],
+    "sentenceModel": {
+      "subjects": {
+        "he": {
+          "label": "He",
+          "number": "singular"
+        },
+        "they": {
+          "label": "They",
+          "number": "plural"
+        }
+      },
+      "verb": {
+        "base": "play",
+        "past": "played"
+      },
+      "object": "tennis",
+      "punctuation": "."
+    },
+    "explanation": "三人称単数の現在形では、主語 He に合わせて動詞に -s が付きます。"
+  },
+  {
+    "id": "SG-002",
+    "type": "sentence-generator",
+    "prompt": "目標に合う英文を組み立て、Generateで確かめてください。",
+    "goal": {
+      "title": "Past negative",
+      "description": "They を主語にして、過去形の否定文を作る。"
+    },
+    "controls": {
+      "subject": [
+        {
+          "value": "he",
+          "label": "He"
+        },
+        {
+          "value": "they",
+          "label": "They"
+        }
+      ],
+      "tense": [
+        {
+          "value": "present",
+          "label": "Present"
+        },
+        {
+          "value": "past",
+          "label": "Past"
+        }
+      ],
+      "negative": [
+        {
+          "value": false,
+          "label": "Affirmative"
+        },
+        {
+          "value": true,
+          "label": "Negative"
+        }
+      ]
+    },
+    "targetStates": [
+      {
+        "subject": "they",
+        "tense": "past",
+        "negative": true
+      }
+    ],
+    "sentenceModel": {
+      "subjects": {
+        "he": {
+          "label": "He",
+          "number": "singular"
+        },
+        "they": {
+          "label": "They",
+          "number": "plural"
+        }
+      },
+      "verb": {
+        "base": "play",
+        "past": "played"
+      },
+      "object": "tennis",
+      "punctuation": "."
+    },
+    "explanation": "過去形の否定文では did not の後ろに動詞の原形 play を置きます。"
+  },
+  {
+    "id": "SG-003",
+    "type": "sentence-generator",
+    "prompt": "目標に合う英文を組み立て、複数の許容状態を確かめてください。",
+    "goal": {
+      "title": "Past negative for either subject",
+      "description": "He または They を主語にして、過去形の否定文を作る。"
+    },
+    "controls": {
+      "subject": [
+        {
+          "value": "he",
+          "label": "He"
+        },
+        {
+          "value": "they",
+          "label": "They"
+        }
+      ],
+      "tense": [
+        {
+          "value": "present",
+          "label": "Present"
+        },
+        {
+          "value": "past",
+          "label": "Past"
+        }
+      ],
+      "negative": [
+        {
+          "value": false,
+          "label": "Affirmative"
+        },
+        {
+          "value": true,
+          "label": "Negative"
+        }
+      ]
+    },
+    "targetStates": [
+      {
+        "subject": "he",
+        "tense": "past",
+        "negative": true
+      },
+      {
+        "subject": "they",
+        "tense": "past",
+        "negative": true
+      }
+    ],
+    "sentenceModel": {
+      "subjects": {
+        "he": {
+          "label": "He",
+          "number": "singular"
+        },
+        "they": {
+          "label": "They",
+          "number": "plural"
+        }
+      },
+      "verb": {
+        "base": "play",
+        "past": "played"
+      },
+      "object": "tennis",
+      "punctuation": "."
+    },
+    "explanation": "主語が変わっても、過去形の否定では did not の後ろに動詞の原形を置きます。"
+  },
+  {
+    "id": "SG-004",
+    "type": "sentence-generator",
+    "prompt": "助動詞を含む目標に合う英文を組み立て、Generateで確かめてください。",
+    "goal": {
+      "title": "Advice with should",
+      "description": "They を主語にして、「〜すべきだ」という助言の肯定文を作る。"
+    },
+    "controls": {
+      "subject": [
+        {
+          "value": "he",
+          "label": "He"
+        },
+        {
+          "value": "they",
+          "label": "They"
+        }
+      ],
+      "modal": [
+        {
+          "value": "can",
+          "label": "Can"
+        },
+        {
+          "value": "could",
+          "label": "Could"
+        },
+        {
+          "value": "should",
+          "label": "Should"
+        },
+        {
+          "value": "must",
+          "label": "Must"
+        }
+      ],
+      "negative": [
+        {
+          "value": false,
+          "label": "Affirmative"
+        },
+        {
+          "value": true,
+          "label": "Negative"
+        }
+      ]
+    },
+    "targetStates": [
+      {
+        "subject": "they",
+        "modal": "should",
+        "negative": false
+      }
+    ],
+    "sentenceModel": {
+      "subjects": {
+        "he": {
+          "label": "He",
+          "number": "singular"
+        },
+        "they": {
+          "label": "They",
+          "number": "plural"
+        }
+      },
+      "verb": {
+        "base": "play"
+      },
+      "object": "tennis",
+      "punctuation": "."
+    },
+    "explanation": "助動詞 should の後ろには、主語が They でも動詞の原形 play を置きます。"
+  },
+  {
+    "id": "SG-005",
+    "type": "sentence-generator",
+    "prompt": "目標に合う能動態または受動態の英文を組み立て、Generateで確かめてください。",
+    "goal": {
+      "title": "Past passive",
+      "description": "過去の出来事を、the report を主語にした受動態で表す。"
+    },
+    "controls": {
+      "tense": [
+        {
+          "value": "present",
+          "label": "Present"
+        },
+        {
+          "value": "past",
+          "label": "Past"
+        }
+      ],
+      "voice": [
+        {
+          "value": "active",
+          "label": "Active"
+        },
+        {
+          "value": "passive",
+          "label": "Passive"
+        }
+      ]
+    },
+    "targetStates": [
+      {
+        "tense": "past",
+        "voice": "passive"
+      }
+    ],
+    "sentenceModel": {
+      "roles": {
+        "agent": {
+          "label": "the teacher",
+          "number": "singular"
+        },
+        "patient": {
+          "label": "the report",
+          "number": "singular"
+        }
+      },
+      "verb": {
+        "base": "write",
+        "past": "wrote",
+        "pastParticiple": "written"
+      },
+      "punctuation": "."
+    },
+    "explanation": "受動態では動作を受ける対象を主語にし、be動詞の過去形 was の後ろに過去分詞 written を置きます。"
+  },
+  {
+    "id": "MPO-001",
+    "type": "modifier-positioner",
+    "prompt": "in the library が The students を説明する位置へ置いてください。",
+    "goal": {
+      "description": "場所そのものではなく、どのstudentsかを説明する。"
+    },
+    "chunks": [
+      {
+        "id": "the-students",
+        "text": "The students"
+      },
+      {
+        "id": "are-studying",
+        "text": "are studying"
+      }
+    ],
+    "modifier": {
+      "id": "in-the-library",
+      "text": "in the library"
+    },
+    "placements": [
+      {
+        "id": "after-subject",
+        "position": 1,
+        "label": "After “The students”",
+        "modifierText": "in the library",
+        "grammatical": true,
+        "matchesGoal": true,
+        "relation": {
+          "modifierId": "in-the-library",
+          "targetId": "the-students",
+          "relationType": "modifies",
+          "label": "The studentsを説明",
+          "explanation": "in the library が、どのstudentsかを限定しています。"
+        },
+        "meaning": "図書館にいる生徒たちが勉強している。"
+      },
+      {
+        "id": "sentence-end",
+        "position": 2,
+        "label": "Sentence end",
+        "modifierText": "in the library",
+        "grammatical": true,
+        "matchesGoal": false,
+        "relation": {
+          "modifierId": "in-the-library",
+          "targetId": "are-studying",
+          "relationType": "modifies",
+          "label": "are studyingを説明",
+          "explanation": "文末では、勉強している場所を表す読みになります。"
+        },
+        "meaning": "生徒たちは図書館で勉強している。"
+      }
+    ],
+    "punctuation": ".",
+    "explanation": "同じ語句でも、置く位置によってどこへ情報を加えるかが変わります。"
+  },
+  {
+    "id": "MPO-002",
+    "type": "modifier-positioner",
+    "prompt": "wearing a blue hat が The girl を説明する位置へ置いてください。",
+    "goal": {
+      "description": "wearing a blue hat がどのgirlを説明するかを確かめる。"
+    },
+    "chunks": [
+      {
+        "id": "the-girl",
+        "text": "The girl"
+      },
+      {
+        "id": "waved-to-us",
+        "text": "waved to us"
+      }
+    ],
+    "modifier": {
+      "id": "wearing-a-blue-hat",
+      "text": "wearing a blue hat"
+    },
+    "placements": [
+      {
+        "id": "after-subject",
+        "position": 1,
+        "label": "After “The girl”",
+        "grammatical": true,
+        "matchesGoal": true,
+        "relation": {
+          "modifierId": "wearing-a-blue-hat",
+          "targetId": "the-girl",
+          "relationType": "modifies",
+          "label": "The girlを説明",
+          "explanation": "wearing a blue hat が、どのgirlかを説明しています。"
+        },
+        "meaning": "青い帽子をかぶっている女の子が私たちに手を振った。"
+      },
+      {
+        "id": "sentence-end",
+        "position": 2,
+        "label": "Sentence end",
+        "grammatical": true,
+        "matchesGoal": false,
+        "relation": {
+          "modifierId": "wearing-a-blue-hat",
+          "targetId": "waved-to-us",
+          "relationType": "modifies",
+          "label": "waved to usを説明",
+          "explanation": "文末では、手を振った動作に付随する情報のように読め、girlへの直接の説明が弱くなります。"
+        },
+        "meaning": "女の子は青い帽子をかぶりながら私たちに手を振った。"
+      }
+    ],
+    "punctuation": ".",
+    "explanation": "分詞句は置く位置によって、名詞への説明か動作への付随情報かが変わります。"
+  },
+  {
+    "id": "MPO-003",
+    "type": "modifier-positioner",
+    "prompt": "on Sundays を自然な位置へ置き、どちらも使えることを確認してください。",
+    "goal": {
+      "description": "on Sundays のような時間の副詞句を、文頭と文末の両方で使う。"
+    },
+    "chunks": [
+      {
+        "id": "they",
+        "text": "They"
+      },
+      {
+        "id": "visit-the-museum",
+        "text": "visit the museum"
+      }
+    ],
+    "modifier": {
+      "id": "on-sundays",
+      "text": "on Sundays"
+    },
+    "placements": [
+      {
+        "id": "sentence-start",
+        "position": 0,
+        "label": "Sentence start",
+        "modifierText": "On Sundays,",
+        "chunkTextOverrides": {
+          "they": "they"
+        },
+        "grammatical": true,
+        "matchesGoal": true,
+        "relation": {
+          "modifierId": "on-sundays",
+          "targetId": "visit-the-museum",
+          "relationType": "modifies",
+          "label": "visit the museumの頻度を説明",
+          "explanation": "On Sundays は visit the museum がいつ行われるかを説明しています。"
+        },
+        "meaning": "日曜日には、彼らは博物館を訪れる。"
+      },
+      {
+        "id": "sentence-end",
+        "position": 2,
+        "label": "Sentence end",
+        "modifierText": "on Sundays",
+        "grammatical": true,
+        "matchesGoal": true,
+        "relation": {
+          "modifierId": "on-sundays",
+          "targetId": "visit-the-museum",
+          "relationType": "modifies",
+          "label": "visit the museumの頻度を説明",
+          "explanation": "文末のon Sundaysも、visit the museumがいつ行われるかを説明しています。"
+        },
+        "meaning": "彼らは日曜日に博物館を訪れる。"
+      }
+    ],
+    "punctuation": ".",
+    "explanation": "時間を表す副詞句は、文頭と文末のどちらにも置ける場合があります。"
+  },
+  {
+    "id": "MPO-004",
+    "type": "modifier-positioner",
+    "prompt": "to learn English を目的を表す位置へ置き、文頭と文末の両方を確認してください。",
+    "goal": {
+      "description": "to learn English が、映画を見る目的を表すことを確かめる。"
+    },
+    "chunks": [
+      {
+        "id": "i",
+        "text": "I"
+      },
+      {
+        "id": "watch-movies",
+        "text": "watch movies"
+      }
+    ],
+    "modifier": {
+      "id": "to-learn-english",
+      "text": "to learn English"
+    },
+    "placements": [
+      {
+        "id": "sentence-start",
+        "position": 0,
+        "label": "Sentence start",
+        "modifierText": "To learn English,",
+        "grammatical": true,
+        "matchesGoal": true,
+        "relation": {
+          "modifierId": "to-learn-english",
+          "targetId": "watch-movies",
+          "relationType": "modifies",
+          "label": "I watch moviesの目的を説明",
+          "explanation": "文頭のTo learn Englishは、映画を見る目的を説明しています。"
+        },
+        "meaning": "英語を学ぶために、私は映画を見る。"
+      },
+      {
+        "id": "sentence-end",
+        "position": 2,
+        "label": "Sentence end",
+        "grammatical": true,
+        "matchesGoal": true,
+        "relation": {
+          "modifierId": "to-learn-english",
+          "targetId": "watch-movies",
+          "relationType": "modifies",
+          "label": "I watch moviesの目的を説明",
+          "explanation": "文末のto learn Englishも、映画を見る目的を説明しています。"
+        },
+        "meaning": "私は英語を学ぶために映画を見る。"
+      }
+    ],
+    "punctuation": ".",
+    "explanation": "目的を表すto不定詞は、文頭・文末のどちらにも置ける場合があります。"
+  }
+]

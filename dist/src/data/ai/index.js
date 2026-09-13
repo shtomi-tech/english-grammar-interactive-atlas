@@ -36,3 +36,14 @@ export {
 } from './material-plan-schema.js';
 export { outcomeRetrievalProfiles } from './outcome-retrieval-profiles.js';
 export { materialPlanFixtures } from './material-plan-fixtures.js';
+export {
+  problemGenerationActionValues,
+  problemGenerationAlignmentFields,
+  problemGenerationContract,
+  problemGenerationFieldDefinitions,
+  problemGenerationMaterialPlanRefFields,
+  problemGenerationSourceEvidenceRefFields,
+  problemGenerationTopLevelFields,
+  problemGenerationVersion,
+} from './problem-generation-contract.js';
+export { problemGenerationContexts, problemGenerationFixtures } from './problem-generation-fixtures.js';

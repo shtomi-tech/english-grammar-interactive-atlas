@@ -77,12 +77,12 @@ export const materialPlanExample = Object.freeze({
       id: 'MPI-EXAMPLE',
       learningPointId: 'LP-EXAMPLE',
       interactionSelection: {
-        query: { kinds: ['interaction'], learningIntents: ['recognize-form'], limit: 5 },
+        query: { kinds: ['interaction'], learningIntents: ['identify-element'], limit: 5 },
         selected: {
           canonicalRef: { kind: 'interaction', id: 'GRAM-INT-EXAMPLE' },
           rank: 1,
           score: 0,
-          reasons: [{ field: 'learningIntents', value: 'recognize-form', score: 0 }],
+          reasons: [{ field: 'learningIntents', value: 'identify-element', score: 0 }],
         },
       },
       problemDecision: {

@@ -17,6 +17,9 @@ const files = [
   'src/data/ai/material-plan-schema.js',
   'src/data/ai/material-plan-fixtures.js',
   'src/data/ai/outcome-retrieval-profiles.js',
+  'src/data/ai/problem-generation-schema.js',
+  'src/data/ai/problem-generation-fixtures.js',
+  'src/data/ai/problem-generation-contract.js',
   'src/data/interactions-additional.js',
   'src/data/demo-problems.js',
   'src/data/problems/word-order.js',
@@ -46,9 +49,11 @@ const files = [
   'src/lib/ai/retrieval-search.js',
   'src/lib/ai/retrieval-evaluation.js',
   'src/lib/ai/material-planning.js',
+  'src/lib/ai/problem-generation.js',
   'src/lib/validateAiRetrieval.js',
   'src/lib/validateLearningRequirements.js',
   'src/lib/validateMaterialPlan.js',
+  'src/lib/validateProblemGeneration.js',
   'src/lib/dom.js',
   'src/lib/grammar/word-order.js',
   'src/lib/grammar/parts.js',
@@ -109,12 +114,15 @@ const {
   learningRequirementsFixtures,
   materialPlanFixtures,
   outcomeRetrievalProfiles,
+  problemGenerationFixtures,
+  problemGenerationContexts,
 } = await import('../src/data/ai/index.js');
 const { createAiRetrievalIndex } = await import('../src/lib/ai/retrieval-index.js');
 const { evaluateRetrievalBenchmarks } = await import('../src/lib/ai/retrieval-evaluation.js');
 const { validateAiRetrieval } = await import('../src/lib/validateAiRetrieval.js');
 const { validateLearningRequirements } = await import('../src/lib/validateLearningRequirements.js');
 const { validateMaterialPlan } = await import('../src/lib/validateMaterialPlan.js');
+const { validateProblemGeneration } = await import('../src/lib/validateProblemGeneration.js');
 const { validateOutcomeRetrievalProfiles } = await import('../src/lib/ai/material-planning.js');
 const validation = validateInteractions(interactions, { registryKeys: Object.keys(demoRegistry) });
 if (!validation.valid) throw new Error(`Interaction validation failed: ${validation.errors.join('; ')}`);
@@ -175,3 +183,11 @@ if (materialPlanValidation.some((result) => !result.valid)) {
   throw new Error(`Material Plan validation failed: ${materialPlanValidation.flatMap((result) => result.errors).join('; ')}`);
 }
 console.log(`Material Plan validation passed for ${materialPlanFixtures.length} fixtures.`);
+const problemGenerationValidation = problemGenerationFixtures.map((fixture, index) => validateProblemGeneration(fixture, problemGenerationContexts[index]));
+if (problemGenerationValidation.some((result) => !result.valid)) {
+  throw new Error(`Problem Generation validation failed: ${problemGenerationValidation.flatMap((result) => result.errors).join('; ')}`);
+}
+console.log(`Problem Generation validation passed for ${problemGenerationFixtures.length} fixtures.`);
+const canonicalProblemSnapshotValidation = validateProblems(problems);
+if (!canonicalProblemSnapshotValidation.valid) throw new Error(`Canonical Problem snapshot validation failed: ${canonicalProblemSnapshotValidation.errors.join('; ')}`);
+console.log(`Canonical Problem snapshot validation passed for ${problems.length} problems.`);

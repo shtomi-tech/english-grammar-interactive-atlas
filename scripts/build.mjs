@@ -5,6 +5,7 @@ import {
   interactionRetrievalMetadata,
   learningRequirementsContract,
   materialPlanContract,
+  problemGenerationContract,
 } from '../src/data/ai/index.js';
 import { problems } from '../src/data/problems/index.js';
 import { lessons } from '../src/data/lessons.js';
@@ -40,5 +41,7 @@ for (const [fileName, data] of Object.entries({
 }
 writeFileSync(join(contractsDist, 'learning-requirements.json'), `${JSON.stringify(learningRequirementsContract, null, 2)}\n`, 'utf8');
 writeFileSync(join(contractsDist, 'material-plan.json'), `${JSON.stringify(materialPlanContract, null, 2)}\n`, 'utf8');
+writeFileSync(join(aiDist, 'problem-data.json'), `${JSON.stringify(problems, null, 2)}\n`, 'utf8');
+writeFileSync(join(contractsDist, 'problem-generation.json'), `${JSON.stringify(problemGenerationContract, null, 2)}\n`, 'utf8');
 
 console.log('Static build complete: dist/');

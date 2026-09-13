@@ -72,6 +72,9 @@ import {
   materialPlanContract,
   materialPlanFixtures,
   outcomeRetrievalProfiles,
+  problemGenerationContract,
+  problemGenerationContexts,
+  problemGenerationFixtures,
   retrievalBenchmarks,
   validateRetrievalQuery,
 } from '../src/data/ai/index.js';
@@ -81,11 +84,14 @@ import { searchRetrievalIndex } from '../src/lib/ai/retrieval-search.js';
 import {
   captureRetrievalSelection,
   createInteractionQueryForLearningPoint,
+  hasProblemContentMatch,
   validateOutcomeRetrievalProfiles,
 } from '../src/lib/ai/material-planning.js';
+import { createProblemGeneration, createProblemGenerationContext, resolveCanonicalProblem } from '../src/lib/ai/problem-generation.js';
 import { validateAiRetrieval } from '../src/lib/validateAiRetrieval.js';
 import { validateLearningRequirements } from '../src/lib/validateLearningRequirements.js';
 import { validateMaterialPlan } from '../src/lib/validateMaterialPlan.js';
+import { validateProblemGeneration } from '../src/lib/validateProblemGeneration.js';
 
 assert.equal(interactions.length, 40);
 assert.deepEqual(
@@ -573,39 +579,39 @@ assert.equal(validateMaterialPlan(unknownLearningPointPlan, {
   learningRequirements: learningRequirementsFixtures[0],
   retrievalIndex: aiRetrievalIndex,
 }).valid, false);
-const noProblemForReusePlan = structuredClone(materialPlanFixtures[0]);
+const noProblemForReusePlan = structuredClone(comparisonPlan);
 delete noProblemForReusePlan.items[0].problemDecision.problemSelection;
 assert.equal(validateMaterialPlan(noProblemForReusePlan, {
-  learningRequirements: learningRequirementsFixtures[0],
+  learningRequirements: comparisonLearningRequirements,
   retrievalIndex: aiRetrievalIndex,
 }).valid, false);
-const generateWithProblemPlan = structuredClone(materialPlanFixtures[0]);
+const generateWithProblemPlan = structuredClone(comparisonPlan);
 generateWithProblemPlan.items[0].problemDecision.action = 'generate';
 generateWithProblemPlan.items[0].problemDecision.reason = '既存Problemでは不足する。';
 assert.equal(validateMaterialPlan(generateWithProblemPlan, {
-  learningRequirements: learningRequirementsFixtures[0],
+  learningRequirements: comparisonLearningRequirements,
   retrievalIndex: aiRetrievalIndex,
 }).valid, false);
-const validGeneratePlan = structuredClone(materialPlanFixtures[0]);
+const validGeneratePlan = structuredClone(comparisonPlan);
 validGeneratePlan.items[0].problemDecision.action = 'generate';
 validGeneratePlan.items[0].problemDecision.reason = '既存Problemでは不足する。';
 delete validGeneratePlan.items[0].problemDecision.problemSelection;
 assert.equal(validateMaterialPlan(validGeneratePlan, {
-  learningRequirements: learningRequirementsFixtures[0],
+  learningRequirements: comparisonLearningRequirements,
   retrievalIndex: aiRetrievalIndex,
 }).valid, true);
-const unresolvedWithProblemPlan = structuredClone(materialPlanFixtures[0]);
+const unresolvedWithProblemPlan = structuredClone(comparisonPlan);
 unresolvedWithProblemPlan.items[0].problemDecision.action = 'unresolved';
 unresolvedWithProblemPlan.items[0].problemDecision.reason = '実装済みComponentでは扱えない。';
 assert.equal(validateMaterialPlan(unresolvedWithProblemPlan, {
-  learningRequirements: learningRequirementsFixtures[0],
+  learningRequirements: comparisonLearningRequirements,
   retrievalIndex: aiRetrievalIndex,
 }).valid, false);
-const adaptWithoutSourcePlan = structuredClone(materialPlanFixtures[0]);
+const adaptWithoutSourcePlan = structuredClone(comparisonPlan);
 adaptWithoutSourcePlan.items[0].problemDecision.action = 'adapt';
 delete adaptWithoutSourcePlan.items[0].problemDecision.problemSelection;
 assert.equal(validateMaterialPlan(adaptWithoutSourcePlan, {
-  learningRequirements: learningRequirementsFixtures[0],
+  learningRequirements: comparisonLearningRequirements,
   retrievalIndex: aiRetrievalIndex,
 }).valid, false);
 const missingInteractionPlan = structuredClone(materialPlanFixtures[0]);
@@ -658,6 +664,83 @@ assert.equal(validateMaterialPlan(fakeReasonsPlan, {
 assert.deepEqual(
   createAiRetrievalIndex({ interactions, problems, lessons, interactionRetrievalMetadata }),
   aiRetrievalIndex,
+);
+
+assert.equal(validateRetrievalQuery(materialPlanContract.example.items[0].interactionSelection.query).valid, true);
+const generatedProblemContext = problemGenerationContexts[0];
+const adaptedProblemContext = problemGenerationContexts[1];
+assert.equal(generatedProblemContext.materialPlan.items[0].problemDecision.action, 'generate');
+const generatedProblemQuery = {
+  kinds: ['problem'],
+  demoTypes: ['word-order'],
+  includeTerms: [generatedProblemContext.learningRequirements.learningPoints[0].concept],
+  limit: 5,
+};
+const generatedProblemResults = searchRetrievalIndex(aiRetrievalIndex, generatedProblemQuery);
+assert.equal(generatedProblemResults.some(hasProblemContentMatch), false);
+assert.equal(problemGenerationContract.version, '1');
+assert.deepEqual(problemGenerationContract.actionValues, ['generate', 'adapt']);
+assert.deepEqual(problemGenerationContract.example, problemGenerationFixtures[0]);
+assert.equal(validateProblemGeneration(problemGenerationContract.example, problemGenerationContexts[0]).valid, true);
+problemGenerationFixtures.forEach((fixture, index) => {
+  const result = validateProblemGeneration(fixture, problemGenerationContexts[index]);
+  assert.equal(result.valid, true, result.errors.join('; '));
+});
+assert.deepEqual(
+  createProblemGeneration({
+    ...generatedProblemContext,
+    candidateProblem: problemGenerationFixtures[0].candidateProblem,
+    id: problemGenerationFixtures[0].id,
+  }),
+  problemGenerationFixtures[0],
+);
+assert.equal(createProblemGenerationContext(generatedProblemContext).action, 'generate');
+assert.ok(createProblemGenerationContext(adaptedProblemContext).sourceProblemRef);
+assert.equal(resolveCanonicalProblem(problems, { kind: 'problem', id: 'PROBLEM-UNKNOWN' }), null);
+assert.equal(resolveCanonicalProblem(problems, { kind: 'problem', id: 'WO-001', type: 'error-corrector' }), null);
+assert.equal(validateProblems([...problems, problemGenerationFixtures[0].candidateProblem]).valid, true);
+
+const invalidGenerationCases = [
+  ['wrong material plan reference', (value) => { value.materialPlanRef.id = 'MATPLAN-UNKNOWN'; }],
+  ['unknown material plan item', (value) => { value.materialPlanItemId = 'MPI-UNKNOWN'; }],
+  ['wrong learning point', (value) => { value.alignment.learningPointId = 'LP-UNKNOWN'; }],
+  ['unknown source evidence', (value) => { value.alignment.sourceEvidenceRefs[0].sourceId = 'SOURCE-UNKNOWN'; }],
+  ['candidate type mismatch', (value) => { value.candidateProblem.type = 'error-corrector'; }],
+  ['candidate id collision', (value) => { value.candidateProblem.id = problems[0].id; }],
+  ['candidate schema error', (value) => { delete value.candidateProblem.prompt; }],
+];
+invalidGenerationCases.forEach(([name, mutate]) => {
+  const invalidGeneration = structuredClone(problemGenerationFixtures[0]);
+  mutate(invalidGeneration);
+  const result = validateProblemGeneration(invalidGeneration, generatedProblemContext);
+  assert.equal(result.valid, false, name);
+});
+
+const reuseGenerationContext = structuredClone(adaptedProblemContext);
+reuseGenerationContext.materialPlan.items[0].problemDecision = {
+  action: 'reuse',
+  problemSelection: structuredClone(adaptedProblemContext.materialPlan.items[0].problemDecision.sourceProblemSelection),
+};
+assert.equal(validateProblemGeneration(problemGenerationFixtures[1], reuseGenerationContext).valid, false);
+const unresolvedGenerationContext = structuredClone(adaptedProblemContext);
+unresolvedGenerationContext.materialPlan.items[0].problemDecision = {
+  action: 'unresolved',
+  reason: 'No implemented activity is available.',
+};
+assert.equal(validateProblemGeneration(problemGenerationFixtures[1], unresolvedGenerationContext).valid, false);
+
+const invalidAdaptId = structuredClone(problemGenerationFixtures[1]);
+invalidAdaptId.candidateProblem.id = adaptedProblemContext.materialPlan.items[0].problemDecision.sourceProblemSelection.selected.canonicalRef.id;
+assert.equal(validateProblemGeneration(invalidAdaptId, adaptedProblemContext).valid, false);
+const invalidAdaptType = structuredClone(problemGenerationFixtures[1]);
+invalidAdaptType.candidateProblem.type = 'word-order';
+assert.equal(validateProblemGeneration(invalidAdaptType, adaptedProblemContext).valid, false);
+const canonicalProblemsBeforeGenerationValidation = structuredClone(problems);
+assert.equal(validateProblemGeneration(problemGenerationFixtures[0], generatedProblemContext).valid, true);
+assert.deepEqual(problems, canonicalProblemsBeforeGenerationValidation);
+assert.deepEqual(
+  createProblemGenerationContext(adaptedProblemContext).exampleProblemRefs[0],
+  { kind: 'problem', id: 'SC-001', type: 'sentence-comparison' },
 );
 
 const lessonProgress = lessons[0];

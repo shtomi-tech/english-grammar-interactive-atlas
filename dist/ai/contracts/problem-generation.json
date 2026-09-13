@@ -1,0 +1,137 @@
+{
+  "version": "1",
+  "requiredFields": [
+    "version",
+    "id",
+    "materialPlanRef",
+    "materialPlanItemId",
+    "candidateProblem",
+    "alignment"
+  ],
+  "optionalFields": [],
+  "fieldDefinitions": {
+    "version": {
+      "type": "string",
+      "required": true,
+      "allowedValues": [
+        "1"
+      ],
+      "description": "Problem Generation contract version."
+    },
+    "id": {
+      "type": "string",
+      "required": true,
+      "description": "Stable identifier for one generated Problem proposal."
+    },
+    "materialPlanRef": {
+      "type": "object",
+      "required": true,
+      "fields": [
+        "id",
+        "version"
+      ],
+      "description": "Reference to the Material Plan that authorizes this generation."
+    },
+    "materialPlanItemId": {
+      "type": "string",
+      "required": true,
+      "description": "Material Plan item that supplies the target Interaction and action."
+    },
+    "candidateProblem": {
+      "type": "object",
+      "required": true,
+      "description": "Problem data using the existing Problem Contract without an AI-specific shape."
+    },
+    "alignment": {
+      "type": "object",
+      "required": true,
+      "fields": [
+        "learningPointId",
+        "sourceEvidenceRefs",
+        "rationale"
+      ],
+      "description": "Traceability from the candidate Problem back to the source-backed Learning Point."
+    }
+  },
+  "actionValues": [
+    "generate",
+    "adapt"
+  ],
+  "materialPlanRefFields": [
+    "id",
+    "version"
+  ],
+  "alignmentFields": [
+    "learningPointId",
+    "sourceEvidenceRefs",
+    "rationale"
+  ],
+  "sourceEvidenceRefFields": [
+    "sourceId",
+    "locator"
+  ],
+  "example": {
+    "version": "1",
+    "id": "PGEN-001",
+    "materialPlanRef": {
+      "id": "MATPLAN-GEN-001",
+      "version": "1"
+    },
+    "materialPlanItemId": "MPI-001",
+    "candidateProblem": {
+      "id": "GEN-WO-001",
+      "type": "word-order",
+      "prompt": "Synthetic generation case: arrange the infinitive sentence.",
+      "words": [
+        {
+          "id": "i",
+          "text": "I"
+        },
+        {
+          "id": "want",
+          "text": "want"
+        },
+        {
+          "id": "to",
+          "text": "to"
+        },
+        {
+          "id": "study",
+          "text": "study"
+        },
+        {
+          "id": "english",
+          "text": "English"
+        }
+      ],
+      "acceptedAnswers": [
+        [
+          "i",
+          "want",
+          "to",
+          "study",
+          "english"
+        ]
+      ],
+      "explanation": "want の後ろで「〜すること」を表す不定詞は、to + 動詞の原形で作ります。",
+      "grammar": [
+        "infinitive",
+        "noun-use",
+        "base-verb",
+        "word-order"
+      ]
+    },
+    "alignment": {
+      "learningPointId": "LP-GEN-001",
+      "sourceEvidenceRefs": [
+        {
+          "sourceId": "SOURCE-GEN-001",
+          "locator": {
+            "section": "Synthetic generation case"
+          }
+        }
+      ],
+      "rationale": "このProblemで対象Learning Pointを練習する。"
+    }
+  }
+}

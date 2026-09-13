@@ -94,6 +94,10 @@ function getInteractionRecord(index, canonicalRef) {
   return index.interactions?.find((record) => record.id === canonicalRef.id) ?? null;
 }
 
+export function hasProblemContentMatch(result) {
+  return Boolean(result?.reasons?.some((reason) => reason.field === 'searchText'));
+}
+
 export function createMaterialPlan({
   learningRequirements,
   retrievalIndex,
@@ -141,7 +145,8 @@ export function createMaterialPlan({
         limit: problemLimit,
       };
       const problemResults = searchRetrievalIndex(retrievalIndex, problemQuery);
-      if (problemResults.length === 0) {
+      const reusableProblem = problemResults.find(hasProblemContentMatch);
+      if (!reusableProblem) {
         problemDecision = {
           action: 'generate',
           reason: 'Existing problems do not cover the source-backed concept.',
@@ -152,7 +157,7 @@ export function createMaterialPlan({
           problemSelection: captureRetrievalSelection(
             retrievalIndex,
             problemQuery,
-            problemResults[0].canonicalRef,
+            reusableProblem.canonicalRef,
           ),
         };
       }
