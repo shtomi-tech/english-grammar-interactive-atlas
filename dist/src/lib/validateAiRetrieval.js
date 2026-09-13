@@ -8,6 +8,10 @@ function unique(values) {
   return [...new Set(values)];
 }
 
+function arrayValue(value) {
+  return Array.isArray(value) ? value : [];
+}
+
 function validateRecordIds(records, expectedEntries, kind, errors) {
   if (!Array.isArray(records)) {
     errors.push(`AI ${kind} records must be an array`);
@@ -72,12 +76,41 @@ function validateInteractionRecords(interactions, problems, recordsById, metadat
       return;
     }
     if (record.kind !== 'interaction') errors.push(`${interaction.id} must have kind interaction`);
+    const expectedMetadata = metadata?.[interaction.id] ?? {};
+    const expectedPositiveTags = unique([
+      ...arrayValue(expectedMetadata.learningIntents),
+      ...arrayValue(expectedMetadata.bestFor),
+    ]);
+    const expectedNegativeTags = unique(arrayValue(expectedMetadata.notBestFor));
+    if (!sameValue(record.positiveTags, expectedPositiveTags)) {
+      errors.push(`${interaction.id}.positiveTags does not match retrieval metadata`);
+    }
+    if (!sameValue(record.negativeTags, expectedNegativeTags)) {
+      errors.push(`${interaction.id}.negativeTags does not match retrieval metadata`);
+    }
+    if (!sameValue(record.tags, expectedPositiveTags)) {
+      errors.push(`${interaction.id}.tags must equal positiveTags`);
+    }
+    if (unique(arrayValue(record.positiveTags)).length !== arrayValue(record.positiveTags).length) {
+      errors.push(`${interaction.id}.positiveTags must not contain duplicates`);
+    }
+    if (unique(arrayValue(record.negativeTags)).length !== arrayValue(record.negativeTags).length) {
+      errors.push(`${interaction.id}.negativeTags must not contain duplicates`);
+    }
+    if (arrayValue(record.positiveTags).some((tag) => arrayValue(record.negativeTags).includes(tag))) {
+      errors.push(`${interaction.id}.positiveTags and negativeTags must be disjoint`);
+    }
+    if (!sameValue(record.canonicalRef, { kind: 'interaction', id: interaction.id })) {
+      errors.push(`${interaction.id}.canonicalRef does not match canonical data`);
+    }
     if (record.searchText?.trim() === '') errors.push(`${interaction.id}.searchText must not be empty`);
-    const expectedMetadata = metadata[interaction.id];
     ['learningIntents', 'bestFor', 'notBestFor'].forEach((field) => {
       if (!sameValue(record[field], expectedMetadata?.[field] ?? [])) {
         errors.push(`${interaction.id}.${field} does not match retrieval metadata`);
       }
+    });
+    arrayValue(record.negativeTags).forEach((tag) => {
+      if (record.searchText?.includes(tag)) errors.push(`${interaction.id}.searchText must exclude negative tag: ${tag}`);
     });
     const expectedProblemIds = problems
       .filter((problem) => problem.type === interaction.demoType)
@@ -107,6 +140,9 @@ function validateProblemRecords(problems, interactions, lessons, recordsById, er
       return;
     }
     if (record.kind !== 'problem') errors.push(`${problem.id} must have kind problem`);
+    if (!sameValue(record.canonicalRef, { kind: 'problem', id: problem.id, type: problem.type })) {
+      errors.push(`${problem.id}.canonicalRef does not match canonical data`);
+    }
     const expectedInteractionIds = interactions
       .filter((interaction) => interaction.demoType === problem.type)
       .map((interaction) => interaction.id);
@@ -133,6 +169,9 @@ function validateLessonRecords(lessons, problems, recordsById, errors) {
       return;
     }
     if (record.kind !== 'lesson') errors.push(`${lesson.id} must have kind lesson`);
+    if (!sameValue(record.canonicalRef, { kind: 'lesson', id: lesson.id })) {
+      errors.push(`${lesson.id}.canonicalRef does not match canonical data`);
+    }
     const expectedProblemIds = lesson.steps.map((step) => step.problemId);
     const expectedInteractionTypes = unique(lesson.steps.map((step) => step.interactionType));
     if (!sameValue(record.relations?.problemIds, expectedProblemIds)) {
@@ -162,19 +201,22 @@ function validateDocuments(index, interactionRecords, problemRecords, lessonReco
     const key = `${document?.kind}:${document?.id}`;
     if (seen.has(key)) errors.push(`Duplicate AI document: ${key}`);
     seen.add(key);
-    if (!document?.kind || !document?.id || !document?.title || !document?.searchText) {
+    if (!document?.kind || !document?.id || !document?.title || !document?.searchText || !document?.canonicalRef) {
       errors.push(`AI document is missing required fields: ${key}`);
     }
   });
   expectedRecords.forEach((record) => {
-    const document = index.documents.find((entry) => entry.kind === record.kind && entry.id === record.id);
+    const document = index.documents.find((entry) => entry?.kind === record.kind && entry?.id === record.id);
     if (!document) {
       errors.push(`Missing unified AI document: ${record.kind}:${record.id}`);
       return;
     }
-    ['title', 'searchText', 'tags', 'relations'].forEach((field) => {
+    ['title', 'searchText', 'tags', 'relations', 'canonicalRef'].forEach((field) => {
       if (!sameValue(document[field], record[field])) errors.push(`${record.kind}:${record.id}.${field} differs from record`);
     });
+    if (record.negativeTags !== undefined && !sameValue(document.negativeTags, record.negativeTags)) {
+      errors.push(`${record.kind}:${record.id}.negativeTags differs from record`);
+    }
   });
 }
 
@@ -191,6 +233,7 @@ export function validateAiRetrieval(
   if (!index || typeof index !== 'object' || Array.isArray(index)) {
     return { valid: false, errors: ['AI retrieval index must be an object'] };
   }
+  if (index.version !== '2') errors.push('AI retrieval index version must be 2');
   if (index.generatedAt !== undefined) errors.push('AI retrieval index must be deterministic and omit generatedAt');
   validateMetadata(interactions, interactionRetrievalMetadata, errors);
 

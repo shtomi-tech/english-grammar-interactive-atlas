@@ -81,14 +81,15 @@ function createInteractionRecords(interactions, problems, interactionRetrievalMe
     const problemIds = problems
       .filter((problem) => problem.type === interaction.demoType)
       .map((problem) => problem.id);
-    const tags = uniqueIds([
+    const positiveTags = uniqueIds([
       ...(metadata?.learningIntents ?? []),
       ...(metadata?.bestFor ?? []),
-      ...(metadata?.notBestFor ?? []),
     ]);
+    const negativeTags = uniqueIds([...(metadata?.notBestFor ?? [])]);
     const record = {
       kind: 'interaction',
       id: interaction.id,
+      canonicalRef: { kind: 'interaction', id: interaction.id },
       slug: interaction.slug,
       title: interaction.title,
       category: interaction.category,
@@ -104,7 +105,9 @@ function createInteractionRecords(interactions, problems, interactionRetrievalMe
       learningIntents: [...(metadata?.learningIntents ?? [])],
       bestFor: [...(metadata?.bestFor ?? [])],
       notBestFor: [...(metadata?.notBestFor ?? [])],
-      tags,
+      positiveTags,
+      negativeTags,
+      tags: [...positiveTags],
       relations: { problemIds },
       searchText: buildSearchText(
         {
@@ -121,7 +124,7 @@ function createInteractionRecords(interactions, problems, interactionRetrievalMe
           interactionType: interaction.interactionType,
           feedbackType: interaction.feedbackType,
         },
-        tags,
+        positiveTags,
       ),
     };
     if (interaction.demoType) record.demoType = interaction.demoType;
@@ -133,6 +136,7 @@ function createProblemRecords(problems, interactions, lessonIdsByProblemId) {
   return problems.map((problem) => ({
     kind: 'problem',
     id: problem.id,
+    canonicalRef: { kind: 'problem', id: problem.id, type: problem.type },
     title: problem.id,
     type: problem.type,
     tags: [problem.type],
@@ -153,6 +157,7 @@ function createLessonRecords(lessons) {
     return {
       kind: 'lesson',
       id: lesson.id,
+      canonicalRef: { kind: 'lesson', id: lesson.id },
       slug: lesson.slug,
       title: lesson.title,
       description: lesson.description,
@@ -171,14 +176,21 @@ function createLessonRecords(lessons) {
 }
 
 function toDocument(record) {
-  return {
+  const document = {
     kind: record.kind,
     id: record.id,
     title: record.title,
+    canonicalRef: structuredClone(record.canonicalRef),
     searchText: record.searchText,
     tags: [...record.tags],
     relations: structuredClone(record.relations),
   };
+  if (record.type) document.type = record.type;
+  if (Array.isArray(record.interactionType)) document.interactionType = [...record.interactionType];
+  if (Array.isArray(record.learningIntents)) document.learningIntents = [...record.learningIntents];
+  if (Array.isArray(record.bestFor)) document.bestFor = [...record.bestFor];
+  if (Array.isArray(record.negativeTags)) document.negativeTags = [...record.negativeTags];
+  return document;
 }
 
 export function createAiRetrievalIndex({
@@ -194,7 +206,7 @@ export function createAiRetrievalIndex({
   const documents = [...interactionRecords, ...problemRecords, ...lessonRecords].map(toDocument);
 
   return {
-    version: '1',
+    version: '2',
     generatedFrom: {
       interactions: ['src/data/interactions.js', 'src/data/interactions-additional.js'],
       problems: 'src/data/problems/',

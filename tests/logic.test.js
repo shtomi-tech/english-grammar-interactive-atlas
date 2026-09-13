@@ -65,8 +65,14 @@ import {
 } from '../src/data/research/index.js';
 import { validateResearchReferences, validateResearchRegistry } from '../src/lib/validateResearch.js';
 import { getLessonProgress, isLessonStepComplete, markLessonStepComplete } from '../src/lib/lesson-progress.js';
-import { interactionRetrievalMetadata } from '../src/data/ai/index.js';
+import {
+  interactionRetrievalMetadata,
+  retrievalBenchmarks,
+  validateRetrievalQuery,
+} from '../src/data/ai/index.js';
 import { createAiRetrievalIndex } from '../src/lib/ai/retrieval-index.js';
+import { evaluateRetrievalBenchmarks } from '../src/lib/ai/retrieval-evaluation.js';
+import { searchRetrievalIndex } from '../src/lib/ai/retrieval-search.js';
 import { validateAiRetrieval } from '../src/lib/validateAiRetrieval.js';
 
 assert.equal(interactions.length, 40);
@@ -346,6 +352,7 @@ const aiRetrievalValidation = validateAiRetrieval(aiRetrievalIndex, {
   interactionRetrievalMetadata,
 });
 assert.equal(aiRetrievalValidation.valid, true, aiRetrievalValidation.errors.join('; '));
+assert.equal(aiRetrievalIndex.version, '2');
 assert.equal(aiRetrievalIndex.interactions.length, 40);
 assert.equal(aiRetrievalIndex.problems.length, 53);
 assert.equal(aiRetrievalIndex.lessons.length, 6);
@@ -366,6 +373,45 @@ assert.match(sentenceComparisonRecord.searchText, /stopped to smoke/);
 const modifierPositionerRecord = aiRetrievalIndex.interactions.find((record) => record.id === 'GRAM-INT-014');
 assert.match(modifierPositionerRecord.searchText, /modifier/i);
 assert.match(modifierPositionerRecord.searchText, /placement/i);
+aiRetrievalIndex.interactions.forEach((record) => {
+  assert.deepEqual(record.negativeTags, record.notBestFor);
+  assert.deepEqual(record.tags, record.positiveTags);
+  assert.equal(record.positiveTags.some((tag) => record.negativeTags.includes(tag)), false);
+  record.negativeTags.forEach((tag) => assert.equal(record.searchText.includes(tag), false));
+  assert.deepEqual(record.canonicalRef, { kind: 'interaction', id: record.id });
+});
+aiRetrievalIndex.documents.forEach((document) => {
+  assert.deepEqual(document.canonicalRef, {
+    kind: document.kind,
+    id: document.id,
+    ...(document.kind === 'problem' ? { type: document.type } : {}),
+  });
+});
+const modifierPositionerDocument = aiRetrievalIndex.documents.find((document) => document.id === 'GRAM-INT-014');
+assert.deepEqual(modifierPositionerDocument.negativeTags, modifierPositionerRecord.negativeTags);
+const retrievalEvaluation = evaluateRetrievalBenchmarks(aiRetrievalIndex, retrievalBenchmarks);
+assert.equal(retrievalEvaluation.failed, 0, JSON.stringify(retrievalEvaluation.results, null, 2));
+assert.equal(retrievalEvaluation.results.filter((result) => result.id.startsWith('interaction-')).length, 5);
+retrievalBenchmarks.forEach((benchmark) => {
+  const results = searchRetrievalIndex(aiRetrievalIndex, benchmark.query);
+  assert.ok(results.length > 0, benchmark.id);
+  assert.equal(results.every((result) => result.reasons.length > 0), true, benchmark.id);
+});
+const modifierQuery = retrievalBenchmarks.find((benchmark) => benchmark.id === 'interaction-modifier-placement').query;
+assert.deepEqual(searchRetrievalIndex(aiRetrievalIndex, modifierQuery), searchRetrievalIndex(aiRetrievalIndex, modifierQuery));
+const negativeRegressionResults = searchRetrievalIndex(aiRetrievalIndex, {
+  kinds: ['interaction'],
+  preferredTags: ['free-form-generation'],
+  limit: 100,
+});
+const wordOrderNegativeResult = negativeRegressionResults.find((result) => result.id === 'GRAM-INT-001');
+assert.equal(wordOrderNegativeResult.score < 0, true);
+assert.notEqual(negativeRegressionResults[0].id, 'GRAM-INT-001');
+assert.equal(validateRetrievalQuery({}).valid, false);
+assert.equal(validateRetrievalQuery({ kinds: ['unknown'] }).valid, false);
+assert.equal(validateRetrievalQuery({ learningIntents: ['unknown-intent'] }).valid, false);
+assert.equal(validateRetrievalQuery({ includeTerms: ['  '] }).valid, false);
+assert.equal(validateRetrievalQuery({ kinds: ['interaction'], limit: 0 }).valid, false);
 assert.deepEqual(
   createAiRetrievalIndex({ interactions, problems, lessons, interactionRetrievalMetadata }),
   aiRetrievalIndex,

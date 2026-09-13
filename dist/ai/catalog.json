@@ -1,5 +1,5 @@
 {
-  "version": "1",
+  "version": "2",
   "generatedFrom": {
     "interactions": [
       "src/data/interactions.js",
@@ -47,6 +47,10 @@
     {
       "kind": "interaction",
       "id": "GRAM-INT-001",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-001"
+      },
       "slug": "word-order-builder",
       "title": "Word Order Builder",
       "category": "build",
@@ -80,12 +84,20 @@
       "notBestFor": [
         "free-form-generation"
       ],
+      "positiveTags": [
+        "assemble-sentence",
+        "practice-word-order",
+        "reconstructing-sentence-order",
+        "checking-sequence-constraints"
+      ],
+      "negativeTags": [
+        "free-form-generation"
+      ],
       "tags": [
         "assemble-sentence",
         "practice-word-order",
         "reconstructing-sentence-order",
-        "checking-sequence-constraints",
-        "free-form-generation"
+        "checking-sequence-constraints"
       ],
       "relations": {
         "problemIds": [
@@ -99,12 +111,16 @@
           "WO-008"
         ]
       },
-      "searchText": "word-order-builder\nWord Order Builder\nbuild\n単語カードを並べ替えて、英文の骨格を組み立てる。\n主語・動詞・目的語の基本語順を、手を動かして理解する。\n単語カード\nタップ / クリック\n回答欄の語順\n英語の基本語順は Subject + Verb + Object で組み立てる。\n文型\nSVO\n関係詞 (relative clauses)\ntap-to-place\nsequence\n正誤\n説明\nassemble-sentence\npractice-word-order\nreconstructing-sentence-order\nchecking-sequence-constraints\nfree-form-generation",
+      "searchText": "word-order-builder\nWord Order Builder\nbuild\n単語カードを並べ替えて、英文の骨格を組み立てる。\n主語・動詞・目的語の基本語順を、手を動かして理解する。\n単語カード\nタップ / クリック\n回答欄の語順\n英語の基本語順は Subject + Verb + Object で組み立てる。\n文型\nSVO\n関係詞 (relative clauses)\ntap-to-place\nsequence\n正誤\n説明\nassemble-sentence\npractice-word-order\nreconstructing-sentence-order\nchecking-sequence-constraints",
       "demoType": "word-order"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-002",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-002"
+      },
       "slug": "drag-into-blank",
       "title": "Drag into Blank",
       "category": "move",
@@ -138,21 +154,33 @@
       "notBestFor": [
         "assembling-an-entire-sentence"
       ],
+      "positiveTags": [
+        "explore-placement",
+        "connect-position-and-meaning",
+        "placing-a-phrase-in-context",
+        "observing-slot-effects"
+      ],
+      "negativeTags": [
+        "assembling-an-entire-sentence"
+      ],
       "tags": [
         "explore-placement",
         "connect-position-and-meaning",
         "placing-a-phrase-in-context",
-        "observing-slot-effects",
-        "assembling-an-entire-sentence"
+        "observing-slot-effects"
       ],
       "relations": {
         "problemIds": []
       },
-      "searchText": "drag-into-blank\nDrag into Blank\nmove\n語句を空欄へ移動し、文の中での役割を確かめる。\n語句の位置と、文全体の意味のつながりを意識する。\n選択肢カードと空欄\nタップ / ドラッグ\n文中の空欄\n同じ語句でも置く場所で文の意味や自然さが変わる。\n語順\n修飾語\n前置詞\ntap-to-place\ndrag-and-drop\n正誤\nヒント\nexplore-placement\nconnect-position-and-meaning\nplacing-a-phrase-in-context\nobserving-slot-effects\nassembling-an-entire-sentence"
+      "searchText": "drag-into-blank\nDrag into Blank\nmove\n語句を空欄へ移動し、文の中での役割を確かめる。\n語句の位置と、文全体の意味のつながりを意識する。\n選択肢カードと空欄\nタップ / ドラッグ\n文中の空欄\n同じ語句でも置く場所で文の意味や自然さが変わる。\n語順\n修飾語\n前置詞\ntap-to-place\ndrag-and-drop\n正誤\nヒント\nexplore-placement\nconnect-position-and-meaning\nplacing-a-phrase-in-context\nobserving-slot-effects"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-003",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-003"
+      },
       "slug": "mark-the-parts",
       "title": "Mark the Parts",
       "category": "select",
@@ -186,12 +214,20 @@
       "notBestFor": [
         "free-form-generation"
       ],
+      "positiveTags": [
+        "identify-element",
+        "identify-role",
+        "finding-sentence-roles",
+        "role-based-reading"
+      ],
+      "negativeTags": [
+        "free-form-generation"
+      ],
       "tags": [
         "identify-element",
         "identify-role",
         "finding-sentence-roles",
-        "role-based-reading",
-        "free-form-generation"
+        "role-based-reading"
       ],
       "relations": {
         "problemIds": [
@@ -201,12 +237,16 @@
           "MP-004"
         ]
       },
-      "searchText": "mark-the-parts\nMark the Parts\nselect\n英文中の語を選び、主語・動詞・目的語の関係を見つける。\n英文を意味のかたまりではなく、文の役割から読めるようにする。\n英文中のトークン\nタップ / クリック\n選択状態と構造ラベル\n文の要素にはそれぞれ役割があり、組み合わせで文ができる。\n文型\n品詞\nS / V / O\ntoken-select\nrole-reveal\n正誤\n構造表示\nidentify-element\nidentify-role\nfinding-sentence-roles\nrole-based-reading\nfree-form-generation",
+      "searchText": "mark-the-parts\nMark the Parts\nselect\n英文中の語を選び、主語・動詞・目的語の関係を見つける。\n英文を意味のかたまりではなく、文の役割から読めるようにする。\n英文中のトークン\nタップ / クリック\n選択状態と構造ラベル\n文の要素にはそれぞれ役割があり、組み合わせで文ができる。\n文型\n品詞\nS / V / O\ntoken-select\nrole-reveal\n正誤\n構造表示\nidentify-element\nidentify-role\nfinding-sentence-roles\nrole-based-reading",
       "demoType": "mark-parts"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-004",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-004"
+      },
       "slug": "grammar-classifier",
       "title": "Grammar Classifier",
       "category": "classify",
@@ -241,13 +281,22 @@
       "notBestFor": [
         "assembling-sentence-order"
       ],
+      "positiveTags": [
+        "classify-form",
+        "classify-function",
+        "classify-role",
+        "classifying-phrase-function",
+        "comparing-grammatical-roles"
+      ],
+      "negativeTags": [
+        "assembling-sentence-order"
+      ],
       "tags": [
         "classify-form",
         "classify-function",
         "classify-role",
         "classifying-phrase-function",
-        "comparing-grammatical-roles",
-        "assembling-sentence-order"
+        "comparing-grammatical-roles"
       ],
       "relations": {
         "problemIds": [
@@ -258,12 +307,16 @@
           "GC-005"
         ]
       },
-      "searchText": "grammar-classifier\nGrammar Classifier\nclassify\n語句を品詞や文の役割ごとのグループへ分類する。\n形ではなく、文中での働きによって語句を捉える。\n語句カードと分類先\nタップ / クリック\n分類先と分類結果\n語句の種類と文中の役割を区別して考えられる。\n品詞\nS / V / O / C\n句と節\nclassification\nsorting\n正誤\n分類理由\nclassify-form\nclassify-function\nclassify-role\nclassifying-phrase-function\ncomparing-grammatical-roles\nassembling-sentence-order",
+      "searchText": "grammar-classifier\nGrammar Classifier\nclassify\n語句を品詞や文の役割ごとのグループへ分類する。\n形ではなく、文中での働きによって語句を捉える。\n語句カードと分類先\nタップ / クリック\n分類先と分類結果\n語句の種類と文中の役割を区別して考えられる。\n品詞\nS / V / O / C\n句と節\nclassification\nsorting\n正誤\n分類理由\nclassify-form\nclassify-function\nclassify-role\nclassifying-phrase-function\ncomparing-grammatical-roles",
       "demoType": "grammar-classifier"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-005",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-005"
+      },
       "slug": "sentence-transformer",
       "title": "Sentence Transformer",
       "category": "transform",
@@ -298,13 +351,22 @@
       "notBestFor": [
         "open-ended-sentence-authoring"
       ],
+      "positiveTags": [
+        "observe-transformation",
+        "observe-state-change",
+        "connect-form-and-meaning",
+        "comparing-grammar-states",
+        "tracing-form-changes"
+      ],
+      "negativeTags": [
+        "open-ended-sentence-authoring"
+      ],
       "tags": [
         "observe-transformation",
         "observe-state-change",
         "connect-form-and-meaning",
         "comparing-grammar-states",
-        "tracing-form-changes",
-        "open-ended-sentence-authoring"
+        "tracing-form-changes"
       ],
       "relations": {
         "problemIds": [
@@ -313,12 +375,16 @@
           "ST-003"
         ]
       },
-      "searchText": "sentence-transformer\nSentence Transformer\ntransform\n主語・時制・否定の条件を変え、英文の変化を比較する。\n文法条件の変更が、動詞や助動詞へどう反映されるかを理解する。\n主語・時制・否定のコントロール\n選択 / 切り替え\n生成された英文\n文法情報を組み合わせると、必要な形が決まる。\n時制\n三単現\n否定文\nstate-selection\nsentence-generation\n即時変化\n構造ラベル\nobserve-transformation\nobserve-state-change\nconnect-form-and-meaning\ncomparing-grammar-states\ntracing-form-changes\nopen-ended-sentence-authoring",
+      "searchText": "sentence-transformer\nSentence Transformer\ntransform\n主語・時制・否定の条件を変え、英文の変化を比較する。\n文法条件の変更が、動詞や助動詞へどう反映されるかを理解する。\n主語・時制・否定のコントロール\n選択 / 切り替え\n生成された英文\n文法情報を組み合わせると、必要な形が決まる。\n時制\n三単現\n否定文\nstate-selection\nsentence-generation\n即時変化\n構造ラベル\nobserve-transformation\nobserve-state-change\nconnect-form-and-meaning\ncomparing-grammar-states\ntracing-form-changes",
       "demoType": "sentence-transformer"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-006",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-006"
+      },
       "slug": "syntax-visualizer",
       "title": "Syntax Visualizer",
       "category": "visualize",
@@ -352,21 +418,33 @@
       "notBestFor": [
         "correcting-surface-errors"
       ],
+      "positiveTags": [
+        "visualize-structure",
+        "visualize-relation",
+        "inspecting-sentence-hierarchy",
+        "tracing-syntax-relations"
+      ],
+      "negativeTags": [
+        "correcting-surface-errors"
+      ],
       "tags": [
         "visualize-structure",
         "visualize-relation",
         "inspecting-sentence-hierarchy",
-        "tracing-syntax-relations",
-        "correcting-surface-errors"
+        "tracing-syntax-relations"
       ],
       "relations": {
         "problemIds": []
       },
-      "searchText": "syntax-visualizer\nSyntax Visualizer\nvisualize\n英文を句・節・修飾関係の図として表示する。\n目に見えにくい英文の階層構造を、位置関係で捉える。\n語句・ノード・関係線\nクリック / 展開\n構造図の階層\n英文は単語の列ではなく、まとまりが重なった構造である。\n文型\n句と節\n関係詞 (relative clauses)\ntree-view\nhighlight\n強調表示\n構造説明\nvisualize-structure\nvisualize-relation\ninspecting-sentence-hierarchy\ntracing-syntax-relations\ncorrecting-surface-errors"
+      "searchText": "syntax-visualizer\nSyntax Visualizer\nvisualize\n英文を句・節・修飾関係の図として表示する。\n目に見えにくい英文の階層構造を、位置関係で捉える。\n語句・ノード・関係線\nクリック / 展開\n構造図の階層\n英文は単語の列ではなく、まとまりが重なった構造である。\n文型\n句と節\n関係詞 (relative clauses)\ntree-view\nhighlight\n強調表示\n構造説明\nvisualize-structure\nvisualize-relation\ninspecting-sentence-hierarchy\ntracing-syntax-relations"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-007",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-007"
+      },
       "slug": "sentence-generator",
       "title": "Sentence Generator",
       "category": "generate",
@@ -400,12 +478,20 @@
       "notBestFor": [
         "unstructured-free-text-generation"
       ],
+      "positiveTags": [
+        "generate-from-conditions",
+        "connect-form-and-meaning",
+        "generating-a-controlled-sentence",
+        "testing-grammar-state"
+      ],
+      "negativeTags": [
+        "unstructured-free-text-generation"
+      ],
       "tags": [
         "generate-from-conditions",
         "connect-form-and-meaning",
         "generating-a-controlled-sentence",
-        "testing-grammar-state",
-        "unstructured-free-text-generation"
+        "testing-grammar-state"
       ],
       "relations": {
         "problemIds": [
@@ -416,12 +502,16 @@
           "SG-005"
         ]
       },
-      "searchText": "sentence-generator\nSentence Generator\ngenerate\n主語・動詞・時制などの条件から、文法的な英文を生成する。\n文法規則を、完成した英文を作る手順として理解する。\n文法条件の選択肢\n選択 / 生成\n生成文と構造情報\n英文は単語を並べるだけでなく、条件に応じて形を変える。\n時制\n助動詞\n態\nform-select\ngeneration\n生成結果\n規則説明\ngenerate-from-conditions\nconnect-form-and-meaning\ngenerating-a-controlled-sentence\ntesting-grammar-state\nunstructured-free-text-generation",
+      "searchText": "sentence-generator\nSentence Generator\ngenerate\n主語・動詞・時制などの条件から、文法的な英文を生成する。\n文法規則を、完成した英文を作る手順として理解する。\n文法条件の選択肢\n選択 / 生成\n生成文と構造情報\n英文は単語を並べるだけでなく、条件に応じて形を変える。\n時制\n助動詞\n態\nform-select\ngeneration\n生成結果\n規則説明\ngenerate-from-conditions\nconnect-form-and-meaning\ngenerating-a-controlled-sentence\ntesting-grammar-state",
       "demoType": "sentence-generator"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-008",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-008"
+      },
       "slug": "sentence-comparison",
       "title": "Sentence Comparison",
       "category": "compare",
@@ -455,12 +545,20 @@
       "notBestFor": [
         "building-a-single-sentence"
       ],
+      "positiveTags": [
+        "compare-form",
+        "compare-meaning",
+        "comparing-contrasting-sentences",
+        "linking-form-to-meaning"
+      ],
+      "negativeTags": [
+        "building-a-single-sentence"
+      ],
       "tags": [
         "compare-form",
         "compare-meaning",
         "comparing-contrasting-sentences",
-        "linking-form-to-meaning",
-        "building-a-single-sentence"
+        "linking-form-to-meaning"
       ],
       "relations": {
         "problemIds": [
@@ -470,12 +568,16 @@
           "SC-004"
         ]
       },
-      "searchText": "sentence-comparison\nSentence Comparison\ncompare\n似た英文を並べ、形の差と意味の差を対応づける。\n似た表現を、文脈と構造の違いから使い分ける。\n比較する英文と差分箇所\n切り替え / 強調\n差分表示と意味メモ\n小さな形の差が、動作の捉え方や意味の差になる。\n不定詞\n動名詞\n比較\nside-by-side\ndiff-highlight\n差分強調\n意味比較\ncompare-form\ncompare-meaning\ncomparing-contrasting-sentences\nlinking-form-to-meaning\nbuilding-a-single-sentence",
+      "searchText": "sentence-comparison\nSentence Comparison\ncompare\n似た英文を並べ、形の差と意味の差を対応づける。\n似た表現を、文脈と構造の違いから使い分ける。\n比較する英文と差分箇所\n切り替え / 強調\n差分表示と意味メモ\n小さな形の差が、動作の捉え方や意味の差になる。\n不定詞\n動名詞\n比較\nside-by-side\ndiff-highlight\n差分強調\n意味比較\ncompare-form\ncompare-meaning\ncomparing-contrasting-sentences\nlinking-form-to-meaning",
       "demoType": "sentence-comparison"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-009",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-009"
+      },
       "slug": "error-corrector",
       "title": "Error Corrector",
       "category": "correct",
@@ -509,12 +611,20 @@
       "notBestFor": [
         "open-ended-proofreading"
       ],
+      "positiveTags": [
+        "correct-form",
+        "diagnose-error",
+        "diagnosing-a-patterned-error",
+        "explaining-a-correction"
+      ],
+      "negativeTags": [
+        "open-ended-proofreading"
+      ],
       "tags": [
         "correct-form",
         "diagnose-error",
         "diagnosing-a-patterned-error",
-        "explaining-a-correction",
-        "open-ended-proofreading"
+        "explaining-a-correction"
       ],
       "relations": {
         "problemIds": [
@@ -527,12 +637,16 @@
           "EC-007"
         ]
       },
-      "searchText": "error-corrector\nError Corrector\ncorrect\n誤りのある英文を直し、どこをなぜ変えたかを確認する。\n文法規則を、誤りを発見して修正する判断へ結びつける。\n誤りのある語句\n選択 / 修正\n誤りの箇所と訂正文\n正しい形だけでなく、誤りが生まれた条件まで説明できる。\n三単現\n時制\n一致\nerror-spotting\ncorrection\n正誤\n修正理由\ncorrect-form\ndiagnose-error\ndiagnosing-a-patterned-error\nexplaining-a-correction\nopen-ended-proofreading",
+      "searchText": "error-corrector\nError Corrector\ncorrect\n誤りのある英文を直し、どこをなぜ変えたかを確認する。\n文法規則を、誤りを発見して修正する判断へ結びつける。\n誤りのある語句\n選択 / 修正\n誤りの箇所と訂正文\n正しい形だけでなく、誤りが生まれた条件まで説明できる。\n三単現\n時制\n一致\nerror-spotting\ncorrection\n正誤\n修正理由\ncorrect-form\ndiagnose-error\ndiagnosing-a-patterned-error\nexplaining-a-correction",
       "demoType": "error-corrector"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-010",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-010"
+      },
       "slug": "context-grammar",
       "title": "Context Grammar",
       "category": "simulate",
@@ -567,13 +681,22 @@
       "notBestFor": [
         "isolated-form-drills"
       ],
+      "positiveTags": [
+        "choose-in-context",
+        "match-form-to-purpose",
+        "connect-context-and-form",
+        "choosing-a-contextual-response",
+        "comparing-goal-fit"
+      ],
+      "negativeTags": [
+        "isolated-form-drills"
+      ],
       "tags": [
         "choose-in-context",
         "match-form-to-purpose",
         "connect-context-and-form",
         "choosing-a-contextual-response",
-        "comparing-goal-fit",
-        "isolated-form-drills"
+        "comparing-goal-fit"
       ],
       "relations": {
         "problemIds": [
@@ -586,12 +709,16 @@
           "CG-007"
         ]
       },
-      "searchText": "context-grammar\nContext Grammar\nsimulate\n場面と会話の流れの中で、適切な文法表現を選ぶ。\n文法形式を、実際の目的や文脈に合う選択として使う。\n会話の選択肢\n選択 / 返答\n場面の進行と返答\n文法の選択は、話し手の目的と場面に結びついている。\n助動詞\n依頼表現\n時制\nscenario\nchoice\n会話結果\n場面別ヒント\nchoose-in-context\nmatch-form-to-purpose\nconnect-context-and-form\nchoosing-a-contextual-response\ncomparing-goal-fit\nisolated-form-drills",
+      "searchText": "context-grammar\nContext Grammar\nsimulate\n場面と会話の流れの中で、適切な文法表現を選ぶ。\n文法形式を、実際の目的や文脈に合う選択として使う。\n会話の選択肢\n選択 / 返答\n場面の進行と返答\n文法の選択は、話し手の目的と場面に結びついている。\n助動詞\n依頼表現\n時制\nscenario\nchoice\n会話結果\n場面別ヒント\nchoose-in-context\nmatch-form-to-purpose\nconnect-context-and-form\nchoosing-a-contextual-response\ncomparing-goal-fit",
       "demoType": "context-grammar"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-011",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-011"
+      },
       "slug": "sentence-pattern-builder",
       "title": "Sentence Pattern Builder",
       "category": "build",
@@ -625,21 +752,33 @@
       "notBestFor": [
         "paragraph-composition"
       ],
+      "positiveTags": [
+        "assemble-sentence",
+        "identify-role",
+        "mapping-slots-to-roles",
+        "building-a-sentence-skeleton"
+      ],
+      "negativeTags": [
+        "paragraph-composition"
+      ],
       "tags": [
         "assemble-sentence",
         "identify-role",
         "mapping-slots-to-roles",
-        "building-a-sentence-skeleton",
-        "paragraph-composition"
+        "building-a-sentence-skeleton"
       ],
       "relations": {
         "problemIds": []
       },
-      "searchText": "sentence-pattern-builder\nSentence Pattern Builder\nbuild\n文型スロットへ語句を置き、英文の骨格を組み立てる。\n文型の違いを、語句の役割と位置の組み合わせとして理解する。\n主語・動詞・目的語・補語のスロット\nタップ / 配置\n文型スロットと完成文\n語句の役割が変わると、英文の骨格も変わる。\n文型\nSVC\nSVO\nslot-fill\nsequence\n正誤\n構造表示\nassemble-sentence\nidentify-role\nmapping-slots-to-roles\nbuilding-a-sentence-skeleton\nparagraph-composition"
+      "searchText": "sentence-pattern-builder\nSentence Pattern Builder\nbuild\n文型スロットへ語句を置き、英文の骨格を組み立てる。\n文型の違いを、語句の役割と位置の組み合わせとして理解する。\n主語・動詞・目的語・補語のスロット\nタップ / 配置\n文型スロットと完成文\n語句の役割が変わると、英文の骨格も変わる。\n文型\nSVC\nSVO\nslot-fill\nsequence\n正誤\n構造表示\nassemble-sentence\nidentify-role\nmapping-slots-to-roles\nbuilding-a-sentence-skeleton"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-012",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-012"
+      },
       "slug": "question-builder",
       "title": "Question Builder",
       "category": "build",
@@ -673,21 +812,33 @@
       "notBestFor": [
         "evaluating-a-conversation-answer"
       ],
+      "positiveTags": [
+        "assemble-sentence",
+        "practice-word-order",
+        "building-question-structure",
+        "tracing-question-word-order"
+      ],
+      "negativeTags": [
+        "evaluating-a-conversation-answer"
+      ],
       "tags": [
         "assemble-sentence",
         "practice-word-order",
         "building-question-structure",
-        "tracing-question-word-order",
-        "evaluating-a-conversation-answer"
+        "tracing-question-word-order"
       ],
       "relations": {
         "problemIds": []
       },
-      "searchText": "question-builder\nQuestion Builder\nbuild\n疑問詞・助動詞・主語などを組み合わせて疑問文を作る。\n疑問文で語順が変わる理由を、構成要素の移動として理解する。\n疑問詞と文の構成カード\nタップ / 並べ替え\n疑問文の語順\n疑問文では、尋ねたい内容に応じて文の構造が組み替わる。\n疑問文\n助動詞\n疑問詞\nsequence\nslot-fill\n正誤\n語順ヒント\nassemble-sentence\npractice-word-order\nbuilding-question-structure\ntracing-question-word-order\nevaluating-a-conversation-answer"
+      "searchText": "question-builder\nQuestion Builder\nbuild\n疑問詞・助動詞・主語などを組み合わせて疑問文を作る。\n疑問文で語順が変わる理由を、構成要素の移動として理解する。\n疑問詞と文の構成カード\nタップ / 並べ替え\n疑問文の語順\n疑問文では、尋ねたい内容に応じて文の構造が組み替わる。\n疑問文\n助動詞\n疑問詞\nsequence\nslot-fill\n正誤\n語順ヒント\nassemble-sentence\npractice-word-order\nbuilding-question-structure\ntracing-question-word-order"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-013",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-013"
+      },
       "slug": "clause-combiner",
       "title": "Clause Combiner",
       "category": "build",
@@ -721,21 +872,33 @@
       "notBestFor": [
         "isolated-word-order-drills"
       ],
+      "positiveTags": [
+        "assemble-sentence",
+        "connect-form-and-meaning",
+        "joining-clause-relations",
+        "building-a-complex-sentence"
+      ],
+      "negativeTags": [
+        "isolated-word-order-drills"
+      ],
       "tags": [
         "assemble-sentence",
         "connect-form-and-meaning",
         "joining-clause-relations",
-        "building-a-complex-sentence",
-        "isolated-word-order-drills"
+        "building-a-complex-sentence"
       ],
       "relations": {
         "problemIds": []
       },
-      "searchText": "clause-combiner\nClause Combiner\nbuild\n主節と従属節を接続詞で結び、複文を組み立てる。\n節の役割と接続詞の働きを、文の組み合わせから理解する。\n主節・従属節・接続詞カード\nタップ / 結合\n節の結合位置と文の意味\n従属節は主節に対して意味上の役割を持つ。\n句と節\n接続詞\n複文\nclause-combination\nsequence\n正誤\n節の説明\nassemble-sentence\nconnect-form-and-meaning\njoining-clause-relations\nbuilding-a-complex-sentence\nisolated-word-order-drills"
+      "searchText": "clause-combiner\nClause Combiner\nbuild\n主節と従属節を接続詞で結び、複文を組み立てる。\n節の役割と接続詞の働きを、文の組み合わせから理解する。\n主節・従属節・接続詞カード\nタップ / 結合\n節の結合位置と文の意味\n従属節は主節に対して意味上の役割を持つ。\n句と節\n接続詞\n複文\nclause-combination\nsequence\n正誤\n節の説明\nassemble-sentence\nconnect-form-and-meaning\njoining-clause-relations\nbuilding-a-complex-sentence"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-014",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-014"
+      },
       "slug": "modifier-positioner",
       "title": "Modifier Positioner",
       "category": "move",
@@ -770,13 +933,22 @@
       "notBestFor": [
         "assembling-an-entire-sentence"
       ],
+      "positiveTags": [
+        "explore-placement",
+        "compare-placement",
+        "connect-position-and-meaning",
+        "placement-affects-meaning",
+        "multiple-valid-placements"
+      ],
+      "negativeTags": [
+        "assembling-an-entire-sentence"
+      ],
       "tags": [
         "explore-placement",
         "compare-placement",
         "connect-position-and-meaning",
         "placement-affects-meaning",
-        "multiple-valid-placements",
-        "assembling-an-entire-sentence"
+        "multiple-valid-placements"
       ],
       "relations": {
         "problemIds": [
@@ -786,12 +958,16 @@
           "MPO-004"
         ]
       },
-      "searchText": "modifier-positioner\nModifier Positioner\nmove\n修飾語を文中の位置へ移動し、かかり方を確かめる。\n修飾語の位置と、どの語句にかかるかの関係を理解する。\n修飾語カードと文中の位置\nタップ / 配置\n修飾関係と文の意味\n修飾語の位置によって、意味のまとまりが変わる。\n修飾語\n語順\n分詞\ntap-to-place\nposition-change\n正誤\n修飾関係表示\nexplore-placement\ncompare-placement\nconnect-position-and-meaning\nplacement-affects-meaning\nmultiple-valid-placements\nassembling-an-entire-sentence",
+      "searchText": "modifier-positioner\nModifier Positioner\nmove\n修飾語を文中の位置へ移動し、かかり方を確かめる。\n修飾語の位置と、どの語句にかかるかの関係を理解する。\n修飾語カードと文中の位置\nタップ / 配置\n修飾関係と文の意味\n修飾語の位置によって、意味のまとまりが変わる。\n修飾語\n語順\n分詞\ntap-to-place\nposition-change\n正誤\n修飾関係表示\nexplore-placement\ncompare-placement\nconnect-position-and-meaning\nplacement-affects-meaning\nmultiple-valid-placements",
       "demoType": "modifier-positioner"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-015",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-015"
+      },
       "slug": "adverb-placement-explorer",
       "title": "Adverb Placement Explorer",
       "category": "move",
@@ -826,22 +1002,35 @@
       "notBestFor": [
         "combining-independent-clauses"
       ],
+      "positiveTags": [
+        "explore-placement",
+        "compare-placement",
+        "observe-state-change",
+        "observing-adverb-scope",
+        "comparing-focus-shifts"
+      ],
+      "negativeTags": [
+        "combining-independent-clauses"
+      ],
       "tags": [
         "explore-placement",
         "compare-placement",
         "observe-state-change",
         "observing-adverb-scope",
-        "comparing-focus-shifts",
-        "combining-independent-clauses"
+        "comparing-focus-shifts"
       ],
       "relations": {
         "problemIds": []
       },
-      "searchText": "adverb-placement-explorer\nAdverb Placement Explorer\nmove\n副詞を複数の位置へ移動し、自然さと意味の違いを比べる。\n副詞の位置が文の焦点や自然さへ与える影響を観察する。\n副詞句と配置スロット\n選択 / 移動\n副詞の位置と読み手の焦点\n副詞は文のどこに置くかで、強調される情報が変わる。\n副詞\n語順\n文の焦点\nposition-change\ncomparison\n意味メモ\n自然さの説明\nexplore-placement\ncompare-placement\nobserve-state-change\nobserving-adverb-scope\ncomparing-focus-shifts\ncombining-independent-clauses"
+      "searchText": "adverb-placement-explorer\nAdverb Placement Explorer\nmove\n副詞を複数の位置へ移動し、自然さと意味の違いを比べる。\n副詞の位置が文の焦点や自然さへ与える影響を観察する。\n副詞句と配置スロット\n選択 / 移動\n副詞の位置と読み手の焦点\n副詞は文のどこに置くかで、強調される情報が変わる。\n副詞\n語順\n文の焦点\nposition-change\ncomparison\n意味メモ\n自然さの説明\nexplore-placement\ncompare-placement\nobserve-state-change\nobserving-adverb-scope\ncomparing-focus-shifts"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-016",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-016"
+      },
       "slug": "clause-reordering",
       "title": "Clause Reordering",
       "category": "move",
@@ -875,21 +1064,33 @@
       "notBestFor": [
         "word-level-error-correction"
       ],
+      "positiveTags": [
+        "observe-transformation",
+        "practice-word-order",
+        "reordering-clause-position",
+        "comparing-punctuation-effects"
+      ],
+      "negativeTags": [
+        "word-level-error-correction"
+      ],
       "tags": [
         "observe-transformation",
         "practice-word-order",
         "reordering-clause-position",
-        "comparing-punctuation-effects",
-        "word-level-error-correction"
+        "comparing-punctuation-effects"
       ],
       "relations": {
         "problemIds": []
       },
-      "searchText": "clause-reordering\nClause Reordering\nmove\n節を並べ替え、接続詞と句読点の働きを確かめる。\n節の位置が変わっても、節同士の関係を保てることを理解する。\n主節・従属節のカード\nタップ / 並べ替え\n節の順序と句読点\n節の位置が変わると、必要な句読点や読みやすさも変わる。\n句と節\n接続詞\n句読点\nsequence\n正誤\n構造ヒント\nobserve-transformation\npractice-word-order\nreordering-clause-position\ncomparing-punctuation-effects\nword-level-error-correction"
+      "searchText": "clause-reordering\nClause Reordering\nmove\n節を並べ替え、接続詞と句読点の働きを確かめる。\n節の位置が変わっても、節同士の関係を保てることを理解する。\n主節・従属節のカード\nタップ / 並べ替え\n節の順序と句読点\n節の位置が変わると、必要な句読点や読みやすさも変わる。\n句と節\n接続詞\n句読点\nsequence\n正誤\n構造ヒント\nobserve-transformation\npractice-word-order\nreordering-clause-position\ncomparing-punctuation-effects"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-017",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-017"
+      },
       "slug": "sentence-role-finder",
       "title": "Sentence Role Finder",
       "category": "select",
@@ -923,21 +1124,33 @@
       "notBestFor": [
         "word-definition-practice"
       ],
+      "positiveTags": [
+        "identify-element",
+        "identify-role",
+        "finding-specified-sentence-roles",
+        "role-based-reading"
+      ],
+      "negativeTags": [
+        "word-definition-practice"
+      ],
       "tags": [
         "identify-element",
         "identify-role",
         "finding-specified-sentence-roles",
-        "role-based-reading",
-        "word-definition-practice"
+        "role-based-reading"
       ],
       "relations": {
         "problemIds": []
       },
-      "searchText": "sentence-role-finder\nSentence Role Finder\nselect\n英文から指定された文の役割を選び、構造を見つける。\n主語・動詞・目的語などを、文全体の関係から見つける。\n文中の語句のまとまり\nタップ / 選択\n選択箇所と文の役割ラベル\n同じ語でも、文の中での位置と働きから役割が決まる。\n文型\nS / V / O / C\n句と節\ntoken-select\nrole-reveal\n正誤\n役割説明\nidentify-element\nidentify-role\nfinding-specified-sentence-roles\nrole-based-reading\nword-definition-practice"
+      "searchText": "sentence-role-finder\nSentence Role Finder\nselect\n英文から指定された文の役割を選び、構造を見つける。\n主語・動詞・目的語などを、文全体の関係から見つける。\n文中の語句のまとまり\nタップ / 選択\n選択箇所と文の役割ラベル\n同じ語でも、文の中での位置と働きから役割が決まる。\n文型\nS / V / O / C\n句と節\ntoken-select\nrole-reveal\n正誤\n役割説明\nidentify-element\nidentify-role\nfinding-specified-sentence-roles\nrole-based-reading"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-018",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-018"
+      },
       "slug": "clause-boundary-marker",
       "title": "Clause Boundary Marker",
       "category": "select",
@@ -971,21 +1184,33 @@
       "notBestFor": [
         "full-sentence-generation"
       ],
+      "positiveTags": [
+        "identify-element",
+        "identify-role",
+        "marking-clause-boundaries",
+        "identifying-clause-structure"
+      ],
+      "negativeTags": [
+        "full-sentence-generation"
+      ],
       "tags": [
         "identify-element",
         "identify-role",
         "marking-clause-boundaries",
-        "identifying-clause-structure",
-        "full-sentence-generation"
+        "identifying-clause-structure"
       ],
       "relations": {
         "problemIds": []
       },
-      "searchText": "clause-boundary-marker\nClause Boundary Marker\nselect\n英文中で節の境界を選び、主節と従属節を見分ける。\n節の始まりと終わりを、接続詞や動詞の関係から見つける。\n語句間の境界と接続詞\nタップ / マーク\n節の境界線と階層\n節は動詞を中心としたまとまりとして文の中に組み込まれる。\n句と節\n接続詞\n関係詞\nboundary-select\nhighlight\n正誤\n節の説明\nidentify-element\nidentify-role\nmarking-clause-boundaries\nidentifying-clause-structure\nfull-sentence-generation"
+      "searchText": "clause-boundary-marker\nClause Boundary Marker\nselect\n英文中で節の境界を選び、主節と従属節を見分ける。\n節の始まりと終わりを、接続詞や動詞の関係から見つける。\n語句間の境界と接続詞\nタップ / マーク\n節の境界線と階層\n節は動詞を中心としたまとまりとして文の中に組み込まれる。\n句と節\n接続詞\n関係詞\nboundary-select\nhighlight\n正誤\n節の説明\nidentify-element\nidentify-role\nmarking-clause-boundaries\nidentifying-clause-structure"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-019",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-019"
+      },
       "slug": "modifier-finder",
       "title": "Modifier Finder",
       "category": "select",
@@ -1019,21 +1244,33 @@
       "notBestFor": [
         "moving-a-modifier-between-positions"
       ],
+      "positiveTags": [
+        "identify-element",
+        "visualize-relation",
+        "finding-modifier-phrases",
+        "tracing-modifier-targets"
+      ],
+      "negativeTags": [
+        "moving-a-modifier-between-positions"
+      ],
       "tags": [
         "identify-element",
         "visualize-relation",
         "finding-modifier-phrases",
-        "tracing-modifier-targets",
-        "moving-a-modifier-between-positions"
+        "tracing-modifier-targets"
       ],
       "relations": {
         "problemIds": []
       },
-      "searchText": "modifier-finder\nModifier Finder\nselect\n英文から修飾語を選び、どの語句にかかるかを確かめる。\n文の中心部分と、情報を追加する修飾部分を区別する。\n修飾語句と被修飾語\nタップ / 選択\n修飾関係の強調表示\n修飾語は文の中心を支えながら、時間や場所などの情報を加える。\n修飾語\n前置詞句\n分詞\ntoken-select\nrelation-reveal\n正誤\n関係線\nidentify-element\nvisualize-relation\nfinding-modifier-phrases\ntracing-modifier-targets\nmoving-a-modifier-between-positions"
+      "searchText": "modifier-finder\nModifier Finder\nselect\n英文から修飾語を選び、どの語句にかかるかを確かめる。\n文の中心部分と、情報を追加する修飾部分を区別する。\n修飾語句と被修飾語\nタップ / 選択\n修飾関係の強調表示\n修飾語は文の中心を支えながら、時間や場所などの情報を加える。\n修飾語\n前置詞句\n分詞\ntoken-select\nrelation-reveal\n正誤\n関係線\nidentify-element\nvisualize-relation\nfinding-modifier-phrases\ntracing-modifier-targets"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-020",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-020"
+      },
       "slug": "part-of-speech-sorter",
       "title": "Part of Speech Sorter",
       "category": "classify",
@@ -1068,21 +1305,33 @@
       "notBestFor": [
         "assembling-sentence-order"
       ],
+      "positiveTags": [
+        "classify-form",
+        "classify-role",
+        "classifying-parts-of-speech",
+        "comparing-form-and-function"
+      ],
+      "negativeTags": [
+        "assembling-sentence-order"
+      ],
       "tags": [
         "classify-form",
         "classify-role",
         "classifying-parts-of-speech",
-        "comparing-form-and-function",
-        "assembling-sentence-order"
+        "comparing-form-and-function"
       ],
       "relations": {
         "problemIds": []
       },
-      "searchText": "part-of-speech-sorter\nPart of Speech Sorter\nclassify\n語句を名詞・動詞・形容詞などの品詞へ分類する。\n語の形だけでなく、文中での働きから品詞を判断する。\n単語または語句カード\nタップ / 分類\n品詞カテゴリと分類理由\n品詞は文中での働きと周囲の語との関係から考えられる。\n品詞\n名詞\n動詞\n形容詞\nclassification\nsorting\n正誤\n品詞説明\nclassify-form\nclassify-role\nclassifying-parts-of-speech\ncomparing-form-and-function\nassembling-sentence-order"
+      "searchText": "part-of-speech-sorter\nPart of Speech Sorter\nclassify\n語句を名詞・動詞・形容詞などの品詞へ分類する。\n語の形だけでなく、文中での働きから品詞を判断する。\n単語または語句カード\nタップ / 分類\n品詞カテゴリと分類理由\n品詞は文中での働きと周囲の語との関係から考えられる。\n品詞\n名詞\n動詞\n形容詞\nclassification\nsorting\n正誤\n品詞説明\nclassify-form\nclassify-role\nclassifying-parts-of-speech\ncomparing-form-and-function"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-021",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-021"
+      },
       "slug": "phrase-vs-clause-classifier",
       "title": "Phrase vs Clause Classifier",
       "category": "classify",
@@ -1116,21 +1365,33 @@
       "notBestFor": [
         "generating-syntax"
       ],
+      "positiveTags": [
+        "classify-form",
+        "classify-function",
+        "distinguishing-phrase-and-clause",
+        "detecting-finite-verbs"
+      ],
+      "negativeTags": [
+        "generating-syntax"
+      ],
       "tags": [
         "classify-form",
         "classify-function",
         "distinguishing-phrase-and-clause",
-        "detecting-finite-verbs",
-        "generating-syntax"
+        "detecting-finite-verbs"
       ],
       "relations": {
         "problemIds": []
       },
-      "searchText": "phrase-vs-clause-classifier\nPhrase vs Clause Classifier\nclassify\n語句を句と節に分類し、動詞を含むまとまりを見分ける。\n句と節の違いを、まとまりの中の動詞の有無から理解する。\n語句のまとまりカード\nタップ / 分類\nPhrase / Clauseの分類先\n節には中心となる動詞があり、句とは構造上の役割が異なる。\n句と節\n動詞\n従属節\nclassification\nfeature-check\n正誤\n根拠表示\nclassify-form\nclassify-function\ndistinguishing-phrase-and-clause\ndetecting-finite-verbs\ngenerating-syntax"
+      "searchText": "phrase-vs-clause-classifier\nPhrase vs Clause Classifier\nclassify\n語句を句と節に分類し、動詞を含むまとまりを見分ける。\n句と節の違いを、まとまりの中の動詞の有無から理解する。\n語句のまとまりカード\nタップ / 分類\nPhrase / Clauseの分類先\n節には中心となる動詞があり、句とは構造上の役割が異なる。\n句と節\n動詞\n従属節\nclassification\nfeature-check\n正誤\n根拠表示\nclassify-form\nclassify-function\ndistinguishing-phrase-and-clause\ndetecting-finite-verbs"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-022",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-022"
+      },
       "slug": "transitive-vs-intransitive-classifier",
       "title": "Transitive vs Intransitive Classifier",
       "category": "classify",
@@ -1164,21 +1425,33 @@
       "notBestFor": [
         "conjugation-drills"
       ],
+      "positiveTags": [
+        "classify-function",
+        "connect-form-and-meaning",
+        "classifying-verb-valency",
+        "linking-verbs-to-objects"
+      ],
+      "negativeTags": [
+        "conjugation-drills"
+      ],
       "tags": [
         "classify-function",
         "connect-form-and-meaning",
         "classifying-verb-valency",
-        "linking-verbs-to-objects",
-        "conjugation-drills"
+        "linking-verbs-to-objects"
       ],
       "relations": {
         "problemIds": []
       },
-      "searchText": "transitive-vs-intransitive-classifier\nTransitive vs Intransitive Classifier\nclassify\n動詞を目的語の有無で分類し、文型との関係を確かめる。\n動詞の性質と、目的語を必要とする文型の関係を理解する。\n動詞カードと例文\nタップ / 分類\n動詞の分類と文型ラベル\n動詞の性質によって、後ろに置ける語句の構造が変わる。\n自動詞\n他動詞\n文型\nclassification\nsentence-context\n正誤\n目的語の説明\nclassify-function\nconnect-form-and-meaning\nclassifying-verb-valency\nlinking-verbs-to-objects\nconjugation-drills"
+      "searchText": "transitive-vs-intransitive-classifier\nTransitive vs Intransitive Classifier\nclassify\n動詞を目的語の有無で分類し、文型との関係を確かめる。\n動詞の性質と、目的語を必要とする文型の関係を理解する。\n動詞カードと例文\nタップ / 分類\n動詞の分類と文型ラベル\n動詞の性質によって、後ろに置ける語句の構造が変わる。\n自動詞\n他動詞\n文型\nclassification\nsentence-context\n正誤\n目的語の説明\nclassify-function\nconnect-form-and-meaning\nclassifying-verb-valency\nlinking-verbs-to-objects"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-023",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-023"
+      },
       "slug": "active-passive-transformer",
       "title": "Active Passive Transformer",
       "category": "transform",
@@ -1213,22 +1486,35 @@
       "notBestFor": [
         "stylistic-free-writing"
       ],
+      "positiveTags": [
+        "observe-transformation",
+        "observe-state-change",
+        "connect-form-and-meaning",
+        "comparing-voice",
+        "tracking-role-reversal"
+      ],
+      "negativeTags": [
+        "stylistic-free-writing"
+      ],
       "tags": [
         "observe-transformation",
         "observe-state-change",
         "connect-form-and-meaning",
         "comparing-voice",
-        "tracking-role-reversal",
-        "stylistic-free-writing"
+        "tracking-role-reversal"
       ],
       "relations": {
         "problemIds": []
       },
-      "searchText": "active-passive-transformer\nActive Passive Transformer\ntransform\n能動態と受動態を切り替え、主語と目的語の関係を追う。\n態の変化で、文の焦点と動詞の形がどう変わるかを理解する。\n態の切り替えコントロール\n選択 / 切り替え\n主語・目的語・be動詞・過去分詞\n受動態では、動作を受けるものが文の主語になる。\n受動態\n過去分詞\n文型\nstate-selection\nsentence-generation\n即時変化\n役割比較\nobserve-transformation\nobserve-state-change\nconnect-form-and-meaning\ncomparing-voice\ntracking-role-reversal\nstylistic-free-writing"
+      "searchText": "active-passive-transformer\nActive Passive Transformer\ntransform\n能動態と受動態を切り替え、主語と目的語の関係を追う。\n態の変化で、文の焦点と動詞の形がどう変わるかを理解する。\n態の切り替えコントロール\n選択 / 切り替え\n主語・目的語・be動詞・過去分詞\n受動態では、動作を受けるものが文の主語になる。\n受動態\n過去分詞\n文型\nstate-selection\nsentence-generation\n即時変化\n役割比較\nobserve-transformation\nobserve-state-change\nconnect-form-and-meaning\ncomparing-voice\ntracking-role-reversal"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-024",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-024"
+      },
       "slug": "direct-indirect-speech-transformer",
       "title": "Direct Indirect Speech Transformer",
       "category": "transform",
@@ -1262,21 +1548,33 @@
       "notBestFor": [
         "writing-an-open-ended-dialogue"
       ],
+      "positiveTags": [
+        "observe-transformation",
+        "connect-form-and-meaning",
+        "tracing-reported-speech-changes",
+        "comparing-tense-shifts"
+      ],
+      "negativeTags": [
+        "writing-an-open-ended-dialogue"
+      ],
       "tags": [
         "observe-transformation",
         "connect-form-and-meaning",
         "tracing-reported-speech-changes",
-        "comparing-tense-shifts",
-        "writing-an-open-ended-dialogue"
+        "comparing-tense-shifts"
       ],
       "relations": {
         "problemIds": []
       },
-      "searchText": "direct-indirect-speech-transformer\nDirect Indirect Speech Transformer\ntransform\n直接話法と間接話法を変換し、時制や代名詞の変化を追う。\n引用する視点が変わると、文法形式も連動して変わることを理解する。\n話法の切り替えと変換対象\n選択 / 変換\n引用節の時制・代名詞・時を表す語\n話し手の視点に合わせて、引用内容の形が調整される。\n話法\n時制の一致\n代名詞\nstate-selection\nsentence-transformation\n差分表示\n変化理由\nobserve-transformation\nconnect-form-and-meaning\ntracing-reported-speech-changes\ncomparing-tense-shifts\nwriting-an-open-ended-dialogue"
+      "searchText": "direct-indirect-speech-transformer\nDirect Indirect Speech Transformer\ntransform\n直接話法と間接話法を変換し、時制や代名詞の変化を追う。\n引用する視点が変わると、文法形式も連動して変わることを理解する。\n話法の切り替えと変換対象\n選択 / 変換\n引用節の時制・代名詞・時を表す語\n話し手の視点に合わせて、引用内容の形が調整される。\n話法\n時制の一致\n代名詞\nstate-selection\nsentence-transformation\n差分表示\n変化理由\nobserve-transformation\nconnect-form-and-meaning\ntracing-reported-speech-changes\ncomparing-tense-shifts"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-025",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-025"
+      },
       "slug": "comparison-transformer",
       "title": "Comparison Transformer",
       "category": "transform",
@@ -1312,22 +1610,35 @@
       "notBestFor": [
         "ranking-unstated-meaning"
       ],
+      "positiveTags": [
+        "observe-transformation",
+        "compare-form",
+        "compare-meaning",
+        "changing-comparison-degree",
+        "linking-form-to-comparison"
+      ],
+      "negativeTags": [
+        "ranking-unstated-meaning"
+      ],
       "tags": [
         "observe-transformation",
         "compare-form",
         "compare-meaning",
         "changing-comparison-degree",
-        "linking-form-to-comparison",
-        "ranking-unstated-meaning"
+        "linking-form-to-comparison"
       ],
       "relations": {
         "problemIds": []
       },
-      "searchText": "comparison-transformer\nComparison Transformer\ntransform\n原級・比較級・最上級を切り替え、比較の形を変える。\n比較対象の数と意味に応じて、形容詞の形が変わることを理解する。\n比較の種類と比較対象\n選択 / 切り替え\n形容詞の形と比較構造\n比べる対象と範囲によって、使う比較表現が決まる。\n比較\n原級\n比較級\n最上級\nstate-selection\nsentence-generation\n即時変化\n比較対象表示\nobserve-transformation\ncompare-form\ncompare-meaning\nchanging-comparison-degree\nlinking-form-to-comparison\nranking-unstated-meaning"
+      "searchText": "comparison-transformer\nComparison Transformer\ntransform\n原級・比較級・最上級を切り替え、比較の形を変える。\n比較対象の数と意味に応じて、形容詞の形が変わることを理解する。\n比較の種類と比較対象\n選択 / 切り替え\n形容詞の形と比較構造\n比べる対象と範囲によって、使う比較表現が決まる。\n比較\n原級\n比較級\n最上級\nstate-selection\nsentence-generation\n即時変化\n比較対象表示\nobserve-transformation\ncompare-form\ncompare-meaning\nchanging-comparison-degree\nlinking-form-to-comparison"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-026",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-026"
+      },
       "slug": "sentence-pattern-diagram",
       "title": "Sentence Pattern Diagram",
       "category": "visualize",
@@ -1361,12 +1672,20 @@
       "notBestFor": [
         "creative-sentence-generation"
       ],
+      "positiveTags": [
+        "visualize-structure",
+        "identify-role",
+        "inspecting-sentence-patterns",
+        "mapping-roles-to-slots"
+      ],
+      "negativeTags": [
+        "creative-sentence-generation"
+      ],
       "tags": [
         "visualize-structure",
         "identify-role",
         "inspecting-sentence-patterns",
-        "mapping-roles-to-slots",
-        "creative-sentence-generation"
+        "mapping-roles-to-slots"
       ],
       "relations": {
         "problemIds": [
@@ -1375,12 +1694,16 @@
           "SPD-003"
         ]
       },
-      "searchText": "sentence-pattern-diagram\nSentence Pattern Diagram\nvisualize\n英文をS・V・O・Cの配置図として表示する。\n文型を、役割ラベルと位置関係の図として捉える。\n文型図の要素と表示切り替え\nクリック / 強調\n文型図と対応する語句\n文の骨格は、役割を持つ要素の配置として見ることができる。\n文型\nS / V / O / C\n補語\ndiagram\nhighlight\n対応強調\n構造説明\nvisualize-structure\nidentify-role\ninspecting-sentence-patterns\nmapping-roles-to-slots\ncreative-sentence-generation",
+      "searchText": "sentence-pattern-diagram\nSentence Pattern Diagram\nvisualize\n英文をS・V・O・Cの配置図として表示する。\n文型を、役割ラベルと位置関係の図として捉える。\n文型図の要素と表示切り替え\nクリック / 強調\n文型図と対応する語句\n文の骨格は、役割を持つ要素の配置として見ることができる。\n文型\nS / V / O / C\n補語\ndiagram\nhighlight\n対応強調\n構造説明\nvisualize-structure\nidentify-role\ninspecting-sentence-patterns\nmapping-roles-to-slots",
       "demoType": "sentence-pattern-diagram"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-027",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-027"
+      },
       "slug": "modifier-connection-viewer",
       "title": "Modifier Connection Viewer",
       "category": "visualize",
@@ -1414,12 +1737,20 @@
       "notBestFor": [
         "changing-modifier-placement"
       ],
+      "positiveTags": [
+        "visualize-relation",
+        "identify-role",
+        "inspecting-modifier-relations",
+        "tracing-target-connections"
+      ],
+      "negativeTags": [
+        "changing-modifier-placement"
+      ],
       "tags": [
         "visualize-relation",
         "identify-role",
         "inspecting-modifier-relations",
-        "tracing-target-connections",
-        "changing-modifier-placement"
+        "tracing-target-connections"
       ],
       "relations": {
         "problemIds": [
@@ -1428,12 +1759,16 @@
           "MCV-003"
         ]
       },
-      "searchText": "modifier-connection-viewer\nModifier Connection Viewer\nvisualize\n修飾語から被修飾語へのつながりを線で表示する。\n語順だけでは見えにくい修飾関係を、接続として理解する。\n語句ノードと修飾関係\nクリック / 展開\n修飾関係の線と強調箇所\n離れた位置にある語句も、文中では意味上つながっている。\n修飾語\n関係詞\n分詞\nrelation-graph\nhighlight\n関係線\n短い説明\nvisualize-relation\nidentify-role\ninspecting-modifier-relations\ntracing-target-connections\nchanging-modifier-placement",
+      "searchText": "modifier-connection-viewer\nModifier Connection Viewer\nvisualize\n修飾語から被修飾語へのつながりを線で表示する。\n語順だけでは見えにくい修飾関係を、接続として理解する。\n語句ノードと修飾関係\nクリック / 展開\n修飾関係の線と強調箇所\n離れた位置にある語句も、文中では意味上つながっている。\n修飾語\n関係詞\n分詞\nrelation-graph\nhighlight\n関係線\n短い説明\nvisualize-relation\nidentify-role\ninspecting-modifier-relations\ntracing-target-connections",
       "demoType": "modifier-connection-viewer"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-028",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-028"
+      },
       "slug": "clause-hierarchy-viewer",
       "title": "Clause Hierarchy Viewer",
       "category": "visualize",
@@ -1467,21 +1802,33 @@
       "notBestFor": [
         "correcting-word-forms"
       ],
+      "positiveTags": [
+        "visualize-structure",
+        "visualize-relation",
+        "inspecting-clause-hierarchy",
+        "tracing-nested-clauses"
+      ],
+      "negativeTags": [
+        "correcting-word-forms"
+      ],
       "tags": [
         "visualize-structure",
         "visualize-relation",
         "inspecting-clause-hierarchy",
-        "tracing-nested-clauses",
-        "correcting-word-forms"
+        "tracing-nested-clauses"
       ],
       "relations": {
         "problemIds": []
       },
-      "searchText": "clause-hierarchy-viewer\nClause Hierarchy Viewer\nvisualize\n主節と従属節の階層を、入れ子構造として表示する。\n複雑な英文の中で、節がどの階層にあるかを理解する。\n節ノードと折りたたみ操作\nクリック / 展開\n節の階層と対応する英文\n英文は節が入れ子になった階層構造として組み立てられる。\n句と節\n関係詞節\n名詞節\ntree-view\ncollapse-expand\n階層表示\n構造説明\nvisualize-structure\nvisualize-relation\ninspecting-clause-hierarchy\ntracing-nested-clauses\ncorrecting-word-forms"
+      "searchText": "clause-hierarchy-viewer\nClause Hierarchy Viewer\nvisualize\n主節と従属節の階層を、入れ子構造として表示する。\n複雑な英文の中で、節がどの階層にあるかを理解する。\n節ノードと折りたたみ操作\nクリック / 展開\n節の階層と対応する英文\n英文は節が入れ子になった階層構造として組み立てられる。\n句と節\n関係詞節\n名詞節\ntree-view\ncollapse-expand\n階層表示\n構造説明\nvisualize-structure\nvisualize-relation\ninspecting-clause-hierarchy\ntracing-nested-clauses"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-029",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-029"
+      },
       "slug": "tense-generator",
       "title": "Tense Generator",
       "category": "generate",
@@ -1516,21 +1863,33 @@
       "notBestFor": [
         "open-ended-writing"
       ],
+      "positiveTags": [
+        "generate-from-conditions",
+        "observe-state-change",
+        "generating-tense-variants",
+        "connecting-time-to-form"
+      ],
+      "negativeTags": [
+        "open-ended-writing"
+      ],
       "tags": [
         "generate-from-conditions",
         "observe-state-change",
         "generating-tense-variants",
-        "connecting-time-to-form",
-        "open-ended-writing"
+        "connecting-time-to-form"
       ],
       "relations": {
         "problemIds": []
       },
-      "searchText": "tense-generator\nTense Generator\ngenerate\n時制の条件から英文を生成し、動詞の形の変化を示す。\n時間の捉え方が、動詞の形や助動詞へ反映されることを理解する。\n時制・主語・動詞の条件\n選択 / 生成\n動詞の形と助動詞\n文の時間情報に応じて、動詞の形が体系的に変わる。\n時制\n現在形\n過去形\n進行形\nform-select\ngeneration\n生成結果\n形の説明\ngenerate-from-conditions\nobserve-state-change\ngenerating-tense-variants\nconnecting-time-to-form\nopen-ended-writing"
+      "searchText": "tense-generator\nTense Generator\ngenerate\n時制の条件から英文を生成し、動詞の形の変化を示す。\n時間の捉え方が、動詞の形や助動詞へ反映されることを理解する。\n時制・主語・動詞の条件\n選択 / 生成\n動詞の形と助動詞\n文の時間情報に応じて、動詞の形が体系的に変わる。\n時制\n現在形\n過去形\n進行形\nform-select\ngeneration\n生成結果\n形の説明\ngenerate-from-conditions\nobserve-state-change\ngenerating-tense-variants\nconnecting-time-to-form"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-030",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-030"
+      },
       "slug": "question-generator",
       "title": "Question Generator",
       "category": "generate",
@@ -1564,21 +1923,33 @@
       "notBestFor": [
         "simulating-a-whole-conversation"
       ],
+      "positiveTags": [
+        "generate-from-conditions",
+        "observe-transformation",
+        "generating-a-question-from-a-target",
+        "mapping-question-types"
+      ],
+      "negativeTags": [
+        "simulating-a-whole-conversation"
+      ],
       "tags": [
         "generate-from-conditions",
         "observe-transformation",
         "generating-a-question-from-a-target",
-        "mapping-question-types",
-        "simulating-a-whole-conversation"
+        "mapping-question-types"
       ],
       "relations": {
         "problemIds": []
       },
-      "searchText": "question-generator\nQuestion Generator\ngenerate\n答えたい情報の条件から、適切な疑問文を生成する。\n疑問文の種類と尋ねる対象の関係を、生成手順として理解する。\n疑問詞・時制・答えの条件\n選択 / 生成\n疑問文の構造と語順\n尋ねる対象によって、疑問詞と文の構造が決まる。\n疑問文\n疑問詞\n助動詞\nform-select\ngeneration\n生成結果\n構造説明\ngenerate-from-conditions\nobserve-transformation\ngenerating-a-question-from-a-target\nmapping-question-types\nsimulating-a-whole-conversation"
+      "searchText": "question-generator\nQuestion Generator\ngenerate\n答えたい情報の条件から、適切な疑問文を生成する。\n疑問文の種類と尋ねる対象の関係を、生成手順として理解する。\n疑問詞・時制・答えの条件\n選択 / 生成\n疑問文の構造と語順\n尋ねる対象によって、疑問詞と文の構造が決まる。\n疑問文\n疑問詞\n助動詞\nform-select\ngeneration\n生成結果\n構造説明\ngenerate-from-conditions\nobserve-transformation\ngenerating-a-question-from-a-target\nmapping-question-types"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-031",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-031"
+      },
       "slug": "conditional-generator",
       "title": "Conditional Generator",
       "category": "generate",
@@ -1612,21 +1983,33 @@
       "notBestFor": [
         "open-ended-argument-writing"
       ],
+      "positiveTags": [
+        "generate-from-conditions",
+        "connect-form-and-meaning",
+        "building-condition-result-pairs",
+        "connecting-tense-to-condition"
+      ],
+      "negativeTags": [
+        "open-ended-argument-writing"
+      ],
       "tags": [
         "generate-from-conditions",
         "connect-form-and-meaning",
         "building-condition-result-pairs",
-        "connecting-tense-to-condition",
-        "open-ended-argument-writing"
+        "connecting-tense-to-condition"
       ],
       "relations": {
         "problemIds": []
       },
-      "searchText": "conditional-generator\nConditional Generator\ngenerate\n条件と結果の組み合わせから、仮定法の文を生成する。\n条件節と結果節の関係、時制の組み合わせを理解する。\n条件の種類と結果の条件\n選択 / 生成\n条件節・結果節・時制\n現実との距離や時間によって、条件文の形が変わる。\n仮定法\n条件文\n時制\nstate-selection\ngeneration\n生成結果\n時制の説明\ngenerate-from-conditions\nconnect-form-and-meaning\nbuilding-condition-result-pairs\nconnecting-tense-to-condition\nopen-ended-argument-writing"
+      "searchText": "conditional-generator\nConditional Generator\ngenerate\n条件と結果の組み合わせから、仮定法の文を生成する。\n条件節と結果節の関係、時制の組み合わせを理解する。\n条件の種類と結果の条件\n選択 / 生成\n条件節・結果節・時制\n現実との距離や時間によって、条件文の形が変わる。\n仮定法\n条件文\n時制\nstate-selection\ngeneration\n生成結果\n時制の説明\ngenerate-from-conditions\nconnect-form-and-meaning\nbuilding-condition-result-pairs\nconnecting-tense-to-condition"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-032",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-032"
+      },
       "slug": "infinitive-vs-gerund-comparison",
       "title": "Infinitive vs Gerund Comparison",
       "category": "compare",
@@ -1660,21 +2043,33 @@
       "notBestFor": [
         "full-sentence-construction"
       ],
+      "positiveTags": [
+        "compare-form",
+        "compare-meaning",
+        "comparing-verb-patterns",
+        "distinguishing-infinitive-and-gerund"
+      ],
+      "negativeTags": [
+        "full-sentence-construction"
+      ],
       "tags": [
         "compare-form",
         "compare-meaning",
         "comparing-verb-patterns",
-        "distinguishing-infinitive-and-gerund",
-        "full-sentence-construction"
+        "distinguishing-infinitive-and-gerund"
       ],
       "relations": {
         "problemIds": []
       },
-      "searchText": "infinitive-vs-gerund-comparison\nInfinitive vs Gerund Comparison\ncompare\n不定詞と動名詞を使う英文を並べ、意味の差を比較する。\n動詞の後ろの形が、行為の捉え方や意味へ与える影響を理解する。\n比較する英文と形の差分\n切り替え / 強調\n動詞後の形と意味メモ\n似た形でも、不定詞と動名詞で行為の捉え方が変わる。\n不定詞\n動名詞\n動詞の語法\nside-by-side\ndiff-highlight\n差分強調\n意味比較\ncompare-form\ncompare-meaning\ncomparing-verb-patterns\ndistinguishing-infinitive-and-gerund\nfull-sentence-construction"
+      "searchText": "infinitive-vs-gerund-comparison\nInfinitive vs Gerund Comparison\ncompare\n不定詞と動名詞を使う英文を並べ、意味の差を比較する。\n動詞の後ろの形が、行為の捉え方や意味へ与える影響を理解する。\n比較する英文と形の差分\n切り替え / 強調\n動詞後の形と意味メモ\n似た形でも、不定詞と動名詞で行為の捉え方が変わる。\n不定詞\n動名詞\n動詞の語法\nside-by-side\ndiff-highlight\n差分強調\n意味比較\ncompare-form\ncompare-meaning\ncomparing-verb-patterns\ndistinguishing-infinitive-and-gerund"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-033",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-033"
+      },
       "slug": "active-vs-passive-comparison",
       "title": "Active vs Passive Comparison",
       "category": "compare",
@@ -1708,21 +2103,33 @@
       "notBestFor": [
         "open-ended-style-editing"
       ],
+      "positiveTags": [
+        "compare-form",
+        "compare-meaning",
+        "comparing-voice-choices",
+        "mapping-agent-and-patient"
+      ],
+      "negativeTags": [
+        "open-ended-style-editing"
+      ],
       "tags": [
         "compare-form",
         "compare-meaning",
         "comparing-voice-choices",
-        "mapping-agent-and-patient",
-        "open-ended-style-editing"
+        "mapping-agent-and-patient"
       ],
       "relations": {
         "problemIds": []
       },
-      "searchText": "active-vs-passive-comparison\nActive vs Passive Comparison\ncompare\n能動態と受動態を並べ、視点と役割の差を比較する。\n同じ出来事を異なる主語から述べる効果を理解する。\n2つの英文と対応する語句\n切り替え / 対応付け\n主語・目的語・動詞の形\n態が変わると、文の焦点と語句の役割が入れ替わる。\n受動態\n文型\n過去分詞\nside-by-side\nrole-mapping\n差分強調\n役割比較\ncompare-form\ncompare-meaning\ncomparing-voice-choices\nmapping-agent-and-patient\nopen-ended-style-editing"
+      "searchText": "active-vs-passive-comparison\nActive vs Passive Comparison\ncompare\n能動態と受動態を並べ、視点と役割の差を比較する。\n同じ出来事を異なる主語から述べる効果を理解する。\n2つの英文と対応する語句\n切り替え / 対応付け\n主語・目的語・動詞の形\n態が変わると、文の焦点と語句の役割が入れ替わる。\n受動態\n文型\n過去分詞\nside-by-side\nrole-mapping\n差分強調\n役割比較\ncompare-form\ncompare-meaning\ncomparing-voice-choices\nmapping-agent-and-patient"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-034",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-034"
+      },
       "slug": "tense-comparison",
       "title": "Tense Comparison",
       "category": "compare",
@@ -1756,21 +2163,33 @@
       "notBestFor": [
         "spontaneous-sentence-generation"
       ],
+      "positiveTags": [
+        "compare-form",
+        "compare-meaning",
+        "comparing-time-frames",
+        "connecting-tense-to-meaning"
+      ],
+      "negativeTags": [
+        "spontaneous-sentence-generation"
+      ],
       "tags": [
         "compare-form",
         "compare-meaning",
         "comparing-time-frames",
-        "connecting-tense-to-meaning",
-        "spontaneous-sentence-generation"
+        "connecting-tense-to-meaning"
       ],
       "relations": {
         "problemIds": []
       },
-      "searchText": "tense-comparison\nTense Comparison\ncompare\n同じ内容を異なる時制で並べ、時間の捉え方を比較する。\n時制の違いが時間関係と文の意味へ与える影響を理解する。\n時制の切り替えと差分箇所\n選択 / 比較\n動詞の形と時間表現\n時制は動詞の形だけでなく、出来事の時間関係を表す。\n時制\n現在完了\n過去形\nside-by-side\ntimeline\n時間軸\n意味比較\ncompare-form\ncompare-meaning\ncomparing-time-frames\nconnecting-tense-to-meaning\nspontaneous-sentence-generation"
+      "searchText": "tense-comparison\nTense Comparison\ncompare\n同じ内容を異なる時制で並べ、時間の捉え方を比較する。\n時制の違いが時間関係と文の意味へ与える影響を理解する。\n時制の切り替えと差分箇所\n選択 / 比較\n動詞の形と時間表現\n時制は動詞の形だけでなく、出来事の時間関係を表す。\n時制\n現在完了\n過去形\nside-by-side\ntimeline\n時間軸\n意味比較\ncompare-form\ncompare-meaning\ncomparing-time-frames\nconnecting-tense-to-meaning"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-035",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-035"
+      },
       "slug": "agreement-fixer",
       "title": "Agreement Fixer",
       "category": "correct",
@@ -1804,21 +2223,33 @@
       "notBestFor": [
         "free-form-proofreading"
       ],
+      "positiveTags": [
+        "correct-form",
+        "diagnose-error",
+        "diagnosing-subject-verb-agreement",
+        "correcting-inflection"
+      ],
+      "negativeTags": [
+        "free-form-proofreading"
+      ],
       "tags": [
         "correct-form",
         "diagnose-error",
         "diagnosing-subject-verb-agreement",
-        "correcting-inflection",
-        "free-form-proofreading"
+        "correcting-inflection"
       ],
       "relations": {
         "problemIds": []
       },
-      "searchText": "agreement-fixer\nAgreement Fixer\ncorrect\n主語と動詞の一致の誤りを見つけ、正しい形へ直す。\n主語の数や人称が、動詞の形を決めることを理解する。\n誤りのある動詞と訂正候補\n選択 / 修正\n動詞の形と一致ラベル\n動詞は主語の人称と数に合わせて形を変える。\n主語と動詞の一致\n三単現\n複数主語\nerror-spotting\nchoice\n正誤\n修正理由\ncorrect-form\ndiagnose-error\ndiagnosing-subject-verb-agreement\ncorrecting-inflection\nfree-form-proofreading"
+      "searchText": "agreement-fixer\nAgreement Fixer\ncorrect\n主語と動詞の一致の誤りを見つけ、正しい形へ直す。\n主語の数や人称が、動詞の形を決めることを理解する。\n誤りのある動詞と訂正候補\n選択 / 修正\n動詞の形と一致ラベル\n動詞は主語の人称と数に合わせて形を変える。\n主語と動詞の一致\n三単現\n複数主語\nerror-spotting\nchoice\n正誤\n修正理由\ncorrect-form\ndiagnose-error\ndiagnosing-subject-verb-agreement\ncorrecting-inflection"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-036",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-036"
+      },
       "slug": "tense-error-finder",
       "title": "Tense Error Finder",
       "category": "correct",
@@ -1853,22 +2284,35 @@
       "notBestFor": [
         "stylistic-editing"
       ],
+      "positiveTags": [
+        "correct-form",
+        "diagnose-error",
+        "connect-form-and-meaning",
+        "diagnosing-tense-mismatch",
+        "aligning-time-cues-and-form"
+      ],
+      "negativeTags": [
+        "stylistic-editing"
+      ],
       "tags": [
         "correct-form",
         "diagnose-error",
         "connect-form-and-meaning",
         "diagnosing-tense-mismatch",
-        "aligning-time-cues-and-form",
-        "stylistic-editing"
+        "aligning-time-cues-and-form"
       ],
       "relations": {
         "problemIds": []
       },
-      "searchText": "tense-error-finder\nTense Error Finder\ncorrect\n文脈に合わない時制を見つけ、動詞の形を修正する。\n時間を表す語と動詞の時制を対応づけて考える。\n時間表現と動詞の形\n選択 / 修正\n誤りの箇所と時間関係\n文脈の時間情報と動詞の時制は対応している。\n時制\n時間表現\n現在完了\nerror-spotting\nsentence-correction\n正誤\n時間軸ヒント\ncorrect-form\ndiagnose-error\nconnect-form-and-meaning\ndiagnosing-tense-mismatch\naligning-time-cues-and-form\nstylistic-editing"
+      "searchText": "tense-error-finder\nTense Error Finder\ncorrect\n文脈に合わない時制を見つけ、動詞の形を修正する。\n時間を表す語と動詞の時制を対応づけて考える。\n時間表現と動詞の形\n選択 / 修正\n誤りの箇所と時間関係\n文脈の時間情報と動詞の時制は対応している。\n時制\n時間表現\n現在完了\nerror-spotting\nsentence-correction\n正誤\n時間軸ヒント\ncorrect-form\ndiagnose-error\nconnect-form-and-meaning\ndiagnosing-tense-mismatch\naligning-time-cues-and-form"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-037",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-037"
+      },
       "slug": "word-order-error-fixer",
       "title": "Word Order Error Fixer",
       "category": "correct",
@@ -1903,22 +2347,35 @@
       "notBestFor": [
         "meaning-only-comparison"
       ],
+      "positiveTags": [
+        "correct-form",
+        "diagnose-error",
+        "practice-word-order",
+        "diagnosing-order-errors",
+        "reconstructing-sentence-order"
+      ],
+      "negativeTags": [
+        "meaning-only-comparison"
+      ],
       "tags": [
         "correct-form",
         "diagnose-error",
         "practice-word-order",
         "diagnosing-order-errors",
-        "reconstructing-sentence-order",
-        "meaning-only-comparison"
+        "reconstructing-sentence-order"
       ],
       "relations": {
         "problemIds": []
       },
-      "searchText": "word-order-error-fixer\nWord Order Error Fixer\ncorrect\n語順の誤りを見つけ、英文の骨格に沿って修正する。\n語順の誤りを、単語の暗記ではなく文型から説明する。\n誤った語順と移動対象\nタップ / 並べ替え\n語句の位置と文型ラベル\n英文の語順には、語句の役割に基づく基本的な制約がある。\n語順\n文型\n修飾語\nerror-spotting\nsequence\n正誤\n語順ヒント\ncorrect-form\ndiagnose-error\npractice-word-order\ndiagnosing-order-errors\nreconstructing-sentence-order\nmeaning-only-comparison"
+      "searchText": "word-order-error-fixer\nWord Order Error Fixer\ncorrect\n語順の誤りを見つけ、英文の骨格に沿って修正する。\n語順の誤りを、単語の暗記ではなく文型から説明する。\n誤った語順と移動対象\nタップ / 並べ替え\n語句の位置と文型ラベル\n英文の語順には、語句の役割に基づく基本的な制約がある。\n語順\n文型\n修飾語\nerror-spotting\nsequence\n正誤\n語順ヒント\ncorrect-form\ndiagnose-error\npractice-word-order\ndiagnosing-order-errors\nreconstructing-sentence-order"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-038",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-038"
+      },
       "slug": "request-simulator",
       "title": "Request Simulator",
       "category": "simulate",
@@ -1953,22 +2410,35 @@
       "notBestFor": [
         "isolated-conjugation"
       ],
+      "positiveTags": [
+        "choose-in-context",
+        "match-form-to-purpose",
+        "connect-context-and-form",
+        "choosing-a-polite-request",
+        "matching-register-to-situation"
+      ],
+      "negativeTags": [
+        "isolated-conjugation"
+      ],
       "tags": [
         "choose-in-context",
         "match-form-to-purpose",
         "connect-context-and-form",
         "choosing-a-polite-request",
-        "matching-register-to-situation",
-        "isolated-conjugation"
+        "matching-register-to-situation"
       ],
       "relations": {
         "problemIds": []
       },
-      "searchText": "request-simulator\nRequest Simulator\nsimulate\n場面に応じた依頼表現を選び、会話の流れを進める。\n相手との関係や目的に応じて、依頼の形を選ぶ。\n場面情報と依頼表現の選択肢\n選択 / 返答\n会話の返答と丁寧さ\n文法形式は、場面と相手への配慮を表す。\n助動詞\n依頼表現\n丁寧表現\nscenario\nchoice\n会話結果\n場面別ヒント\nchoose-in-context\nmatch-form-to-purpose\nconnect-context-and-form\nchoosing-a-polite-request\nmatching-register-to-situation\nisolated-conjugation"
+      "searchText": "request-simulator\nRequest Simulator\nsimulate\n場面に応じた依頼表現を選び、会話の流れを進める。\n相手との関係や目的に応じて、依頼の形を選ぶ。\n場面情報と依頼表現の選択肢\n選択 / 返答\n会話の返答と丁寧さ\n文法形式は、場面と相手への配慮を表す。\n助動詞\n依頼表現\n丁寧表現\nscenario\nchoice\n会話結果\n場面別ヒント\nchoose-in-context\nmatch-form-to-purpose\nconnect-context-and-form\nchoosing-a-polite-request\nmatching-register-to-situation"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-039",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-039"
+      },
       "slug": "travel-conversation-grammar",
       "title": "Travel Conversation Grammar",
       "category": "simulate",
@@ -2003,22 +2473,35 @@
       "notBestFor": [
         "sentence-diagramming"
       ],
+      "positiveTags": [
+        "choose-in-context",
+        "match-form-to-purpose",
+        "connect-context-and-form",
+        "practicing-travel-dialogue",
+        "choosing-a-purpose-fit-response"
+      ],
+      "negativeTags": [
+        "sentence-diagramming"
+      ],
       "tags": [
         "choose-in-context",
         "match-form-to-purpose",
         "connect-context-and-form",
         "practicing-travel-dialogue",
-        "choosing-a-purpose-fit-response",
-        "sentence-diagramming"
+        "choosing-a-purpose-fit-response"
       ],
       "relations": {
         "problemIds": []
       },
-      "searchText": "travel-conversation-grammar\nTravel Conversation Grammar\nsimulate\n旅行場面の会話で、時制や依頼表現を使い分ける。\n旅行中の目的に合う文法表現を、会話の選択として使う。\n会話の文脈と返答候補\n選択 / 会話\n会話の進行と適切な返答\n文法の選択は、場面で達成したい目的に結びついている。\n時制\n依頼表現\n助動詞\nscenario\nbranching-choice\n会話結果\n文法メモ\nchoose-in-context\nmatch-form-to-purpose\nconnect-context-and-form\npracticing-travel-dialogue\nchoosing-a-purpose-fit-response\nsentence-diagramming"
+      "searchText": "travel-conversation-grammar\nTravel Conversation Grammar\nsimulate\n旅行場面の会話で、時制や依頼表現を使い分ける。\n旅行中の目的に合う文法表現を、会話の選択として使う。\n会話の文脈と返答候補\n選択 / 会話\n会話の進行と適切な返答\n文法の選択は、場面で達成したい目的に結びついている。\n時制\n依頼表現\n助動詞\nscenario\nbranching-choice\n会話結果\n文法メモ\nchoose-in-context\nmatch-form-to-purpose\nconnect-context-and-form\npracticing-travel-dialogue\nchoosing-a-purpose-fit-response"
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-040",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-040"
+      },
       "slug": "situation-tense-choice",
       "title": "Situation Tense Choice",
       "category": "simulate",
@@ -2053,24 +2536,38 @@
       "notBestFor": [
         "generating-all-tense-forms"
       ],
+      "positiveTags": [
+        "choose-in-context",
+        "match-form-to-purpose",
+        "connect-context-and-form",
+        "selecting-tense-from-time-cues",
+        "aligning-context-and-tense"
+      ],
+      "negativeTags": [
+        "generating-all-tense-forms"
+      ],
       "tags": [
         "choose-in-context",
         "match-form-to-purpose",
         "connect-context-and-form",
         "selecting-tense-from-time-cues",
-        "aligning-context-and-tense",
-        "generating-all-tense-forms"
+        "aligning-context-and-tense"
       ],
       "relations": {
         "problemIds": []
       },
-      "searchText": "situation-tense-choice\nSituation Tense Choice\nsimulate\n状況と時間の手がかりから、適切な時制を選ぶ。\n文脈の時間情報を読み取り、時制の選択へ結びつける。\n状況文・時間の手がかり・時制候補\n選択 / 確認\n選択した時制と場面の結果\n時制は文だけで決めず、出来事の時間関係から選ぶ。\n時制\n現在完了\n過去形\nscenario\ntense-choice\n正誤\n時間関係の説明\nchoose-in-context\nmatch-form-to-purpose\nconnect-context-and-form\nselecting-tense-from-time-cues\naligning-context-and-tense\ngenerating-all-tense-forms"
+      "searchText": "situation-tense-choice\nSituation Tense Choice\nsimulate\n状況と時間の手がかりから、適切な時制を選ぶ。\n文脈の時間情報を読み取り、時制の選択へ結びつける。\n状況文・時間の手がかり・時制候補\n選択 / 確認\n選択した時制と場面の結果\n時制は文だけで決めず、出来事の時間関係から選ぶ。\n時制\n現在完了\n過去形\nscenario\ntense-choice\n正誤\n時間関係の説明\nchoose-in-context\nmatch-form-to-purpose\nconnect-context-and-form\nselecting-tense-from-time-cues\naligning-context-and-tense"
     }
   ],
   "problems": [
     {
       "kind": "problem",
       "id": "WO-001",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "WO-001",
+        "type": "word-order"
+      },
       "title": "WO-001",
       "type": "word-order",
       "tags": [
@@ -2089,6 +2586,11 @@
     {
       "kind": "problem",
       "id": "WO-002",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "WO-002",
+        "type": "word-order"
+      },
       "title": "WO-002",
       "type": "word-order",
       "tags": [
@@ -2107,6 +2609,11 @@
     {
       "kind": "problem",
       "id": "WO-003",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "WO-003",
+        "type": "word-order"
+      },
       "title": "WO-003",
       "type": "word-order",
       "tags": [
@@ -2125,6 +2632,11 @@
     {
       "kind": "problem",
       "id": "WO-004",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "WO-004",
+        "type": "word-order"
+      },
       "title": "WO-004",
       "type": "word-order",
       "tags": [
@@ -2141,6 +2653,11 @@
     {
       "kind": "problem",
       "id": "WO-005",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "WO-005",
+        "type": "word-order"
+      },
       "title": "WO-005",
       "type": "word-order",
       "tags": [
@@ -2159,6 +2676,11 @@
     {
       "kind": "problem",
       "id": "WO-006",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "WO-006",
+        "type": "word-order"
+      },
       "title": "WO-006",
       "type": "word-order",
       "tags": [
@@ -2177,6 +2699,11 @@
     {
       "kind": "problem",
       "id": "WO-007",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "WO-007",
+        "type": "word-order"
+      },
       "title": "WO-007",
       "type": "word-order",
       "tags": [
@@ -2195,6 +2722,11 @@
     {
       "kind": "problem",
       "id": "WO-008",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "WO-008",
+        "type": "word-order"
+      },
       "title": "WO-008",
       "type": "word-order",
       "tags": [
@@ -2213,6 +2745,11 @@
     {
       "kind": "problem",
       "id": "MP-001",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "MP-001",
+        "type": "mark-parts"
+      },
       "title": "MP-001",
       "type": "mark-parts",
       "tags": [
@@ -2232,6 +2769,11 @@
     {
       "kind": "problem",
       "id": "MP-002",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "MP-002",
+        "type": "mark-parts"
+      },
       "title": "MP-002",
       "type": "mark-parts",
       "tags": [
@@ -2248,6 +2790,11 @@
     {
       "kind": "problem",
       "id": "MP-003",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "MP-003",
+        "type": "mark-parts"
+      },
       "title": "MP-003",
       "type": "mark-parts",
       "tags": [
@@ -2264,6 +2811,11 @@
     {
       "kind": "problem",
       "id": "MP-004",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "MP-004",
+        "type": "mark-parts"
+      },
       "title": "MP-004",
       "type": "mark-parts",
       "tags": [
@@ -2282,6 +2834,11 @@
     {
       "kind": "problem",
       "id": "GC-001",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "GC-001",
+        "type": "grammar-classifier"
+      },
       "title": "GC-001",
       "type": "grammar-classifier",
       "tags": [
@@ -2300,6 +2857,11 @@
     {
       "kind": "problem",
       "id": "GC-002",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "GC-002",
+        "type": "grammar-classifier"
+      },
       "title": "GC-002",
       "type": "grammar-classifier",
       "tags": [
@@ -2319,6 +2881,11 @@
     {
       "kind": "problem",
       "id": "GC-003",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "GC-003",
+        "type": "grammar-classifier"
+      },
       "title": "GC-003",
       "type": "grammar-classifier",
       "tags": [
@@ -2335,6 +2902,11 @@
     {
       "kind": "problem",
       "id": "GC-004",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "GC-004",
+        "type": "grammar-classifier"
+      },
       "title": "GC-004",
       "type": "grammar-classifier",
       "tags": [
@@ -2353,6 +2925,11 @@
     {
       "kind": "problem",
       "id": "GC-005",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "GC-005",
+        "type": "grammar-classifier"
+      },
       "title": "GC-005",
       "type": "grammar-classifier",
       "tags": [
@@ -2371,6 +2948,11 @@
     {
       "kind": "problem",
       "id": "ST-001",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "ST-001",
+        "type": "sentence-transformer"
+      },
       "title": "ST-001",
       "type": "sentence-transformer",
       "tags": [
@@ -2387,6 +2969,11 @@
     {
       "kind": "problem",
       "id": "ST-002",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "ST-002",
+        "type": "sentence-transformer"
+      },
       "title": "ST-002",
       "type": "sentence-transformer",
       "tags": [
@@ -2405,6 +2992,11 @@
     {
       "kind": "problem",
       "id": "ST-003",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "ST-003",
+        "type": "sentence-transformer"
+      },
       "title": "ST-003",
       "type": "sentence-transformer",
       "tags": [
@@ -2423,6 +3015,11 @@
     {
       "kind": "problem",
       "id": "SPD-001",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "SPD-001",
+        "type": "sentence-pattern-diagram"
+      },
       "title": "SPD-001",
       "type": "sentence-pattern-diagram",
       "tags": [
@@ -2441,6 +3038,11 @@
     {
       "kind": "problem",
       "id": "SPD-002",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "SPD-002",
+        "type": "sentence-pattern-diagram"
+      },
       "title": "SPD-002",
       "type": "sentence-pattern-diagram",
       "tags": [
@@ -2459,6 +3061,11 @@
     {
       "kind": "problem",
       "id": "SPD-003",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "SPD-003",
+        "type": "sentence-pattern-diagram"
+      },
       "title": "SPD-003",
       "type": "sentence-pattern-diagram",
       "tags": [
@@ -2475,6 +3082,11 @@
     {
       "kind": "problem",
       "id": "MCV-001",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "MCV-001",
+        "type": "modifier-connection-viewer"
+      },
       "title": "MCV-001",
       "type": "modifier-connection-viewer",
       "tags": [
@@ -2493,6 +3105,11 @@
     {
       "kind": "problem",
       "id": "MCV-002",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "MCV-002",
+        "type": "modifier-connection-viewer"
+      },
       "title": "MCV-002",
       "type": "modifier-connection-viewer",
       "tags": [
@@ -2511,6 +3128,11 @@
     {
       "kind": "problem",
       "id": "MCV-003",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "MCV-003",
+        "type": "modifier-connection-viewer"
+      },
       "title": "MCV-003",
       "type": "modifier-connection-viewer",
       "tags": [
@@ -2527,6 +3149,11 @@
     {
       "kind": "problem",
       "id": "SC-001",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "SC-001",
+        "type": "sentence-comparison"
+      },
       "title": "SC-001",
       "type": "sentence-comparison",
       "tags": [
@@ -2546,6 +3173,11 @@
     {
       "kind": "problem",
       "id": "SC-002",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "SC-002",
+        "type": "sentence-comparison"
+      },
       "title": "SC-002",
       "type": "sentence-comparison",
       "tags": [
@@ -2562,6 +3194,11 @@
     {
       "kind": "problem",
       "id": "SC-003",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "SC-003",
+        "type": "sentence-comparison"
+      },
       "title": "SC-003",
       "type": "sentence-comparison",
       "tags": [
@@ -2580,6 +3217,11 @@
     {
       "kind": "problem",
       "id": "SC-004",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "SC-004",
+        "type": "sentence-comparison"
+      },
       "title": "SC-004",
       "type": "sentence-comparison",
       "tags": [
@@ -2598,6 +3240,11 @@
     {
       "kind": "problem",
       "id": "EC-001",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "EC-001",
+        "type": "error-corrector"
+      },
       "title": "EC-001",
       "type": "error-corrector",
       "tags": [
@@ -2614,6 +3261,11 @@
     {
       "kind": "problem",
       "id": "EC-002",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "EC-002",
+        "type": "error-corrector"
+      },
       "title": "EC-002",
       "type": "error-corrector",
       "tags": [
@@ -2630,6 +3282,11 @@
     {
       "kind": "problem",
       "id": "EC-003",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "EC-003",
+        "type": "error-corrector"
+      },
       "title": "EC-003",
       "type": "error-corrector",
       "tags": [
@@ -2646,6 +3303,11 @@
     {
       "kind": "problem",
       "id": "EC-004",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "EC-004",
+        "type": "error-corrector"
+      },
       "title": "EC-004",
       "type": "error-corrector",
       "tags": [
@@ -2664,6 +3326,11 @@
     {
       "kind": "problem",
       "id": "EC-005",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "EC-005",
+        "type": "error-corrector"
+      },
       "title": "EC-005",
       "type": "error-corrector",
       "tags": [
@@ -2682,6 +3349,11 @@
     {
       "kind": "problem",
       "id": "EC-006",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "EC-006",
+        "type": "error-corrector"
+      },
       "title": "EC-006",
       "type": "error-corrector",
       "tags": [
@@ -2700,6 +3372,11 @@
     {
       "kind": "problem",
       "id": "EC-007",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "EC-007",
+        "type": "error-corrector"
+      },
       "title": "EC-007",
       "type": "error-corrector",
       "tags": [
@@ -2718,6 +3395,11 @@
     {
       "kind": "problem",
       "id": "CG-001",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "CG-001",
+        "type": "context-grammar"
+      },
       "title": "CG-001",
       "type": "context-grammar",
       "tags": [
@@ -2734,6 +3416,11 @@
     {
       "kind": "problem",
       "id": "CG-002",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "CG-002",
+        "type": "context-grammar"
+      },
       "title": "CG-002",
       "type": "context-grammar",
       "tags": [
@@ -2750,6 +3437,11 @@
     {
       "kind": "problem",
       "id": "CG-003",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "CG-003",
+        "type": "context-grammar"
+      },
       "title": "CG-003",
       "type": "context-grammar",
       "tags": [
@@ -2766,6 +3458,11 @@
     {
       "kind": "problem",
       "id": "CG-004",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "CG-004",
+        "type": "context-grammar"
+      },
       "title": "CG-004",
       "type": "context-grammar",
       "tags": [
@@ -2784,6 +3481,11 @@
     {
       "kind": "problem",
       "id": "CG-005",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "CG-005",
+        "type": "context-grammar"
+      },
       "title": "CG-005",
       "type": "context-grammar",
       "tags": [
@@ -2802,6 +3504,11 @@
     {
       "kind": "problem",
       "id": "CG-006",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "CG-006",
+        "type": "context-grammar"
+      },
       "title": "CG-006",
       "type": "context-grammar",
       "tags": [
@@ -2820,6 +3527,11 @@
     {
       "kind": "problem",
       "id": "CG-007",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "CG-007",
+        "type": "context-grammar"
+      },
       "title": "CG-007",
       "type": "context-grammar",
       "tags": [
@@ -2838,6 +3550,11 @@
     {
       "kind": "problem",
       "id": "SG-001",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "SG-001",
+        "type": "sentence-generator"
+      },
       "title": "SG-001",
       "type": "sentence-generator",
       "tags": [
@@ -2854,6 +3571,11 @@
     {
       "kind": "problem",
       "id": "SG-002",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "SG-002",
+        "type": "sentence-generator"
+      },
       "title": "SG-002",
       "type": "sentence-generator",
       "tags": [
@@ -2870,6 +3592,11 @@
     {
       "kind": "problem",
       "id": "SG-003",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "SG-003",
+        "type": "sentence-generator"
+      },
       "title": "SG-003",
       "type": "sentence-generator",
       "tags": [
@@ -2886,6 +3613,11 @@
     {
       "kind": "problem",
       "id": "SG-004",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "SG-004",
+        "type": "sentence-generator"
+      },
       "title": "SG-004",
       "type": "sentence-generator",
       "tags": [
@@ -2904,6 +3636,11 @@
     {
       "kind": "problem",
       "id": "SG-005",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "SG-005",
+        "type": "sentence-generator"
+      },
       "title": "SG-005",
       "type": "sentence-generator",
       "tags": [
@@ -2922,6 +3659,11 @@
     {
       "kind": "problem",
       "id": "MPO-001",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "MPO-001",
+        "type": "modifier-positioner"
+      },
       "title": "MPO-001",
       "type": "modifier-positioner",
       "tags": [
@@ -2938,6 +3680,11 @@
     {
       "kind": "problem",
       "id": "MPO-002",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "MPO-002",
+        "type": "modifier-positioner"
+      },
       "title": "MPO-002",
       "type": "modifier-positioner",
       "tags": [
@@ -2954,6 +3701,11 @@
     {
       "kind": "problem",
       "id": "MPO-003",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "MPO-003",
+        "type": "modifier-positioner"
+      },
       "title": "MPO-003",
       "type": "modifier-positioner",
       "tags": [
@@ -2970,6 +3722,11 @@
     {
       "kind": "problem",
       "id": "MPO-004",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "MPO-004",
+        "type": "modifier-positioner"
+      },
       "title": "MPO-004",
       "type": "modifier-positioner",
       "tags": [
@@ -2990,6 +3747,10 @@
     {
       "kind": "lesson",
       "id": "LESSON-001",
+      "canonicalRef": {
+        "kind": "lesson",
+        "id": "LESSON-001"
+      },
       "slug": "basic-sentence-structure",
       "title": "文の骨格を見抜く",
       "description": "英文を単語の列ではなく、役割を持つまとまりとして捉えます。",
@@ -3021,6 +3782,10 @@
     {
       "kind": "lesson",
       "id": "LESSON-002",
+      "canonicalRef": {
+        "kind": "lesson",
+        "id": "LESSON-002"
+      },
       "slug": "structural-reading",
       "title": "英文の構造を読む",
       "description": "文の骨格と、そこへ加わる修飾情報を順に見分けます。",
@@ -3054,6 +3819,10 @@
     {
       "kind": "lesson",
       "id": "LESSON-003",
+      "canonicalRef": {
+        "kind": "lesson",
+        "id": "LESSON-003"
+      },
       "slug": "modal-verbs",
       "title": "助動詞を形と場面から使う",
       "description": "助動詞の後ろに動詞の原形を置く基本形を確認し、can / should / must などの意味を場面に応じて使い分けます。",
@@ -3091,6 +3860,10 @@
     {
       "kind": "lesson",
       "id": "LESSON-004",
+      "canonicalRef": {
+        "kind": "lesson",
+        "id": "LESSON-004"
+      },
       "slug": "passive-voice",
       "title": "能動態と受動態で視点を変える",
       "description": "同じ出来事でも、何を主語として見るかによって英文の形が変わることを確認します。",
@@ -3128,6 +3901,10 @@
     {
       "kind": "lesson",
       "id": "LESSON-005",
+      "canonicalRef": {
+        "kind": "lesson",
+        "id": "LESSON-005"
+      },
       "slug": "infinitives",
       "title": "不定詞を形・役割・目的から使う",
       "description": "to + 動詞原形という形を確認し、文の中で名詞・形容詞・副詞のように働く違いを、位置・意味・場面から整理します。",
@@ -3165,6 +3942,10 @@
     {
       "kind": "lesson",
       "id": "LESSON-006",
+      "canonicalRef": {
+        "kind": "lesson",
+        "id": "LESSON-006"
+      },
       "slug": "gerunds",
       "title": "動名詞を名詞の働きと動詞との組み合わせから使う",
       "description": "動詞 + ing が名詞のように働くことを確認し、主語・目的語・補語としての使い方や、不定詞との意味・verb patternの違いを整理します。",
@@ -3205,13 +3986,16 @@
       "kind": "interaction",
       "id": "GRAM-INT-001",
       "title": "Word Order Builder",
-      "searchText": "word-order-builder\nWord Order Builder\nbuild\n単語カードを並べ替えて、英文の骨格を組み立てる。\n主語・動詞・目的語の基本語順を、手を動かして理解する。\n単語カード\nタップ / クリック\n回答欄の語順\n英語の基本語順は Subject + Verb + Object で組み立てる。\n文型\nSVO\n関係詞 (relative clauses)\ntap-to-place\nsequence\n正誤\n説明\nassemble-sentence\npractice-word-order\nreconstructing-sentence-order\nchecking-sequence-constraints\nfree-form-generation",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-001"
+      },
+      "searchText": "word-order-builder\nWord Order Builder\nbuild\n単語カードを並べ替えて、英文の骨格を組み立てる。\n主語・動詞・目的語の基本語順を、手を動かして理解する。\n単語カード\nタップ / クリック\n回答欄の語順\n英語の基本語順は Subject + Verb + Object で組み立てる。\n文型\nSVO\n関係詞 (relative clauses)\ntap-to-place\nsequence\n正誤\n説明\nassemble-sentence\npractice-word-order\nreconstructing-sentence-order\nchecking-sequence-constraints",
       "tags": [
         "assemble-sentence",
         "practice-word-order",
         "reconstructing-sentence-order",
-        "checking-sequence-constraints",
-        "free-form-generation"
+        "checking-sequence-constraints"
       ],
       "relations": {
         "problemIds": [
@@ -3224,35 +4008,71 @@
           "WO-007",
           "WO-008"
         ]
-      }
+      },
+      "interactionType": [
+        "tap-to-place",
+        "sequence"
+      ],
+      "learningIntents": [
+        "assemble-sentence",
+        "practice-word-order"
+      ],
+      "bestFor": [
+        "reconstructing-sentence-order",
+        "checking-sequence-constraints"
+      ],
+      "negativeTags": [
+        "free-form-generation"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-002",
       "title": "Drag into Blank",
-      "searchText": "drag-into-blank\nDrag into Blank\nmove\n語句を空欄へ移動し、文の中での役割を確かめる。\n語句の位置と、文全体の意味のつながりを意識する。\n選択肢カードと空欄\nタップ / ドラッグ\n文中の空欄\n同じ語句でも置く場所で文の意味や自然さが変わる。\n語順\n修飾語\n前置詞\ntap-to-place\ndrag-and-drop\n正誤\nヒント\nexplore-placement\nconnect-position-and-meaning\nplacing-a-phrase-in-context\nobserving-slot-effects\nassembling-an-entire-sentence",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-002"
+      },
+      "searchText": "drag-into-blank\nDrag into Blank\nmove\n語句を空欄へ移動し、文の中での役割を確かめる。\n語句の位置と、文全体の意味のつながりを意識する。\n選択肢カードと空欄\nタップ / ドラッグ\n文中の空欄\n同じ語句でも置く場所で文の意味や自然さが変わる。\n語順\n修飾語\n前置詞\ntap-to-place\ndrag-and-drop\n正誤\nヒント\nexplore-placement\nconnect-position-and-meaning\nplacing-a-phrase-in-context\nobserving-slot-effects",
       "tags": [
         "explore-placement",
         "connect-position-and-meaning",
         "placing-a-phrase-in-context",
-        "observing-slot-effects",
-        "assembling-an-entire-sentence"
+        "observing-slot-effects"
       ],
       "relations": {
         "problemIds": []
-      }
+      },
+      "interactionType": [
+        "tap-to-place",
+        "drag-and-drop"
+      ],
+      "learningIntents": [
+        "explore-placement",
+        "connect-position-and-meaning"
+      ],
+      "bestFor": [
+        "placing-a-phrase-in-context",
+        "observing-slot-effects"
+      ],
+      "negativeTags": [
+        "assembling-an-entire-sentence"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-003",
       "title": "Mark the Parts",
-      "searchText": "mark-the-parts\nMark the Parts\nselect\n英文中の語を選び、主語・動詞・目的語の関係を見つける。\n英文を意味のかたまりではなく、文の役割から読めるようにする。\n英文中のトークン\nタップ / クリック\n選択状態と構造ラベル\n文の要素にはそれぞれ役割があり、組み合わせで文ができる。\n文型\n品詞\nS / V / O\ntoken-select\nrole-reveal\n正誤\n構造表示\nidentify-element\nidentify-role\nfinding-sentence-roles\nrole-based-reading\nfree-form-generation",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-003"
+      },
+      "searchText": "mark-the-parts\nMark the Parts\nselect\n英文中の語を選び、主語・動詞・目的語の関係を見つける。\n英文を意味のかたまりではなく、文の役割から読めるようにする。\n英文中のトークン\nタップ / クリック\n選択状態と構造ラベル\n文の要素にはそれぞれ役割があり、組み合わせで文ができる。\n文型\n品詞\nS / V / O\ntoken-select\nrole-reveal\n正誤\n構造表示\nidentify-element\nidentify-role\nfinding-sentence-roles\nrole-based-reading",
       "tags": [
         "identify-element",
         "identify-role",
         "finding-sentence-roles",
-        "role-based-reading",
-        "free-form-generation"
+        "role-based-reading"
       ],
       "relations": {
         "problemIds": [
@@ -3261,20 +4081,38 @@
           "MP-003",
           "MP-004"
         ]
-      }
+      },
+      "interactionType": [
+        "token-select",
+        "role-reveal"
+      ],
+      "learningIntents": [
+        "identify-element",
+        "identify-role"
+      ],
+      "bestFor": [
+        "finding-sentence-roles",
+        "role-based-reading"
+      ],
+      "negativeTags": [
+        "free-form-generation"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-004",
       "title": "Grammar Classifier",
-      "searchText": "grammar-classifier\nGrammar Classifier\nclassify\n語句を品詞や文の役割ごとのグループへ分類する。\n形ではなく、文中での働きによって語句を捉える。\n語句カードと分類先\nタップ / クリック\n分類先と分類結果\n語句の種類と文中の役割を区別して考えられる。\n品詞\nS / V / O / C\n句と節\nclassification\nsorting\n正誤\n分類理由\nclassify-form\nclassify-function\nclassify-role\nclassifying-phrase-function\ncomparing-grammatical-roles\nassembling-sentence-order",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-004"
+      },
+      "searchText": "grammar-classifier\nGrammar Classifier\nclassify\n語句を品詞や文の役割ごとのグループへ分類する。\n形ではなく、文中での働きによって語句を捉える。\n語句カードと分類先\nタップ / クリック\n分類先と分類結果\n語句の種類と文中の役割を区別して考えられる。\n品詞\nS / V / O / C\n句と節\nclassification\nsorting\n正誤\n分類理由\nclassify-form\nclassify-function\nclassify-role\nclassifying-phrase-function\ncomparing-grammatical-roles",
       "tags": [
         "classify-form",
         "classify-function",
         "classify-role",
         "classifying-phrase-function",
-        "comparing-grammatical-roles",
-        "assembling-sentence-order"
+        "comparing-grammatical-roles"
       ],
       "relations": {
         "problemIds": [
@@ -3284,20 +4122,39 @@
           "GC-004",
           "GC-005"
         ]
-      }
+      },
+      "interactionType": [
+        "classification",
+        "sorting"
+      ],
+      "learningIntents": [
+        "classify-form",
+        "classify-function",
+        "classify-role"
+      ],
+      "bestFor": [
+        "classifying-phrase-function",
+        "comparing-grammatical-roles"
+      ],
+      "negativeTags": [
+        "assembling-sentence-order"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-005",
       "title": "Sentence Transformer",
-      "searchText": "sentence-transformer\nSentence Transformer\ntransform\n主語・時制・否定の条件を変え、英文の変化を比較する。\n文法条件の変更が、動詞や助動詞へどう反映されるかを理解する。\n主語・時制・否定のコントロール\n選択 / 切り替え\n生成された英文\n文法情報を組み合わせると、必要な形が決まる。\n時制\n三単現\n否定文\nstate-selection\nsentence-generation\n即時変化\n構造ラベル\nobserve-transformation\nobserve-state-change\nconnect-form-and-meaning\ncomparing-grammar-states\ntracing-form-changes\nopen-ended-sentence-authoring",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-005"
+      },
+      "searchText": "sentence-transformer\nSentence Transformer\ntransform\n主語・時制・否定の条件を変え、英文の変化を比較する。\n文法条件の変更が、動詞や助動詞へどう反映されるかを理解する。\n主語・時制・否定のコントロール\n選択 / 切り替え\n生成された英文\n文法情報を組み合わせると、必要な形が決まる。\n時制\n三単現\n否定文\nstate-selection\nsentence-generation\n即時変化\n構造ラベル\nobserve-transformation\nobserve-state-change\nconnect-form-and-meaning\ncomparing-grammar-states\ntracing-form-changes",
       "tags": [
         "observe-transformation",
         "observe-state-change",
         "connect-form-and-meaning",
         "comparing-grammar-states",
-        "tracing-form-changes",
-        "open-ended-sentence-authoring"
+        "tracing-form-changes"
       ],
       "relations": {
         "problemIds": [
@@ -3305,35 +4162,72 @@
           "ST-002",
           "ST-003"
         ]
-      }
+      },
+      "interactionType": [
+        "state-selection",
+        "sentence-generation"
+      ],
+      "learningIntents": [
+        "observe-transformation",
+        "observe-state-change",
+        "connect-form-and-meaning"
+      ],
+      "bestFor": [
+        "comparing-grammar-states",
+        "tracing-form-changes"
+      ],
+      "negativeTags": [
+        "open-ended-sentence-authoring"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-006",
       "title": "Syntax Visualizer",
-      "searchText": "syntax-visualizer\nSyntax Visualizer\nvisualize\n英文を句・節・修飾関係の図として表示する。\n目に見えにくい英文の階層構造を、位置関係で捉える。\n語句・ノード・関係線\nクリック / 展開\n構造図の階層\n英文は単語の列ではなく、まとまりが重なった構造である。\n文型\n句と節\n関係詞 (relative clauses)\ntree-view\nhighlight\n強調表示\n構造説明\nvisualize-structure\nvisualize-relation\ninspecting-sentence-hierarchy\ntracing-syntax-relations\ncorrecting-surface-errors",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-006"
+      },
+      "searchText": "syntax-visualizer\nSyntax Visualizer\nvisualize\n英文を句・節・修飾関係の図として表示する。\n目に見えにくい英文の階層構造を、位置関係で捉える。\n語句・ノード・関係線\nクリック / 展開\n構造図の階層\n英文は単語の列ではなく、まとまりが重なった構造である。\n文型\n句と節\n関係詞 (relative clauses)\ntree-view\nhighlight\n強調表示\n構造説明\nvisualize-structure\nvisualize-relation\ninspecting-sentence-hierarchy\ntracing-syntax-relations",
       "tags": [
         "visualize-structure",
         "visualize-relation",
         "inspecting-sentence-hierarchy",
-        "tracing-syntax-relations",
-        "correcting-surface-errors"
+        "tracing-syntax-relations"
       ],
       "relations": {
         "problemIds": []
-      }
+      },
+      "interactionType": [
+        "tree-view",
+        "highlight"
+      ],
+      "learningIntents": [
+        "visualize-structure",
+        "visualize-relation"
+      ],
+      "bestFor": [
+        "inspecting-sentence-hierarchy",
+        "tracing-syntax-relations"
+      ],
+      "negativeTags": [
+        "correcting-surface-errors"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-007",
       "title": "Sentence Generator",
-      "searchText": "sentence-generator\nSentence Generator\ngenerate\n主語・動詞・時制などの条件から、文法的な英文を生成する。\n文法規則を、完成した英文を作る手順として理解する。\n文法条件の選択肢\n選択 / 生成\n生成文と構造情報\n英文は単語を並べるだけでなく、条件に応じて形を変える。\n時制\n助動詞\n態\nform-select\ngeneration\n生成結果\n規則説明\ngenerate-from-conditions\nconnect-form-and-meaning\ngenerating-a-controlled-sentence\ntesting-grammar-state\nunstructured-free-text-generation",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-007"
+      },
+      "searchText": "sentence-generator\nSentence Generator\ngenerate\n主語・動詞・時制などの条件から、文法的な英文を生成する。\n文法規則を、完成した英文を作る手順として理解する。\n文法条件の選択肢\n選択 / 生成\n生成文と構造情報\n英文は単語を並べるだけでなく、条件に応じて形を変える。\n時制\n助動詞\n態\nform-select\ngeneration\n生成結果\n規則説明\ngenerate-from-conditions\nconnect-form-and-meaning\ngenerating-a-controlled-sentence\ntesting-grammar-state",
       "tags": [
         "generate-from-conditions",
         "connect-form-and-meaning",
         "generating-a-controlled-sentence",
-        "testing-grammar-state",
-        "unstructured-free-text-generation"
+        "testing-grammar-state"
       ],
       "relations": {
         "problemIds": [
@@ -3343,19 +4237,37 @@
           "SG-004",
           "SG-005"
         ]
-      }
+      },
+      "interactionType": [
+        "form-select",
+        "generation"
+      ],
+      "learningIntents": [
+        "generate-from-conditions",
+        "connect-form-and-meaning"
+      ],
+      "bestFor": [
+        "generating-a-controlled-sentence",
+        "testing-grammar-state"
+      ],
+      "negativeTags": [
+        "unstructured-free-text-generation"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-008",
       "title": "Sentence Comparison",
-      "searchText": "sentence-comparison\nSentence Comparison\ncompare\n似た英文を並べ、形の差と意味の差を対応づける。\n似た表現を、文脈と構造の違いから使い分ける。\n比較する英文と差分箇所\n切り替え / 強調\n差分表示と意味メモ\n小さな形の差が、動作の捉え方や意味の差になる。\n不定詞\n動名詞\n比較\nside-by-side\ndiff-highlight\n差分強調\n意味比較\ncompare-form\ncompare-meaning\ncomparing-contrasting-sentences\nlinking-form-to-meaning\nbuilding-a-single-sentence",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-008"
+      },
+      "searchText": "sentence-comparison\nSentence Comparison\ncompare\n似た英文を並べ、形の差と意味の差を対応づける。\n似た表現を、文脈と構造の違いから使い分ける。\n比較する英文と差分箇所\n切り替え / 強調\n差分表示と意味メモ\n小さな形の差が、動作の捉え方や意味の差になる。\n不定詞\n動名詞\n比較\nside-by-side\ndiff-highlight\n差分強調\n意味比較\ncompare-form\ncompare-meaning\ncomparing-contrasting-sentences\nlinking-form-to-meaning",
       "tags": [
         "compare-form",
         "compare-meaning",
         "comparing-contrasting-sentences",
-        "linking-form-to-meaning",
-        "building-a-single-sentence"
+        "linking-form-to-meaning"
       ],
       "relations": {
         "problemIds": [
@@ -3364,19 +4276,37 @@
           "SC-003",
           "SC-004"
         ]
-      }
+      },
+      "interactionType": [
+        "side-by-side",
+        "diff-highlight"
+      ],
+      "learningIntents": [
+        "compare-form",
+        "compare-meaning"
+      ],
+      "bestFor": [
+        "comparing-contrasting-sentences",
+        "linking-form-to-meaning"
+      ],
+      "negativeTags": [
+        "building-a-single-sentence"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-009",
       "title": "Error Corrector",
-      "searchText": "error-corrector\nError Corrector\ncorrect\n誤りのある英文を直し、どこをなぜ変えたかを確認する。\n文法規則を、誤りを発見して修正する判断へ結びつける。\n誤りのある語句\n選択 / 修正\n誤りの箇所と訂正文\n正しい形だけでなく、誤りが生まれた条件まで説明できる。\n三単現\n時制\n一致\nerror-spotting\ncorrection\n正誤\n修正理由\ncorrect-form\ndiagnose-error\ndiagnosing-a-patterned-error\nexplaining-a-correction\nopen-ended-proofreading",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-009"
+      },
+      "searchText": "error-corrector\nError Corrector\ncorrect\n誤りのある英文を直し、どこをなぜ変えたかを確認する。\n文法規則を、誤りを発見して修正する判断へ結びつける。\n誤りのある語句\n選択 / 修正\n誤りの箇所と訂正文\n正しい形だけでなく、誤りが生まれた条件まで説明できる。\n三単現\n時制\n一致\nerror-spotting\ncorrection\n正誤\n修正理由\ncorrect-form\ndiagnose-error\ndiagnosing-a-patterned-error\nexplaining-a-correction",
       "tags": [
         "correct-form",
         "diagnose-error",
         "diagnosing-a-patterned-error",
-        "explaining-a-correction",
-        "open-ended-proofreading"
+        "explaining-a-correction"
       ],
       "relations": {
         "problemIds": [
@@ -3388,20 +4318,38 @@
           "EC-006",
           "EC-007"
         ]
-      }
+      },
+      "interactionType": [
+        "error-spotting",
+        "correction"
+      ],
+      "learningIntents": [
+        "correct-form",
+        "diagnose-error"
+      ],
+      "bestFor": [
+        "diagnosing-a-patterned-error",
+        "explaining-a-correction"
+      ],
+      "negativeTags": [
+        "open-ended-proofreading"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-010",
       "title": "Context Grammar",
-      "searchText": "context-grammar\nContext Grammar\nsimulate\n場面と会話の流れの中で、適切な文法表現を選ぶ。\n文法形式を、実際の目的や文脈に合う選択として使う。\n会話の選択肢\n選択 / 返答\n場面の進行と返答\n文法の選択は、話し手の目的と場面に結びついている。\n助動詞\n依頼表現\n時制\nscenario\nchoice\n会話結果\n場面別ヒント\nchoose-in-context\nmatch-form-to-purpose\nconnect-context-and-form\nchoosing-a-contextual-response\ncomparing-goal-fit\nisolated-form-drills",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-010"
+      },
+      "searchText": "context-grammar\nContext Grammar\nsimulate\n場面と会話の流れの中で、適切な文法表現を選ぶ。\n文法形式を、実際の目的や文脈に合う選択として使う。\n会話の選択肢\n選択 / 返答\n場面の進行と返答\n文法の選択は、話し手の目的と場面に結びついている。\n助動詞\n依頼表現\n時制\nscenario\nchoice\n会話結果\n場面別ヒント\nchoose-in-context\nmatch-form-to-purpose\nconnect-context-and-form\nchoosing-a-contextual-response\ncomparing-goal-fit",
       "tags": [
         "choose-in-context",
         "match-form-to-purpose",
         "connect-context-and-form",
         "choosing-a-contextual-response",
-        "comparing-goal-fit",
-        "isolated-form-drills"
+        "comparing-goal-fit"
       ],
       "relations": {
         "problemIds": [
@@ -3413,68 +4361,141 @@
           "CG-006",
           "CG-007"
         ]
-      }
+      },
+      "interactionType": [
+        "scenario",
+        "choice"
+      ],
+      "learningIntents": [
+        "choose-in-context",
+        "match-form-to-purpose",
+        "connect-context-and-form"
+      ],
+      "bestFor": [
+        "choosing-a-contextual-response",
+        "comparing-goal-fit"
+      ],
+      "negativeTags": [
+        "isolated-form-drills"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-011",
       "title": "Sentence Pattern Builder",
-      "searchText": "sentence-pattern-builder\nSentence Pattern Builder\nbuild\n文型スロットへ語句を置き、英文の骨格を組み立てる。\n文型の違いを、語句の役割と位置の組み合わせとして理解する。\n主語・動詞・目的語・補語のスロット\nタップ / 配置\n文型スロットと完成文\n語句の役割が変わると、英文の骨格も変わる。\n文型\nSVC\nSVO\nslot-fill\nsequence\n正誤\n構造表示\nassemble-sentence\nidentify-role\nmapping-slots-to-roles\nbuilding-a-sentence-skeleton\nparagraph-composition",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-011"
+      },
+      "searchText": "sentence-pattern-builder\nSentence Pattern Builder\nbuild\n文型スロットへ語句を置き、英文の骨格を組み立てる。\n文型の違いを、語句の役割と位置の組み合わせとして理解する。\n主語・動詞・目的語・補語のスロット\nタップ / 配置\n文型スロットと完成文\n語句の役割が変わると、英文の骨格も変わる。\n文型\nSVC\nSVO\nslot-fill\nsequence\n正誤\n構造表示\nassemble-sentence\nidentify-role\nmapping-slots-to-roles\nbuilding-a-sentence-skeleton",
       "tags": [
         "assemble-sentence",
         "identify-role",
         "mapping-slots-to-roles",
-        "building-a-sentence-skeleton",
-        "paragraph-composition"
+        "building-a-sentence-skeleton"
       ],
       "relations": {
         "problemIds": []
-      }
+      },
+      "interactionType": [
+        "slot-fill",
+        "sequence"
+      ],
+      "learningIntents": [
+        "assemble-sentence",
+        "identify-role"
+      ],
+      "bestFor": [
+        "mapping-slots-to-roles",
+        "building-a-sentence-skeleton"
+      ],
+      "negativeTags": [
+        "paragraph-composition"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-012",
       "title": "Question Builder",
-      "searchText": "question-builder\nQuestion Builder\nbuild\n疑問詞・助動詞・主語などを組み合わせて疑問文を作る。\n疑問文で語順が変わる理由を、構成要素の移動として理解する。\n疑問詞と文の構成カード\nタップ / 並べ替え\n疑問文の語順\n疑問文では、尋ねたい内容に応じて文の構造が組み替わる。\n疑問文\n助動詞\n疑問詞\nsequence\nslot-fill\n正誤\n語順ヒント\nassemble-sentence\npractice-word-order\nbuilding-question-structure\ntracing-question-word-order\nevaluating-a-conversation-answer",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-012"
+      },
+      "searchText": "question-builder\nQuestion Builder\nbuild\n疑問詞・助動詞・主語などを組み合わせて疑問文を作る。\n疑問文で語順が変わる理由を、構成要素の移動として理解する。\n疑問詞と文の構成カード\nタップ / 並べ替え\n疑問文の語順\n疑問文では、尋ねたい内容に応じて文の構造が組み替わる。\n疑問文\n助動詞\n疑問詞\nsequence\nslot-fill\n正誤\n語順ヒント\nassemble-sentence\npractice-word-order\nbuilding-question-structure\ntracing-question-word-order",
       "tags": [
         "assemble-sentence",
         "practice-word-order",
         "building-question-structure",
-        "tracing-question-word-order",
-        "evaluating-a-conversation-answer"
+        "tracing-question-word-order"
       ],
       "relations": {
         "problemIds": []
-      }
+      },
+      "interactionType": [
+        "sequence",
+        "slot-fill"
+      ],
+      "learningIntents": [
+        "assemble-sentence",
+        "practice-word-order"
+      ],
+      "bestFor": [
+        "building-question-structure",
+        "tracing-question-word-order"
+      ],
+      "negativeTags": [
+        "evaluating-a-conversation-answer"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-013",
       "title": "Clause Combiner",
-      "searchText": "clause-combiner\nClause Combiner\nbuild\n主節と従属節を接続詞で結び、複文を組み立てる。\n節の役割と接続詞の働きを、文の組み合わせから理解する。\n主節・従属節・接続詞カード\nタップ / 結合\n節の結合位置と文の意味\n従属節は主節に対して意味上の役割を持つ。\n句と節\n接続詞\n複文\nclause-combination\nsequence\n正誤\n節の説明\nassemble-sentence\nconnect-form-and-meaning\njoining-clause-relations\nbuilding-a-complex-sentence\nisolated-word-order-drills",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-013"
+      },
+      "searchText": "clause-combiner\nClause Combiner\nbuild\n主節と従属節を接続詞で結び、複文を組み立てる。\n節の役割と接続詞の働きを、文の組み合わせから理解する。\n主節・従属節・接続詞カード\nタップ / 結合\n節の結合位置と文の意味\n従属節は主節に対して意味上の役割を持つ。\n句と節\n接続詞\n複文\nclause-combination\nsequence\n正誤\n節の説明\nassemble-sentence\nconnect-form-and-meaning\njoining-clause-relations\nbuilding-a-complex-sentence",
       "tags": [
         "assemble-sentence",
         "connect-form-and-meaning",
         "joining-clause-relations",
-        "building-a-complex-sentence",
-        "isolated-word-order-drills"
+        "building-a-complex-sentence"
       ],
       "relations": {
         "problemIds": []
-      }
+      },
+      "interactionType": [
+        "clause-combination",
+        "sequence"
+      ],
+      "learningIntents": [
+        "assemble-sentence",
+        "connect-form-and-meaning"
+      ],
+      "bestFor": [
+        "joining-clause-relations",
+        "building-a-complex-sentence"
+      ],
+      "negativeTags": [
+        "isolated-word-order-drills"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-014",
       "title": "Modifier Positioner",
-      "searchText": "modifier-positioner\nModifier Positioner\nmove\n修飾語を文中の位置へ移動し、かかり方を確かめる。\n修飾語の位置と、どの語句にかかるかの関係を理解する。\n修飾語カードと文中の位置\nタップ / 配置\n修飾関係と文の意味\n修飾語の位置によって、意味のまとまりが変わる。\n修飾語\n語順\n分詞\ntap-to-place\nposition-change\n正誤\n修飾関係表示\nexplore-placement\ncompare-placement\nconnect-position-and-meaning\nplacement-affects-meaning\nmultiple-valid-placements\nassembling-an-entire-sentence",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-014"
+      },
+      "searchText": "modifier-positioner\nModifier Positioner\nmove\n修飾語を文中の位置へ移動し、かかり方を確かめる。\n修飾語の位置と、どの語句にかかるかの関係を理解する。\n修飾語カードと文中の位置\nタップ / 配置\n修飾関係と文の意味\n修飾語の位置によって、意味のまとまりが変わる。\n修飾語\n語順\n分詞\ntap-to-place\nposition-change\n正誤\n修飾関係表示\nexplore-placement\ncompare-placement\nconnect-position-and-meaning\nplacement-affects-meaning\nmultiple-valid-placements",
       "tags": [
         "explore-placement",
         "compare-placement",
         "connect-position-and-meaning",
         "placement-affects-meaning",
-        "multiple-valid-placements",
-        "assembling-an-entire-sentence"
+        "multiple-valid-placements"
       ],
       "relations": {
         "problemIds": [
@@ -3483,198 +4504,418 @@
           "MPO-003",
           "MPO-004"
         ]
-      }
+      },
+      "interactionType": [
+        "tap-to-place",
+        "position-change"
+      ],
+      "learningIntents": [
+        "explore-placement",
+        "compare-placement",
+        "connect-position-and-meaning"
+      ],
+      "bestFor": [
+        "placement-affects-meaning",
+        "multiple-valid-placements"
+      ],
+      "negativeTags": [
+        "assembling-an-entire-sentence"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-015",
       "title": "Adverb Placement Explorer",
-      "searchText": "adverb-placement-explorer\nAdverb Placement Explorer\nmove\n副詞を複数の位置へ移動し、自然さと意味の違いを比べる。\n副詞の位置が文の焦点や自然さへ与える影響を観察する。\n副詞句と配置スロット\n選択 / 移動\n副詞の位置と読み手の焦点\n副詞は文のどこに置くかで、強調される情報が変わる。\n副詞\n語順\n文の焦点\nposition-change\ncomparison\n意味メモ\n自然さの説明\nexplore-placement\ncompare-placement\nobserve-state-change\nobserving-adverb-scope\ncomparing-focus-shifts\ncombining-independent-clauses",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-015"
+      },
+      "searchText": "adverb-placement-explorer\nAdverb Placement Explorer\nmove\n副詞を複数の位置へ移動し、自然さと意味の違いを比べる。\n副詞の位置が文の焦点や自然さへ与える影響を観察する。\n副詞句と配置スロット\n選択 / 移動\n副詞の位置と読み手の焦点\n副詞は文のどこに置くかで、強調される情報が変わる。\n副詞\n語順\n文の焦点\nposition-change\ncomparison\n意味メモ\n自然さの説明\nexplore-placement\ncompare-placement\nobserve-state-change\nobserving-adverb-scope\ncomparing-focus-shifts",
       "tags": [
         "explore-placement",
         "compare-placement",
         "observe-state-change",
         "observing-adverb-scope",
-        "comparing-focus-shifts",
-        "combining-independent-clauses"
+        "comparing-focus-shifts"
       ],
       "relations": {
         "problemIds": []
-      }
+      },
+      "interactionType": [
+        "position-change",
+        "comparison"
+      ],
+      "learningIntents": [
+        "explore-placement",
+        "compare-placement",
+        "observe-state-change"
+      ],
+      "bestFor": [
+        "observing-adverb-scope",
+        "comparing-focus-shifts"
+      ],
+      "negativeTags": [
+        "combining-independent-clauses"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-016",
       "title": "Clause Reordering",
-      "searchText": "clause-reordering\nClause Reordering\nmove\n節を並べ替え、接続詞と句読点の働きを確かめる。\n節の位置が変わっても、節同士の関係を保てることを理解する。\n主節・従属節のカード\nタップ / 並べ替え\n節の順序と句読点\n節の位置が変わると、必要な句読点や読みやすさも変わる。\n句と節\n接続詞\n句読点\nsequence\n正誤\n構造ヒント\nobserve-transformation\npractice-word-order\nreordering-clause-position\ncomparing-punctuation-effects\nword-level-error-correction",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-016"
+      },
+      "searchText": "clause-reordering\nClause Reordering\nmove\n節を並べ替え、接続詞と句読点の働きを確かめる。\n節の位置が変わっても、節同士の関係を保てることを理解する。\n主節・従属節のカード\nタップ / 並べ替え\n節の順序と句読点\n節の位置が変わると、必要な句読点や読みやすさも変わる。\n句と節\n接続詞\n句読点\nsequence\n正誤\n構造ヒント\nobserve-transformation\npractice-word-order\nreordering-clause-position\ncomparing-punctuation-effects",
       "tags": [
         "observe-transformation",
         "practice-word-order",
         "reordering-clause-position",
-        "comparing-punctuation-effects",
-        "word-level-error-correction"
+        "comparing-punctuation-effects"
       ],
       "relations": {
         "problemIds": []
-      }
+      },
+      "interactionType": [
+        "sequence",
+        "clause-reordering"
+      ],
+      "learningIntents": [
+        "observe-transformation",
+        "practice-word-order"
+      ],
+      "bestFor": [
+        "reordering-clause-position",
+        "comparing-punctuation-effects"
+      ],
+      "negativeTags": [
+        "word-level-error-correction"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-017",
       "title": "Sentence Role Finder",
-      "searchText": "sentence-role-finder\nSentence Role Finder\nselect\n英文から指定された文の役割を選び、構造を見つける。\n主語・動詞・目的語などを、文全体の関係から見つける。\n文中の語句のまとまり\nタップ / 選択\n選択箇所と文の役割ラベル\n同じ語でも、文の中での位置と働きから役割が決まる。\n文型\nS / V / O / C\n句と節\ntoken-select\nrole-reveal\n正誤\n役割説明\nidentify-element\nidentify-role\nfinding-specified-sentence-roles\nrole-based-reading\nword-definition-practice",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-017"
+      },
+      "searchText": "sentence-role-finder\nSentence Role Finder\nselect\n英文から指定された文の役割を選び、構造を見つける。\n主語・動詞・目的語などを、文全体の関係から見つける。\n文中の語句のまとまり\nタップ / 選択\n選択箇所と文の役割ラベル\n同じ語でも、文の中での位置と働きから役割が決まる。\n文型\nS / V / O / C\n句と節\ntoken-select\nrole-reveal\n正誤\n役割説明\nidentify-element\nidentify-role\nfinding-specified-sentence-roles\nrole-based-reading",
       "tags": [
         "identify-element",
         "identify-role",
         "finding-specified-sentence-roles",
-        "role-based-reading",
-        "word-definition-practice"
+        "role-based-reading"
       ],
       "relations": {
         "problemIds": []
-      }
+      },
+      "interactionType": [
+        "token-select",
+        "role-reveal"
+      ],
+      "learningIntents": [
+        "identify-element",
+        "identify-role"
+      ],
+      "bestFor": [
+        "finding-specified-sentence-roles",
+        "role-based-reading"
+      ],
+      "negativeTags": [
+        "word-definition-practice"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-018",
       "title": "Clause Boundary Marker",
-      "searchText": "clause-boundary-marker\nClause Boundary Marker\nselect\n英文中で節の境界を選び、主節と従属節を見分ける。\n節の始まりと終わりを、接続詞や動詞の関係から見つける。\n語句間の境界と接続詞\nタップ / マーク\n節の境界線と階層\n節は動詞を中心としたまとまりとして文の中に組み込まれる。\n句と節\n接続詞\n関係詞\nboundary-select\nhighlight\n正誤\n節の説明\nidentify-element\nidentify-role\nmarking-clause-boundaries\nidentifying-clause-structure\nfull-sentence-generation",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-018"
+      },
+      "searchText": "clause-boundary-marker\nClause Boundary Marker\nselect\n英文中で節の境界を選び、主節と従属節を見分ける。\n節の始まりと終わりを、接続詞や動詞の関係から見つける。\n語句間の境界と接続詞\nタップ / マーク\n節の境界線と階層\n節は動詞を中心としたまとまりとして文の中に組み込まれる。\n句と節\n接続詞\n関係詞\nboundary-select\nhighlight\n正誤\n節の説明\nidentify-element\nidentify-role\nmarking-clause-boundaries\nidentifying-clause-structure",
       "tags": [
         "identify-element",
         "identify-role",
         "marking-clause-boundaries",
-        "identifying-clause-structure",
-        "full-sentence-generation"
+        "identifying-clause-structure"
       ],
       "relations": {
         "problemIds": []
-      }
+      },
+      "interactionType": [
+        "boundary-select",
+        "highlight"
+      ],
+      "learningIntents": [
+        "identify-element",
+        "identify-role"
+      ],
+      "bestFor": [
+        "marking-clause-boundaries",
+        "identifying-clause-structure"
+      ],
+      "negativeTags": [
+        "full-sentence-generation"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-019",
       "title": "Modifier Finder",
-      "searchText": "modifier-finder\nModifier Finder\nselect\n英文から修飾語を選び、どの語句にかかるかを確かめる。\n文の中心部分と、情報を追加する修飾部分を区別する。\n修飾語句と被修飾語\nタップ / 選択\n修飾関係の強調表示\n修飾語は文の中心を支えながら、時間や場所などの情報を加える。\n修飾語\n前置詞句\n分詞\ntoken-select\nrelation-reveal\n正誤\n関係線\nidentify-element\nvisualize-relation\nfinding-modifier-phrases\ntracing-modifier-targets\nmoving-a-modifier-between-positions",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-019"
+      },
+      "searchText": "modifier-finder\nModifier Finder\nselect\n英文から修飾語を選び、どの語句にかかるかを確かめる。\n文の中心部分と、情報を追加する修飾部分を区別する。\n修飾語句と被修飾語\nタップ / 選択\n修飾関係の強調表示\n修飾語は文の中心を支えながら、時間や場所などの情報を加える。\n修飾語\n前置詞句\n分詞\ntoken-select\nrelation-reveal\n正誤\n関係線\nidentify-element\nvisualize-relation\nfinding-modifier-phrases\ntracing-modifier-targets",
       "tags": [
         "identify-element",
         "visualize-relation",
         "finding-modifier-phrases",
-        "tracing-modifier-targets",
-        "moving-a-modifier-between-positions"
+        "tracing-modifier-targets"
       ],
       "relations": {
         "problemIds": []
-      }
+      },
+      "interactionType": [
+        "token-select",
+        "relation-reveal"
+      ],
+      "learningIntents": [
+        "identify-element",
+        "visualize-relation"
+      ],
+      "bestFor": [
+        "finding-modifier-phrases",
+        "tracing-modifier-targets"
+      ],
+      "negativeTags": [
+        "moving-a-modifier-between-positions"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-020",
       "title": "Part of Speech Sorter",
-      "searchText": "part-of-speech-sorter\nPart of Speech Sorter\nclassify\n語句を名詞・動詞・形容詞などの品詞へ分類する。\n語の形だけでなく、文中での働きから品詞を判断する。\n単語または語句カード\nタップ / 分類\n品詞カテゴリと分類理由\n品詞は文中での働きと周囲の語との関係から考えられる。\n品詞\n名詞\n動詞\n形容詞\nclassification\nsorting\n正誤\n品詞説明\nclassify-form\nclassify-role\nclassifying-parts-of-speech\ncomparing-form-and-function\nassembling-sentence-order",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-020"
+      },
+      "searchText": "part-of-speech-sorter\nPart of Speech Sorter\nclassify\n語句を名詞・動詞・形容詞などの品詞へ分類する。\n語の形だけでなく、文中での働きから品詞を判断する。\n単語または語句カード\nタップ / 分類\n品詞カテゴリと分類理由\n品詞は文中での働きと周囲の語との関係から考えられる。\n品詞\n名詞\n動詞\n形容詞\nclassification\nsorting\n正誤\n品詞説明\nclassify-form\nclassify-role\nclassifying-parts-of-speech\ncomparing-form-and-function",
       "tags": [
         "classify-form",
         "classify-role",
         "classifying-parts-of-speech",
-        "comparing-form-and-function",
-        "assembling-sentence-order"
+        "comparing-form-and-function"
       ],
       "relations": {
         "problemIds": []
-      }
+      },
+      "interactionType": [
+        "classification",
+        "sorting"
+      ],
+      "learningIntents": [
+        "classify-form",
+        "classify-role"
+      ],
+      "bestFor": [
+        "classifying-parts-of-speech",
+        "comparing-form-and-function"
+      ],
+      "negativeTags": [
+        "assembling-sentence-order"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-021",
       "title": "Phrase vs Clause Classifier",
-      "searchText": "phrase-vs-clause-classifier\nPhrase vs Clause Classifier\nclassify\n語句を句と節に分類し、動詞を含むまとまりを見分ける。\n句と節の違いを、まとまりの中の動詞の有無から理解する。\n語句のまとまりカード\nタップ / 分類\nPhrase / Clauseの分類先\n節には中心となる動詞があり、句とは構造上の役割が異なる。\n句と節\n動詞\n従属節\nclassification\nfeature-check\n正誤\n根拠表示\nclassify-form\nclassify-function\ndistinguishing-phrase-and-clause\ndetecting-finite-verbs\ngenerating-syntax",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-021"
+      },
+      "searchText": "phrase-vs-clause-classifier\nPhrase vs Clause Classifier\nclassify\n語句を句と節に分類し、動詞を含むまとまりを見分ける。\n句と節の違いを、まとまりの中の動詞の有無から理解する。\n語句のまとまりカード\nタップ / 分類\nPhrase / Clauseの分類先\n節には中心となる動詞があり、句とは構造上の役割が異なる。\n句と節\n動詞\n従属節\nclassification\nfeature-check\n正誤\n根拠表示\nclassify-form\nclassify-function\ndistinguishing-phrase-and-clause\ndetecting-finite-verbs",
       "tags": [
         "classify-form",
         "classify-function",
         "distinguishing-phrase-and-clause",
-        "detecting-finite-verbs",
-        "generating-syntax"
+        "detecting-finite-verbs"
       ],
       "relations": {
         "problemIds": []
-      }
+      },
+      "interactionType": [
+        "classification",
+        "feature-check"
+      ],
+      "learningIntents": [
+        "classify-form",
+        "classify-function"
+      ],
+      "bestFor": [
+        "distinguishing-phrase-and-clause",
+        "detecting-finite-verbs"
+      ],
+      "negativeTags": [
+        "generating-syntax"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-022",
       "title": "Transitive vs Intransitive Classifier",
-      "searchText": "transitive-vs-intransitive-classifier\nTransitive vs Intransitive Classifier\nclassify\n動詞を目的語の有無で分類し、文型との関係を確かめる。\n動詞の性質と、目的語を必要とする文型の関係を理解する。\n動詞カードと例文\nタップ / 分類\n動詞の分類と文型ラベル\n動詞の性質によって、後ろに置ける語句の構造が変わる。\n自動詞\n他動詞\n文型\nclassification\nsentence-context\n正誤\n目的語の説明\nclassify-function\nconnect-form-and-meaning\nclassifying-verb-valency\nlinking-verbs-to-objects\nconjugation-drills",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-022"
+      },
+      "searchText": "transitive-vs-intransitive-classifier\nTransitive vs Intransitive Classifier\nclassify\n動詞を目的語の有無で分類し、文型との関係を確かめる。\n動詞の性質と、目的語を必要とする文型の関係を理解する。\n動詞カードと例文\nタップ / 分類\n動詞の分類と文型ラベル\n動詞の性質によって、後ろに置ける語句の構造が変わる。\n自動詞\n他動詞\n文型\nclassification\nsentence-context\n正誤\n目的語の説明\nclassify-function\nconnect-form-and-meaning\nclassifying-verb-valency\nlinking-verbs-to-objects",
       "tags": [
         "classify-function",
         "connect-form-and-meaning",
         "classifying-verb-valency",
-        "linking-verbs-to-objects",
-        "conjugation-drills"
+        "linking-verbs-to-objects"
       ],
       "relations": {
         "problemIds": []
-      }
+      },
+      "interactionType": [
+        "classification",
+        "sentence-context"
+      ],
+      "learningIntents": [
+        "classify-function",
+        "connect-form-and-meaning"
+      ],
+      "bestFor": [
+        "classifying-verb-valency",
+        "linking-verbs-to-objects"
+      ],
+      "negativeTags": [
+        "conjugation-drills"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-023",
       "title": "Active Passive Transformer",
-      "searchText": "active-passive-transformer\nActive Passive Transformer\ntransform\n能動態と受動態を切り替え、主語と目的語の関係を追う。\n態の変化で、文の焦点と動詞の形がどう変わるかを理解する。\n態の切り替えコントロール\n選択 / 切り替え\n主語・目的語・be動詞・過去分詞\n受動態では、動作を受けるものが文の主語になる。\n受動態\n過去分詞\n文型\nstate-selection\nsentence-generation\n即時変化\n役割比較\nobserve-transformation\nobserve-state-change\nconnect-form-and-meaning\ncomparing-voice\ntracking-role-reversal\nstylistic-free-writing",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-023"
+      },
+      "searchText": "active-passive-transformer\nActive Passive Transformer\ntransform\n能動態と受動態を切り替え、主語と目的語の関係を追う。\n態の変化で、文の焦点と動詞の形がどう変わるかを理解する。\n態の切り替えコントロール\n選択 / 切り替え\n主語・目的語・be動詞・過去分詞\n受動態では、動作を受けるものが文の主語になる。\n受動態\n過去分詞\n文型\nstate-selection\nsentence-generation\n即時変化\n役割比較\nobserve-transformation\nobserve-state-change\nconnect-form-and-meaning\ncomparing-voice\ntracking-role-reversal",
       "tags": [
         "observe-transformation",
         "observe-state-change",
         "connect-form-and-meaning",
         "comparing-voice",
-        "tracking-role-reversal",
-        "stylistic-free-writing"
+        "tracking-role-reversal"
       ],
       "relations": {
         "problemIds": []
-      }
+      },
+      "interactionType": [
+        "state-selection",
+        "sentence-generation"
+      ],
+      "learningIntents": [
+        "observe-transformation",
+        "observe-state-change",
+        "connect-form-and-meaning"
+      ],
+      "bestFor": [
+        "comparing-voice",
+        "tracking-role-reversal"
+      ],
+      "negativeTags": [
+        "stylistic-free-writing"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-024",
       "title": "Direct Indirect Speech Transformer",
-      "searchText": "direct-indirect-speech-transformer\nDirect Indirect Speech Transformer\ntransform\n直接話法と間接話法を変換し、時制や代名詞の変化を追う。\n引用する視点が変わると、文法形式も連動して変わることを理解する。\n話法の切り替えと変換対象\n選択 / 変換\n引用節の時制・代名詞・時を表す語\n話し手の視点に合わせて、引用内容の形が調整される。\n話法\n時制の一致\n代名詞\nstate-selection\nsentence-transformation\n差分表示\n変化理由\nobserve-transformation\nconnect-form-and-meaning\ntracing-reported-speech-changes\ncomparing-tense-shifts\nwriting-an-open-ended-dialogue",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-024"
+      },
+      "searchText": "direct-indirect-speech-transformer\nDirect Indirect Speech Transformer\ntransform\n直接話法と間接話法を変換し、時制や代名詞の変化を追う。\n引用する視点が変わると、文法形式も連動して変わることを理解する。\n話法の切り替えと変換対象\n選択 / 変換\n引用節の時制・代名詞・時を表す語\n話し手の視点に合わせて、引用内容の形が調整される。\n話法\n時制の一致\n代名詞\nstate-selection\nsentence-transformation\n差分表示\n変化理由\nobserve-transformation\nconnect-form-and-meaning\ntracing-reported-speech-changes\ncomparing-tense-shifts",
       "tags": [
         "observe-transformation",
         "connect-form-and-meaning",
         "tracing-reported-speech-changes",
-        "comparing-tense-shifts",
-        "writing-an-open-ended-dialogue"
+        "comparing-tense-shifts"
       ],
       "relations": {
         "problemIds": []
-      }
+      },
+      "interactionType": [
+        "state-selection",
+        "sentence-transformation"
+      ],
+      "learningIntents": [
+        "observe-transformation",
+        "connect-form-and-meaning"
+      ],
+      "bestFor": [
+        "tracing-reported-speech-changes",
+        "comparing-tense-shifts"
+      ],
+      "negativeTags": [
+        "writing-an-open-ended-dialogue"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-025",
       "title": "Comparison Transformer",
-      "searchText": "comparison-transformer\nComparison Transformer\ntransform\n原級・比較級・最上級を切り替え、比較の形を変える。\n比較対象の数と意味に応じて、形容詞の形が変わることを理解する。\n比較の種類と比較対象\n選択 / 切り替え\n形容詞の形と比較構造\n比べる対象と範囲によって、使う比較表現が決まる。\n比較\n原級\n比較級\n最上級\nstate-selection\nsentence-generation\n即時変化\n比較対象表示\nobserve-transformation\ncompare-form\ncompare-meaning\nchanging-comparison-degree\nlinking-form-to-comparison\nranking-unstated-meaning",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-025"
+      },
+      "searchText": "comparison-transformer\nComparison Transformer\ntransform\n原級・比較級・最上級を切り替え、比較の形を変える。\n比較対象の数と意味に応じて、形容詞の形が変わることを理解する。\n比較の種類と比較対象\n選択 / 切り替え\n形容詞の形と比較構造\n比べる対象と範囲によって、使う比較表現が決まる。\n比較\n原級\n比較級\n最上級\nstate-selection\nsentence-generation\n即時変化\n比較対象表示\nobserve-transformation\ncompare-form\ncompare-meaning\nchanging-comparison-degree\nlinking-form-to-comparison",
       "tags": [
         "observe-transformation",
         "compare-form",
         "compare-meaning",
         "changing-comparison-degree",
-        "linking-form-to-comparison",
-        "ranking-unstated-meaning"
+        "linking-form-to-comparison"
       ],
       "relations": {
         "problemIds": []
-      }
+      },
+      "interactionType": [
+        "state-selection",
+        "sentence-generation"
+      ],
+      "learningIntents": [
+        "observe-transformation",
+        "compare-form",
+        "compare-meaning"
+      ],
+      "bestFor": [
+        "changing-comparison-degree",
+        "linking-form-to-comparison"
+      ],
+      "negativeTags": [
+        "ranking-unstated-meaning"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-026",
       "title": "Sentence Pattern Diagram",
-      "searchText": "sentence-pattern-diagram\nSentence Pattern Diagram\nvisualize\n英文をS・V・O・Cの配置図として表示する。\n文型を、役割ラベルと位置関係の図として捉える。\n文型図の要素と表示切り替え\nクリック / 強調\n文型図と対応する語句\n文の骨格は、役割を持つ要素の配置として見ることができる。\n文型\nS / V / O / C\n補語\ndiagram\nhighlight\n対応強調\n構造説明\nvisualize-structure\nidentify-role\ninspecting-sentence-patterns\nmapping-roles-to-slots\ncreative-sentence-generation",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-026"
+      },
+      "searchText": "sentence-pattern-diagram\nSentence Pattern Diagram\nvisualize\n英文をS・V・O・Cの配置図として表示する。\n文型を、役割ラベルと位置関係の図として捉える。\n文型図の要素と表示切り替え\nクリック / 強調\n文型図と対応する語句\n文の骨格は、役割を持つ要素の配置として見ることができる。\n文型\nS / V / O / C\n補語\ndiagram\nhighlight\n対応強調\n構造説明\nvisualize-structure\nidentify-role\ninspecting-sentence-patterns\nmapping-roles-to-slots",
       "tags": [
         "visualize-structure",
         "identify-role",
         "inspecting-sentence-patterns",
-        "mapping-roles-to-slots",
-        "creative-sentence-generation"
+        "mapping-roles-to-slots"
       ],
       "relations": {
         "problemIds": [
@@ -3682,19 +4923,37 @@
           "SPD-002",
           "SPD-003"
         ]
-      }
+      },
+      "interactionType": [
+        "diagram",
+        "highlight"
+      ],
+      "learningIntents": [
+        "visualize-structure",
+        "identify-role"
+      ],
+      "bestFor": [
+        "inspecting-sentence-patterns",
+        "mapping-roles-to-slots"
+      ],
+      "negativeTags": [
+        "creative-sentence-generation"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-027",
       "title": "Modifier Connection Viewer",
-      "searchText": "modifier-connection-viewer\nModifier Connection Viewer\nvisualize\n修飾語から被修飾語へのつながりを線で表示する。\n語順だけでは見えにくい修飾関係を、接続として理解する。\n語句ノードと修飾関係\nクリック / 展開\n修飾関係の線と強調箇所\n離れた位置にある語句も、文中では意味上つながっている。\n修飾語\n関係詞\n分詞\nrelation-graph\nhighlight\n関係線\n短い説明\nvisualize-relation\nidentify-role\ninspecting-modifier-relations\ntracing-target-connections\nchanging-modifier-placement",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-027"
+      },
+      "searchText": "modifier-connection-viewer\nModifier Connection Viewer\nvisualize\n修飾語から被修飾語へのつながりを線で表示する。\n語順だけでは見えにくい修飾関係を、接続として理解する。\n語句ノードと修飾関係\nクリック / 展開\n修飾関係の線と強調箇所\n離れた位置にある語句も、文中では意味上つながっている。\n修飾語\n関係詞\n分詞\nrelation-graph\nhighlight\n関係線\n短い説明\nvisualize-relation\nidentify-role\ninspecting-modifier-relations\ntracing-target-connections",
       "tags": [
         "visualize-relation",
         "identify-role",
         "inspecting-modifier-relations",
-        "tracing-target-connections",
-        "changing-modifier-placement"
+        "tracing-target-connections"
       ],
       "relations": {
         "problemIds": [
@@ -3702,225 +4961,484 @@
           "MCV-002",
           "MCV-003"
         ]
-      }
+      },
+      "interactionType": [
+        "relation-graph",
+        "highlight"
+      ],
+      "learningIntents": [
+        "visualize-relation",
+        "identify-role"
+      ],
+      "bestFor": [
+        "inspecting-modifier-relations",
+        "tracing-target-connections"
+      ],
+      "negativeTags": [
+        "changing-modifier-placement"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-028",
       "title": "Clause Hierarchy Viewer",
-      "searchText": "clause-hierarchy-viewer\nClause Hierarchy Viewer\nvisualize\n主節と従属節の階層を、入れ子構造として表示する。\n複雑な英文の中で、節がどの階層にあるかを理解する。\n節ノードと折りたたみ操作\nクリック / 展開\n節の階層と対応する英文\n英文は節が入れ子になった階層構造として組み立てられる。\n句と節\n関係詞節\n名詞節\ntree-view\ncollapse-expand\n階層表示\n構造説明\nvisualize-structure\nvisualize-relation\ninspecting-clause-hierarchy\ntracing-nested-clauses\ncorrecting-word-forms",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-028"
+      },
+      "searchText": "clause-hierarchy-viewer\nClause Hierarchy Viewer\nvisualize\n主節と従属節の階層を、入れ子構造として表示する。\n複雑な英文の中で、節がどの階層にあるかを理解する。\n節ノードと折りたたみ操作\nクリック / 展開\n節の階層と対応する英文\n英文は節が入れ子になった階層構造として組み立てられる。\n句と節\n関係詞節\n名詞節\ntree-view\ncollapse-expand\n階層表示\n構造説明\nvisualize-structure\nvisualize-relation\ninspecting-clause-hierarchy\ntracing-nested-clauses",
       "tags": [
         "visualize-structure",
         "visualize-relation",
         "inspecting-clause-hierarchy",
-        "tracing-nested-clauses",
-        "correcting-word-forms"
+        "tracing-nested-clauses"
       ],
       "relations": {
         "problemIds": []
-      }
+      },
+      "interactionType": [
+        "tree-view",
+        "collapse-expand"
+      ],
+      "learningIntents": [
+        "visualize-structure",
+        "visualize-relation"
+      ],
+      "bestFor": [
+        "inspecting-clause-hierarchy",
+        "tracing-nested-clauses"
+      ],
+      "negativeTags": [
+        "correcting-word-forms"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-029",
       "title": "Tense Generator",
-      "searchText": "tense-generator\nTense Generator\ngenerate\n時制の条件から英文を生成し、動詞の形の変化を示す。\n時間の捉え方が、動詞の形や助動詞へ反映されることを理解する。\n時制・主語・動詞の条件\n選択 / 生成\n動詞の形と助動詞\n文の時間情報に応じて、動詞の形が体系的に変わる。\n時制\n現在形\n過去形\n進行形\nform-select\ngeneration\n生成結果\n形の説明\ngenerate-from-conditions\nobserve-state-change\ngenerating-tense-variants\nconnecting-time-to-form\nopen-ended-writing",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-029"
+      },
+      "searchText": "tense-generator\nTense Generator\ngenerate\n時制の条件から英文を生成し、動詞の形の変化を示す。\n時間の捉え方が、動詞の形や助動詞へ反映されることを理解する。\n時制・主語・動詞の条件\n選択 / 生成\n動詞の形と助動詞\n文の時間情報に応じて、動詞の形が体系的に変わる。\n時制\n現在形\n過去形\n進行形\nform-select\ngeneration\n生成結果\n形の説明\ngenerate-from-conditions\nobserve-state-change\ngenerating-tense-variants\nconnecting-time-to-form",
       "tags": [
         "generate-from-conditions",
         "observe-state-change",
         "generating-tense-variants",
-        "connecting-time-to-form",
-        "open-ended-writing"
+        "connecting-time-to-form"
       ],
       "relations": {
         "problemIds": []
-      }
+      },
+      "interactionType": [
+        "form-select",
+        "generation"
+      ],
+      "learningIntents": [
+        "generate-from-conditions",
+        "observe-state-change"
+      ],
+      "bestFor": [
+        "generating-tense-variants",
+        "connecting-time-to-form"
+      ],
+      "negativeTags": [
+        "open-ended-writing"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-030",
       "title": "Question Generator",
-      "searchText": "question-generator\nQuestion Generator\ngenerate\n答えたい情報の条件から、適切な疑問文を生成する。\n疑問文の種類と尋ねる対象の関係を、生成手順として理解する。\n疑問詞・時制・答えの条件\n選択 / 生成\n疑問文の構造と語順\n尋ねる対象によって、疑問詞と文の構造が決まる。\n疑問文\n疑問詞\n助動詞\nform-select\ngeneration\n生成結果\n構造説明\ngenerate-from-conditions\nobserve-transformation\ngenerating-a-question-from-a-target\nmapping-question-types\nsimulating-a-whole-conversation",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-030"
+      },
+      "searchText": "question-generator\nQuestion Generator\ngenerate\n答えたい情報の条件から、適切な疑問文を生成する。\n疑問文の種類と尋ねる対象の関係を、生成手順として理解する。\n疑問詞・時制・答えの条件\n選択 / 生成\n疑問文の構造と語順\n尋ねる対象によって、疑問詞と文の構造が決まる。\n疑問文\n疑問詞\n助動詞\nform-select\ngeneration\n生成結果\n構造説明\ngenerate-from-conditions\nobserve-transformation\ngenerating-a-question-from-a-target\nmapping-question-types",
       "tags": [
         "generate-from-conditions",
         "observe-transformation",
         "generating-a-question-from-a-target",
-        "mapping-question-types",
-        "simulating-a-whole-conversation"
+        "mapping-question-types"
       ],
       "relations": {
         "problemIds": []
-      }
+      },
+      "interactionType": [
+        "form-select",
+        "generation"
+      ],
+      "learningIntents": [
+        "generate-from-conditions",
+        "observe-transformation"
+      ],
+      "bestFor": [
+        "generating-a-question-from-a-target",
+        "mapping-question-types"
+      ],
+      "negativeTags": [
+        "simulating-a-whole-conversation"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-031",
       "title": "Conditional Generator",
-      "searchText": "conditional-generator\nConditional Generator\ngenerate\n条件と結果の組み合わせから、仮定法の文を生成する。\n条件節と結果節の関係、時制の組み合わせを理解する。\n条件の種類と結果の条件\n選択 / 生成\n条件節・結果節・時制\n現実との距離や時間によって、条件文の形が変わる。\n仮定法\n条件文\n時制\nstate-selection\ngeneration\n生成結果\n時制の説明\ngenerate-from-conditions\nconnect-form-and-meaning\nbuilding-condition-result-pairs\nconnecting-tense-to-condition\nopen-ended-argument-writing",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-031"
+      },
+      "searchText": "conditional-generator\nConditional Generator\ngenerate\n条件と結果の組み合わせから、仮定法の文を生成する。\n条件節と結果節の関係、時制の組み合わせを理解する。\n条件の種類と結果の条件\n選択 / 生成\n条件節・結果節・時制\n現実との距離や時間によって、条件文の形が変わる。\n仮定法\n条件文\n時制\nstate-selection\ngeneration\n生成結果\n時制の説明\ngenerate-from-conditions\nconnect-form-and-meaning\nbuilding-condition-result-pairs\nconnecting-tense-to-condition",
       "tags": [
         "generate-from-conditions",
         "connect-form-and-meaning",
         "building-condition-result-pairs",
-        "connecting-tense-to-condition",
-        "open-ended-argument-writing"
+        "connecting-tense-to-condition"
       ],
       "relations": {
         "problemIds": []
-      }
+      },
+      "interactionType": [
+        "state-selection",
+        "generation"
+      ],
+      "learningIntents": [
+        "generate-from-conditions",
+        "connect-form-and-meaning"
+      ],
+      "bestFor": [
+        "building-condition-result-pairs",
+        "connecting-tense-to-condition"
+      ],
+      "negativeTags": [
+        "open-ended-argument-writing"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-032",
       "title": "Infinitive vs Gerund Comparison",
-      "searchText": "infinitive-vs-gerund-comparison\nInfinitive vs Gerund Comparison\ncompare\n不定詞と動名詞を使う英文を並べ、意味の差を比較する。\n動詞の後ろの形が、行為の捉え方や意味へ与える影響を理解する。\n比較する英文と形の差分\n切り替え / 強調\n動詞後の形と意味メモ\n似た形でも、不定詞と動名詞で行為の捉え方が変わる。\n不定詞\n動名詞\n動詞の語法\nside-by-side\ndiff-highlight\n差分強調\n意味比較\ncompare-form\ncompare-meaning\ncomparing-verb-patterns\ndistinguishing-infinitive-and-gerund\nfull-sentence-construction",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-032"
+      },
+      "searchText": "infinitive-vs-gerund-comparison\nInfinitive vs Gerund Comparison\ncompare\n不定詞と動名詞を使う英文を並べ、意味の差を比較する。\n動詞の後ろの形が、行為の捉え方や意味へ与える影響を理解する。\n比較する英文と形の差分\n切り替え / 強調\n動詞後の形と意味メモ\n似た形でも、不定詞と動名詞で行為の捉え方が変わる。\n不定詞\n動名詞\n動詞の語法\nside-by-side\ndiff-highlight\n差分強調\n意味比較\ncompare-form\ncompare-meaning\ncomparing-verb-patterns\ndistinguishing-infinitive-and-gerund",
       "tags": [
         "compare-form",
         "compare-meaning",
         "comparing-verb-patterns",
-        "distinguishing-infinitive-and-gerund",
-        "full-sentence-construction"
+        "distinguishing-infinitive-and-gerund"
       ],
       "relations": {
         "problemIds": []
-      }
+      },
+      "interactionType": [
+        "side-by-side",
+        "diff-highlight"
+      ],
+      "learningIntents": [
+        "compare-form",
+        "compare-meaning"
+      ],
+      "bestFor": [
+        "comparing-verb-patterns",
+        "distinguishing-infinitive-and-gerund"
+      ],
+      "negativeTags": [
+        "full-sentence-construction"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-033",
       "title": "Active vs Passive Comparison",
-      "searchText": "active-vs-passive-comparison\nActive vs Passive Comparison\ncompare\n能動態と受動態を並べ、視点と役割の差を比較する。\n同じ出来事を異なる主語から述べる効果を理解する。\n2つの英文と対応する語句\n切り替え / 対応付け\n主語・目的語・動詞の形\n態が変わると、文の焦点と語句の役割が入れ替わる。\n受動態\n文型\n過去分詞\nside-by-side\nrole-mapping\n差分強調\n役割比較\ncompare-form\ncompare-meaning\ncomparing-voice-choices\nmapping-agent-and-patient\nopen-ended-style-editing",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-033"
+      },
+      "searchText": "active-vs-passive-comparison\nActive vs Passive Comparison\ncompare\n能動態と受動態を並べ、視点と役割の差を比較する。\n同じ出来事を異なる主語から述べる効果を理解する。\n2つの英文と対応する語句\n切り替え / 対応付け\n主語・目的語・動詞の形\n態が変わると、文の焦点と語句の役割が入れ替わる。\n受動態\n文型\n過去分詞\nside-by-side\nrole-mapping\n差分強調\n役割比較\ncompare-form\ncompare-meaning\ncomparing-voice-choices\nmapping-agent-and-patient",
       "tags": [
         "compare-form",
         "compare-meaning",
         "comparing-voice-choices",
-        "mapping-agent-and-patient",
-        "open-ended-style-editing"
+        "mapping-agent-and-patient"
       ],
       "relations": {
         "problemIds": []
-      }
+      },
+      "interactionType": [
+        "side-by-side",
+        "role-mapping"
+      ],
+      "learningIntents": [
+        "compare-form",
+        "compare-meaning"
+      ],
+      "bestFor": [
+        "comparing-voice-choices",
+        "mapping-agent-and-patient"
+      ],
+      "negativeTags": [
+        "open-ended-style-editing"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-034",
       "title": "Tense Comparison",
-      "searchText": "tense-comparison\nTense Comparison\ncompare\n同じ内容を異なる時制で並べ、時間の捉え方を比較する。\n時制の違いが時間関係と文の意味へ与える影響を理解する。\n時制の切り替えと差分箇所\n選択 / 比較\n動詞の形と時間表現\n時制は動詞の形だけでなく、出来事の時間関係を表す。\n時制\n現在完了\n過去形\nside-by-side\ntimeline\n時間軸\n意味比較\ncompare-form\ncompare-meaning\ncomparing-time-frames\nconnecting-tense-to-meaning\nspontaneous-sentence-generation",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-034"
+      },
+      "searchText": "tense-comparison\nTense Comparison\ncompare\n同じ内容を異なる時制で並べ、時間の捉え方を比較する。\n時制の違いが時間関係と文の意味へ与える影響を理解する。\n時制の切り替えと差分箇所\n選択 / 比較\n動詞の形と時間表現\n時制は動詞の形だけでなく、出来事の時間関係を表す。\n時制\n現在完了\n過去形\nside-by-side\ntimeline\n時間軸\n意味比較\ncompare-form\ncompare-meaning\ncomparing-time-frames\nconnecting-tense-to-meaning",
       "tags": [
         "compare-form",
         "compare-meaning",
         "comparing-time-frames",
-        "connecting-tense-to-meaning",
-        "spontaneous-sentence-generation"
+        "connecting-tense-to-meaning"
       ],
       "relations": {
         "problemIds": []
-      }
+      },
+      "interactionType": [
+        "side-by-side",
+        "timeline"
+      ],
+      "learningIntents": [
+        "compare-form",
+        "compare-meaning"
+      ],
+      "bestFor": [
+        "comparing-time-frames",
+        "connecting-tense-to-meaning"
+      ],
+      "negativeTags": [
+        "spontaneous-sentence-generation"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-035",
       "title": "Agreement Fixer",
-      "searchText": "agreement-fixer\nAgreement Fixer\ncorrect\n主語と動詞の一致の誤りを見つけ、正しい形へ直す。\n主語の数や人称が、動詞の形を決めることを理解する。\n誤りのある動詞と訂正候補\n選択 / 修正\n動詞の形と一致ラベル\n動詞は主語の人称と数に合わせて形を変える。\n主語と動詞の一致\n三単現\n複数主語\nerror-spotting\nchoice\n正誤\n修正理由\ncorrect-form\ndiagnose-error\ndiagnosing-subject-verb-agreement\ncorrecting-inflection\nfree-form-proofreading",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-035"
+      },
+      "searchText": "agreement-fixer\nAgreement Fixer\ncorrect\n主語と動詞の一致の誤りを見つけ、正しい形へ直す。\n主語の数や人称が、動詞の形を決めることを理解する。\n誤りのある動詞と訂正候補\n選択 / 修正\n動詞の形と一致ラベル\n動詞は主語の人称と数に合わせて形を変える。\n主語と動詞の一致\n三単現\n複数主語\nerror-spotting\nchoice\n正誤\n修正理由\ncorrect-form\ndiagnose-error\ndiagnosing-subject-verb-agreement\ncorrecting-inflection",
       "tags": [
         "correct-form",
         "diagnose-error",
         "diagnosing-subject-verb-agreement",
-        "correcting-inflection",
-        "free-form-proofreading"
+        "correcting-inflection"
       ],
       "relations": {
         "problemIds": []
-      }
+      },
+      "interactionType": [
+        "error-spotting",
+        "choice"
+      ],
+      "learningIntents": [
+        "correct-form",
+        "diagnose-error"
+      ],
+      "bestFor": [
+        "diagnosing-subject-verb-agreement",
+        "correcting-inflection"
+      ],
+      "negativeTags": [
+        "free-form-proofreading"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-036",
       "title": "Tense Error Finder",
-      "searchText": "tense-error-finder\nTense Error Finder\ncorrect\n文脈に合わない時制を見つけ、動詞の形を修正する。\n時間を表す語と動詞の時制を対応づけて考える。\n時間表現と動詞の形\n選択 / 修正\n誤りの箇所と時間関係\n文脈の時間情報と動詞の時制は対応している。\n時制\n時間表現\n現在完了\nerror-spotting\nsentence-correction\n正誤\n時間軸ヒント\ncorrect-form\ndiagnose-error\nconnect-form-and-meaning\ndiagnosing-tense-mismatch\naligning-time-cues-and-form\nstylistic-editing",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-036"
+      },
+      "searchText": "tense-error-finder\nTense Error Finder\ncorrect\n文脈に合わない時制を見つけ、動詞の形を修正する。\n時間を表す語と動詞の時制を対応づけて考える。\n時間表現と動詞の形\n選択 / 修正\n誤りの箇所と時間関係\n文脈の時間情報と動詞の時制は対応している。\n時制\n時間表現\n現在完了\nerror-spotting\nsentence-correction\n正誤\n時間軸ヒント\ncorrect-form\ndiagnose-error\nconnect-form-and-meaning\ndiagnosing-tense-mismatch\naligning-time-cues-and-form",
       "tags": [
         "correct-form",
         "diagnose-error",
         "connect-form-and-meaning",
         "diagnosing-tense-mismatch",
-        "aligning-time-cues-and-form",
-        "stylistic-editing"
+        "aligning-time-cues-and-form"
       ],
       "relations": {
         "problemIds": []
-      }
+      },
+      "interactionType": [
+        "error-spotting",
+        "sentence-correction"
+      ],
+      "learningIntents": [
+        "correct-form",
+        "diagnose-error",
+        "connect-form-and-meaning"
+      ],
+      "bestFor": [
+        "diagnosing-tense-mismatch",
+        "aligning-time-cues-and-form"
+      ],
+      "negativeTags": [
+        "stylistic-editing"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-037",
       "title": "Word Order Error Fixer",
-      "searchText": "word-order-error-fixer\nWord Order Error Fixer\ncorrect\n語順の誤りを見つけ、英文の骨格に沿って修正する。\n語順の誤りを、単語の暗記ではなく文型から説明する。\n誤った語順と移動対象\nタップ / 並べ替え\n語句の位置と文型ラベル\n英文の語順には、語句の役割に基づく基本的な制約がある。\n語順\n文型\n修飾語\nerror-spotting\nsequence\n正誤\n語順ヒント\ncorrect-form\ndiagnose-error\npractice-word-order\ndiagnosing-order-errors\nreconstructing-sentence-order\nmeaning-only-comparison",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-037"
+      },
+      "searchText": "word-order-error-fixer\nWord Order Error Fixer\ncorrect\n語順の誤りを見つけ、英文の骨格に沿って修正する。\n語順の誤りを、単語の暗記ではなく文型から説明する。\n誤った語順と移動対象\nタップ / 並べ替え\n語句の位置と文型ラベル\n英文の語順には、語句の役割に基づく基本的な制約がある。\n語順\n文型\n修飾語\nerror-spotting\nsequence\n正誤\n語順ヒント\ncorrect-form\ndiagnose-error\npractice-word-order\ndiagnosing-order-errors\nreconstructing-sentence-order",
       "tags": [
         "correct-form",
         "diagnose-error",
         "practice-word-order",
         "diagnosing-order-errors",
-        "reconstructing-sentence-order",
-        "meaning-only-comparison"
+        "reconstructing-sentence-order"
       ],
       "relations": {
         "problemIds": []
-      }
+      },
+      "interactionType": [
+        "error-spotting",
+        "sequence"
+      ],
+      "learningIntents": [
+        "correct-form",
+        "diagnose-error",
+        "practice-word-order"
+      ],
+      "bestFor": [
+        "diagnosing-order-errors",
+        "reconstructing-sentence-order"
+      ],
+      "negativeTags": [
+        "meaning-only-comparison"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-038",
       "title": "Request Simulator",
-      "searchText": "request-simulator\nRequest Simulator\nsimulate\n場面に応じた依頼表現を選び、会話の流れを進める。\n相手との関係や目的に応じて、依頼の形を選ぶ。\n場面情報と依頼表現の選択肢\n選択 / 返答\n会話の返答と丁寧さ\n文法形式は、場面と相手への配慮を表す。\n助動詞\n依頼表現\n丁寧表現\nscenario\nchoice\n会話結果\n場面別ヒント\nchoose-in-context\nmatch-form-to-purpose\nconnect-context-and-form\nchoosing-a-polite-request\nmatching-register-to-situation\nisolated-conjugation",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-038"
+      },
+      "searchText": "request-simulator\nRequest Simulator\nsimulate\n場面に応じた依頼表現を選び、会話の流れを進める。\n相手との関係や目的に応じて、依頼の形を選ぶ。\n場面情報と依頼表現の選択肢\n選択 / 返答\n会話の返答と丁寧さ\n文法形式は、場面と相手への配慮を表す。\n助動詞\n依頼表現\n丁寧表現\nscenario\nchoice\n会話結果\n場面別ヒント\nchoose-in-context\nmatch-form-to-purpose\nconnect-context-and-form\nchoosing-a-polite-request\nmatching-register-to-situation",
       "tags": [
         "choose-in-context",
         "match-form-to-purpose",
         "connect-context-and-form",
         "choosing-a-polite-request",
-        "matching-register-to-situation",
-        "isolated-conjugation"
+        "matching-register-to-situation"
       ],
       "relations": {
         "problemIds": []
-      }
+      },
+      "interactionType": [
+        "scenario",
+        "choice"
+      ],
+      "learningIntents": [
+        "choose-in-context",
+        "match-form-to-purpose",
+        "connect-context-and-form"
+      ],
+      "bestFor": [
+        "choosing-a-polite-request",
+        "matching-register-to-situation"
+      ],
+      "negativeTags": [
+        "isolated-conjugation"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-039",
       "title": "Travel Conversation Grammar",
-      "searchText": "travel-conversation-grammar\nTravel Conversation Grammar\nsimulate\n旅行場面の会話で、時制や依頼表現を使い分ける。\n旅行中の目的に合う文法表現を、会話の選択として使う。\n会話の文脈と返答候補\n選択 / 会話\n会話の進行と適切な返答\n文法の選択は、場面で達成したい目的に結びついている。\n時制\n依頼表現\n助動詞\nscenario\nbranching-choice\n会話結果\n文法メモ\nchoose-in-context\nmatch-form-to-purpose\nconnect-context-and-form\npracticing-travel-dialogue\nchoosing-a-purpose-fit-response\nsentence-diagramming",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-039"
+      },
+      "searchText": "travel-conversation-grammar\nTravel Conversation Grammar\nsimulate\n旅行場面の会話で、時制や依頼表現を使い分ける。\n旅行中の目的に合う文法表現を、会話の選択として使う。\n会話の文脈と返答候補\n選択 / 会話\n会話の進行と適切な返答\n文法の選択は、場面で達成したい目的に結びついている。\n時制\n依頼表現\n助動詞\nscenario\nbranching-choice\n会話結果\n文法メモ\nchoose-in-context\nmatch-form-to-purpose\nconnect-context-and-form\npracticing-travel-dialogue\nchoosing-a-purpose-fit-response",
       "tags": [
         "choose-in-context",
         "match-form-to-purpose",
         "connect-context-and-form",
         "practicing-travel-dialogue",
-        "choosing-a-purpose-fit-response",
-        "sentence-diagramming"
+        "choosing-a-purpose-fit-response"
       ],
       "relations": {
         "problemIds": []
-      }
+      },
+      "interactionType": [
+        "scenario",
+        "branching-choice"
+      ],
+      "learningIntents": [
+        "choose-in-context",
+        "match-form-to-purpose",
+        "connect-context-and-form"
+      ],
+      "bestFor": [
+        "practicing-travel-dialogue",
+        "choosing-a-purpose-fit-response"
+      ],
+      "negativeTags": [
+        "sentence-diagramming"
+      ]
     },
     {
       "kind": "interaction",
       "id": "GRAM-INT-040",
       "title": "Situation Tense Choice",
-      "searchText": "situation-tense-choice\nSituation Tense Choice\nsimulate\n状況と時間の手がかりから、適切な時制を選ぶ。\n文脈の時間情報を読み取り、時制の選択へ結びつける。\n状況文・時間の手がかり・時制候補\n選択 / 確認\n選択した時制と場面の結果\n時制は文だけで決めず、出来事の時間関係から選ぶ。\n時制\n現在完了\n過去形\nscenario\ntense-choice\n正誤\n時間関係の説明\nchoose-in-context\nmatch-form-to-purpose\nconnect-context-and-form\nselecting-tense-from-time-cues\naligning-context-and-tense\ngenerating-all-tense-forms",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-040"
+      },
+      "searchText": "situation-tense-choice\nSituation Tense Choice\nsimulate\n状況と時間の手がかりから、適切な時制を選ぶ。\n文脈の時間情報を読み取り、時制の選択へ結びつける。\n状況文・時間の手がかり・時制候補\n選択 / 確認\n選択した時制と場面の結果\n時制は文だけで決めず、出来事の時間関係から選ぶ。\n時制\n現在完了\n過去形\nscenario\ntense-choice\n正誤\n時間関係の説明\nchoose-in-context\nmatch-form-to-purpose\nconnect-context-and-form\nselecting-tense-from-time-cues\naligning-context-and-tense",
       "tags": [
         "choose-in-context",
         "match-form-to-purpose",
         "connect-context-and-form",
         "selecting-tense-from-time-cues",
-        "aligning-context-and-tense",
-        "generating-all-tense-forms"
+        "aligning-context-and-tense"
       ],
       "relations": {
         "problemIds": []
-      }
+      },
+      "interactionType": [
+        "scenario",
+        "tense-choice"
+      ],
+      "learningIntents": [
+        "choose-in-context",
+        "match-form-to-purpose",
+        "connect-context-and-form"
+      ],
+      "bestFor": [
+        "selecting-tense-from-time-cues",
+        "aligning-context-and-tense"
+      ],
+      "negativeTags": [
+        "generating-all-tense-forms"
+      ]
     },
     {
       "kind": "problem",
       "id": "WO-001",
       "title": "WO-001",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "WO-001",
+        "type": "word-order"
+      },
       "searchText": "word-order\n単語カードをタップして、英文を完成させてください。\nI\nplay\ntennis\ni\n英語の基本語順は Subject + Verb + Object です。\nSVO\npresent-simple",
       "tags": [
         "word-order"
@@ -3932,12 +5450,18 @@
         "lessonIds": [
           "LESSON-001"
         ]
-      }
+      },
+      "type": "word-order"
     },
     {
       "kind": "problem",
       "id": "WO-002",
       "title": "WO-002",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "WO-002",
+        "type": "word-order"
+      },
       "searchText": "word-order\n主語に合わせて、自然な英文を組み立ててください。\nShe\nlikes\nmusic\nshe\n三人称単数の主語 She の現在形では、動詞に s がつきます。\nSVO\nthird-person-singular\npresent-simple",
       "tags": [
         "word-order"
@@ -3949,12 +5473,18 @@
         "lessonIds": [
           "LESSON-001"
         ]
-      }
+      },
+      "type": "word-order"
     },
     {
       "kind": "problem",
       "id": "WO-003",
       "title": "WO-003",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "WO-003",
+        "type": "word-order"
+      },
       "searchText": "word-order\n主語・動詞・補語の順に、英文を組み立ててください。\nMy brother\nis\nkind\nmy-brother\nbe動詞の後ろの補語が、主語の状態を説明する SVC の文です。\nSVC\nbe-verb\ncomplement",
       "tags": [
         "word-order"
@@ -3966,12 +5496,18 @@
         "lessonIds": [
           "LESSON-001"
         ]
-      }
+      },
+      "type": "word-order"
     },
     {
       "kind": "problem",
       "id": "WO-004",
       "title": "WO-004",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "WO-004",
+        "type": "word-order"
+      },
       "searchText": "word-order\nどちらも自然な語順になるように、英文を組み立ててください。\nThey\nvisit\nthe museum\non Sundays\nthey\nthe-museum\non-sundays\nまず、だれが行うかを表す主語を探してみましょう。\n時間を表す語句は、文の最後にも文の最初にも置けます。\nThey visit the museum on Sundays. と On Sundays they visit the museum. は、どちらも自然な語順です。\nSVO\nadverbial-phrase",
       "tags": [
         "word-order"
@@ -3981,12 +5517,18 @@
           "GRAM-INT-001"
         ],
         "lessonIds": []
-      }
+      },
+      "type": "word-order"
     },
     {
       "kind": "problem",
       "id": "WO-005",
       "title": "WO-005",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "WO-005",
+        "type": "word-order"
+      },
       "searchText": "word-order\n助動詞を含む英文を、自然な語順に組み立ててください。\nYou\nshould\nstudy\ntoday\nyou\n助動詞の後ろには動詞の原形を置きます。基本語順は Subject + Modal + Base Verb です。\nmodal\nbase-verb",
       "tags": [
         "word-order"
@@ -3998,12 +5540,18 @@
         "lessonIds": [
           "LESSON-003"
         ]
-      }
+      },
+      "type": "word-order"
     },
     {
       "kind": "problem",
       "id": "WO-006",
       "title": "WO-006",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "WO-006",
+        "type": "word-order"
+      },
       "searchText": "word-order\n受動態の英文を、自然な語順に組み立ててください。\nThe report\nwas\nwritten\nby the teacher\nthe-report\nby-the-teacher\n受動態は Subject + be + Past Participle が中心で、必要なら by 句で動作主を示します。\npassive-voice\npast-participle",
       "tags": [
         "word-order"
@@ -4015,12 +5563,18 @@
         "lessonIds": [
           "LESSON-004"
         ]
-      }
+      },
+      "type": "word-order"
     },
     {
       "kind": "problem",
       "id": "WO-007",
       "title": "WO-007",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "WO-007",
+        "type": "word-order"
+      },
       "searchText": "word-order\nto + 動詞原形の語順を意識して、英文を組み立ててください。\nI\nwant\nto\nstudy\nEnglish\ni\nenglish\nwant の後ろで「〜すること」を表す不定詞は、to + 動詞の原形で作ります。\ninfinitive\nnoun-use\nbase-verb",
       "tags": [
         "word-order"
@@ -4032,12 +5586,18 @@
         "lessonIds": [
           "LESSON-005"
         ]
-      }
+      },
+      "type": "word-order"
     },
     {
       "kind": "problem",
       "id": "WO-008",
       "title": "WO-008",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "WO-008",
+        "type": "word-order"
+      },
       "searchText": "word-order\nenjoy + gerund の語順を意識して、英文を組み立ててください。\nI\nenjoy\nreading\nbooks\ni\nenjoy の後ろでは、動詞 read を reading の形にして「本を読むこと」を表します。ここでは enjoy + gerund という組み合わせを確認します。\ngerund\nverb-pattern\nnoun-like",
       "tags": [
         "word-order"
@@ -4049,12 +5609,18 @@
         "lessonIds": [
           "LESSON-006"
         ]
-      }
+      },
+      "type": "word-order"
     },
     {
       "kind": "problem",
       "id": "MP-001",
       "title": "MP-001",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "MP-001",
+        "type": "mark-parts"
+      },
       "searchText": "mark-parts\n「主語を選んでください。」\nSubject\nThe\nboy\nplays\nVerb\nsoccer\nObject\nthe\n「だれが・なにが」にあたる語句が、この文の主語です。",
       "tags": [
         "mark-parts"
@@ -4067,12 +5633,18 @@
           "LESSON-001",
           "LESSON-002"
         ]
-      }
+      },
+      "type": "mark-parts"
     },
     {
       "kind": "problem",
       "id": "MP-002",
       "title": "MP-002",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "MP-002",
+        "type": "mark-parts"
+      },
       "searchText": "mark-parts\n「動作をする人・もの、つまり主語を選んでください。」\nSubject\nMy\nsister\nlikes\nVerb\nmusic\nObject\nmy\nMy sister が「だれが」にあたり、動作 likes の主語です。",
       "tags": [
         "mark-parts"
@@ -4082,12 +5654,18 @@
           "GRAM-INT-003"
         ],
         "lessonIds": []
-      }
+      },
+      "type": "mark-parts"
     },
     {
       "kind": "problem",
       "id": "MP-003",
       "title": "MP-003",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "MP-003",
+        "type": "mark-parts"
+      },
       "searchText": "mark-parts\n「主語の状態を説明する補語を選んでください。」\nComplement\nTom\nSubject\nis\nVerb\nhappy\nhappy は be動詞 is の後ろで、Tom の状態を説明する補語です。",
       "tags": [
         "mark-parts"
@@ -4097,12 +5675,18 @@
           "GRAM-INT-003"
         ],
         "lessonIds": []
-      }
+      },
+      "type": "mark-parts"
     },
     {
       "kind": "problem",
       "id": "MP-004",
       "title": "MP-004",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "MP-004",
+        "type": "mark-parts"
+      },
       "searchText": "mark-parts\n文の主語として働いている動名詞句を選んでください。\nSubject\nReading books is fun.\nReading\nbooks\nis\nVerb\nfun\nComplement\nreading\nReading books 全体が「本を読むこと」という一つの内容を表し、文の主語として働いています。",
       "tags": [
         "mark-parts"
@@ -4114,12 +5698,18 @@
         "lessonIds": [
           "LESSON-006"
         ]
-      }
+      },
+      "type": "mark-parts"
     },
     {
       "kind": "problem",
       "id": "GC-001",
       "title": "GC-001",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "GC-001",
+        "type": "grammar-classifier"
+      },
       "searchText": "grammar-classifier\nSentence role\n語句カードを、英文の中での役割ごとに分類してください。\nThe young boy plays soccer after school.\nSubject\n「だれが・なにが」にあたる主語です。\nVerb\n主語の動作や状態を表す動詞です。\nObject\n動作の対象を表す目的語です。\nModifier\nいつ・どこでなど、文に情報を加える修飾語です。\nThe young boy\nsubject\n「だれが」にあたり、文の主語です。\nplays\nverb\n主語の動作を表す動詞です。\nsoccer\nobject\nplay の動作の対象となる目的語です。\nafter school\nmodifier\n動作がいつ起きるかを加える修飾語です。\n英文は単語の列ではなく、役割を持つ語句のまとまりとして見ることができます。",
       "tags": [
         "grammar-classifier"
@@ -4131,12 +5721,18 @@
         "lessonIds": [
           "LESSON-001"
         ]
-      }
+      },
+      "type": "grammar-classifier"
     },
     {
       "kind": "problem",
       "id": "GC-002",
       "title": "GC-002",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "GC-002",
+        "type": "grammar-classifier"
+      },
       "searchText": "grammar-classifier\nPhrase / Clause\n語句カードを、句（Phrase）と節（Clause）に分類してください。\nI know that she studies.\nPhrase\n主語と動詞の組み合わせを含まない語句のまとまりです。\nClause\n主語と動詞を含む節のまとまりです。\nI\nphrase\nI は主語として働く語句です。\nknow\nknow は動詞として働く語句です。\nthat she studies\nclause\nshe と studies を含む節です。\n句と節は、主語・動詞の組み合わせがあるかどうかに注目すると見分けられます。",
       "tags": [
         "grammar-classifier"
@@ -4149,12 +5745,18 @@
           "LESSON-001",
           "LESSON-002"
         ]
-      }
+      },
+      "type": "grammar-classifier"
     },
     {
       "kind": "problem",
       "id": "GC-003",
       "title": "GC-003",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "GC-003",
+        "type": "grammar-classifier"
+      },
       "searchText": "grammar-classifier\nPart of speech\n語句カードを、品詞ごとに分類してください。\nBright birds sing loudly.\nNoun\n人・もの・ことの名前を表す名詞です。\nVerb\n動作や状態を表す動詞です。\nAdjective\n名詞の性質や状態を説明する形容詞です。\nAdverb\n動作の様子などを説明する副詞です。\nBright\nadjective\nBright は birds の性質を説明します。\nbirds\nnoun\nbirds は生き物の名前を表します。\nsing\nverb\nsing は動作を表します。\nloudly\nadverb\nloudly は歌う様子を説明します。\n品詞を分類すると、英文の中でそれぞれの語が担う役割を整理できます。",
       "tags": [
         "grammar-classifier"
@@ -4164,12 +5766,18 @@
           "GRAM-INT-004"
         ],
         "lessonIds": []
-      }
+      },
+      "type": "grammar-classifier"
     },
     {
       "kind": "problem",
       "id": "GC-004",
       "title": "GC-004",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "GC-004",
+        "type": "grammar-classifier"
+      },
       "searchText": "grammar-classifier\nInfinitive function\nto + 動詞原形の語句を、文中での働きごとに分類してください。\nTo stay healthy, I want to exercise and I need shoes to run in.\nNoun-like\n名詞のように、動作や内容を表します。\nAdjective-like\n形容詞のように、名詞を説明します。\nAdverb-like\n副詞のように、文や動作の目的を説明します。\nTo stay healthy\nadverb\n「健康でいるために」と、文全体の目的を説明しています。\nto exercise\nnoun\nwant の内容として、「運動すること」を表しています。\nto run in\nadjective\nshoes がどのような靴かを説明しています。\n同じ to + 動詞原形でも、文中で名詞・形容詞・副詞に近い働きを持つことがあります。",
       "tags": [
         "grammar-classifier"
@@ -4181,12 +5789,18 @@
         "lessonIds": [
           "LESSON-005"
         ]
-      }
+      },
+      "type": "grammar-classifier"
     },
     {
       "kind": "problem",
       "id": "GC-005",
       "title": "GC-005",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "GC-005",
+        "type": "grammar-classifier"
+      },
       "searchText": "grammar-classifier\nGerund phrase role\n動名詞句を、文中での役割ごとに分類してください。\nReading books is fun. I enjoy cooking. My favorite hobby is swimming.\nSubject\n文の主語として働く語句です。\nObject\n動詞の目的語として働く語句です。\nComplement\n主語の内容を説明する補語です。\nReading books\nsubject\nReading books が文の主語として働いています。\ncooking\nobject\ncooking は enjoy の目的語として、「料理すること」を表しています。\nswimming\ncomplement\nswimming は My favorite hobby の内容を説明する補語です。\n動名詞は動詞由来の -ing 形ですが、文の中では名詞のように主語・目的語・補語として働けます。",
       "tags": [
         "grammar-classifier"
@@ -4198,12 +5812,18 @@
         "lessonIds": [
           "LESSON-006"
         ]
-      }
+      },
+      "type": "grammar-classifier"
     },
     {
       "kind": "problem",
       "id": "ST-001",
       "title": "ST-001",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "ST-001",
+        "type": "sentence-transformer"
+      },
       "searchText": "sentence-transformer\n条件を変えると、英文の形がどう変わるか観察してください。\nhe\nHe\nthey\nThey\npresent\nPresent\npast\nPast\nOFF\nON\nsingular\nplural\nplay\nplayed\ntennis\n.",
       "tags": [
         "sentence-transformer"
@@ -4213,12 +5833,18 @@
           "GRAM-INT-005"
         ],
         "lessonIds": []
-      }
+      },
+      "type": "sentence-transformer"
     },
     {
       "kind": "problem",
       "id": "ST-002",
       "title": "ST-002",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "ST-002",
+        "type": "sentence-transformer"
+      },
       "searchText": "sentence-transformer\n助動詞を変えると、英文の形がどう変わるか観察してください。\nhe\nHe\nthey\nThey\ncan\nCan\ncould\nCould\nshould\nShould\nmust\nMust\nAffirmative\nNegative\nexplore-control\nmodal\nsingular\nplural\nplay\ntennis\n.",
       "tags": [
         "sentence-transformer"
@@ -4230,12 +5856,18 @@
         "lessonIds": [
           "LESSON-003"
         ]
-      }
+      },
+      "type": "sentence-transformer"
     },
     {
       "kind": "problem",
       "id": "ST-003",
       "title": "ST-003",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "ST-003",
+        "type": "sentence-transformer"
+      },
       "searchText": "sentence-transformer\nVoiceを切り替えると、同じ出来事の視点と動詞の形がどう変わるか観察してください。\npresent\nPresent\npast\nPast\nactive\nActive\npassive\nPassive\nexplore-control\nvoice\nthe teacher\nsingular\nthe report\nwrite\nwrote\nwritten\n.",
       "tags": [
         "sentence-transformer"
@@ -4247,12 +5879,18 @@
         "lessonIds": [
           "LESSON-004"
         ]
-      }
+      },
+      "type": "sentence-transformer"
     },
     {
       "kind": "problem",
       "id": "SPD-001",
       "title": "SPD-001",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "SPD-001",
+        "type": "sentence-pattern-diagram"
+      },
       "searchText": "sentence-pattern-diagram\n英文の各要素を選び、文型の骨格を確認してください。\nThe boy plays soccer.\nThe boy\nS\nSubject\n「だれが・なにが」にあたる文の主語です。\nplays\nV\nVerb\n主語の動作を表す動詞です。\nsoccer\nO\nObject\nplays の動作の対象となる目的語です。\nこの文の骨格は S + V + O です。",
       "tags": [
         "sentence-pattern-diagram"
@@ -4264,12 +5902,18 @@
         "lessonIds": [
           "LESSON-002"
         ]
-      }
+      },
+      "type": "sentence-pattern-diagram"
     },
     {
       "kind": "problem",
       "id": "SPD-002",
       "title": "SPD-002",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "SPD-002",
+        "type": "sentence-pattern-diagram"
+      },
       "searchText": "sentence-pattern-diagram\n各要素を選び、主語と補語の関係を確認してください。\nMy brother is kind.\nMy brother\nS\nSubject\n「だれが・なにが」にあたる文の主語です。\nis\nV\nVerb\n主語と補語をつなぐ動詞です。\nkind\nC\nComplement\n主語がどのようなものかを説明する補語です。\nこの文の骨格は S + V + C です。",
       "tags": [
         "sentence-pattern-diagram"
@@ -4281,12 +5925,18 @@
         "lessonIds": [
           "LESSON-002"
         ]
-      }
+      },
+      "type": "sentence-pattern-diagram"
     },
     {
       "kind": "problem",
       "id": "SPD-003",
       "title": "SPD-003",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "SPD-003",
+        "type": "sentence-pattern-diagram"
+      },
       "searchText": "sentence-pattern-diagram\n同じ役割記号が二度現れる文型も、要素ごとに確認してください。\nThe teacher gave the class homework.\nThe teacher\nS\nSubject\n「だれが」にあたる文の主語です。\ngave\nV\nVerb\n与える動作を表す動詞です。\nthe class\nO\nIndirect Object\n何を受け取る人・ものかを表す間接目的語です。\nhomework\nDirect Object\n与えられるものを表す直接目的語です。\nこの文の骨格は S + V + O + O です。2つのOは別々のchunkとして見分けます。",
       "tags": [
         "sentence-pattern-diagram"
@@ -4296,12 +5946,18 @@
           "GRAM-INT-026"
         ],
         "lessonIds": []
-      }
+      },
+      "type": "sentence-pattern-diagram"
     },
     {
       "kind": "problem",
       "id": "MCV-001",
       "title": "MCV-001",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "MCV-001",
+        "type": "modifier-connection-viewer"
+      },
       "searchText": "modifier-connection-viewer\n修飾語を選び、どの語句にかかっているか確認してください。\nThe boy with a red cap plays soccer.\nThe boy\ncore\nwith a red cap\nmodifier\nplays\nsoccer\nwith-a-red-cap\nthe-boy\nmodifies\nThe boyを説明\nwith a red cap は The boy に追加情報を与えています。\n修飾語は、文中の別の語句に情報を付け加えます。",
       "tags": [
         "modifier-connection-viewer"
@@ -4313,12 +5969,18 @@
         "lessonIds": [
           "LESSON-002"
         ]
-      }
+      },
+      "type": "modifier-connection-viewer"
     },
     {
       "kind": "problem",
       "id": "MCV-002",
       "title": "MCV-002",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "MCV-002",
+        "type": "modifier-connection-viewer"
+      },
       "searchText": "modifier-connection-viewer\n時間を表す修飾語と、説明している動作のつながりを確認してください。\nShe studies English after dinner.\nShe\ncore\nstudies\nEnglish\nafter dinner\nmodifier\nafter-dinner\nmodifies\nstudiesの時間を説明\nafter dinner は studies がいつ行われるかを説明しています。\n副詞句は、動作がいつ・どこで・どのように行われるかを説明できます。",
       "tags": [
         "modifier-connection-viewer"
@@ -4330,12 +5992,18 @@
         "lessonIds": [
           "LESSON-002"
         ]
-      }
+      },
+      "type": "modifier-connection-viewer"
     },
     {
       "kind": "problem",
       "id": "MCV-003",
       "title": "MCV-003",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "MCV-003",
+        "type": "modifier-connection-viewer"
+      },
       "searchText": "modifier-connection-viewer\n関係詞節が、どの名詞に追加情報を与えているか確認してください。\nThe student who studies hard passed the exam.\nThe student\ncore\nwho studies hard\nmodifier\npassed\nthe exam\nwho-studies-hard\nthe-student\nmodifies\nThe studentを説明\nwho studies hard は The student がどのような生徒かを説明しています。\n関係詞節は、前にある名詞へ説明を加えるまとまりとして働きます。",
       "tags": [
         "modifier-connection-viewer"
@@ -4345,12 +6013,18 @@
           "GRAM-INT-027"
         ],
         "lessonIds": []
-      }
+      },
+      "type": "modifier-connection-viewer"
     },
     {
       "kind": "problem",
       "id": "SC-001",
       "title": "SC-001",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "SC-001",
+        "type": "sentence-comparison"
+      },
       "searchText": "sentence-comparison\n2つの英文の違う部分を選び、意味の違いを確認してください。\nI stopped smoking.\nI stopped\nsmoking\npurpose-action\nI stopped to smoke.\nto smoke\n動名詞 / 不定詞\n動名詞は「喫煙をやめた」、不定詞は「喫煙するために立ち止まった」という違いを作ります。\n私は喫煙をやめた。\n私は喫煙するために立ち止まった。\n動詞の後ろの形が変わると、動作をやめたのか、その目的のために止まったのかが変わります。",
       "tags": [
         "sentence-comparison"
@@ -4363,12 +6037,18 @@
           "LESSON-005",
           "LESSON-006"
         ]
-      }
+      },
+      "type": "sentence-comparison"
     },
     {
       "kind": "problem",
       "id": "SC-002",
       "title": "SC-002",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "SC-002",
+        "type": "sentence-comparison"
+      },
       "searchText": "sentence-comparison\n比較表現の違う部分を選び、比較の強さと意味を確認してください。\nThis bag is as light as that one.\nThis bag is\nsubject\nas light as\ndegree-comparison\nthat one\nobject\nThis bag is lighter than that one.\nlighter than\nas ... as / 比較級\nas ... as は2つが同じ程度だと比べ、比較級は一方が他方より上回ることを示します。\nこのバッグはあのバッグと同じくらい軽い。\nこのバッグはあのバッグより軽い。\n比較する対象が同じでも、原級を使うか比較級を使うかで、伝わる関係が変わります。",
       "tags": [
         "sentence-comparison"
@@ -4378,12 +6058,18 @@
           "GRAM-INT-008"
         ],
         "lessonIds": []
-      }
+      },
+      "type": "sentence-comparison"
     },
     {
       "kind": "problem",
       "id": "SC-003",
       "title": "SC-003",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "SC-003",
+        "type": "sentence-comparison"
+      },
       "searchText": "sentence-comparison\n能動態と受動態の違う部分を順に選び、視点の変化を確認してください。\nThe chef cooks the meal.\nThe chef\nsubject-agent\ncooks\nvoice-form\nthe meal\nmeal\nThe meal is cooked by the chef.\nThe meal\nis cooked\nby the chef\ncooks / is cooked\n能動態は主語が動作を行う形、受動態は主語が動作を受ける形です。\n料理人がその料理を作る。\nその料理が料理人によって作られる。\n主語 / by句\n能動態の主語は、受動態ではby句に移り、動作を受ける対象が主語になります。\nThe chef が文の主語です。\nby the chef は動作主を補足しています。\n同じ出来事でも、文の主語を誰・何にするかで、文の視点と動詞の形が変わります。",
       "tags": [
         "sentence-comparison"
@@ -4395,12 +6081,18 @@
         "lessonIds": [
           "LESSON-004"
         ]
-      }
+      },
+      "type": "sentence-comparison"
     },
     {
       "kind": "problem",
       "id": "SC-004",
       "title": "SC-004",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "SC-004",
+        "type": "sentence-comparison"
+      },
       "searchText": "sentence-comparison\n助動詞の違う部分を選び、話し手の意味の違いを確認してください。\nYou can leave now.\nYou\nsubject\ncan\nmodal-meaning\nleave now.\naction\nYou must leave now.\nmust\ncan / must\ncan は許可や可能を、must は強い必要や義務を表します。\n今、帰ってもよい。\n今、帰らなければならない。\n助動詞の小さな形の差が、許可・可能と義務という意味の差を作ります。",
       "tags": [
         "sentence-comparison"
@@ -4412,12 +6104,18 @@
         "lessonIds": [
           "LESSON-003"
         ]
-      }
+      },
+      "type": "sentence-comparison"
     },
     {
       "kind": "problem",
       "id": "EC-001",
       "title": "EC-001",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "EC-001",
+        "type": "error-corrector"
+      },
       "searchText": "error-corrector\n誤っている部分を選び、正しい英文に直してください。\nHe\nplay\ntennis.\nplays\nplayed\nSubject–verb agreement\n主語 He は三人称単数なので、現在形では動詞に -s を付けます。\n主語の人称・数と動詞の形を対応させます。",
       "tags": [
         "error-corrector"
@@ -4427,12 +6125,18 @@
           "GRAM-INT-009"
         ],
         "lessonIds": []
-      }
+      },
+      "type": "error-corrector"
     },
     {
       "kind": "problem",
       "id": "EC-002",
       "title": "EC-002",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "EC-002",
+        "type": "error-corrector"
+      },
       "searchText": "error-corrector\n時間を表す語句に合う動詞の形を選んでください。\nYesterday\nI\ngo\nto\nschool.\nwent\ngoes\nPast tense with a finished time\nYesterday は過去の時点を表すので、動詞 go は過去形 went にします。\n過去の時点を示す時間表現に合わせて、動詞の時制を選びます。",
       "tags": [
         "error-corrector"
@@ -4442,12 +6146,18 @@
           "GRAM-INT-009"
         ],
         "lessonIds": []
-      }
+      },
+      "type": "error-corrector"
     },
     {
       "kind": "problem",
       "id": "EC-003",
       "title": "EC-003",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "EC-003",
+        "type": "error-corrector"
+      },
       "searchText": "error-corrector\n2箇所の誤りを見つけ、それぞれ正しい形に直してください。\nShe\nhave\nfinish\nher\nhomework.\nhas\nhad\nSubject–auxiliary agreement\n主語 She は三人称単数なので、現在完了の助動詞は has にします。\nfinished\nfinishing\nPast participle after have / has\n現在完了では have / has の後ろに過去分詞を置くため、finish は finished にします。\n現在完了では、主語に合う助動詞と、その後ろの過去分詞を組み合わせます。",
       "tags": [
         "error-corrector"
@@ -4457,12 +6167,18 @@
           "GRAM-INT-009"
         ],
         "lessonIds": []
-      }
+      },
+      "type": "error-corrector"
     },
     {
       "kind": "problem",
       "id": "EC-004",
       "title": "EC-004",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "EC-004",
+        "type": "error-corrector"
+      },
       "searchText": "error-corrector\n助動詞の後ろの動詞の形を正しく直してください。\nHe\ncan\nplays\ntennis.\nplay\nplaying\nBase verb after a modal\n助動詞 can の後ろでは、三単現の -s を付けずに動詞の原形 play を使います。\n助動詞の後ろには、主語が三人称単数でも動詞の原形を置きます。",
       "tags": [
         "error-corrector"
@@ -4474,12 +6190,18 @@
         "lessonIds": [
           "LESSON-003"
         ]
-      }
+      },
+      "type": "error-corrector"
     },
     {
       "kind": "problem",
       "id": "EC-005",
       "title": "EC-005",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "EC-005",
+        "type": "error-corrector"
+      },
       "searchText": "error-corrector\n受動態のbe動詞の後ろに置く動詞の形を正しく直してください。\nThe\nreport\nwas\nwrote\nby the teacher.\nwrite\nwritten\nPast participle in the passive\n受動態ではbe動詞の後ろに過去形 wrote ではなく、過去分詞 written を置きます。\n受動態は be + 過去分詞で作ります。過去形と過去分詞が異なる動詞にも注意します。",
       "tags": [
         "error-corrector"
@@ -4491,12 +6213,18 @@
         "lessonIds": [
           "LESSON-004"
         ]
-      }
+      },
+      "type": "error-corrector"
     },
     {
       "kind": "problem",
       "id": "EC-006",
       "title": "EC-006",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "EC-006",
+        "type": "error-corrector"
+      },
       "searchText": "error-corrector\nto の後ろの動詞を原形に直し、正しい英文を完成させてください。\nShe\nwants\nto\nstudies\nabroad.\nstudy\nstudying\nBase verb after to\n不定詞ではtoの後ろに動詞の原形を置くため、studiesではなくstudyを使います。\nto不定詞の基本形は to + 動詞原形です。主語が三人称単数でも、toの後ろに -s は付けません。",
       "tags": [
         "error-corrector"
@@ -4508,12 +6236,18 @@
         "lessonIds": [
           "LESSON-005"
         ]
-      }
+      },
+      "type": "error-corrector"
     },
     {
       "kind": "problem",
       "id": "EC-007",
       "title": "EC-007",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "EC-007",
+        "type": "error-corrector"
+      },
       "searchText": "error-corrector\nenjoy の後ろの動詞の形を正しく直してください。\nShe\nenjoys\nto read\nnovels.\nreading\nread\nGerund after enjoy\nenjoy の後ろでは、通常 to不定詞ではなく動名詞を使うため、to read ではなく reading にします。\n動詞によって、後ろに動名詞を取るか不定詞を取るかが異なります。enjoy は動名詞を取る代表例です。-ing が常に正しいわけではありません。",
       "tags": [
         "error-corrector"
@@ -4525,12 +6259,18 @@
         "lessonIds": [
           "LESSON-006"
         ]
-      }
+      },
+      "type": "error-corrector"
     },
     {
       "kind": "problem",
       "id": "CG-001",
       "title": "CG-001",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "CG-001",
+        "type": "context-grammar"
+      },
       "searchText": "context-grammar\n場面に合う表現を選び、ホテルとの会話を進めてください。\nLate checkout\nホテルのチェックアウト時刻を少し遅らせたい場面です。\nGuest\nホテルのスタッフに、丁寧にレイトチェックアウトを依頼する。\nHotel staff\nGood morning. How can I help you?\nチェックアウトを遅らせたいと、丁寧に依頼してください。\nCould I get a late checkout, please?\nCertainly. We can extend your checkout until noon.\nPolite request with could\nCould I ...? は許可や依頼を丁寧に尋ねる表現です。\nGive me a late checkout.\nImperative\n命令形なので、この場面では相手への依頼として直接的すぎます。\nWhat time would you like to check out?\n希望する時刻を、丁寧な依頼として伝えてください。\nCould we check out at noon, please?\nYes, noon will be fine. I will note it on your reservation.\nCould for a polite request\nCould we ...? は相手への配慮を含む丁寧な依頼に使えます。\nWe check out at noon.\nPresent statement\n希望を尋ねられているので、単なる事実の断定より依頼表現が適切です。\n依頼表現は、文法的に正しいだけでなく、場面や相手との関係に合わせて選びます。",
       "tags": [
         "context-grammar"
@@ -4540,12 +6280,18 @@
           "GRAM-INT-010"
         ],
         "lessonIds": []
-      }
+      },
+      "type": "context-grammar"
     },
     {
       "kind": "problem",
       "id": "CG-002",
       "title": "CG-002",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "CG-002",
+        "type": "context-grammar"
+      },
       "searchText": "context-grammar\n時間の手がかりに合う表現を選び、学校での会話を進めてください。\nYesterday after school\n昨日の放課後にしたことを先生へ説明する場面です。\nStudent\n終わった過去の出来事を、適切な過去形で説明する。\nTeacher\nWhat did you do after school yesterday?\nYesterday に合う過去形で答えてください。\nI practiced the piano.\nThat sounds like a productive afternoon.\nPast tense with yesterday\nYesterday は終わった過去の時点なので、practice の過去形 practiced を使います。\nI practice the piano.\nPresent tense\nYesterday という過去の手がかりには、現在形より過去形が合います。\nDid you finish your science report?\n昨夜に終えたことを、過去形で答えてください。\nYes, I finished it last night.\nExcellent. Please put it on my desk before class.\nPast tense with last night\nLast night は終わった過去の時点なので、finish の過去形 finished を使います。\nYes, I finish it last night.\nPresent tense with a finished time\nLast night と一緒に使う動詞は、終わった過去を表す finished にします。\nYesterday や last night のような時間情報は、終わった出来事を表す過去形の手がかりになります。",
       "tags": [
         "context-grammar"
@@ -4555,12 +6301,18 @@
           "GRAM-INT-010"
         ],
         "lessonIds": []
-      }
+      },
+      "type": "context-grammar"
     },
     {
       "kind": "problem",
       "id": "CG-003",
       "title": "CG-003",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "CG-003",
+        "type": "context-grammar"
+      },
       "searchText": "context-grammar\n経験と具体的な過去時点を区別し、旅行の会話を進めてください。\nTalking about a trip\n旅行経験について友人と話し、いつ行ったかを続けて説明する場面です。\nTraveler\n経験には現在完了、具体的な過去時点には過去形を使い分ける。\nFriend\nHave you ever been to Kyoto?\n経験があるかどうかを、現在完了を使って答えてください。\nYes, I have.\nWhen did you go there?\nPresent perfect for experience\nHave you ever ...? という経験の質問には、Yes, I have. と現在完了で答えます。\nYes, I went there last year.\nPast detail too early\nこの質問はまず経験の有無を聞いているので、最初は Yes, I have. が焦点に合います。\n具体的な過去時点に合う過去形で答えてください。\nI went there last year.\nThat must have been a memorable trip.\nPast tense with a finished time\nLast year は具体的な過去時点なので、go の過去形 went を使います。\nI have gone there last year.\nPresent perfect with a finished time\nLast year のような具体的に終わった時点には、現在完了ではなく過去形を使います。\n経験を尋ねるときは現在完了、いつ起きたかを示す具体的な過去時点には過去形を使います。",
       "tags": [
         "context-grammar"
@@ -4570,12 +6322,18 @@
           "GRAM-INT-010"
         ],
         "lessonIds": []
-      }
+      },
+      "type": "context-grammar"
     },
     {
       "kind": "problem",
       "id": "CG-004",
       "title": "CG-004",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "CG-004",
+        "type": "context-grammar"
+      },
       "searchText": "context-grammar\n助言と義務の場面に合う助動詞を選び、会話を進めてください。\nAdvice and obligation\n勉強の相談と、実験室の安全規則について話す場面です。\nStudent\n助言には should、明確な義務には must を使い分ける。\nFriend\nI have an important test tomorrow. What do you recommend?\n相手への助言として、今夜勉強することを伝えてください。\nYou should study tonight.\nThat sounds helpful. I will start tonight.\nshould for advice\nshould は相手にとってよい行動をすすめる、穏やかな助言に使います。\nYou could study tonight.\nThat is another good idea. I will make a study plan.\ncould for a suggestion\ncould も選択肢の一つを提案する助言に使えるため、この場面で自然です。\nYou must not study tonight.\nmust not for prohibition\nmust not は禁止を表すので、勉強をすすめるこの場面の目的に合いません。\nLab supervisor\nStudents are required to wear safety glasses in the lab.\n明確な安全規則による義務として、保護めがねを着用するよう伝えてください。\nYou must wear safety glasses.\nExactly. Please put them on before you enter.\nmust for obligation\nmust は規則や必要性にもとづく、強い義務を表します。\nYou should wear safety glasses.\nshould は助言としては自然ですが、required と示された規則の強い義務には must が合います。\nshould や could は助言・提案、must は規則にもとづく強い義務を表します。場面と話し手の意図を合わせて選びます。",
       "tags": [
         "context-grammar"
@@ -4587,12 +6345,18 @@
         "lessonIds": [
           "LESSON-003"
         ]
-      }
+      },
+      "type": "context-grammar"
     },
     {
       "kind": "problem",
       "id": "CG-005",
       "title": "CG-005",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "CG-005",
+        "type": "context-grammar"
+      },
       "searchText": "context-grammar\n何に焦点を置くかに合う能動態・受動態を選び、会話を進めてください。\nChoosing the focus\n出来事の対象に焦点を置くか、動作主を前面に出すかを考える場面です。\nReporter\n動作主が不明なときや対象に焦点を置きたいときに、受動態を選ぶ。\nEditor\nWhat happened to the window last night?\n誰がしたか分からない出来事として、窓に焦点を置いて報告してください。\nThe window was broken last night.\nGood. The report focuses on the window, and the agent is unknown.\nPassive when the agent is unknown\n今回のreporting goalでは、誰がしたかを示さず、対象のwindowに焦点を置くため受動態が合います。\nSomeone broke the window last night.\nActive with an unspecified agent\nこの文も文法的ですが、今回は動作主を前面に出さず、対象に焦点を置くことが目的です。\nThe school festival was a success. Who organized it?\n対象を主語にしつつ、必要な動作主をby句で示してください。\nThe school festival was organized by the students.\nExactly. The festival stays in focus, while the students are added as the agent.\nPassive with a by-phrase\n受動態では対象のschool festivalを主語に置き、by the studentsで動作主を補足できます。\nThe students organized the school festival.\nActive with the agent as subject\nこの文も文法的ですが、今回は対象のschool festivalを主語として焦点に置く指定です。\n受動態は単なる変形ではなく、何を主語として焦点に置くか、動作主を示す必要があるかに応じて選びます。",
       "tags": [
         "context-grammar"
@@ -4604,12 +6368,18 @@
         "lessonIds": [
           "LESSON-004"
         ]
-      }
+      },
+      "type": "context-grammar"
     },
     {
       "kind": "problem",
       "id": "CG-006",
       "title": "CG-006",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "CG-006",
+        "type": "context-grammar"
+      },
       "searchText": "context-grammar\n場面に合う不定詞の働きを選び、会話を進めてください。\nPlans, needs, and purposes\n週末の予定、必要なもの、英語を学ぶ目的について話す場面です。\nStudent\n不定詞が何を表しているかを場面に合わせて選ぶ。\nFriend\nWhat do you want to do this weekend?\nwant の内容として、週末にしたいことを不定詞で答えてください。\nI want to visit the museum.\nThat sounds fun. I hope you enjoy the visit.\nInfinitive after want\nto visit the museum がwantの内容を表します。\nI want visit the museum.\nMissing to\nwant の後ろで「訪れること」を表すには、to visit の形にします。\nWhat do you need for the train ride?\n必要なものを、名詞を説明する不定詞で答えてください。\nI need a book to read.\nGood idea. You can read it on the train.\nAdjective-like infinitive\nto read がa bookを説明し、「読むための本」という意味を作ります。\nI need to read a book.\nInfinitive after need\nこの文も文法的には正しいですが、「私は本を読む必要がある」という意味で、今回の「何が必要か」というgoalには一致しません。\nWhy do you watch English videos?\n英語の動画を見る目的を、目的を表す不定詞で説明してください。\nI watch them to learn English.\nThat is a useful way to practice every day.\nAdverb-like infinitive of purpose\nto learn English がwatch themの目的を表します。\nI watch them to learning English.\nWrong form after to\ntoの後ろには動詞の原形learnを置き、learningにはしません。\n不定詞は、wantの内容、名詞の説明、動作の目的など、文中でさまざまな働きをします。",
       "tags": [
         "context-grammar"
@@ -4621,12 +6391,18 @@
         "lessonIds": [
           "LESSON-005"
         ]
-      }
+      },
+      "type": "context-grammar"
     },
     {
       "kind": "problem",
       "id": "CG-007",
       "title": "CG-007",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "CG-007",
+        "type": "context-grammar"
+      },
       "searchText": "context-grammar\n場面に合う動名詞の使い方を選び、会話を進めてください。\nHobbies, finishing, and stopping\n好きなこと、終えた行為、やめた行為について話す場面です。\nStudent\n動名詞を取る表現と、動名詞・不定詞で意味が変わる表現を場面に合わせて選ぶ。\nFriend\nWhat do you enjoy doing after work?\nenjoy の後ろに動名詞を置いて、好きなことを答えてください。\nI enjoy cooking.\nThat sounds relaxing. Cooking can be a great hobby.\nGerund after enjoy\nenjoy の後ろでは cooking のような動名詞を使います。\nI enjoy to cook.\nInfinitive after enjoy\nenjoy の後ろでは通常to不定詞ではなく、動名詞 cooking を使います。\nTeacher\nDid you finish your report?\nfinish の後ろに動名詞を置いて、終えた行為を答えてください。\nYes, I finished writing it.\nGood. Now you can submit the report.\nGerund after finish\nfinish の後ろでは writing のような動名詞を使って、終えた行為の内容を表します。\nYes, I finished to write it.\nInfinitive after finish\nfinish の後ろで行為を表す場合は、通常to不定詞ではなく動名詞を使います。\nDid you stop talking when class started?\n話すのをやめたことを、stop + 動名詞で答えてください。\nYes, I stopped talking.\nThat was considerate. The class could begin quietly.\nstop + gerund\nstop talking は、「話すという行為をやめる」という意味です。\nYes, I stopped to talk to my teacher.\nstop + infinitive\nこの文も文法的ですが、stop to talk は「話すために立ち止まる／別の行動を止める」という意味で、今回のgoalとは異なります。\nenjoy や finish の後ろでは動名詞を使い、stop は後ろの形によって意味が変わります。",
       "tags": [
         "context-grammar"
@@ -4638,12 +6414,18 @@
         "lessonIds": [
           "LESSON-006"
         ]
-      }
+      },
+      "type": "context-grammar"
     },
     {
       "kind": "problem",
       "id": "SG-001",
       "title": "SG-001",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "SG-001",
+        "type": "sentence-generator"
+      },
       "searchText": "sentence-generator\n目標に合う英文を組み立て、Generateで確かめてください。\nPresent affirmative\nHe を主語にして、現在形の肯定文を作る。\nhe\nHe\nthey\nThey\npresent\nPresent\npast\nPast\nAffirmative\nNegative\nsingular\nplural\nplay\nplayed\ntennis\n.\n三人称単数の現在形では、主語 He に合わせて動詞に -s が付きます。",
       "tags": [
         "sentence-generator"
@@ -4653,12 +6435,18 @@
           "GRAM-INT-007"
         ],
         "lessonIds": []
-      }
+      },
+      "type": "sentence-generator"
     },
     {
       "kind": "problem",
       "id": "SG-002",
       "title": "SG-002",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "SG-002",
+        "type": "sentence-generator"
+      },
       "searchText": "sentence-generator\n目標に合う英文を組み立て、Generateで確かめてください。\nPast negative\nThey を主語にして、過去形の否定文を作る。\nhe\nHe\nthey\nThey\npresent\nPresent\npast\nPast\nAffirmative\nNegative\nsingular\nplural\nplay\nplayed\ntennis\n.\n過去形の否定文では did not の後ろに動詞の原形 play を置きます。",
       "tags": [
         "sentence-generator"
@@ -4668,12 +6456,18 @@
           "GRAM-INT-007"
         ],
         "lessonIds": []
-      }
+      },
+      "type": "sentence-generator"
     },
     {
       "kind": "problem",
       "id": "SG-003",
       "title": "SG-003",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "SG-003",
+        "type": "sentence-generator"
+      },
       "searchText": "sentence-generator\n目標に合う英文を組み立て、複数の許容状態を確かめてください。\nPast negative for either subject\nHe または They を主語にして、過去形の否定文を作る。\nhe\nHe\nthey\nThey\npresent\nPresent\npast\nPast\nAffirmative\nNegative\nsingular\nplural\nplay\nplayed\ntennis\n.\n主語が変わっても、過去形の否定では did not の後ろに動詞の原形を置きます。",
       "tags": [
         "sentence-generator"
@@ -4683,12 +6477,18 @@
           "GRAM-INT-007"
         ],
         "lessonIds": []
-      }
+      },
+      "type": "sentence-generator"
     },
     {
       "kind": "problem",
       "id": "SG-004",
       "title": "SG-004",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "SG-004",
+        "type": "sentence-generator"
+      },
       "searchText": "sentence-generator\n助動詞を含む目標に合う英文を組み立て、Generateで確かめてください。\nAdvice with should\nThey を主語にして、「〜すべきだ」という助言の肯定文を作る。\nhe\nHe\nthey\nThey\ncan\nCan\ncould\nCould\nshould\nShould\nmust\nMust\nAffirmative\nNegative\nsingular\nplural\nplay\ntennis\n.\n助動詞 should の後ろには、主語が They でも動詞の原形 play を置きます。",
       "tags": [
         "sentence-generator"
@@ -4700,12 +6500,18 @@
         "lessonIds": [
           "LESSON-003"
         ]
-      }
+      },
+      "type": "sentence-generator"
     },
     {
       "kind": "problem",
       "id": "SG-005",
       "title": "SG-005",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "SG-005",
+        "type": "sentence-generator"
+      },
       "searchText": "sentence-generator\n目標に合う能動態または受動態の英文を組み立て、Generateで確かめてください。\nPast passive\n過去の出来事を、the report を主語にした受動態で表す。\npresent\nPresent\npast\nPast\nactive\nActive\npassive\nPassive\nthe teacher\nsingular\nthe report\nwrite\nwrote\nwritten\n.\n受動態では動作を受ける対象を主語にし、be動詞の過去形 was の後ろに過去分詞 written を置きます。",
       "tags": [
         "sentence-generator"
@@ -4717,12 +6523,18 @@
         "lessonIds": [
           "LESSON-004"
         ]
-      }
+      },
+      "type": "sentence-generator"
     },
     {
       "kind": "problem",
       "id": "MPO-001",
       "title": "MPO-001",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "MPO-001",
+        "type": "modifier-positioner"
+      },
       "searchText": "modifier-positioner\nin the library が The students を説明する位置へ置いてください。\n場所そのものではなく、どのstudentsかを説明する。\nThe students\nare studying\nin the library\nAfter “The students”\nin-the-library\nthe-students\nmodifies\nThe studentsを説明\nin the library が、どのstudentsかを限定しています。\n図書館にいる生徒たちが勉強している。\nSentence end\nare-studying\nare studyingを説明\n文末では、勉強している場所を表す読みになります。\n生徒たちは図書館で勉強している。\n.\n同じ語句でも、置く位置によってどこへ情報を加えるかが変わります。",
       "tags": [
         "modifier-positioner"
@@ -4732,12 +6544,18 @@
           "GRAM-INT-014"
         ],
         "lessonIds": []
-      }
+      },
+      "type": "modifier-positioner"
     },
     {
       "kind": "problem",
       "id": "MPO-002",
       "title": "MPO-002",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "MPO-002",
+        "type": "modifier-positioner"
+      },
       "searchText": "modifier-positioner\nwearing a blue hat が The girl を説明する位置へ置いてください。\nwearing a blue hat がどのgirlを説明するかを確かめる。\nThe girl\nwaved to us\nwearing a blue hat\nAfter “The girl”\nwearing-a-blue-hat\nthe-girl\nmodifies\nThe girlを説明\nwearing a blue hat が、どのgirlかを説明しています。\n青い帽子をかぶっている女の子が私たちに手を振った。\nSentence end\nwaved-to-us\nwaved to usを説明\n文末では、手を振った動作に付随する情報のように読め、girlへの直接の説明が弱くなります。\n女の子は青い帽子をかぶりながら私たちに手を振った。\n.\n分詞句は置く位置によって、名詞への説明か動作への付随情報かが変わります。",
       "tags": [
         "modifier-positioner"
@@ -4747,12 +6565,18 @@
           "GRAM-INT-014"
         ],
         "lessonIds": []
-      }
+      },
+      "type": "modifier-positioner"
     },
     {
       "kind": "problem",
       "id": "MPO-003",
       "title": "MPO-003",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "MPO-003",
+        "type": "modifier-positioner"
+      },
       "searchText": "modifier-positioner\non Sundays を自然な位置へ置き、どちらも使えることを確認してください。\non Sundays のような時間の副詞句を、文頭と文末の両方で使う。\nThey\nvisit the museum\non Sundays\nSentence start\nOn Sundays,\nthey\non-sundays\nvisit-the-museum\nmodifies\nvisit the museumの頻度を説明\nOn Sundays は visit the museum がいつ行われるかを説明しています。\n日曜日には、彼らは博物館を訪れる。\nSentence end\n文末のon Sundaysも、visit the museumがいつ行われるかを説明しています。\n彼らは日曜日に博物館を訪れる。\n.\n時間を表す副詞句は、文頭と文末のどちらにも置ける場合があります。",
       "tags": [
         "modifier-positioner"
@@ -4762,12 +6586,18 @@
           "GRAM-INT-014"
         ],
         "lessonIds": []
-      }
+      },
+      "type": "modifier-positioner"
     },
     {
       "kind": "problem",
       "id": "MPO-004",
       "title": "MPO-004",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "MPO-004",
+        "type": "modifier-positioner"
+      },
       "searchText": "modifier-positioner\nto learn English を目的を表す位置へ置き、文頭と文末の両方を確認してください。\nto learn English が、映画を見る目的を表すことを確かめる。\nI\nwatch movies\nto learn English\nSentence start\nTo learn English,\nto-learn-english\nwatch-movies\nmodifies\nI watch moviesの目的を説明\n文頭のTo learn Englishは、映画を見る目的を説明しています。\n英語を学ぶために、私は映画を見る。\nSentence end\n文末のto learn Englishも、映画を見る目的を説明しています。\n私は英語を学ぶために映画を見る。\n.\n目的を表すto不定詞は、文頭・文末のどちらにも置ける場合があります。",
       "tags": [
         "modifier-positioner"
@@ -4779,12 +6609,17 @@
         "lessonIds": [
           "LESSON-005"
         ]
-      }
+      },
+      "type": "modifier-positioner"
     },
     {
       "kind": "lesson",
       "id": "LESSON-001",
       "title": "文の骨格を見抜く",
+      "canonicalRef": {
+        "kind": "lesson",
+        "id": "LESSON-001"
+      },
       "searchText": "basic-sentence-structure\n文の骨格を見抜く\n英文を単語の列ではなく、役割を持つまとまりとして捉えます。\n主語・動詞・目的語・補語などの役割に注目して、英文の基本構造を理解する。\nmark-parts\n文の主語と動詞を見つける\nまず、文の「だれが・なにが」にあたる部分を探します。\ngrammar-classifier\n語句を文中の役割に分類する\n見つけた語句を、Subject・Verb・Object・Modifierに分類します。\nword-order\n役割を意識して英文を組み立てる\n主語から始まる英語の語順を意識して、文を完成させます。\n主語に合う動詞の形を確かめる\n同じ語順でも、主語が変わると動詞の形が変わることに注目します。\n補語を使う文型を組み立てる\n動詞の後ろが目的語ではなく、主語を説明する補語になる文も組み立てます。\n句と節のまとまりを見分ける\n最後に、主語と動詞を含む節という別の構造にも目を向けます。",
       "tags": [
         "lesson",
@@ -4813,6 +6648,10 @@
       "kind": "lesson",
       "id": "LESSON-002",
       "title": "英文の構造を読む",
+      "canonicalRef": {
+        "kind": "lesson",
+        "id": "LESSON-002"
+      },
       "searchText": "structural-reading\n英文の構造を読む\n文の骨格と、そこへ加わる修飾情報を順に見分けます。\n英文の骨格と修飾部分を分け、文の中心と追加情報を構造として理解する。\nmark-parts\nまず文の中心を見つける\n最初に、文の「だれが・なにが」にあたる中心部分を選びます。\nsentence-pattern-diagram\n骨格をS・V・Oで見る\n中心部分を確認したら、The boy plays soccer. の骨格をS・V・Oの配置として見てみましょう。\n別の文型と比べる\n次にS・V・Cの文を見て、動詞の後ろが主語を説明する場合も確認します。\nmodifier-connection-viewer\n追加情報のかかり先を見る\n骨格に with a red cap が加わりました。修飾語がThe boyへ追加情報を与える関係を確認します。\n動作への修飾を見る\n今度は after dinner が studies の時間を説明します。修飾先が変わることに注目します。\ngrammar-classifier\n句と節として整理する\n最後に句と節を分類し、語句のまとまりが文の構造を作ることを整理します。",
       "tags": [
         "lesson",
@@ -4843,6 +6682,10 @@
       "kind": "lesson",
       "id": "LESSON-003",
       "title": "助動詞を形と場面から使う",
+      "canonicalRef": {
+        "kind": "lesson",
+        "id": "LESSON-003"
+      },
       "searchText": "modal-verbs\n助動詞を形と場面から使う\n助動詞の後ろに動詞の原形を置く基本形を確認し、can / should / must などの意味を場面に応じて使い分けます。\n助動詞 + 動詞原形という形を理解し、能力・助言・義務などの意味と場面を対応づけて適切な助動詞を選べるようにする。\nsentence-transformer\n助動詞を変えて形を見る\ncan / could / should / must を切り替え、助動詞の後ろが動詞の原形のまま変わらないことを観察します。\nword-order\n助動詞を含む語順を組み立てる\nSubject + Modal + Base Verb の順に単語を並べ、助動詞の後ろの形を確かめます。\nerror-corrector\n助動詞後の動詞を直す\n助動詞の後ろに三単現の -s を付けない規則を、誤文の訂正で確認します。\nsentence-comparison\n助動詞で意味を比べる\ncan と must の形の差を、許可・可能と義務という意味の差に対応づけます。\nsentence-generator\n目標に合う助動詞を生成する\n助言というGoalに合う文法状態を選び、英文を生成して確かめます。\ncontext-grammar\n場面に合う助動詞を選ぶ\n相談の助言と安全規則の義務を、会話の場面に合う助動詞で表します。",
       "tags": [
         "lesson",
@@ -4877,6 +6720,10 @@
       "kind": "lesson",
       "id": "LESSON-004",
       "title": "能動態と受動態で視点を変える",
+      "canonicalRef": {
+        "kind": "lesson",
+        "id": "LESSON-004"
+      },
       "searchText": "passive-voice\n能動態と受動態で視点を変える\n同じ出来事でも、何を主語として見るかによって英文の形が変わることを確認します。\n能動態と受動態の形の違いを理解し、動作主と動作を受ける対象のどちらを主語として焦点化するかに応じて使い分ける。\nsentence-comparison\n能動態と受動態を比べる\n同じ出来事を表す2つの文を比べ、主語と動詞の形がどう変わるかを確認します。\nsentence-transformer\nVoiceを切り替えて形を見る\nActive と Passive を切り替え、agent と patient の文中での役割と動詞の形を観察します。\nword-order\n受動態の語順を組み立てる\nSubject + be + Past Participle の中心語順に、必要なby句を続けて文を完成させます。\nerror-corrector\n過去分詞の誤りを直す\nbe動詞の後ろに過去形ではなく過去分詞を置く規則を、誤文の訂正で確認します。\nsentence-generator\n目標に合う受動態を生成する\n対象を主語にした過去の受動態を目標として選び、英文を生成して確かめます。\ncontext-grammar\n場面に合う視点を選ぶ\n動作主が不明な場面や対象に焦点を置く場面で、受動態が合う理由を会話の中で確認します。",
       "tags": [
         "lesson",
@@ -4911,6 +6758,10 @@
       "kind": "lesson",
       "id": "LESSON-005",
       "title": "不定詞を形・役割・目的から使う",
+      "canonicalRef": {
+        "kind": "lesson",
+        "id": "LESSON-005"
+      },
       "searchText": "infinitives\n不定詞を形・役割・目的から使う\nto + 動詞原形という形を確認し、文の中で名詞・形容詞・副詞のように働く違いを、位置・意味・場面から整理します。\n不定詞の基本形を理解し、名詞的・形容詞的・副詞的な働きを見分け、文の意味や目的に応じて適切に使えるようにする。\nword-order\n不定詞の基本形を組み立てる\nI want to study English. を組み立て、to + 動詞原形の語順を確認します。\ngrammar-classifier\n不定詞の3つの働きを分類する\n同じto + 動詞原形が、名詞・形容詞・副詞に近い働きをする違いを分類します。\nmodifier-positioner\n目的を表す不定詞の位置を見る\nto learn English を文頭と文末へ置き、どちらも映画を見る目的を表せることを確認します。\nsentence-comparison\n動名詞と不定詞の意味差を比べる\nstop の後ろの動名詞と不定詞を比べ、形の違いが意味の差を作ることを確認します。\nerror-corrector\ntoの後ろの動詞を直す\ntoの後ろには動詞の原形を置く規則を、誤文の訂正で確認します。\ncontext-grammar\n場面で不定詞を使い分ける\n予定・必要なもの・目的の場面に合う不定詞の働きを会話の中で選びます。",
       "tags": [
         "lesson",
@@ -4945,6 +6796,10 @@
       "kind": "lesson",
       "id": "LESSON-006",
       "title": "動名詞を名詞の働きと動詞との組み合わせから使う",
+      "canonicalRef": {
+        "kind": "lesson",
+        "id": "LESSON-006"
+      },
       "searchText": "gerunds\n動名詞を名詞の働きと動詞との組み合わせから使う\n動詞 + ing が名詞のように働くことを確認し、主語・目的語・補語としての使い方や、不定詞との意味・verb patternの違いを整理します。\n動名詞の基本形と名詞的な働きを理解し、文中での役割を見分け、動名詞を取る動詞や不定詞との意味差に応じて適切な形を選べるようにする。\nword-order\nenjoy + gerund の形を組み立てる\nenjoy の後ろに動名詞を置く語順を意識して、文を完成させます。\nmark-parts\n動名詞句の主語を見つける\nReading books 全体が文の主語として働くことを確認します。\ngrammar-classifier\n動名詞の文中の役割を分類する\n動名詞句が主語・目的語・補語のどの役割を担うか分類します。\nsentence-comparison\n動名詞と不定詞の意味差を比べる\nstop + 動名詞と stop + 不定詞を比べ、同じ動詞でも後ろの形によって意味が変わることを確認します。\nerror-corrector\nenjoy の後ろの形を直す\nenjoy の後ろでは動名詞を使う規則を、誤文の訂正で確認します。\ncontext-grammar\n場面で動名詞の形を使い分ける\n好きなこと、終えた行為、やめた行為の場面に合う動名詞の使い方を選びます。",
       "tags": [
         "lesson",

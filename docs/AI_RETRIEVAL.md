@@ -1,5 +1,7 @@
 # AI Retrieval Index
 
+現在のIndex contractは **v2**。v1で一つにまとめていた検索タグから、適用しやすい候補と不向きな候補を分離している。
+
 このプロジェクトでは、文法の内容と学習操作を分離する。
 
 ```text
@@ -49,6 +51,21 @@ dist/ai/*.json
 
 `learningIntents` は `schema.js` のcontrolled vocabularyを使い、タグはlowercase-kebab-caseで統一する。
 
+生成されるInteraction recordでは、検索上の極性を次のように保持する。
+
+```js
+{
+  learningIntents: ['compare-placement'],
+  bestFor: ['placement-affects-meaning'],
+  notBestFor: ['assembling-an-entire-sentence'],
+  positiveTags: ['compare-placement', 'placement-affects-meaning'],
+  negativeTags: ['assembling-an-entire-sentence'],
+  tags: ['compare-placement', 'placement-affects-meaning']
+}
+```
+
+`notBestFor` / `negativeTags` は通常の `searchText` やpositive `tags`へ混ぜない。不向きな用途が検索語に一致しても、適合候補として加点されないようにするためである。
+
 ## Indexの関係
 
 - Interactionの `relations.problemIds` は `interaction.demoType === problem.type` から生成する。
@@ -66,13 +83,18 @@ dist/ai/lessons.json
 dist/ai/catalog.json
 ```
 
-`catalog.json` はMetadata、Interaction / Problem / Lessonのrecords、統合した `documents` を含む。統合documentは次の最小形を持つ。
+`catalog.json` はMetadata、Interaction / Problem / Lessonのrecords、統合した `documents` を含む。各recordとunified documentには、Canonical Dataへ戻るための `canonicalRef` を持たせる。統合documentは次の形を持つ。
 
 ```json
 {
   "kind": "problem",
   "id": "SC-001",
   "title": "SC-001",
+  "canonicalRef": {
+    "kind": "problem",
+    "id": "SC-001",
+    "type": "sentence-comparison"
+  },
   "searchText": "...",
   "tags": ["sentence-comparison"],
   "relations": {}
@@ -102,4 +124,26 @@ Adapt
 Generate
 ```
 
-Phase 7Aでは検索Engine、Vector DB、Embedding、LLM API、Backendは実装しない。portableなJSON Indexの生成とValidatorによる整合性確認だけを担当する。
+## Structured Retrieval Query
+
+Phase 7Bでは、自然言語を自動解析せず、AIがLearning Requirementsから作る構造化Queryだけを受け付ける。
+
+```js
+{
+  kinds: ['interaction'],
+  learningIntents: ['compare-placement'],
+  includeTerms: ['modifier', 'position', 'meaning'],
+  preferredTags: ['placement-affects-meaning'],
+  avoidTags: [],
+  interactionTypes: [],
+  limit: 5
+}
+```
+
+利用できるfieldは `kinds`、`learningIntents`、`includeTerms`、`preferredTags`、`avoidTags`、`interactionTypes`、`limit`。全fieldは任意だが、空のQuery、未知のlearningIntent、未知のkind、不正なlimit、空のincludeTermはValidatorで拒否する。
+
+`src/lib/ai/retrieval-search.js` の `searchRetrievalIndex(index, query)` は、同じIndexとQueryに対して同じ結果順を返すpure functionである。現在の重みは、learning intent一致が+8、preferred tag一致が+5、検索本文の一致が+2、interaction type一致が+3、avoid tag一致が-10。不向きな `negativeTags` へのpositive要求は加点せず、-10と理由へ記録する。結果には `score`、`reasons`、`canonicalRef` を含める。
+
+`src/data/ai/retrieval-benchmarks.js` のdata-driven fixtureを `src/lib/ai/retrieval-evaluation.js` で評価し、Interaction 5件、Problem、Lessonの検索例を回帰検証する。ID順のCanonical Data順をtie-breakに使い、random、network、filesystem、Embedding、Vector DB、LLM APIは使わない。
+
+Phase 7B後も、既存教材の件数、UI、Component、Research Dataは変更しない。

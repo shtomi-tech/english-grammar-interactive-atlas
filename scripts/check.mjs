@@ -10,6 +10,8 @@ const files = [
   'src/data/ai/schema.js',
   'src/data/ai/interaction-retrieval.js',
   'src/data/ai/index.js',
+  'src/data/ai/retrieval-query-schema.js',
+  'src/data/ai/retrieval-benchmarks.js',
   'src/data/interactions-additional.js',
   'src/data/demo-problems.js',
   'src/data/problems/word-order.js',
@@ -36,6 +38,8 @@ const files = [
   'src/lib/validateLessons.js',
   'src/lib/validateResearch.js',
   'src/lib/ai/retrieval-index.js',
+  'src/lib/ai/retrieval-search.js',
+  'src/lib/ai/retrieval-evaluation.js',
   'src/lib/validateAiRetrieval.js',
   'src/lib/dom.js',
   'src/lib/grammar/word-order.js',
@@ -92,7 +96,9 @@ const { validateLessons } = await import('../src/lib/validateLessons.js');
 const { researchReferences, researchReferenceRegistry } = await import('../src/data/research/index.js');
 const { validateResearchReferences, validateResearchRegistry } = await import('../src/lib/validateResearch.js');
 const { interactionRetrievalMetadata } = await import('../src/data/ai/index.js');
+const { retrievalBenchmarks } = await import('../src/data/ai/index.js');
 const { createAiRetrievalIndex } = await import('../src/lib/ai/retrieval-index.js');
+const { evaluateRetrievalBenchmarks } = await import('../src/lib/ai/retrieval-evaluation.js');
 const { validateAiRetrieval } = await import('../src/lib/validateAiRetrieval.js');
 const validation = validateInteractions(interactions, { registryKeys: Object.keys(demoRegistry) });
 if (!validation.valid) throw new Error(`Interaction validation failed: ${validation.errors.join('; ')}`);
@@ -134,3 +140,6 @@ const aiRetrievalValidation = validateAiRetrieval(aiRetrievalIndex, {
 });
 if (!aiRetrievalValidation.valid) throw new Error(`AI retrieval validation failed: ${aiRetrievalValidation.errors.join('; ')}`);
 console.log(`AI retrieval validation passed for ${interactions.length} interactions, ${problems.length} problems, ${lessons.length} lessons, ${aiRetrievalIndex.documents.length} documents.`);
+const retrievalEvaluation = evaluateRetrievalBenchmarks(aiRetrievalIndex, retrievalBenchmarks);
+if (retrievalEvaluation.failed !== 0) throw new Error(`Retrieval benchmark failed: ${retrievalEvaluation.results.filter((result) => !result.passed).map((result) => result.id).join(', ')}`);
+console.log(`Retrieval benchmarks passed for ${retrievalEvaluation.passed}/${retrievalEvaluation.total} cases.`);
