@@ -3,7 +3,7 @@ import { interactions } from '../src/data/interactions.js';
 import { getLessonById, getLessonBySlug, lessons } from '../src/data/lessons.js';
 import { grammarClassifierProblems } from '../src/data/problems/grammar-classifier.js';
 import { markPartsProblems } from '../src/data/problems/mark-parts.js';
-import { problemRegistry, problems } from '../src/data/problems/index.js';
+import { getProblemById, problemRegistry, problems } from '../src/data/problems/index.js';
 import { sentenceTransformerProblem, sentenceTransformerProblems } from '../src/data/problems/sentence-transformer.js';
 import { sentencePatternDiagramProblems } from '../src/data/problems/sentence-pattern-diagram.js';
 import { modifierConnectionViewerProblems } from '../src/data/problems/modifier-connection-viewer.js';
@@ -105,6 +105,7 @@ import {
 import { validateLessonGeneration } from '../src/lib/validateLessonGeneration.js';
 import { runMaterialGenerationProof } from '../src/lib/ai/material-generation-proof.js';
 import { validateMaterialGenerationProof, validateSyntheticSourceTraceability } from '../src/lib/validateMaterialGenerationProof.js';
+import { createRuntimePreviewModel } from '../src/lib/ai/runtime-preview.js';
 
 assert.equal(interactions.length, 40);
 assert.deepEqual(
@@ -914,6 +915,7 @@ assert.deepEqual(e2eProof.proof.summary.reusedProblemIds, ['SC-001']);
 assert.deepEqual(e2eProof.proof.summary.generatedProblemIds, ['E2E-WO-001', 'E2E-EC-001']);
 assert.deepEqual(e2eProof.proof.summary.unresolvedItemIds, []);
 assert.equal(e2eProof.proof.summary.learningPointCount, 3);
+assert.equal(e2eProof.proof.summary.materialPlanItemCount, 3);
 assert.equal(e2eProof.proof.summary.candidateLessonId, 'E2E-LESSON-001');
 assert.deepEqual(e2eProof.proof.validation, {
   sourceTraceability: true,
@@ -927,6 +929,10 @@ assert.deepEqual(e2eProof.resolved.problemRefs.map((reference) => reference.id),
   'E2E-WO-001',
   'E2E-EC-001',
 ]);
+assert.deepEqual(
+  e2eInput.generatedProblemCandidates.map((candidate) => candidate.materialPlanItemId),
+  ['MPI-002', 'MPI-003'],
+);
 e2eProof.resolved.candidateLesson.steps.forEach((step) => assert.ok(demoRegistry[step.interactionType]));
 assert.equal(e2eProof.outputs.materialPlan.items.some((item) => item.problemDecision.action === 'reuse'), true);
 assert.equal(e2eProof.outputs.materialPlan.items.some((item) => item.problemDecision.action === 'generate'), true);
@@ -934,6 +940,63 @@ assert.equal(validateProblems([
   ...problems,
   ...e2eProof.outputs.problemGenerations.map((generation) => generation.candidateProblem),
 ]).valid, true);
+assert.equal(getLessonBySlug('verb-patterns-proof'), undefined);
+assert.equal(getProblemById('E2E-WO-001'), undefined);
+assert.equal(getProblemById('E2E-EC-001'), undefined);
+const runtimePreviewModel = createRuntimePreviewModel(e2eProof.proof, {
+  canonicalProblems: problems,
+  canonicalLessons: lessons,
+  problemTypes: new Set(Object.keys(demoRegistry)),
+});
+assert.deepEqual(runtimePreviewModel, createRuntimePreviewModel(e2eProof.proof, {
+  canonicalProblems: problems,
+  canonicalLessons: lessons,
+  problemTypes: new Set(Object.keys(demoRegistry)),
+}));
+assert.equal(runtimePreviewModel.lesson.id, 'E2E-LESSON-001');
+assert.deepEqual(Object.keys(runtimePreviewModel.transientProblemRegistry).filter((id) => id.startsWith('E2E-')), [
+  'E2E-WO-001',
+  'E2E-EC-001',
+]);
+assert.deepEqual(runtimePreviewModel.lesson.steps.map((step) => runtimePreviewModel.transientProblemRegistry[step.problemId]?.id ?? step.problemId), [
+  'SC-001',
+  'E2E-WO-001',
+  'E2E-EC-001',
+]);
+assert.throws(() => createRuntimePreviewModel({ ...e2eProof.proof, valid: false }, {
+  canonicalProblems: problems,
+  canonicalLessons: lessons,
+  problemTypes: new Set(Object.keys(demoRegistry)),
+}), /valid proof/);
+assert.throws(() => createRuntimePreviewModel({
+  ...e2eProof.proof,
+  outputs: { ...e2eProof.proof.outputs, lessonGeneration: { ...e2eProof.proof.outputs.lessonGeneration, candidateLesson: null } },
+}, {
+  canonicalProblems: problems,
+  canonicalLessons: lessons,
+  problemTypes: new Set(Object.keys(demoRegistry)),
+}), /outputs are incomplete/);
+const runtimeTypeMismatchProof = structuredClone(e2eProof.proof);
+runtimeTypeMismatchProof.outputs.problemGenerations[0].candidateProblem.type = 'error-corrector';
+assert.throws(() => createRuntimePreviewModel(runtimeTypeMismatchProof, {
+  canonicalProblems: problems,
+  canonicalLessons: lessons,
+  problemTypes: new Set(Object.keys(demoRegistry)),
+}), /Runtime Problems are invalid/);
+const runtimeUnresolvedStepProof = structuredClone(e2eProof.proof);
+runtimeUnresolvedStepProof.outputs.lessonGeneration.candidateLesson.steps[1].problemId = 'E2E-MISSING-001';
+assert.throws(() => createRuntimePreviewModel(runtimeUnresolvedStepProof, {
+  canonicalProblems: problems,
+  canonicalLessons: lessons,
+  problemTypes: new Set(Object.keys(demoRegistry)),
+}), /Runtime Lesson is invalid/);
+const runtimeSummaryMismatchProof = structuredClone(e2eProof.proof);
+runtimeSummaryMismatchProof.summary.materialPlanItemCount = 2;
+assert.throws(() => createRuntimePreviewModel(runtimeSummaryMismatchProof, {
+  canonicalProblems: problems,
+  canonicalLessons: lessons,
+  problemTypes: new Set(Object.keys(demoRegistry)),
+}), /Material Plan summary/);
 
 function assertInvalidE2eProof(name, mutate) {
   const invalidInput = {
@@ -957,6 +1020,12 @@ assertInvalidE2eProof('negative generated Problem schema', (input) => {
 });
 assertInvalidE2eProof('negative candidate Problem ID collision', (input) => {
   input.generatedProblemCandidates[0].candidateProblem.id = 'SC-001';
+});
+assertInvalidE2eProof('negative candidate unknown Material Plan item', (input) => {
+  input.generatedProblemCandidates[0].materialPlanItemId = 'MPI-UNKNOWN';
+});
+assertInvalidE2eProof('negative duplicate candidate for Material Plan item', (input) => {
+  input.generatedProblemCandidates.push(structuredClone(input.generatedProblemCandidates[0]));
 });
 assertInvalidE2eProof('negative candidate Lesson unauthorized Problem', (input) => {
   input.candidateLesson.steps[0].problemId = 'WO-001';

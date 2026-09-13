@@ -70,6 +70,13 @@ export function getDemoProblem(type, problemId) {
 export function mountDemo(type, root, options = {}) {
   const { problemId, ...componentOptions } = options;
   const problem = getDemoProblem(type, problemId);
+  return mountDemoProblem(type, root, problem, componentOptions);
+}
+
+export function mountDemoProblem(type, root, problem, options = {}) {
   const entry = demoRegistry[type];
-  return entry.mount(root, problem, componentOptions);
+  if (!entry) throw new Error(`Unknown demo type: ${type}`);
+  if (!problem) throw new Error(`Missing demo problem: ${type}`);
+  if (problem.type !== type) throw new Error(`Demo problem type mismatch: ${problem.type} vs ${type}`);
+  return entry.mount(root, problem, options);
 }

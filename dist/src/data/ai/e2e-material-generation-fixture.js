@@ -110,8 +110,8 @@ generatedErrorCorrectorProblem.corrections = [{
 generatedErrorCorrectorProblem.explanation = 'avoidは後ろに動名詞を取る動詞なので、avoid + gerundの形にします。';
 
 export const generatedProblemCandidates = Object.freeze([
-  { learningPointId: 'LP-E2E-002', candidateProblem: generatedWordOrderProblem },
-  { learningPointId: 'LP-E2E-003', candidateProblem: generatedErrorCorrectorProblem },
+  { materialPlanItemId: 'MPI-002', learningPointId: 'LP-E2E-002', candidateProblem: generatedWordOrderProblem },
+  { materialPlanItemId: 'MPI-003', learningPointId: 'LP-E2E-003', candidateProblem: generatedErrorCorrectorProblem },
 ]);
 
 export const candidateLesson = {

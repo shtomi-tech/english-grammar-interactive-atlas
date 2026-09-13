@@ -626,6 +626,60 @@ a.button {
   padding: 22px 0 80px;
 }
 
+.runtime-preview-link {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.runtime-preview-link a {
+  color: var(--accent);
+}
+
+.runtime-preview-notice {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  align-items: center;
+  margin: 0 0 28px;
+  padding: 12px 14px;
+  border: 1px solid rgba(242, 182, 110, 0.42);
+  border-radius: var(--radius-md);
+  background: rgba(242, 182, 110, 0.08);
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.runtime-preview-notice strong {
+  color: var(--accent);
+}
+
+.runtime-preview-notice span + span {
+  padding-left: 14px;
+  border-left: 1px solid var(--line);
+}
+
+.runtime-preview-loading,
+.runtime-preview-error {
+  min-height: 60vh;
+  padding-top: 80px;
+}
+
+.runtime-preview-loading h1,
+.runtime-preview-error h1 {
+  max-width: 720px;
+  font-family: Georgia, serif;
+  font-size: clamp(2.2rem, 6vw, 4.6rem);
+  font-weight: 400;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.runtime-preview-error p:not(.section-kicker) {
+  max-width: 600px;
+  color: var(--muted);
+}
+
 .lesson-header {
   max-width: 900px;
 }

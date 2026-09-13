@@ -61,8 +61,8 @@ export function validateSyntheticSourceTraceability(grammarReference, learningRe
   return { valid: errors.length === 0, errors };
 }
 
-function findCandidate(candidates, learningPointId) {
-  return candidates.find((candidate) => candidate?.learningPointId === learningPointId)?.candidateProblem ?? null;
+function findCandidate(candidates, materialPlanItemId) {
+  return candidates.find((candidate) => candidate?.materialPlanItemId === materialPlanItemId)?.candidateProblem ?? null;
 }
 
 function getActionCounts(materialPlan) {
@@ -140,16 +140,38 @@ export function validateMaterialGenerationProof({
 
   const generatedItems = materialPlan?.items?.filter((item) => ['generate', 'adapt'].includes(item.problemDecision?.action)) ?? [];
   const candidateList = Array.isArray(generatedProblemCandidates) ? generatedProblemCandidates : [];
-  const generatedItemIds = new Set(generatedItems.map((item) => item.learningPointId));
-  candidateList.forEach((candidate) => {
-    if (!generatedItemIds.has(candidate?.learningPointId)) {
-      errors.push(`generatedProblemCandidates contains an unused Learning Point: ${candidate?.learningPointId ?? 'unknown'}`);
+  if (!Array.isArray(generatedProblemCandidates)) errors.push('generatedProblemCandidates must be an array');
+  const planItemsById = new Map(materialPlan?.items?.map((item) => [item.id, item]) ?? []);
+  const candidateCounts = new Map();
+  candidateList.forEach((candidate, index) => {
+    if (!isObject(candidate)) {
+      errors.push(`generatedProblemCandidates[${index}] must be an object`);
+      return;
+    }
+    const item = planItemsById.get(candidate.materialPlanItemId);
+    if (!item) {
+      errors.push(`generatedProblemCandidates[${index}].materialPlanItemId must reference materialPlan.items`);
+      return;
+    }
+    const count = candidateCounts.get(candidate.materialPlanItemId) ?? 0;
+    candidateCounts.set(candidate.materialPlanItemId, count + 1);
+    if (count > 0) errors.push(`generatedProblemCandidates has multiple candidates for ${candidate.materialPlanItemId}`);
+    if (candidate.learningPointId !== item.learningPointId) {
+      errors.push(`generatedProblemCandidates[${index}].learningPointId must match its Material Plan item`);
+    }
+    if (!['generate', 'adapt'].includes(item.problemDecision?.action)) {
+      errors.push(`generatedProblemCandidates[${index}] is not allowed for Material Plan action ${item.problemDecision?.action}`);
+    }
+  });
+  generatedItems.forEach((item) => {
+    if ((candidateCounts.get(item.id) ?? 0) !== 1) {
+      errors.push(`Material Plan item ${item.id} requires exactly one generated Problem candidate`);
     }
   });
   const problemGenerationResults = [];
   if (materialPlan && learningRequirements && retrievalIndex && Array.isArray(canonicalProblems)) {
     generatedItems.forEach((item) => {
-      const candidateProblem = findCandidate(candidateList, item.learningPointId);
+      const candidateProblem = findCandidate(candidateList, item.id);
       if (!candidateProblem) {
         errors.push(`No generated Problem candidate was supplied for ${item.learningPointId}`);
         return;

@@ -10,6 +10,7 @@ import {
   sourceTypeLabels,
 } from './data/interaction-schema.js';
 import { getLessonBySlug, lessons } from './data/lessons.js';
+import { problems } from './data/problems/index.js';
 import {
   getResearchReferencesByIds,
   researchLicenseStatusLabels,
@@ -20,14 +21,16 @@ import {
 import { renderInteractionCard, renderEmptyState, renderDifficulty } from './components/atlas/interactionCard.js';
 import { renderFilterBar } from './components/atlas/filterBar.js';
 import { renderDemoPanel } from './components/demos/demoPanel.js';
-import { demoRegistry, mountDemo } from './components/demos/registry.js';
+import { demoRegistry, mountDemo, mountDemoProblem } from './components/demos/registry.js';
 import { filterInteractions, getAtlasStats, searchInteractions } from './lib/atlas.js';
 import { escapeHtml } from './lib/dom.js';
 import { getLessonProgress, isLessonStepComplete, markLessonStepComplete } from './lib/lesson-progress.js';
+import { createRuntimePreviewModel, loadRuntimeProof } from './lib/ai/runtime-preview.js';
 import { registerAtlasWebMcp } from './webmcp.js';
 
 const app = document.querySelector('#app');
 const state = { query: '', category: 'all', reusability: 'all', demo: 'all' };
+let runtimePreviewRequest = 0;
 
 function getRoute() {
   const hash = window.location.hash.replace(/^#/, '');
@@ -37,6 +40,9 @@ function getRoute() {
   }
   if (hashParts[0] === 'lessons' && hashParts[1]) {
     return { page: 'lesson', slug: decodeURIComponent(hashParts.slice(1).join('/')) };
+  }
+  if (hashParts[0] === 'preview' && hashParts[1] === 'e2e-material-generation') {
+    return { page: 'runtime-preview', id: 'e2e-material-generation' };
   }
   return { page: 'atlas' };
 }
@@ -228,6 +234,7 @@ function renderAtlas() {
     ${renderHeader()}
     <main class="catalog-section shell" id="catalog">
       ${renderToolbar()}
+      <p class="runtime-preview-link"><a href="#preview/e2e-material-generation">Generated material runtime preview →</a></p>
       ${renderLessonIndex()}
       <div class="results-heading">
         <h2>Explore interactions</h2>
@@ -341,7 +348,7 @@ function renderDetail(entry) {
   if (hasDemo) mountDemo(entry.demoType, app.querySelector(`#${demoMountId}`));
 }
 
-function renderLesson(lesson) {
+function renderLesson(lesson, { resolveProblem = null, preview = false } = {}) {
   document.title = `${lesson.label}: ${lesson.title} · Interactive Grammar Atlas`;
   let stepIndex = 0;
   let cleanup = null;
@@ -353,6 +360,12 @@ function renderLesson(lesson) {
         <a class="back-link" href="#">← Back to catalog</a>
         <span class="entry-id">${escapeHtml(lesson.id)}</span>
       </div>
+      ${preview ? `
+        <div class="runtime-preview-notice" data-runtime-preview-notice role="status">
+          <strong>Generated E2E Preview</strong>
+          <span>Synthetic source</span>
+          <span>Transient — not in Canonical Lesson Registry</span>
+        </div>` : ''}
       <header class="lesson-header">
         <p class="header-kicker">${escapeHtml(lesson.label)}</p>
         <h1>${escapeHtml(lesson.title)}</h1>
@@ -422,8 +435,7 @@ function renderLesson(lesson) {
       : '';
     previousButton.disabled = stepIndex === 0;
     nextButton.disabled = stepIndex === lesson.steps.length - 1 || !stepComplete;
-    cleanup = mountDemo(step.interactionType, componentRoot, {
-      problemId: step.problemId,
+    const componentOptions = {
       onComplete(result) {
         if (result.correct) {
           completedStepIds = markLessonStepComplete(completedStepIds, step.id);
@@ -434,7 +446,10 @@ function renderLesson(lesson) {
           nextButton.disabled = stepIndex === lesson.steps.length - 1;
         }
       },
-    });
+    };
+    cleanup = resolveProblem
+      ? mountDemoProblem(step.interactionType, componentRoot, resolveProblem(step.problemId), componentOptions)
+      : mountDemo(step.interactionType, componentRoot, { problemId: step.problemId, ...componentOptions });
     if (shouldFocus) stepTitle.focus({ preventScroll: true });
   }
 
@@ -452,6 +467,40 @@ function renderLesson(lesson) {
   renderStep(false);
 }
 
+function renderRuntimePreview() {
+  const requestId = ++runtimePreviewRequest;
+  document.title = 'Generated E2E Preview · Interactive Grammar Atlas';
+  app.innerHTML = `
+    <main class="runtime-preview-loading shell" aria-busy="true">
+      <p class="section-kicker">Runtime proof</p>
+      <h1>Loading generated material preview…</h1>
+    </main>`;
+
+  loadRuntimeProof()
+    .then((proof) => {
+      if (requestId !== runtimePreviewRequest || getRoute().page !== 'runtime-preview') return;
+      const model = createRuntimePreviewModel(proof, {
+        canonicalProblems: problems,
+        canonicalLessons: lessons,
+        problemTypes: new Set(Object.keys(demoRegistry)),
+      });
+      renderLesson(model.lesson, {
+        preview: true,
+        resolveProblem: (problemId) => model.transientProblemRegistry[problemId],
+      });
+    })
+    .catch(() => {
+      if (requestId !== runtimePreviewRequest || getRoute().page !== 'runtime-preview') return;
+      app.innerHTML = `
+        <main class="runtime-preview-error shell" role="alert">
+          <p class="section-kicker">Runtime proof</p>
+          <h1>Runtime preview unavailable</h1>
+          <p>生成物の検証に失敗したため、学習コンポーネントは表示していません。</p>
+          <a class="button secondary" href="#">Back to catalog</a>
+        </main>`;
+    });
+}
+
 function render() {
   const route = getRoute();
   const entry = route.page === 'detail' ? getInteractionBySlug(route.slug) : null;
@@ -460,6 +509,8 @@ function render() {
     renderDetail(entry);
   } else if (route.page === 'lesson' && lesson) {
     renderLesson(lesson);
+  } else if (route.page === 'runtime-preview') {
+    renderRuntimePreview();
   } else {
     renderAtlas();
   }

@@ -6,7 +6,8 @@ export function runMaterialGenerationProof(input = {}) {
   const problemGenerations = result.outputs.problemGenerations;
   const lessonGeneration = result.outputs.lessonGeneration;
   const summary = {
-    learningPointCount: materialPlan?.items?.length ?? 0,
+    learningPointCount: input.learningRequirements?.learningPoints?.length ?? 0,
+    materialPlanItemCount: materialPlan?.items?.length ?? 0,
     reusedProblemIds: materialPlan?.items
       ?.filter((item) => item.problemDecision?.action === 'reuse')
       .map((item) => item.problemDecision.problemSelection.selected.canonicalRef.id)

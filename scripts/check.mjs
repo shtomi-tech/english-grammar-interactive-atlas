@@ -56,6 +56,7 @@ const files = [
   'src/lib/ai/problem-generation.js',
   'src/lib/ai/lesson-generation.js',
   'src/lib/ai/material-generation-proof.js',
+  'src/lib/ai/runtime-preview.js',
   'src/lib/validateAiRetrieval.js',
   'src/lib/validateLearningRequirements.js',
   'src/lib/validateMaterialPlan.js',
