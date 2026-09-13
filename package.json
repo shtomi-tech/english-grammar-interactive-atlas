@@ -7,8 +7,11 @@
     "build": "node scripts/build.mjs",
     "check": "node scripts/check.mjs",
     "test": "node tests/logic.test.js",
+    "test:server": "node --test tests/server/*.test.js",
+    "test:llm:live": "node scripts/live-learning-requirements-smoke.mjs",
     "test:runtime": "playwright test",
     "serve:dist": "node scripts/serve-dist.mjs",
+    "serve:extraction-api": "node scripts/serve-extraction-api.mjs",
     "start": "py -m http.server 4173 -d dist"
   },
   "devDependencies": {

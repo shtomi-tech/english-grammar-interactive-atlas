@@ -1,4 +1,4 @@
-# Phase 11A — Grammar Reference Intake
+# Phase 11A/11B — Grammar Reference Intake
 
 Phase 11A は、ユーザーが提供する文法資料を、Learning Requirements v1へ渡すためのprovider-neutralな境界を定めます。対象は `text` と `markdown` だけです。PDF、Word、OCR、外部LLM、API、保存処理はこの段階では扱いません。
 
@@ -38,6 +38,17 @@ adapter exception、null/non-object、unknown outcome、欠落したsourceEviden
 
 validなfixture結果は既存の `createMaterialPlan()` へ渡せることまでをsmoke testします。その後段のProblem / Lesson生成とruntime previewはPhase 9/10で検証済みです。
 
-## Phase 11Bとの境界
+## Phase 11B — server-side LLM adapter
 
-次のPhase 11Bで、server-sideのLLM adapter、provider、秘密情報の保管場所、request timeout、retry、監査ログなどを別途選定します。GitHub Pagesのstatic frontendから直接LLM endpointを呼び出す設計にはしません。
+Phase 11Bでは、実providerとしてOpenAI Responses APIをserver-side adapterへ接続します。`server/openai/` と `server/http/` は静的ビルド対象の `src/` の外に置き、GitHub Pages artifactへ入りません。ブラウザからproviderへ直接接続せず、API keyは `OPENAI_API_KEY` 環境変数だけから読み込みます。
+
+adapterは `store:false`、strict JSON Schema、約30秒のtimeout、429/5xx/一時的なネットワーク障害に限る最大1回のretryを使います。レスポンスは `completed`、拒否なし、空でないstructured JSON objectを満たさなければinvalidです。JSON repairは行いません。
+
+HTTP入口は `POST` と `OPTIONS` だけを受け付け、`APP_ORIGIN` と完全一致するOriginだけをCORSで許可します。入力はGrammar Referenceと次の制約に限定します。
+
+- `durationMinutes`: 正の整数
+- `maxLearningPoints`: 正の整数
+- `language`: 空でない文字列
+- `audienceStage`: `middle-school` / `high-school` / `adult`
+
+出力は既存の `runLearningRequirementsExtraction()` へ渡し、Learning Requirements v1、単一の `user-provided` source reference、各Learning Pointの本文完全一致quoteを再検証します。providerの生レスポンスやHTTP headerは返しません。ローカルAPIは `npm run serve:extraction-api` で別起動し、実provider smokeは `npm run test:llm:live` で明示的に実行します。通常のCIとPages deployはlive APIを呼びません。

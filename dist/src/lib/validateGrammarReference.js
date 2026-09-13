@@ -32,3 +32,23 @@ export function validateGrammarReference(grammarReference) {
   }
   return { valid: errors.length === 0, errors };
 }
+
+export function validateSingleSourceReference(grammarReference, learningRequirements) {
+  const errors = [];
+  const sourceReferences = learningRequirements?.sourceReferences;
+  if (!Array.isArray(sourceReferences) || sourceReferences.length !== 1) {
+    errors.push('Learning Requirements must contain exactly one source reference');
+    return { valid: false, errors };
+  }
+  const [sourceReference] = sourceReferences;
+  if (sourceReference?.id !== grammarReference?.sourceId) {
+    errors.push('sourceReferences[0].id must match grammarReference.sourceId');
+  }
+  if (sourceReference?.title !== grammarReference?.title) {
+    errors.push('sourceReferences[0].title must match grammarReference.title');
+  }
+  if (sourceReference?.type !== 'user-provided') {
+    errors.push("sourceReferences[0].type must be 'user-provided'");
+  }
+  return { valid: errors.length === 0, errors };
+}

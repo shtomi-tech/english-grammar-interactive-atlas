@@ -1,5 +1,5 @@
 import { spawnSync } from 'node:child_process';
-import { existsSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const root = decodeURIComponent(new URL('..', import.meta.url).pathname).replace(/^\/([A-Za-z]):/, '$1:');
@@ -98,6 +98,11 @@ const files = [
   'src/components/demos/contextGrammar.js',
   'src/components/demos/sentenceGenerator.js',
   'src/components/demos/registry.js',
+  'server/openai/learning-requirements-json-schema.js',
+  'server/openai/openai-learning-requirements-adapter.js',
+  'server/http/extract-learning-requirements-handler.js',
+  'scripts/serve-extraction-api.mjs',
+  'scripts/live-learning-requirements-smoke.mjs',
 ];
 
 for (const relativePath of files) {
@@ -111,6 +116,27 @@ for (const relativePath of files) {
 }
 
 console.log(`Syntax check passed for ${files.length} source files.`);
+
+function listFiles(directory) {
+  if (!existsSync(directory)) return [];
+  return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const path = join(directory, entry.name);
+    return entry.isDirectory() ? listFiles(path) : [path];
+  });
+}
+
+if (existsSync(join(root, 'dist', 'server'))) throw new Error('dist/server must not be present in the Pages artifact.');
+const generatedSecretPatterns = [
+  /sk-[A-Za-z0-9_-]{16,}/i,
+  /Bearer\s+[A-Za-z0-9._-]{12,}/i,
+];
+for (const filePath of listFiles(join(root, 'dist'))) {
+  const content = readFileSync(filePath, 'utf8');
+  if (generatedSecretPatterns.some((pattern) => pattern.test(content))) {
+    throw new Error(`Possible secret pattern found in generated artifact: ${filePath}`);
+  }
+}
+console.log('Generated artifact security boundary passed.');
 
 const { interactions } = await import('../src/data/interactions.js');
 const { demoRegistry } = await import('../src/components/demos/registry.js');
@@ -143,7 +169,10 @@ const { evaluateRetrievalBenchmarks } = await import('../src/lib/ai/retrieval-ev
 const { validateAiRetrieval } = await import('../src/lib/validateAiRetrieval.js');
 const { validateLearningRequirements } = await import('../src/lib/validateLearningRequirements.js');
 const { validateGrammarReference } = await import('../src/lib/validateGrammarReference.js');
-const { runLearningRequirementsExtraction } = await import('../src/lib/ai/learning-requirements-extraction.js');
+const {
+  runLearningRequirementsExtraction,
+  validateExtractionConstraints,
+} = await import('../src/lib/ai/learning-requirements-extraction.js');
 const { createMaterialPlan } = await import('../src/lib/ai/material-planning.js');
 const { validateMaterialPlan } = await import('../src/lib/validateMaterialPlan.js');
 const { validateProblemGeneration } = await import('../src/lib/validateProblemGeneration.js');
@@ -204,6 +233,15 @@ grammarReferenceFixtures.forEach((fixture) => {
   if (!result.valid) throw new Error(`Grammar Reference validation failed: ${result.errors.join('; ')}`);
 });
 console.log(`Grammar Reference validation passed for ${grammarReferenceFixtures.length} fixtures.`);
+const extractionConstraintsValidation = validateExtractionConstraints({
+  durationMinutes: 10,
+  maxLearningPoints: 2,
+  language: 'ja',
+  audienceStage: 'high-school',
+});
+if (!extractionConstraintsValidation.valid) throw new Error(`Extraction constraints validation failed: ${extractionConstraintsValidation.errors.join('; ')}`);
+if (validateExtractionConstraints({ unsupported: true }).valid) throw new Error('Unknown extraction constraints must be rejected.');
+console.log('Extraction constraints validation passed.');
 const extractionFixtures = [
   [plainTextGrammarReference, plainTextLearningRequirements],
   [markdownGrammarReference, comparisonLearningRequirements],

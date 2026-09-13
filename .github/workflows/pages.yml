@@ -33,6 +33,9 @@ jobs:
       - name: Run tests
         run: npm test
 
+      - name: Run server tests
+        run: npm run test:server
+
       - name: Validate project data
         run: npm run check
 

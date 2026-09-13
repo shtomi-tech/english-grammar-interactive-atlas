@@ -22,7 +22,7 @@ function addErrors(errors, prefix, result) {
   if (!result.valid) errors.push(`${prefix}: ${result.errors.join('; ')}`);
 }
 
-export function validateGrammarReferenceTraceability(grammarReference, learningRequirements) {
+export function validateGrammarReferenceTraceability(grammarReference, learningRequirements, { requireQuote = false } = {}) {
   const errors = [];
   const grammarValidation = validateGrammarReference(grammarReference);
   addErrors(errors, 'grammarReference', grammarValidation);
@@ -64,6 +64,9 @@ export function validateGrammarReferenceTraceability(grammarReference, learningR
         if (!normalizedReference.content.includes(locator.quote)) {
           errors.push(`${path}.locator.quote does not occur in grammarReference.content`);
         }
+      }
+      if (requireQuote && (typeof locator.quote !== 'string' || locator.quote.trim() === '')) {
+        errors.push(`${path}.locator.quote is required for provider output`);
       }
       if (typeof locator.section === 'string' && locator.section.trim() !== '') {
         const sectionExists = normalizedReference.format === 'markdown'
