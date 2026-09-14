@@ -37,10 +37,10 @@
       "connect-context-and-form"
     ],
     "counts": {
-      "interactions": 40,
-      "problems": 53,
+      "interactions": 41,
+      "problems": 54,
       "lessons": 6,
-      "documents": 99
+      "documents": 101
     }
   },
   "interactions": [
@@ -2779,6 +2779,79 @@
         "problemIds": []
       },
       "searchText": "situation-tense-choice\nSituation Tense Choice\nsimulate\n状況と時間の手がかりから、適切な時制を選ぶ。\n文脈の時間情報を読み取り、時制の選択へ結びつける。\n状況文・時間の手がかり・時制候補\n選択 / 確認\n選択した時制と場面の結果\n時制は文だけで決めず、出来事の時間関係から選ぶ。\n時制\n現在完了\n過去形\nscenario\ntense-choice\n正誤\n時間関係の説明\nchoose-in-context\nmatch-form-to-purpose\nconnect-context-and-form\nselecting-tense-from-time-cues\naligning-context-and-tense"
+    },
+    {
+      "kind": "interaction",
+      "id": "GRAM-INT-041",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-041"
+      },
+      "slug": "exam-multiple-choice",
+      "title": "Exam Multiple Choice",
+      "category": "select",
+      "description": "大学入試型の4択英文法問題を解き、正解理由と各誤答の理由を確認する。",
+      "learningGoal": "学習した文法知識を初見の選択問題へ適用し、選択根拠を説明できるようにする。",
+      "touchTarget": "英文問題と4つの選択肢",
+      "userAction": "選択 / 解答",
+      "changingElement": "選択状態、正誤、選択肢別解説",
+      "insight": "正解だけでなく、他の選択肢が不適切な理由を比較すると文法判断が明確になる。",
+      "targetGrammar": [
+        "英文法総合",
+        "大学入試"
+      ],
+      "interactionType": [
+        "multiple-choice",
+        "assessment"
+      ],
+      "interactionPatterns": [
+        "multiple-choice",
+        "assessment"
+      ],
+      "feedbackType": [
+        "正誤",
+        "正解理由",
+        "選択肢別解説"
+      ],
+      "learningIntents": [
+        "choose-in-context",
+        "diagnose-error",
+        "connect-form-and-meaning"
+      ],
+      "bestFor": [
+        "evaluating-grammar-choices",
+        "comparing-option-rationales"
+      ],
+      "notBestFor": [
+        "free-form-writing"
+      ],
+      "positiveTags": [
+        "choose-in-context",
+        "diagnose-error",
+        "connect-form-and-meaning",
+        "evaluating-grammar-choices",
+        "comparing-option-rationales"
+      ],
+      "negativeTags": [
+        "free-form-writing"
+      ],
+      "tags": [
+        "choose-in-context",
+        "diagnose-error",
+        "connect-form-and-meaning",
+        "evaluating-grammar-choices",
+        "comparing-option-rationales"
+      ],
+      "demoTypes": [
+        "exam-multiple-choice"
+      ],
+      "relations": {
+        "problemIds": [
+          "EMC-001"
+        ]
+      },
+      "searchText": "exam-multiple-choice\nExam Multiple Choice\nselect\n大学入試型の4択英文法問題を解き、正解理由と各誤答の理由を確認する。\n学習した文法知識を初見の選択問題へ適用し、選択根拠を説明できるようにする。\n英文問題と4つの選択肢\n選択 / 解答\n選択状態、正誤、選択肢別解説\n正解だけでなく、他の選択肢が不適切な理由を比較すると文法判断が明確になる。\n英文法総合\n大学入試\nmultiple-choice\nassessment\n正誤\n正解理由\n選択肢別解説\nchoose-in-context\ndiagnose-error\nconnect-form-and-meaning\nevaluating-grammar-choices\ncomparing-option-rationales",
+      "demoType": "exam-multiple-choice"
     }
   ],
   "problems": [
@@ -4122,6 +4195,30 @@
         ]
       },
       "searchText": "modifier-positioner\nto learn English を目的を表す位置へ置き、文頭と文末の両方を確認してください。\nto learn English が、映画を見る目的を表すことを確かめる。\nI\nwatch movies\nto learn English\nSentence start\nTo learn English,\nto-learn-english\nwatch-movies\nmodifies\nI watch moviesの目的を説明\n文頭のTo learn Englishは、映画を見る目的を説明しています。\n英語を学ぶために、私は映画を見る。\nSentence end\n文末のto learn Englishも、映画を見る目的を説明しています。\n私は英語を学ぶために映画を見る。\n.\n目的を表すto不定詞は、文頭・文末のどちらにも置ける場合があります。"
+    },
+    {
+      "kind": "problem",
+      "id": "EMC-001",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "EMC-001",
+        "type": "exam-multiple-choice"
+      },
+      "title": "EMC-001",
+      "type": "exam-multiple-choice",
+      "demoTypes": [
+        "exam-multiple-choice"
+      ],
+      "tags": [
+        "exam-multiple-choice"
+      ],
+      "relations": {
+        "interactionIds": [
+          "GRAM-INT-041"
+        ],
+        "lessonIds": []
+      },
+      "searchText": "exam-multiple-choice\n空所に入る最も適切なものを選びなさい。\nI (     ) him since last year.\ndon't see\nsince last year は過去から現在まで続く期間を示すため、単純現在では表しません。\ndidn't see\n過去形は過去の一点・完結した出来事を表すため、現在まで続く since と合いません。\nhaven't seen\nsince last year は過去から現在までの継続を表すため、現在完了が適切です。\nwon't see\n未来を表す will は、since last year が示す過去から現在までの時間関係と合いません。\nsince + 過去の起点は、過去から現在までの継続を表す現在完了とよく結び付きます。\nstandard"
     }
   ],
   "lessons": [
@@ -6120,6 +6217,51 @@
       ]
     },
     {
+      "kind": "interaction",
+      "id": "GRAM-INT-041",
+      "title": "Exam Multiple Choice",
+      "canonicalRef": {
+        "kind": "interaction",
+        "id": "GRAM-INT-041"
+      },
+      "searchText": "exam-multiple-choice\nExam Multiple Choice\nselect\n大学入試型の4択英文法問題を解き、正解理由と各誤答の理由を確認する。\n学習した文法知識を初見の選択問題へ適用し、選択根拠を説明できるようにする。\n英文問題と4つの選択肢\n選択 / 解答\n選択状態、正誤、選択肢別解説\n正解だけでなく、他の選択肢が不適切な理由を比較すると文法判断が明確になる。\n英文法総合\n大学入試\nmultiple-choice\nassessment\n正誤\n正解理由\n選択肢別解説\nchoose-in-context\ndiagnose-error\nconnect-form-and-meaning\nevaluating-grammar-choices\ncomparing-option-rationales",
+      "tags": [
+        "choose-in-context",
+        "diagnose-error",
+        "connect-form-and-meaning",
+        "evaluating-grammar-choices",
+        "comparing-option-rationales"
+      ],
+      "relations": {
+        "problemIds": [
+          "EMC-001"
+        ]
+      },
+      "demoTypes": [
+        "exam-multiple-choice"
+      ],
+      "interactionType": [
+        "multiple-choice",
+        "assessment"
+      ],
+      "interactionPatterns": [
+        "multiple-choice",
+        "assessment"
+      ],
+      "learningIntents": [
+        "choose-in-context",
+        "diagnose-error",
+        "connect-form-and-meaning"
+      ],
+      "bestFor": [
+        "evaluating-grammar-choices",
+        "comparing-option-rationales"
+      ],
+      "negativeTags": [
+        "free-form-writing"
+      ]
+    },
+    {
       "kind": "problem",
       "id": "WO-001",
       "title": "WO-001",
@@ -7458,6 +7600,30 @@
       "type": "modifier-positioner",
       "demoTypes": [
         "modifier-positioner"
+      ]
+    },
+    {
+      "kind": "problem",
+      "id": "EMC-001",
+      "title": "EMC-001",
+      "canonicalRef": {
+        "kind": "problem",
+        "id": "EMC-001",
+        "type": "exam-multiple-choice"
+      },
+      "searchText": "exam-multiple-choice\n空所に入る最も適切なものを選びなさい。\nI (     ) him since last year.\ndon't see\nsince last year は過去から現在まで続く期間を示すため、単純現在では表しません。\ndidn't see\n過去形は過去の一点・完結した出来事を表すため、現在まで続く since と合いません。\nhaven't seen\nsince last year は過去から現在までの継続を表すため、現在完了が適切です。\nwon't see\n未来を表す will は、since last year が示す過去から現在までの時間関係と合いません。\nsince + 過去の起点は、過去から現在までの継続を表す現在完了とよく結び付きます。\nstandard",
+      "tags": [
+        "exam-multiple-choice"
+      ],
+      "relations": {
+        "interactionIds": [
+          "GRAM-INT-041"
+        ],
+        "lessonIds": []
+      },
+      "type": "exam-multiple-choice",
+      "demoTypes": [
+        "exam-multiple-choice"
       ]
     },
     {

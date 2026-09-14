@@ -13,6 +13,7 @@ import { errorCorrectorProblems } from '../src/data/problems/error-corrector.js'
 import { contextGrammarProblems } from '../src/data/problems/context-grammar.js';
 import { sentenceGeneratorProblems } from '../src/data/problems/sentence-generator.js';
 import { wordOrderProblems } from '../src/data/problems/word-order.js';
+import { examMultipleChoiceProblem, examMultipleChoiceProblems } from '../src/data/problems/exam-multiple-choice.js';
 import { filterInteractions, getAtlasStats, searchInteractions } from '../src/lib/atlas.js';
 import { grammarClassifierProblem } from '../src/data/demo-problems.js';
 import { demoRegistry, getDemoProblem } from '../src/components/demos/registry.js';
@@ -122,18 +123,23 @@ import {
 } from '../src/lib/ai/grammar-reference.js';
 import { validateGrammarReference } from '../src/lib/validateGrammarReference.js';
 import { validateGrammarReferenceTraceability } from '../src/lib/validateMaterialGenerationProof.js';
+import { evaluateExamChoice, getExamChoice, isCorrectExamChoice } from '../src/lib/grammar/exam-multiple-choice.js';
 
-assert.equal(interactions.length, 40);
+assert.equal(interactions.length, 41);
+const examMultipleChoiceInteraction = interactions.find((entry) => entry.id === 'GRAM-INT-041');
+assert.equal(examMultipleChoiceInteraction.slug, 'exam-multiple-choice');
+assert.equal(examMultipleChoiceInteraction.demoType, 'exam-multiple-choice');
+assert.equal(demoRegistry['exam-multiple-choice'].demoProblemId, 'EMC-001');
 assert.deepEqual(
   interactions.map((entry) => entry.id),
-  Array.from({ length: 40 }, (_, index) => `GRAM-INT-${String(index + 1).padStart(3, '0')}`),
+  Array.from({ length: 41 }, (_, index) => `GRAM-INT-${String(index + 1).padStart(3, '0')}`),
 );
 assert.equal(new Set(interactions.map((entry) => entry.category)).size, 10);
 assert.equal(filterInteractions(interactions, 'transform').length, 4);
-assert.equal(filterInteractions(interactions, 'all', { reusability: 'S' }).length, 29);
+assert.equal(filterInteractions(interactions, 'all', { reusability: 'S' }).length, 30);
 assert.equal(filterInteractions(interactions, 'all', { reusability: 'A' }).length, 11);
 assert.equal(filterInteractions(interactions, 'all', { reusability: 'B' }).length, 0);
-assert.equal(filterInteractions(interactions, 'all', { demo: 'available' }).length, 11);
+assert.equal(filterInteractions(interactions, 'all', { demo: 'available' }).length, 12);
 assert.equal(filterInteractions(interactions, 'all', { demo: 'planned' }).length, 29);
 assert.equal(searchInteractions(interactions, 'relative').length, 2);
 assert.equal(searchInteractions(interactions, '  RELATIVE  ').length, 2);
@@ -143,12 +149,12 @@ assert.equal(
   2,
 );
 assert.deepEqual(getAtlasStats(interactions, demoRegistry), {
-  catalogEntries: 40,
+  catalogEntries: 41,
   interactionFamilies: 10,
-  workingDemos: 11,
+  workingDemos: 12,
 });
 
-assert.equal(problems.length, 53);
+assert.equal(problems.length, 54);
 assert.deepEqual(
   Object.fromEntries(Object.entries({
     'word-order': wordOrderProblems,
@@ -162,8 +168,9 @@ assert.deepEqual(
     'error-corrector': errorCorrectorProblems,
     'context-grammar': contextGrammarProblems,
     'sentence-generator': sentenceGeneratorProblems,
+    'exam-multiple-choice': examMultipleChoiceProblems,
   }).map(([type, entries]) => [type, entries.length])),
-  { 'word-order': 8, 'mark-parts': 4, 'grammar-classifier': 5, 'sentence-transformer': 3, 'sentence-pattern-diagram': 3, 'modifier-connection-viewer': 3, 'modifier-positioner': 4, 'sentence-comparison': 4, 'error-corrector': 7, 'context-grammar': 7, 'sentence-generator': 5 },
+  { 'word-order': 8, 'mark-parts': 4, 'grammar-classifier': 5, 'sentence-transformer': 3, 'sentence-pattern-diagram': 3, 'modifier-connection-viewer': 3, 'modifier-positioner': 4, 'sentence-comparison': 4, 'error-corrector': 7, 'context-grammar': 7, 'sentence-generator': 5, 'exam-multiple-choice': 1 },
 );
 assert.equal(problemRegistry['WO-001'], wordOrderProblems[0]);
 assert.equal(problemRegistry['SPD-001'], sentencePatternDiagramProblems[0]);
@@ -173,6 +180,7 @@ assert.equal(problemRegistry['SC-001'], sentenceComparisonProblems[0]);
 assert.equal(problemRegistry['EC-001'], errorCorrectorProblems[0]);
 assert.equal(problemRegistry['CG-001'], contextGrammarProblems[0]);
 assert.equal(problemRegistry['SG-001'], sentenceGeneratorProblems[0]);
+assert.equal(problemRegistry['EMC-001'], examMultipleChoiceProblem);
 assert.equal(problemRegistry['ST-002'], sentenceTransformerProblems[1]);
 assert.equal(problemRegistry['WO-005'], wordOrderProblems[4]);
 assert.equal(problemRegistry['EC-004'], errorCorrectorProblems[3]);
@@ -208,7 +216,44 @@ assert.equal(getDemoProblem('sentence-comparison', 'SC-003').id, 'SC-003');
 assert.equal(getDemoProblem('error-corrector', 'EC-003').id, 'EC-003');
 assert.equal(getDemoProblem('context-grammar', 'CG-003').id, 'CG-003');
 assert.equal(getDemoProblem('sentence-generator', 'SG-003').id, 'SG-003');
+assert.equal(getDemoProblem('exam-multiple-choice', 'EMC-001').id, 'EMC-001');
 assert.throws(() => getDemoProblem('word-order', 'MP-001'), /type mismatch/);
+
+assert.equal(getExamChoice(examMultipleChoiceProblem.choices, 'c3').text, "haven't seen");
+assert.equal(getExamChoice(examMultipleChoiceProblem.choices, 'missing'), null);
+assert.equal(isCorrectExamChoice(examMultipleChoiceProblem, 'c3'), true);
+assert.equal(isCorrectExamChoice(examMultipleChoiceProblem, 'c1'), false);
+assert.equal(isCorrectExamChoice(examMultipleChoiceProblem, 'missing'), false);
+assert.deepEqual(evaluateExamChoice(examMultipleChoiceProblem, 'c3'), {
+  correct: true,
+  selectedChoiceId: 'c3',
+  answerChoiceId: 'c3',
+});
+assert.deepEqual(evaluateExamChoice(examMultipleChoiceProblem, 'c1'), {
+  correct: false,
+  selectedChoiceId: 'c1',
+  answerChoiceId: 'c3',
+});
+assert.deepEqual(evaluateExamChoice(examMultipleChoiceProblem, 'missing'), {
+  correct: false,
+  selectedChoiceId: 'missing',
+  answerChoiceId: 'c3',
+});
+const invalidExamChoiceCases = [
+  ['3 choices', (value) => { value.choices.pop(); }],
+  ['5 choices', (value) => { value.choices.push({ id: 'c5', text: 'extra', explanation: 'extra' }); }],
+  ['duplicate choice ID', (value) => { value.choices[1].id = value.choices[0].id; }],
+  ['missing text', (value) => { value.choices[0].text = ''; }],
+  ['missing choice explanation', (value) => { value.choices[0].explanation = ''; }],
+  ['unknown answerChoiceId', (value) => { value.answerChoiceId = 'unknown'; }],
+  ['missing explanation', (value) => { delete value.explanation; }],
+  ['invalid difficulty', (value) => { value.difficulty = 'expert'; }],
+];
+invalidExamChoiceCases.forEach(([name, mutate]) => {
+  const invalidProblem = structuredClone(examMultipleChoiceProblem);
+  mutate(invalidProblem);
+  assert.equal(validateProblems([invalidProblem]).valid, false, name);
+});
 
 const sentencePatternProblem = sentencePatternDiagramProblems[0];
 assert.deepEqual(buildPatternSlots(sentencePatternProblem.chunks, sentencePatternProblem.pattern), [
@@ -401,10 +446,10 @@ const aiRetrievalValidation = validateAiRetrieval(aiRetrievalIndex, {
 });
 assert.equal(aiRetrievalValidation.valid, true, aiRetrievalValidation.errors.join('; '));
 assert.equal(aiRetrievalIndex.version, '2');
-assert.equal(aiRetrievalIndex.interactions.length, 40);
-assert.equal(aiRetrievalIndex.problems.length, 53);
+assert.equal(aiRetrievalIndex.interactions.length, 41);
+assert.equal(aiRetrievalIndex.problems.length, 54);
 assert.equal(aiRetrievalIndex.lessons.length, 6);
-assert.equal(aiRetrievalIndex.documents.length, 99);
+assert.equal(aiRetrievalIndex.documents.length, 101);
 assert.deepEqual(
   aiRetrievalIndex.interactions.find((record) => record.id === 'GRAM-INT-001').relations.problemIds,
   ['WO-001', 'WO-002', 'WO-003', 'WO-004', 'WO-005', 'WO-006', 'WO-007', 'WO-008'],

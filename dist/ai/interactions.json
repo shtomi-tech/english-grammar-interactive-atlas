@@ -2734,5 +2734,78 @@
       "problemIds": []
     },
     "searchText": "situation-tense-choice\nSituation Tense Choice\nsimulate\n状況と時間の手がかりから、適切な時制を選ぶ。\n文脈の時間情報を読み取り、時制の選択へ結びつける。\n状況文・時間の手がかり・時制候補\n選択 / 確認\n選択した時制と場面の結果\n時制は文だけで決めず、出来事の時間関係から選ぶ。\n時制\n現在完了\n過去形\nscenario\ntense-choice\n正誤\n時間関係の説明\nchoose-in-context\nmatch-form-to-purpose\nconnect-context-and-form\nselecting-tense-from-time-cues\naligning-context-and-tense"
+  },
+  {
+    "kind": "interaction",
+    "id": "GRAM-INT-041",
+    "canonicalRef": {
+      "kind": "interaction",
+      "id": "GRAM-INT-041"
+    },
+    "slug": "exam-multiple-choice",
+    "title": "Exam Multiple Choice",
+    "category": "select",
+    "description": "大学入試型の4択英文法問題を解き、正解理由と各誤答の理由を確認する。",
+    "learningGoal": "学習した文法知識を初見の選択問題へ適用し、選択根拠を説明できるようにする。",
+    "touchTarget": "英文問題と4つの選択肢",
+    "userAction": "選択 / 解答",
+    "changingElement": "選択状態、正誤、選択肢別解説",
+    "insight": "正解だけでなく、他の選択肢が不適切な理由を比較すると文法判断が明確になる。",
+    "targetGrammar": [
+      "英文法総合",
+      "大学入試"
+    ],
+    "interactionType": [
+      "multiple-choice",
+      "assessment"
+    ],
+    "interactionPatterns": [
+      "multiple-choice",
+      "assessment"
+    ],
+    "feedbackType": [
+      "正誤",
+      "正解理由",
+      "選択肢別解説"
+    ],
+    "learningIntents": [
+      "choose-in-context",
+      "diagnose-error",
+      "connect-form-and-meaning"
+    ],
+    "bestFor": [
+      "evaluating-grammar-choices",
+      "comparing-option-rationales"
+    ],
+    "notBestFor": [
+      "free-form-writing"
+    ],
+    "positiveTags": [
+      "choose-in-context",
+      "diagnose-error",
+      "connect-form-and-meaning",
+      "evaluating-grammar-choices",
+      "comparing-option-rationales"
+    ],
+    "negativeTags": [
+      "free-form-writing"
+    ],
+    "tags": [
+      "choose-in-context",
+      "diagnose-error",
+      "connect-form-and-meaning",
+      "evaluating-grammar-choices",
+      "comparing-option-rationales"
+    ],
+    "demoTypes": [
+      "exam-multiple-choice"
+    ],
+    "relations": {
+      "problemIds": [
+        "EMC-001"
+      ]
+    },
+    "searchText": "exam-multiple-choice\nExam Multiple Choice\nselect\n大学入試型の4択英文法問題を解き、正解理由と各誤答の理由を確認する。\n学習した文法知識を初見の選択問題へ適用し、選択根拠を説明できるようにする。\n英文問題と4つの選択肢\n選択 / 解答\n選択状態、正誤、選択肢別解説\n正解だけでなく、他の選択肢が不適切な理由を比較すると文法判断が明確になる。\n英文法総合\n大学入試\nmultiple-choice\nassessment\n正誤\n正解理由\n選択肢別解説\nchoose-in-context\ndiagnose-error\nconnect-form-and-meaning\nevaluating-grammar-choices\ncomparing-option-rationales",
+    "demoType": "exam-multiple-choice"
   }
 ]

@@ -33,3 +33,7 @@ export {
   sentenceGeneratorProblem,
   sentenceGeneratorProblems,
 } from './problems/sentence-generator.js';
+export {
+  examMultipleChoiceProblem,
+  examMultipleChoiceProblems,
+} from './problems/exam-multiple-choice.js';

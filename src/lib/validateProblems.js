@@ -1,7 +1,8 @@
 import { getGrammarStateMode, SUPPORTED_MODALS, SUPPORTED_TENSES, SUPPORTED_VOICES } from './grammar/grammar-state.js';
 
-const problemTypes = new Set(['word-order', 'mark-parts', 'grammar-classifier', 'sentence-transformer', 'sentence-pattern-diagram', 'modifier-connection-viewer', 'modifier-positioner', 'sentence-comparison', 'error-corrector', 'context-grammar', 'sentence-generator']);
+const problemTypes = new Set(['word-order', 'mark-parts', 'grammar-classifier', 'sentence-transformer', 'sentence-pattern-diagram', 'modifier-connection-viewer', 'modifier-positioner', 'sentence-comparison', 'error-corrector', 'context-grammar', 'sentence-generator', 'exam-multiple-choice']);
 const transformerControlNames = new Set(['subject', 'tense', 'negative', 'modal', 'voice']);
+const examMultipleChoiceDifficulties = new Set(['basic', 'standard', 'entrance']);
 
 function hasText(value) {
   return typeof value === 'string' && value.trim().length > 0;
@@ -612,6 +613,27 @@ function validateErrorCorrector(problem, label, errors) {
   }
 }
 
+function validateExamMultipleChoice(problem, label, errors) {
+  if (!hasText(problem.prompt) || !hasText(problem.stem)) errors.push(`${label}.prompt and stem are required`);
+
+  if (!Array.isArray(problem.choices) || problem.choices.length !== 4) {
+    errors.push(`${label}.choices must contain exactly four choices`);
+  } else {
+    duplicateIds(problem.choices, `${label}.choices`, errors);
+    problem.choices.forEach((choice, index) => {
+      if (!isRecord(choice) || !hasText(choice.id) || !hasText(choice.text) || !hasText(choice.explanation)) {
+        errors.push(`${label}.choices[${index}] must have id, text, and explanation`);
+      }
+    });
+  }
+
+  const choiceIds = new Set((problem.choices ?? []).map((choice) => choice?.id));
+  if (!hasText(problem.answerChoiceId)) errors.push(`${label}.answerChoiceId is required`);
+  else if (!choiceIds.has(problem.answerChoiceId)) errors.push(`${label}.answerChoiceId references an unknown choice: ${problem.answerChoiceId}`);
+  if (!hasText(problem.explanation)) errors.push(`${label}.explanation is required`);
+  if (!examMultipleChoiceDifficulties.has(problem.difficulty)) errors.push(`${label}.difficulty is invalid: ${problem.difficulty}`);
+}
+
 function validateContextGrammar(problem, label, errors) {
   if (!hasText(problem.prompt) || !hasText(problem.explanation)) {
     errors.push(`${label}.prompt and explanation are required`);
@@ -705,6 +727,7 @@ export function validateProblems(entries, { expectedTypes = problemTypes } = {})
     if (problem.type === 'error-corrector') validateErrorCorrector(problem, label, errors);
     if (problem.type === 'context-grammar') validateContextGrammar(problem, label, errors);
     if (problem.type === 'sentence-generator') validateSentenceGenerator(problem, label, errors);
+    if (problem.type === 'exam-multiple-choice') validateExamMultipleChoice(problem, label, errors);
   });
 
   return { valid: errors.length === 0, errors };

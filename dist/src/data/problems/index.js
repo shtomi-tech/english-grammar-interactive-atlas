@@ -9,6 +9,7 @@ import { contextGrammarProblems } from './context-grammar.js';
 import { sentenceGeneratorProblems } from './sentence-generator.js';
 import { wordOrderProblems } from './word-order.js';
 import { modifierPositionerProblems } from './modifier-positioner.js';
+import { examMultipleChoiceProblems } from './exam-multiple-choice.js';
 
 export const problemSets = {
   'word-order': wordOrderProblems,
@@ -22,6 +23,7 @@ export const problemSets = {
   'context-grammar': contextGrammarProblems,
   'sentence-generator': sentenceGeneratorProblems,
   'modifier-positioner': modifierPositionerProblems,
+  'exam-multiple-choice': examMultipleChoiceProblems,
 };
 
 export const problems = Object.values(problemSets).flat();
@@ -47,4 +49,5 @@ export {
   sentenceGeneratorProblems,
   wordOrderProblems,
   modifierPositionerProblems,
+  examMultipleChoiceProblems,
 };

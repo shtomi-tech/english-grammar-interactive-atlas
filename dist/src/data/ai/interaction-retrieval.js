@@ -199,4 +199,9 @@ export const interactionRetrievalMetadata = {
     bestFor: ['selecting-tense-from-time-cues', 'aligning-context-and-tense'],
     notBestFor: ['generating-all-tense-forms'],
   },
+  'GRAM-INT-041': {
+    learningIntents: ['choose-in-context', 'diagnose-error', 'connect-form-and-meaning'],
+    bestFor: ['evaluating-grammar-choices', 'comparing-option-rationales'],
+    notBestFor: ['free-form-writing'],
+  },
 };
